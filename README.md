@@ -1,7 +1,7 @@
-# Scientific Computing in MATLAB
+# Modelling and Scientific Computing
 
-An online course on Scientific Computing in MATLAB for the Oxford Doctoral Training Centre http://www.dtc.ox.ac.uk/.
-
+An online course on Modelling and Scientific Computing in Python for the Oxford Doctoral 
+Training Centre http://www.dtc.ox.ac.uk/.
 
 ## Hugo
 
