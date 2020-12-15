@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Modelling and Scientific Computing</title>
+    <link>https://sabs-r3.github.io/scientific-computing/</link>
+    <description>Recent content on Modelling and Scientific Computing</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 27 Nov 2020 16:10:31 +0000</lastBuildDate><atom:link href="https://sabs-r3.github.io/scientific-computing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matrix form of equations</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</guid>
+      <description>Simultaneous equations Consider 2 simultaneous equations:
+\[ \begin{aligned} a_1x+b_1y &amp;= c_1, \quad (1)\\ a_2x+b_2y &amp;= c_2, \quad (2) \end{aligned} \]
+where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2, \;c_1\;$ and $\;c_2\;$ are given constants.
+\[ \begin{aligned} (1) \times b_2:~~~~~~~~~~~~~~~ b_2a_1x+b_2b_1y &amp;=&amp; b_2c_1, \quad (3)\\ (2) \times b_1:~~~~~~~~~~~~~~~ b_1a_2x+b_1b_2y &amp;=&amp; b_1c_2, \quad (4)\\ (3) - (4):~~~~~~~~~~~~~~~ b_2a_1x-b_1a_2x &amp;=&amp; b_2c_1-b_1c_2. \end{aligned} \]
+The Matrix Matrices are a structure that allow us to more easily manipulate linear systems.</description>
+    </item>
+    
+    <item>
+      <title>Nonlinear Optimisation</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/</guid>
+      <description>Mathematical formulation Optimisation aims to find the minimum (or equivilently the maximum) of some objective, or loss function $f$, given a set of $n$ parameters $\theta$
+\[ \min_{\theta \in \mathcal{R}^n} f(\theta) \]
+We might also have a set of constraints, for example a parameter might be required to be non-negative (e.g. a concentration or population number). These are often written as a set of equality $\mathcal{E}$ and inequality $\mathcal{I}$ constraints</description>
+    </item>
+    
+    <item>
+      <title>Sparse matrices</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/</guid>
+      <description>Why sparse matrices Taking advantage of any special structure in the matrix of interest is always of great importance when designing a linear algebra algorithm/solver. Thus far we have discussed special structures such as symmetric or positive definite matrices, but one of the most common matrix structures in scientific computing is that of a sparse matrix, or a matrix containing many zero elements. Since zeros can be ignored in many computations, for example multiplication or addition, a sparse matrix will specify a special data structure so that only the non-zero elements of the matrix are actually stored and used in computation.</description>
+    </item>
+    
+    <item>
+      <title>Gaussian Elimination</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/</guid>
+      <description>Gaussian Elimination Consider the problem: Find $x, y,z$ such that
+\[ \begin{aligned} eq1: &amp; 2x &amp; + &amp; y &amp; -&amp; z &amp; = &amp; 3 \\ eq2: &amp; x &amp; &amp; &amp;+ &amp;5z &amp; = &amp; 6 \\ eq3: &amp; -x &amp;+&amp; 3y&amp; -&amp; 2z &amp; = &amp; 3 \end{aligned} \]
+Gaussian elimination -- step 1 reduce the above system of equations so that the unknown $x$ is removed from the last two equations:</description>
+    </item>
+    
+    <item>
+      <title>COOrdinate format</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/02-coo-matrix/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/02-coo-matrix/</guid>
+      <description>As an example of a sparse matrix format, this section describes one of the sparse formats implemented in Scipy, the The COOrdinate format (COO). This is also known as the &amp;quot;ijv&amp;quot; or &amp;quot;triplet&amp;quot; format, and stores the non-zero elements in three arrays, row, col, and data. The data[i] value is the non-zero entry in row row[i] and column col[i] of the matrix. The advantages of this format are:
+ fast format for contructing sparse matrices fast conversions to/from the CSR and CSC formats fast matrix-vector multiplication fast elementwise operations (e.</description>
+    </item>
+    
+    <item>
+      <title>Line Search Methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/02-line-search-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/02-line-search-methods/</guid>
+      <description>Gradient descent and line search methods One of the simplest local optimisation algoriths is gradient descent. It is initialised at some point in parameter space $a_0$, and at each iteration the function $f(x)$ is reduced by following the direction of steepest descent $-\nabla f(a)$
+\[ a_{n+1} = a_n - \gamma \nabla f(a_n) \]
+This is an example of an imporant class of algorithms called the line search methods. These algorithms choose a search direction $p_k$ at each iteration $k$, and search along the 1D line from the initial point $a_k$ to a new point</description>
+    </item>
+    
+    <item>
+      <title>Matrix decompositions</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/</guid>
+      <description>Matrix factorisations play a key role in the solution of problems of the type $A x = b$. Often (e.g. ODE solvers), you have a fixed matrix $A$ that must be solved with many different $b$ vectors. A matrix factorisation is effectivly a pre-processing step that allows you to partition $A$ into multiple factors (e.g. $A = LU$ in the case of $LU$ decomposition), so that the actual solve is as quick as possible.</description>
+    </item>
+    
+    <item>
+      <title>Finite Difference Matrix</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/03-finite-difference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/03-finite-difference/</guid>
+      <description>Many matrices in scientific computing contain mostly zeros, particularly those arising from the discretistaion of partial differential equations (PDEs). Here we will construct a sparse matrix using scipy.sparse that is derived from the finite difference discretistaion of the Poisson equation. In 1D, Poisson equation is
+\[u_{xx} = f(x)\text{ for }0 \le x \le 1\]
+The central FD approximation of $u_{xx}$ is:
+\[u_{xx} \approx \frac{u(x + h) - 2u(x) + u(x-h)}{h^2}\]</description>
+    </item>
+    
+    <item>
+      <title>Trust Region Methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/03-trust-region-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/03-trust-region-methods/</guid>
+      <description>Saddle points Saddle point pose a particular challenge in non-linear optimisation, particularly in higher dimensions. The plots below show two examples of saddle points in two dimensions. Like local minima and maxima, these are stationary points where the gradient of the function is zero $\nabla f = 0$, but where the value of the function rises along certain directions and reduces along others (left plot). An alternative type of saddle point arises when the hessian is singular, and are characterised by a plateau around the stationary point, like the monkey saddle depicted in the plot to the right.</description>
+    </item>
+    
+    <item>
+      <title>LU decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/</guid>
+      <description>$LU$ decomposition The $LU$ decomposition is closely related to gaussian elimination. It takes the original equation to be solved $A x = b$ and splits it up into two separate equations involving a unit lower triangular matrix $L$, and the row echelon matrix $U$:
+\[ \begin{aligned} L y &amp;= b \\ U x &amp;= y \end{aligned} \]
+where $A = LU$. The $L$ matrix is a unit lower triangular matrix and thus has ones on the diagonal, whereas $U$ is in row echelon form with pivot values in the leading coefficients of each row.</description>
+    </item>
+    
+    <item>
+      <title>Derivative-free methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/</guid>
+      <description>The line search and trust region methods introduced in the previous lesson all required that the user be able to calculate the gradient of the function $\nabla f$. However, in many cases the gradient is either not available or too error-prone to be of use. For example, the function $f$ might be only available as a compiled executable or the result of a physical experiment. The model might be stochastic, or the gradient evaluation might be noisy due to numerical innacuracies, or of sufficiently complexity that the gradient is either unknown or too expensive to compute.</description>
+    </item>
+    
+    <item>
+      <title>Finite difference method</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/05-finite-difference-method/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/05-finite-difference-method/</guid>
+      <description>The simplest way of converting a gradient-based optimisation algorithm to a derivative free one is to approximate the gradient of the function using finite differences.
+The Finite Difference (FD) method is based on taking a Taylor series expansion of either $f(x+h)$ and $f(x-h)$ (and others) for a small parameter $f$ about $x$. Consider a smooth function $f(x)$ then its Taylor expansion is
+\[f(x+h) = f(x) + h f&#39;(x) + \frac{h^2}{2} f&#39;&#39;(x) + \frac{h^3}{6} f&#39;&#39;&#39;(x) + \frac{h^4}{24} f&#39;&#39;&#39;&#39;&#39;(x) + \ldots \]</description>
+    </item>
+    
+    <item>
+      <title>Scipy.sparse</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/</guid>
+      <description>There are seven available sparse matrix types in scipy.sparse:
+ csc_matrix: Compressed Sparse Column format csr_matrix: Compressed Sparse Row format bsr_matrix: Block Sparse Row format lil_matrix: List of Lists format dok_matrix: Dictionary of Keys format coo_matrix: COOrdinate format (aka IJV, triplet format) dia_matrix: DIAgonal format  As indicated by the excellent documentation, the dok_matrix or lil_matrix formats are preferable to construct matrices as they support basic slicing and indexing similar to a standard NumPy array.</description>
+    </item>
+    
+    <item>
+      <title>LDL decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</guid>
+      <description>$LDL$ decomposition It is often very benificial when solving linear systems to consider and take advantage of any special structure that the matrix $A$ might possesses. The $LDL$ decomposition is a varient on LU decomposition which is only applicable to a symmetric matrix $A$ (i.e. $A = A^T$). The advantage of using this decomposition is that it takes advantage of the redundent entries in the matrix to reduce the amount of computation to $n^3/3$, which is about a half that required for the $LU$ decomposition.</description>
+    </item>
+    
+    <item>
+      <title>Iterative methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/05-iterative-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/05-iterative-methods/</guid>
+      <description>Previously we have discussed direct linear algebra solvers based on decompositions of the original matrix $A$. The amount of computational effort required to achieve these decomposisions is $\mathcal{O}(n^3)$, where $n$ is the number of rows of a square matrix. They are therefore unsuitable for the large, sparse systems of equations that are typically encountered in scientific applications. An alternate class of linear algebra solvers are the iterative methods, which produce a series of approximate solutions $x_k$ to the $A x = b$ problem.</description>
+    </item>
+    
+    <item>
+      <title>Cholesky decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/</guid>
+      <description>Cholesky decomposition Symmetric positive definite matrices are a very special type of matrix that often arise in practice. From a computational point of view, this class of matrix is very attractive because it is possible to decompose a symmetic positive definite matrix $A$ very efficiently into a single lower triangular matrix $G$ so that $A = GG^T$.
+A matrix $A$ is positive definite if $x^T A x &amp;gt; 0$ for any nonzero $x \in \mathbb{R}$.</description>
+    </item>
+    
+    <item>
+      <title>Jacobi and Relaxation Methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/</guid>
+      <description>Jacobi Method The Jacobi method is the simplest of the iterative methods, and relies on the fact that the matrix is diagonally dominant. Starting from the problem definition:
+\[ A\mathbf{x} = \mathbf{b} \]
+we decompose $A$ in to $A = L + D + U$, where $L$ is lower triagular, $D$ is diagonal, $U$ is upper triangular.
+\[ A\mathbf{x} = L\mathbf{x} + D\mathbf{x} + U\mathbf{x} = \mathbf{b} \]
+We then assume that we have an initial guess at the solution $\mathbf{x}^0$, and try to find a new estimate $\mathbf{x}^1$.</description>
+    </item>
+    
+    <item>
+      <title>Nelder-Mead method</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/06-nelder-mead/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/06-nelder-mead/</guid>
+      <description>The Nelder-Mead method is popular and implementations exist in many optimisation software libraries. It is based on the idea of a simplex in parameter space of dimension $n$, which is formed from the
+convex hull of $n + 1$ points in $\mathcal{R}^n$. These points $x_i$ are ordered according to their function value so that
+\[ f(x_1) \le f(x_2) \le \cdots \le f(x_{n+1}) \]
+For each iteration of the algorithm, there are five different points of interest, the first of which is the centroid of the $n$ points with the lowest $f$ values</description>
+    </item>
+    
+    <item>
+      <title>QR decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/</guid>
+      <description>QR decomposition The least-squares problem One of the most important application of the $QR$ decomposition is the least squares solution of a set of overdetermined equations. That is a set of $m$ linear equations with $n$ unknowns, with $m \ge n$. The least squares problem to be solved is the mimimisation of $||A x - b ||_2$, where $|| x ||_2 = \sqrt{x_1^2 + x_2^2 + ... + x_m^2}$ is the standard 2-norm, and where $A \in \mathbb{R}^{m \times n}$ with $m \ge n$ and $b \in \mathbb{R}^m$.</description>
+    </item>
+    
+    <item>
+      <title>Conjugate Gradient Method</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/</guid>
+      <description>One of the most important classes of iterative methods are the Krylov subspace methods, which include:
+ Congugate Gradient (CG): for symmetrix positive definite matrices Biconjugate Gradient Stabilized (BiCGSTAB): for general square matrices Generalized Minimal Residual (GMRES): for general square matrices  Below we will give a brief summary of the CG method, for more details you can consult the text by Golub and Van Loan (Chapter 10).
+The CG method is based on minimising the function</description>
+    </item>
+    
+    <item>
+      <title>Scipy.sparse.linalg</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/</guid>
+      <description>Once again the best resource for Python is the scipi.sparse.linalg documentation.
+Iterative methods for linear equation systems in scipy.sparse.linalg:
+ BIConjugate Gradient iteration (BiCG) BIConjugate Gradient STABilized iteration (BiCGSTAB) Conjugate Gradient iteration (CG) Conjugate Gradient Squared iteration (CGS) Generalized Minimal RESidual iteration (GMRES)  LGMRES MINimum RESidual iteration (MINRES) Quasi-Minimal Residual iteration (QMR)  GCROT(m,k)  scipy.sparse.linalg also contains two iterative solvers for least-squares problems, lsqr and lsmr
+Problems Note: based on the Finite Difference matrix $A$ in a previous exercise:</description>
+    </item>
+    
+    <item>
+      <title>Course Overview</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/01_course_overview/</link>
+      <pubDate>Thu, 26 Nov 2020 16:52:22 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/01_course_overview/</guid>
+      <description>Welcome to &amp;lsquo;Scientific Computing in MATLAB&amp;rsquo;. We are delighted you have chosen this course and hope it will meet your expectations.
+In this preliminary unit we shall be looking at:
+ communications managing your learning activities.  If you are already familiar with online study, you will be able to skip through these sessions quickly and get onto the real stuff. If you are not, it may answer a few of your questions.</description>
+    </item>
+    
+    <item>
+      <title>Course Activities</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/02_course_activities/</link>
+      <pubDate>Wed, 25 Nov 2020 16:52:22 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/02_course_activities/</guid>
+      <description>The main teaching mechanism on this course is through activities and exercises. Each unit is composed of a number of such activities which will not only introduce the material to you but also enable you to demonstrate your understanding (or to express your lack of understanding – something you should never be afraid to do).
+Regular activities and resources There are several kinds of activity that you will be asked to complete while on this course.</description>
+    </item>
+    
+    <item>
+      <title>Getting MATLAB</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_matlab/</link>
+      <pubDate>Tue, 24 Nov 2020 16:52:22 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_matlab/</guid>
+      <description>A pre-requisite for the course is to have the program MATLAB installed on your computer. You will only need the basic version of MATLAB for this course. As you will discover there are many toolboxes are available which extend the functionality of MATLAB but these are not needed for this course. In this section we will get MATLAB set up on your computer.
+Checking for MATLAB If you are using a departmental computer then MATLAB may already have been installed for you.</description>
+    </item>
+    
+  </channel>
+</rss>

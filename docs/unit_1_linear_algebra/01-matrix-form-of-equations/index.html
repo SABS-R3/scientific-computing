@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.78.2" />
+    <meta name="description" content="An online course on Modelling and Scientific Computing in Python for the SABS:R3 Centre for Doctoral Training https://www.sabsr3.ox.ac.uk/">
+<meta name="author" content="Martin Robinson">
+
+    <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
+
+    <title>Matrix form of equations   Modelling and Scientific Computing</title>
+
+    
+    <link href="/scientific-computing/css/nucleus.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608054345" rel="stylesheet">
+    
+    <link href="/scientific-computing/css/theme-dtc.css?1608054345" rel="stylesheet">
+    
+    
+
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608054345"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+        delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+        });
+    });
+</script>
+
+
+
+  </head>
+  <body class="" data-url="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://sabs-r3.github.io/scientific-computing/">
+    <img src="/scientific-computing/logos/SABSR3.svg" alt="SABSR3 logo">
+</a>
+  
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608054345"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608054345"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
+    
+</script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608054345"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_0_introduction/" title="Course introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_0_introduction/">
+          Course introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/01_course_overview/" title="Course Overview" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/01_course_overview/">
+        1. Course Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/02_course_activities/" title="Course Activities" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/02_course_activities/">
+        2. Course Activities
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/03_getting_matlab/" title="Getting MATLAB" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/03_getting_matlab/">
+        3. Getting MATLAB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/scientific-computing/unit_1_linear_algebra/">
+          <b>Day 1. </b>Direct Solvers and Matrix Decompositions
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/" title="Matrix form of equations" class="dd-item active">
+        <a href="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+        Matrix form of equations
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/" title="Gaussian Elimination" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/">
+        Gaussian Elimination
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/">
+        Matrix decompositions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+        LU decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/">
+        LDL decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/">
+        Cholesky decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/" title="QR decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+        QR decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_2_linear_algebra/">
+          <b>Day 2. </b>Sparse Matrices and Iterative Solvers
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/" title="Sparse matrices" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/">
+        Sparse matrices
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/">
+        COOrdinate format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/">
+        Finite Difference Matrix
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+        Scipy.sparse
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/">
+        Iterative methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/" title="Jacobi and Relaxation Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/">
+        Jacobi and Relaxation Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/" title="Conjugate Gradient Method" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+        Conjugate Gradient Method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
+        Scipy.sparse.linalg
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_3_ode/">
+          <b>Day 3. </b>Solving ODEs
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_4_optimisation/">
+          <b>Day 4. </b>Non-linear Optimisation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/">
+        Nonlinear Optimisation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/02-line-search-methods/" title="Line Search Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+        Line Search Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/">
+        Trust Region Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/" title="Derivative-free methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/">
+        Derivative-free methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/05-finite-difference-method/" title="Finite difference method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/05-finite-difference-method/">
+        Finite difference method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/06-nelder-mead/" title="Nelder-Mead method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/06-nelder-mead/">
+        Nelder-Mead method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/" title="Bayesian Inference" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_5_bayesian_inference/">
+          <b>Day 5. </b>Bayesian Inference
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_6_projects/">
+          <b>Day 6-8. </b>Projects
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/main/hugo_site/content/unit_1_linear_algebra/01-matrix-form-of-equations.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_1_linear_algebra/'>Direct Solvers and Matrix Decompositions</a> > Matrix form of equations
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Matrix form of equations
+            </h1>
+          
+
+        
+
+
+<h2 id="simultaneous-equations">Simultaneous equations</h2>
+
+<p>Consider 2 simultaneous equations:</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+a_1x+b_1y &= c_1, \quad (1)\\
+a_2x+b_2y &= c_2, \quad (2)
+\end{aligned}
+\]</span></p>
+
+<p>where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2, \;c_1\;$ and $\;c_2\;$ are given constants.</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+ (1) \times b_2:~~~~~~~~~~~~~~~ b_2a_1x+b_2b_1y &=& b_2c_1, \quad (3)\\
+  (2) \times b_1:~~~~~~~~~~~~~~~ b_1a_2x+b_1b_2y &=& b_1c_2, \quad (4)\\
+  (3) - (4):~~~~~~~~~~~~~~~ b_2a_1x-b_1a_2x &=& b_2c_1-b_1c_2.
+\end{aligned}
+\]</span></p>
+
+<h2 id="the-matrix">The Matrix</h2>
+
+<p>Matrices are a structure that allow us to more easily manipulate linear systems.</p>
+
+<p>Consider the original system</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+a_1x+b_1y &= c_1, \\
+a_2x+b_2y &= c_2. 
+\end{aligned}
+\]</span></p>
+
+<p>We rewrite this, in the form of a matrix as:</p>
+
+<p><span  class="math">\[
+\left(\begin{matrix}a_1&b_1\\ a_2&b_2\end{matrix}\right)
+\left(\begin{matrix}x\\y\end{matrix}\right)
+=\left(\begin{matrix}c_1\\ c_2 \end{matrix}\right).
+\]</span></p>
+
+<p>Think about how this form relates to the original linear system.</p>
+
+<h3 id="the-determinant">The determinant</h3>
+
+<p>If</p>
+
+<p><span  class="math">\[A = \left(\begin{matrix} p & q \\ r & s\end{matrix}\right)\]</span></p>
+
+<p>then the <strong>determinant</strong> of A is:</p>
+
+<p><span  class="math">\[|A| = ps-qr\]</span></p>
+
+<p>The inverse of $A$ can be found using the determinant:</p>
+
+<p><span  class="math">\[
+A^{-1} = \frac{1}{ps-qr} \left(\begin{matrix} s & -q \\ -r & p\end{matrix}\right)
+\]</span></p>
+
+<p>Calculating the inverse of a matrix using its determinant can be very costly for larger
+matrices, therefore other algorithms are used (e.g. Gaussian Elimination, which is
+introduced below)</p>
+
+<p>If $|A| = 0$, A is said to be <strong>singular</strong> (have no inverse).</p>
+
+<h2 id="geometry-of-linear-equations">Geometry of linear equations</h2>
+
+<p>Consider the following system of equations</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+ x + -2y &= -1, \\
+-x +  3y &=  3. 
+\end{aligned}
+\]</span></p>
+
+<p>That is,</p>
+
+<p><span  class="math">\[A = \left(\begin{matrix} 1 & -2 \\ -1 & 3\end{matrix}\right)\]</span></p>
+
+<p>Plotting these two linear equations on a graph shows graphically the solution to this
+equation given by</p>
+
+<p><span  class="math">\[\left(\begin{matrix} x \\ y \end{matrix}\right) = A^{-1} \left(\begin{matrix} -1 \\ 3 
+\end{matrix}\right) = \left(\begin{matrix} -1 \\ 3 \end{matrix}\right)\]</span></p>
+
+<p><figure><img src="/scientific-computing/images/unit_01/01-sim1.svg" alt="single solution"></figure></p>
+
+<p>Now lets consider two different system of equations represented by the matrix:</p>
+
+<p><span  class="math">\[
+A = \left(\begin{matrix} 1 & -2 \\ -1 & 2\end{matrix}\right)
+\]</span></p>
+
+<p><span  class="math">\[
+\begin{aligned}
+ x + -2y &= -1, \\
+-x +  2y &=  3. \end{aligned}
+\]</span></p>
+
+<p>and</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+ x + -2y &= -1, \\
+-x +  2y &=  1. \end{aligned}
+\]</span></p>
+
+<p><figure><img src="/scientific-computing/images/unit_01/01-sim2.svg" alt="(left) infinite solutions, (right) no 
+solutions"></figure></p>
+
+<p>The first gives the plot on the left, while the second, which has a different vector of
+constants on the RHS, gives the plot on the right. You can see that depending on the
+constants, the system of equations can have an infinite number of solutions, or no
+solutions at all.</p>
+
+<p>The matrix $A$ in this case is singular, and therefore does not have an inverse. Looking
+at the equations again, you can see that the two rows of the matrix $A$ are multiples of
+the other, and thus there is only <em>one</em> independent row. That is, the <em>rank</em> of the
+matrix is one.</p>
+
+<h2 id="singular-matrices">Singular matrices</h2>
+
+<p>The <em>rank</em> of an $\;n\,\times\,n\;$ matrix $\;A\;$ is the number of linearly independent rows in $\;A\;$ (rows not combinations of other rows).</p>
+
+<p>When $\;\text{rank}(A) &lt; n\;$ then</p>
+
+<ul>
+<li>The matrix is said to be 'rank deficient'</li>
+<li>The system $\;A\textbf{x} = \textbf{b}\;$ has <em>fewer</em> equations than unknowns</li>
+<li>The matrix is said to be singular</li>
+<li>The matrix is said to be underdetermined</li>
+<li>$A\;$ has no inverse</li>
+<li>The determinant of $\;A\;$ is 0</li>
+<li>The equation $\;A\textbf{u} = \textbf{0}\;$ has non-trivial solutions ($\textbf{u} \neq \textbf{0}$)</li>
+</ul>
+
+<h2 id="other-reading">Other Reading</h2>
+
+<p>Linear algebra by Ward Cheney
+Linear algebra and its applications by David C. Lay.</p>
+
+<p>Strang, G. (2016). Introduction to linear algebra (Fifth ed.). Wellesley.</p>
+
+<p>Linear algebra and its applications by Gilbert Strang</p>
+
+<p>lots of supplimentary material for this last two via MIT course page here:
+<a href="https://github.com/mitmath/1806/blob/master/summaries.md">https://github.com/mitmath/1806/blob/master/summaries.md</a></p>
+
+<ul>
+<li>LA from an ODE perspective
+Kapitula, T. (2015). Ordinary Differential Equations and Linear Algebra. Society for
+Industrial and Applied Mathematics.</li>
+</ul>
+
+<h2 id="problems">Problems</h2>
+
+<ol>
+<li><p>Describe the intersection of the three planes u+v+w+z = 6 and u+w+z = 4 and u+w = 2
+(all in four-dimensional space). Is it a line or a point or a fourth equation that
+leaves us with no solution. an empty set? What is the intersection if the fourth
+plane u = −1 is included? Find a fourth equation that leaves us with no solution.</p></li>
+
+<li><p>Sketch these three lines and decide if the equations are solvable: 3 by 2 system
+x + 2y = 2 x − y = 2 y = 1.
+What happens if all right-hand sides are zero? Is there any nonzero choice of right- hand sides that allows the three lines to intersect at the same point?</p></li>
+
+<li><p>Write a Python function that takes in a triangular matrix $A$ represented as an
+<code>ndarray</code>, and a rhs vector $b$, and solves the equation $A x = b$. i.e. the function
+will solve the following triangular system for $x = (x_1, x_2, x_3)$:</p></li>
+</ol>
+
+<p><span  class="math">\[
+\begin{aligned}
+A_{11} x_1 + A_{12} x_2 + A_{13} x_3 &= b_1, \\
+A_{22} x_2 + A_{23} x_3 &= b_2, \\
+A_{33} x_3 &= b_3
+\end{aligned}
+\]</span></p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/scientific-computing/js/clipboard.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608054345"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608054345"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608054345"></script>
+    <script src="/scientific-computing/js/learn.js?1608054345"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608054345"></script>
+    
+    
+
+  </body>
+</html>
+

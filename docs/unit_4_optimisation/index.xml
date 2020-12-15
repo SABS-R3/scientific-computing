@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Non-linear Optimisation on Modelling and Scientific Computing</title>
+    <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/</link>
+    <description>Recent content in Non-linear Optimisation on Modelling and Scientific Computing</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 27 Nov 2020 16:10:31 +0000</lastBuildDate><atom:link href="https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nonlinear Optimisation</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/</guid>
+      <description>Mathematical formulation Optimisation aims to find the minimum (or equivilently the maximum) of some objective, or loss function $f$, given a set of $n$ parameters $\theta$
+\[ \min_{\theta \in \mathcal{R}^n} f(\theta) \]
+We might also have a set of constraints, for example a parameter might be required to be non-negative (e.g. a concentration or population number). These are often written as a set of equality $\mathcal{E}$ and inequality $\mathcal{I}$ constraints</description>
+    </item>
+    
+    <item>
+      <title>Line Search Methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/02-line-search-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/02-line-search-methods/</guid>
+      <description>Gradient descent and line search methods One of the simplest local optimisation algoriths is gradient descent. It is initialised at some point in parameter space $a_0$, and at each iteration the function $f(x)$ is reduced by following the direction of steepest descent $-\nabla f(a)$
+\[ a_{n+1} = a_n - \gamma \nabla f(a_n) \]
+This is an example of an imporant class of algorithms called the line search methods. These algorithms choose a search direction $p_k$ at each iteration $k$, and search along the 1D line from the initial point $a_k$ to a new point</description>
+    </item>
+    
+    <item>
+      <title>Trust Region Methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/03-trust-region-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/03-trust-region-methods/</guid>
+      <description>Saddle points Saddle point pose a particular challenge in non-linear optimisation, particularly in higher dimensions. The plots below show two examples of saddle points in two dimensions. Like local minima and maxima, these are stationary points where the gradient of the function is zero $\nabla f = 0$, but where the value of the function rises along certain directions and reduces along others (left plot). An alternative type of saddle point arises when the hessian is singular, and are characterised by a plateau around the stationary point, like the monkey saddle depicted in the plot to the right.</description>
+    </item>
+    
+    <item>
+      <title>Derivative-free methods</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/</guid>
+      <description>The line search and trust region methods introduced in the previous lesson all required that the user be able to calculate the gradient of the function $\nabla f$. However, in many cases the gradient is either not available or too error-prone to be of use. For example, the function $f$ might be only available as a compiled executable or the result of a physical experiment. The model might be stochastic, or the gradient evaluation might be noisy due to numerical innacuracies, or of sufficiently complexity that the gradient is either unknown or too expensive to compute.</description>
+    </item>
+    
+    <item>
+      <title>Finite difference method</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/05-finite-difference-method/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/05-finite-difference-method/</guid>
+      <description>The simplest way of converting a gradient-based optimisation algorithm to a derivative free one is to approximate the gradient of the function using finite differences.
+The Finite Difference (FD) method is based on taking a Taylor series expansion of either $f(x+h)$ and $f(x-h)$ (and others) for a small parameter $f$ about $x$. Consider a smooth function $f(x)$ then its Taylor expansion is
+\[f(x+h) = f(x) + h f&#39;(x) + \frac{h^2}{2} f&#39;&#39;(x) + \frac{h^3}{6} f&#39;&#39;&#39;(x) + \frac{h^4}{24} f&#39;&#39;&#39;&#39;&#39;(x) + \ldots \]</description>
+    </item>
+    
+    <item>
+      <title>Nelder-Mead method</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/06-nelder-mead/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/06-nelder-mead/</guid>
+      <description>The Nelder-Mead method is popular and implementations exist in many optimisation software libraries. It is based on the idea of a simplex in parameter space of dimension $n$, which is formed from the
+convex hull of $n + 1$ points in $\mathcal{R}^n$. These points $x_i$ are ordered according to their function value so that
+\[ f(x_1) \le f(x_2) \le \cdots \le f(x_{n+1}) \]
+For each iteration of the algorithm, there are five different points of interest, the first of which is the centroid of the $n$ points with the lowest $f$ values</description>
+    </item>
+    
+  </channel>
+</rss>

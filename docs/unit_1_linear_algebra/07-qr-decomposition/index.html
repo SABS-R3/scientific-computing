@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.78.2" />
+    <meta name="description" content="An online course on Modelling and Scientific Computing in Python for the SABS:R3 Centre for Doctoral Training https://www.sabsr3.ox.ac.uk/">
+<meta name="author" content="Martin Robinson">
+
+    <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
+
+    <title>QR decomposition   Modelling and Scientific Computing</title>
+
+    
+    <link href="/scientific-computing/css/nucleus.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608054345" rel="stylesheet">
+    
+    <link href="/scientific-computing/css/theme-dtc.css?1608054345" rel="stylesheet">
+    
+    
+
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608054345"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+        delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+        });
+    });
+</script>
+
+
+
+  </head>
+  <body class="" data-url="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://sabs-r3.github.io/scientific-computing/">
+    <img src="/scientific-computing/logos/SABSR3.svg" alt="SABSR3 logo">
+</a>
+  
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608054345"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608054345"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
+    
+</script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608054345"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_0_introduction/" title="Course introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_0_introduction/">
+          Course introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/01_course_overview/" title="Course Overview" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/01_course_overview/">
+        1. Course Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/02_course_activities/" title="Course Activities" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/02_course_activities/">
+        2. Course Activities
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/03_getting_matlab/" title="Getting MATLAB" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/03_getting_matlab/">
+        3. Getting MATLAB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/scientific-computing/unit_1_linear_algebra/">
+          <b>Day 1. </b>Direct Solvers and Matrix Decompositions
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/" title="Matrix form of equations" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+        Matrix form of equations
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/" title="Gaussian Elimination" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/">
+        Gaussian Elimination
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/">
+        Matrix decompositions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+        LU decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/">
+        LDL decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/">
+        Cholesky decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/" title="QR decomposition" class="dd-item active">
+        <a href="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+        QR decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_2_linear_algebra/">
+          <b>Day 2. </b>Sparse Matrices and Iterative Solvers
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/" title="Sparse matrices" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/">
+        Sparse matrices
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/">
+        COOrdinate format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/">
+        Finite Difference Matrix
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+        Scipy.sparse
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/">
+        Iterative methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/" title="Jacobi and Relaxation Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/">
+        Jacobi and Relaxation Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/" title="Conjugate Gradient Method" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+        Conjugate Gradient Method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
+        Scipy.sparse.linalg
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_3_ode/">
+          <b>Day 3. </b>Solving ODEs
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_4_optimisation/">
+          <b>Day 4. </b>Non-linear Optimisation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/">
+        Nonlinear Optimisation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/02-line-search-methods/" title="Line Search Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+        Line Search Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/">
+        Trust Region Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/" title="Derivative-free methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/">
+        Derivative-free methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/05-finite-difference-method/" title="Finite difference method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/05-finite-difference-method/">
+        Finite difference method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/06-nelder-mead/" title="Nelder-Mead method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/06-nelder-mead/">
+        Nelder-Mead method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/" title="Bayesian Inference" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_5_bayesian_inference/">
+          <b>Day 5. </b>Bayesian Inference
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_6_projects/">
+          <b>Day 6-8. </b>Projects
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/main/hugo_site/content/unit_1_linear_algebra/07-QR-decomposition.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_1_linear_algebra/'>Direct Solvers and Matrix Decompositions</a> > QR decomposition
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              QR decomposition
+            </h1>
+          
+
+        
+
+
+<h2 id="qr-decomposition">QR decomposition</h2>
+
+<h2 id="the-leastsquares-problem">The least-squares problem</h2>
+
+<p>One of the most important application of the $QR$ decomposition is the least squares
+solution of a set of overdetermined equations. That is a set of $m$ linear equations
+with $n$ unknowns, with $m \ge n$. The least squares problem to be solved is the
+mimimisation of $||A x - b ||_2$, where $|| x ||_2 = \sqrt{x_1^2 + x_2^2 + ... + x_m^2}$
+is the standard 2-norm, and where $A \in \mathbb{R}^{m \times n}$ with $m \ge n$ and $b
+\in \mathbb{R}^m$. In this case, the problem $Ax = b$ will often have no solution, and
+thus it is nessessary to consider $Ax$ and $b$ as <em>approximatelly</em> equal, and to
+minimise the distance between them by minimising the loss function $||A x - b||_2$.</p>
+
+<p>To solve this least squares problem, we need to consider the subspace of all vectors in
+$\mathbb{R}^{m}$ that are formed from linear combinations of the columns of $A$. This is
+known as the column space of the $A$, and is denoted as $\text{Col }A$. Given that <em>any</em>
+linear combination of the columns of $A$ will lie in this space, we can say that $Ax$
+will also lie in $\text{Col }A$ for any $x$.</p>
+
+<p>Now consider a projection of $b$ into the column space of $A$ to give a new vector
+$\hat{b}$ (i.e. $\hat{b}$ is the closest point in Col $A$ to $b$), see the diagram
+below. Because $\hat{b}$ is in the column space of $A$, we know that there is another
+vector $\hat{x}$ that also lies in Col $A$ and satisfies</p>
+
+<p><span  class="math">\[
+A \hat{x} = \hat{b}
+\]</span></p>
+
+<p>Since $\hat{b}$ is the closest point to $b$ in the column space of $A$, we can therefore
+say that $\hat{x}$ is the least-squares solution.</p>
+
+<p><figure><img src="/scientific-computing/images/unit_01/linear-least-squares.svg" alt="least squares problem"></figure></p>
+
+<p>We can show that the vector $b - \hat{b} = b - A \hat{x}$ is orthogonal to Col $A$ and
+therefore also orthogonal to each column in $A$, so we have $a_j^T (b - A \hat{x})$ for
+each column $a_j$ of $A$. Putting these $m$ equations together we can write</p>
+
+<p><span  class="math">\[
+A^T (b - A \hat{x}) = 0
+\]</span></p>
+
+<p>or rearranged slightly, we can find the least-sqaures solution $\hat{x}$ via the
+solution of the equation</p>
+
+<p><span  class="math">\[
+A^T A \hat{x} = A^T b
+\]</span></p>
+
+<p>The $QR$ decomposition divides $A = QR$ into an orthogonal matrix $Q$, and an upper
+triangular matrix $R$. Most importantly for the least-squares problem, the matrix $Q$ is
+also an orthonormal basis for Col $A$ and therefore $\hat{b} = Q Q^T b$.</p>
+
+<p>Given this decomposition, it can be shown that the least squares solution of $A x = b$
+is given by</p>
+
+<p><span  class="math">\[
+\hat{x} = R^{-1} Q^T b
+\]</span></p>
+
+<p>To prove this, we let $\hat{x} = R^{-1} Q^T b$ and make the following substitutions</p>
+
+<p><span  class="math">\[
+A\hat{x} =  QR \hat{x} = QRR^{-1}Q^T b = Q Q^T b = \hat{b}
+\]</span></p>
+
+<p>Therefore $A\hat{x} = \hat{b}$, which proves that $\hat{x}$ is the least-squares
+solution for $A x = b$</p>
+
+<p>Finally, we note that the inverse $R^{-1}$ should not be calculated directly, but
+instead $\hat{x}$ should be found by solving</p>
+
+<p><span  class="math">\[
+R x = Q^T b
+\]</span></p>
+
+<h3 id="constructing-the-qr-decomposition">Constructing the QR decomposition</h3>
+
+<p>$QR$ decomposisions are normally computed via Householder reflections, Givens rotations
+or the Gram-Schmidt process. For a brief summary of the first two methods, it is useful
+to consider a simple $2 \times 2$ reflection or rotation of a 2d vector. For example,
+the matrix</p>
+
+<p><span  class="math">\[
+Q = \left(\begin{matrix}
+\cos(\theta) & \sin(\theta) \\
+-\sin(\theta) & \cos(\theta)
+\end{matrix}\right)
+\]</span></p>
+
+<p>is a <em>rotation</em> matrix that when applied to a vector $x$ will result in $y = Qx$, where
+$y$ is rotated counterclockwise through the angle $\theta$. $Q$ is also <em>orthogonal</em>
+since $QQ^T = I$.</p>
+
+<p>Similarly, a $2 \times 2$ <em>reflection</em> matrix can be constructed as</p>
+
+<p><span  class="math">\[
+Q = \left(\begin{matrix}
+\cos(\theta) & \sin(\theta) \\
+\sin(\theta) & -\cos(\theta)
+\end{matrix}\right)
+\]</span></p>
+
+<p>which when applied to a vector $x$ will result in $y = Qx$, where $y$ is reflected
+across the line defined by $\text{span}((\cos(\theta), \sin(\theta))^T)$.</p>
+
+<p>Rotations and reflections are often useful because they can be selected in order to
+introduce zeros to the vector they are applied to. Given an $m \times n$ matrix $A$, a
+series of $n$ <em>Householder reflections</em> can be applied to reduce $A$ to an upper
+triangular matrix $R$</p>
+
+<p><span  class="math">\[
+H_n ... H_2 H_1 A = R
+\]</span></p>
+
+<p>By setting $Q = H_1 H_2 ... H_n$, we can show that $A = QR$, and that $Q$ is an
+orthogonal matrix which is also an orthonormal basis for the column space of $A$.</p>
+
+<p>Similarly, a <em>Givens rotation</em> can be used to zero a single component of $A$, so that a
+a series of rotations can be used to contruct the upper triangular matrix $R$</p>
+
+<p><span  class="math">\[
+G_j ... G_2 G_1 A = R
+\]</span></p>
+
+<p>so that $Q = G_1 G_2 ... G_j$, and $A = QR$. For both the Householder and Givens
+methods, it is often useful to not construct the full matrix $Q$ but to keep $Q$
+factored as a implicit product of either $H_1 H_2 ... H_n$ or $G_1 G_2 ... G_j$. Fast
+algorithms exist to calculate the produce of these factored forms to another vector.</p>
+
+<p>The final method to contruct a $QR$ decomposition is using the Gram-Schmidt process,
+which is a process for contructing an orthogonal or orthonormal basis for a given
+subspace defined by the span of the set of vectors $x_1, x_2, ..., x_n$. If these $n$
+vectors are the columns of the $m \times n$ matrix $A$, then the Gram-Schmidt process
+can be used to directly contruct the orthonormal basis of the column space of $A$ given
+by $Q$, and that $A = QR$ where $R$ is an upper triangular matrix. The matrix $R$ can be
+calculated using $R = Q^T A$. Note that the classical Gram-Schmidt exhibits poor
+numerical qualities, therefore a modified version of the algorithm exists, which is
+described in the Golub and Van Loan Matrix Computations textbook listed below.</p>
+
+<p>In terms of computational work, the Householder method takes $2n^2(m-n/3)$ flops to
+compute $Q$ in factored form, and another $2n^2(m-n/3)$ to get the full matrix $Q$,
+whereas the Gram-Schmidt method is more efficient at $2mn^2$ flops. However, Householder
+is normally prefered in practice as even with the modified algorithm the numerical
+properies of the Gram-Schmidt are still poor in comparison with both Householder and
+Givens (i.e. the final orthogonality of $Q$ is not ideal), so is only useful when the
+columns of $A$ are already fairly independent. Using Givens rotations the matrix $R$ can
+be found in $2n^2(m-n/3)$, or the factorised form of the $QR$ decomposition can be found
+in the same amount of time. The full matrix $Q$ is not normally calculated via Givens
+rotations. Using Givens rotations is most useful when there are only few non-zeros in
+$A$, and is more easily parallised than Householder.</p>
+
+<h3 id="other-reading">Other Reading</h3>
+
+<p>The discussion in this section relied on concepts such as orthogonal and orthonormal
+vector pairs, vector spaces and subspaces and basis vectors. It is well worth
+investigating these topics further in:</p>
+
+<ul>
+<li>Linear algebra and its applications by David C. Lay. Chapers 4 &amp; 6.</li>
+</ul>
+
+<p>Additional reading on the $QR$ decomposition can be found at:</p>
+
+<ul>
+<li>Linear algebra and its applications by David C. Lay. Chaper 6.4<br></li>
+<li>Golub, G. H. &amp; Van Loan, C. F. Matrix Computations, 3rd Ed. (Johns Hopkins University
+Press, 1996). Chapter 5.2</li>
+<li><a href="https://en.wikipedia.org/wiki/QR_decomposition">https://en.wikipedia.org/wiki/QR_decomposition</a></li>
+</ul>
+
+<h3 id="software">Software</h3>
+
+<ul>
+<li>
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html"><code>scipy.linalg.qr</code></a></li>
+<li>
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_multiply.html"><code>scipy.linalg.qr_multiply</code></a></li>
+<li>
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_update.html"><code>scipy.linalg.qr_update</code></a></li>
+<li>
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_delete.html"><code>scipy.linalg.qr_delete</code></a></li>
+<li>
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_insert.html"><code>scipy.linalg.qr_insert</code></a></li>
+</ul>
+
+<h2 id="problems">Problems</h2>
+
+<p>For this exercises we will be using some data on Oxford's weather which is hosted by
+<a href="https://users.fmrib.ox.ac.uk/~saad/">Saad Jbabdi</a> from the Wellcome Centre for
+Integrative NeuroImaging (FMRIB), which can be obtained
+<a href="http://www.fmrib.ox.ac.uk/~saad/ONBI/OxfordWeather.txt">here</a>.</p>
+
+<p>We wish to fit a quadratic model of the form $y = a x^2 + b x + c$ to the hours of
+sunlight observed in Oxford (7th column in <code>OxfordWeather.txt</code>) versus the month (2nd
+column). The dataset in question has $m &gt; 3$ data points, so our model gives us a set of
+$m$ equations for 3 unknowns $a$, $b$, and $c$ that are overdetermined, that is, for
+each data point $(y_i, x_i)$ for $i=1..m$ we have:</p>
+
+<p><span  class="math">\[
+y_i = a x_i^2 + b x_i + c
+\]</span></p>
+
+<p>Use a $QR$ decomposition to find the least-squares solution to these equations, and
+therefore fit the model to the data. Plot the model and the data side by side to
+qualitativly evaluate the fit.</p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/scientific-computing/js/clipboard.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608054345"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608054345"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608054345"></script>
+    <script src="/scientific-computing/js/learn.js?1608054345"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608054345"></script>
+    
+    
+
+  </body>
+</html>
+

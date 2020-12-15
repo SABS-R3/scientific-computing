@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/</loc>
+    <lastmod>2020-11-26T16:50:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/02-coo-matrix/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/02-line-search-methods/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/</loc>
+    <lastmod>2014-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/03-finite-difference/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/03-trust-region-methods/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_3_ode/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/</loc>
+    <lastmod>2014-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/05-finite-difference-method/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</loc>
+    <lastmod>2014-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/05-iterative-methods/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_5_bayesian_inference/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_6_projects/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/</loc>
+    <lastmod>2014-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/06-nelder-mead/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/</loc>
+    <lastmod>2014-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/</loc>
+    <lastmod>2020-11-27T16:10:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/01_course_overview/</loc>
+    <lastmod>2020-11-26T16:52:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/02_course_activities/</loc>
+    <lastmod>2020-11-25T16:52:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_matlab/</loc>
+    <lastmod>2020-11-24T16:52:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabs-r3.github.io/scientific-computing/tags/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.78.2" />
+    <meta name="description" content="An online course on Modelling and Scientific Computing in Python for the SABS:R3 Centre for Doctoral Training https://www.sabsr3.ox.ac.uk/">
+<meta name="author" content="Martin Robinson">
+
+    <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
+
+    <title>Line Search Methods   Modelling and Scientific Computing</title>
+
+    
+    <link href="/scientific-computing/css/nucleus.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608054345" rel="stylesheet">
+    
+    <link href="/scientific-computing/css/theme-dtc.css?1608054345" rel="stylesheet">
+    
+    
+
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608054345"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+        delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+        });
+    });
+</script>
+
+
+
+  </head>
+  <body class="" data-url="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://sabs-r3.github.io/scientific-computing/">
+    <img src="/scientific-computing/logos/SABSR3.svg" alt="SABSR3 logo">
+</a>
+  
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608054345"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608054345"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
+    
+</script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608054345"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_0_introduction/" title="Course introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_0_introduction/">
+          Course introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/01_course_overview/" title="Course Overview" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/01_course_overview/">
+        1. Course Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/02_course_activities/" title="Course Activities" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/02_course_activities/">
+        2. Course Activities
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/03_getting_matlab/" title="Getting MATLAB" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/03_getting_matlab/">
+        3. Getting MATLAB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_1_linear_algebra/">
+          <b>Day 1. </b>Direct Solvers and Matrix Decompositions
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/" title="Matrix form of equations" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+        Matrix form of equations
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/" title="Gaussian Elimination" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/">
+        Gaussian Elimination
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/">
+        Matrix decompositions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+        LU decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/">
+        LDL decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/">
+        Cholesky decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/" title="QR decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+        QR decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_2_linear_algebra/">
+          <b>Day 2. </b>Sparse Matrices and Iterative Solvers
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/" title="Sparse matrices" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/">
+        Sparse matrices
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/">
+        COOrdinate format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/">
+        Finite Difference Matrix
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+        Scipy.sparse
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/">
+        Iterative methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/" title="Jacobi and Relaxation Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/">
+        Jacobi and Relaxation Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/" title="Conjugate Gradient Method" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+        Conjugate Gradient Method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
+        Scipy.sparse.linalg
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_3_ode/">
+          <b>Day 3. </b>Solving ODEs
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/scientific-computing/unit_4_optimisation/">
+          <b>Day 4. </b>Non-linear Optimisation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/">
+        Nonlinear Optimisation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/02-line-search-methods/" title="Line Search Methods" class="dd-item active">
+        <a href="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+        Line Search Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/">
+        Trust Region Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/" title="Derivative-free methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/">
+        Derivative-free methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/05-finite-difference-method/" title="Finite difference method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/05-finite-difference-method/">
+        Finite difference method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/06-nelder-mead/" title="Nelder-Mead method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/06-nelder-mead/">
+        Nelder-Mead method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/" title="Bayesian Inference" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_5_bayesian_inference/">
+          <b>Day 5. </b>Bayesian Inference
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_6_projects/">
+          <b>Day 6-8. </b>Projects
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/main/hugo_site/content/unit_4_optimisation/02-line-search-methods.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_4_optimisation/'>Non-linear Optimisation</a> > Line Search Methods
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Line Search Methods
+            </h1>
+          
+
+        
+
+
+<h3 id="gradient-descent-and-line-search-methods">Gradient descent and line search methods</h3>
+
+<p>One of the simplest local optimisation algoriths is <em>gradient descent</em>. It is
+initialised at some point in parameter space $a_0$, and at each iteration the function
+$f(x)$ is reduced by following the direction of <em>steepest descent</em> $-\nabla f(a)$</p>
+
+<p><span  class="math">\[
+a_{n+1} = a_n - \gamma \nabla f(a_n)
+\]</span></p>
+
+<p>This is an example of an imporant class of algorithms called the <em>line search</em> methods.
+These algorithms choose a <em>search direction</em>  $p_k$ at each iteration $k$, and search
+along the 1D line from the initial point $a_k$ to a new point</p>
+
+<p><span  class="math">\[
+a_{k+1} = a_k + \alpha p_k
+\]</span></p>
+
+<p>with a lower function value. The problem at each iteration becomes a one-dimensional
+optimisation problem along $p_k$ to find the optimal value of $\alpha$. Each line search
+algorithm is thus defined on how it chooses both the search direction $p_k$ and the
+optimal $\alpha$.</p>
+
+<h3 id="plataus-with-low-gradient">Plataus with low gradient</h3>
+
+<p>An obvious downside to simple gradient descent can be seen for functions which have
+regions of zero or small gradients, or plataus. Here a gradient descent algorithm with a
+constant $\gamma$ will proceed very slowly, if at all. This motivates another important
+line search algorithm, <em>Newtons method</em>.</p>
+
+<p>The Newtons direction $p^N_k$ can be derived by considering the second-order Taylor
+expansion of the function $f(x)$</p>
+
+<p><span  class="math">\[
+f(a_k + p) \approx f(a_k) + p^T \nabla f(a_k) + \frac{1}{2} p^T \nabla^2 f(a_k) = 
+m_k(p).
+\]</span></p>
+
+<p>We find the value of $p$ that minimises $m_k(p)$ by setting the derivative of $m_k$ to
+zero, leading to</p>
+
+<p><span  class="math">\[
+p_k^N = - (\nabla^2 f(a_k))^{-1} \nabla f(a_k)
+\]</span></p>
+
+<p>Unlike the steepest descent, Newtons method has a natural step length $\alpha \approx
+1$, which is suitable for a wide variety of problems and can quickly cross areas of low
+gradient. Natually, since the algorithm is based on a <em>second-order</em> approximation of
+the function $f$, it works better if this approximation is reasonably accurate.</p>
+
+<p>Newtons method can be used as long as the inverse of the second derivative of the
+function $(\nabla^2 f(a_k))^{-1}$, exists (e.g. it will always exist for a positive
+definite $\nabla^2 f$). However, even when this inverse does exist it is possible that
+the direction $p^N_k$ does not satisfy the descent condition $f(a_k + \alpha p^N_k) &lt;
+f(a_k)$ (or equivilently $\nabla f(a_k)^T p^N &lt; 0$), so many modifications to Newtons
+methods, falling under a class of methods called <em>Quasi-Newton</em> methods, have been
+proposed to satisfy this descent condition.</p>
+
+<p>Quasi-Newton methods do not require the (often onerous) calculation of the hession
+$\nabla^2 f(x)$ like Newtons, instead they form an approximation to the hessian $B_k
+\approx \nabla^2 f(a_k)$ that is updated at each step using the information given by the
+gradient evaluations $\nabla f(a_k)$. Two popular methods of performing this update are
+the <em>symmetric-rank-one</em> (SR1), and the <em>Broyden, Fletcher, Goldfarb, and Shanno,
+(BFGS)</em> formula. Once the approximation $B_k$ is formed then the search direction is
+calculated via</p>
+
+<p><span  class="math">\[
+p_k = -B_k^{-1} \nabla f(a_k)
+\]</span></p>
+
+<p>For more details of other line search methods, and other concepts such as the <em>Wolfe
+conditions</em> for calculating the step length $\alpha$, please see Chapter 3 of the
+Nocedal and Wright textbook, or in the other textbooks listed at the end of this
+lession. Finally, it should be noted that the <em>conjugate gradient</em> method can also be
+used for non-linear optimisation, where the search direction is given by</p>
+
+<p><span  class="math">\[
+p_k = -\nabla f(a_k) + \beta_k p\_{k-1}
+\]</span></p>
+
+<h3 id="step-length">Step length</h3>
+
+<p>In line search methods, choosing the step length $\alpha_k$ is a non-trivial task.
+Ideally we would want to chose $\alpha_k$ to minimise the function along the
+one-dimensional search direction $p_k$. That is, we wish to minimise</p>
+
+<p><span  class="math">\[
+\phi(\alpha_k) = f(a_k + \alpha_k p_k),\text{ }\alpha_k > 0.
+\]</span></p>
+
+<p>In general this is too expensive to do this minimisation exactly, so approximate methods
+are used so that multiple trial $\alpha_k$ values are trialed, stopping when a candidate
+is found that satisfies a set of <em>conditions</em>. There are two main conditions used, the
+<em>Wolfe conditions</em> and the <em>Goldstein</em> conditions.</p>
+
+<p>The two Wolfe conditions are the <em>sufficient decrease</em> condition, which ensures that the
+reduction in the function value is proportional to the step length $\alpha_k$ and the
+gradient in the direction of the step</p>
+
+<p><span  class="math">\[
+f(a_k + \alpha_k p_k) \le f(a_k) + c_1 \alpha_k \nabla f(a_k)^T p_k.
+\]</span></p>
+
+<p>The second Wolfe condition is the <em>curvature</em> condition, which prevents unacceptibly
+short steps by ensuring that the slope of $\phi$ is greater than some constant $c_2$
+times the initial slope $\phi'(0)$</p>
+
+<p><span  class="math">\[
+\nabla f(a_k + \alpha_k p_k)^T p_k \ge c_2 \nabla f(a_k)^T p_k,
+\]</span></p>
+
+<p>where $c_2 \in (c_1, 1)$. Typical values are $c_1 = 10^{-4}$ and $c_2 = 0.9$. The
+<em>strong Wolfe</em> conditions restrict the gradient $\phi'$ to be small, so as to exclude
+points that are too far from stationary points of $\phi$</p>
+
+<p><span  class="math">\(
+f(a_k + \alpha_k p_k) \le f(a_k) + c_1 \alpha_k \nabla f(a_k)^T p_k.
+\)</span>
+<span  class="math">\(
+|\nabla f(a_k + \alpha_k p_k)^T p_k| \ge c_2 |\nabla f(a_k)^T p_k|,
+\)</span></p>
+
+<p>The Goldstein conditions are similar in spirit to the Wolfe condtitions, and are formed
+from the two inequalities</p>
+
+<p><span  class="math">\[
+f(a_k) + (1 - c) \alpha_k \nabla f(a_k)^T p_k \le f(a_k + \alpha_k p_k) \le f(a_k) + c 
+\alpha_k \nabla f(a_k)^T p_k.
+\]</span></p>
+
+<p>with $0 &lt; c &lt; 1/2$. The first inequality prevents small step sizes while the second is
+the same sufficient decrease condition as in the Wolfe conditions. The Goldstein
+conditions are often used in Newton-type methods but for quasi-Newton methods the Wolfe
+conditions are prefered. The diagrams from the text by Nocedal and Wright
+illustrate the two conditions</p>
+
+<p><figure><img src="/scientific-computing/images/unit_04/conditions.jpg" alt=""></figure></p>
+
+<p>Algorithms for choosing candidate step size values $\alpha_k$ can be complicated, so we
+will only mention here one of the simplest, which is the <em>backtracking</em> method. This
+approach implicitly satisfies the condition on too small $\alpha_k$, and only repeatedly
+test for the common sufficient decrease condition that appears in both the Wolfe and
+Goldstein condtitions.</p>
+
+<p>Choose $\bar{\alpha} &gt; 0$, $\rho \in (0, 1)$, $c \in (0, 1)$ <br>
+$\alpha_k := \bar{\alpha}$ <br>
+<strong>repeat</strong> until $f(a_k + \alpha_k p_k) \le f(a_k) + c \alpha_k \nabla f(a_k)^T p_k$ <br>
+&nbsp;&nbsp; $\alpha_k := \rho \alpha_k$ <br>
+<strong>end repeat</strong></p>
+
+<h3 id="software">Software</h3>
+
+<ul>
+<li>Scipy has a wide variety of (mostly) line search and trust region algorithms in
+<a href="https://docs.scipy.org/doc/scipy/reference/optimize.html"><code>scipy.optimize</code></a></li>
+</ul>
+
+<h3 id="problems">Problems</h3>
+
+<ol>
+<li>Program the steepest descent and Newton algorithms using the backtracking line
+search, Algorithm 3.1. Use them to minimize the <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
+function</a>. Set the initial step
+length $\alpha_0 = 1$ and print the step length used by each method at each
+iteration. First try the initial point $x_0 = (1.2, 1.2)^T$ and then the more
+difficult starting point $x_0 = (−1.2, 1)^T$.</li>
+<li>Plot the function surface using <code>matplotlib</code> and overlay the line search segments so
+you can visualise the progress of your algorithm.</li>
+<li>Repeat (1) and (2) above using the line seach implemented in Scipy
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.line_search.html"><code>scipy.optimize.line_search</code></a>,
+which uses the strong Wolfe conditions.</li>
+</ol>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/scientific-computing/js/clipboard.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608054345"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608054345"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608054345"></script>
+    <script src="/scientific-computing/js/learn.js?1608054345"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608054345"></script>
+    
+    
+
+  </body>
+</html>
+

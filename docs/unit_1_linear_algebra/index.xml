@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Direct Solvers and Matrix Decompositions on Modelling and Scientific Computing</title>
+    <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/</link>
+    <description>Recent content in Direct Solvers and Matrix Decompositions on Modelling and Scientific Computing</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 27 Nov 2020 16:10:31 +0000</lastBuildDate><atom:link href="https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matrix form of equations</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</guid>
+      <description>Simultaneous equations Consider 2 simultaneous equations:
+\[ \begin{aligned} a_1x+b_1y &amp;= c_1, \quad (1)\\ a_2x+b_2y &amp;= c_2, \quad (2) \end{aligned} \]
+where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2, \;c_1\;$ and $\;c_2\;$ are given constants.
+\[ \begin{aligned} (1) \times b_2:~~~~~~~~~~~~~~~ b_2a_1x+b_2b_1y &amp;=&amp; b_2c_1, \quad (3)\\ (2) \times b_1:~~~~~~~~~~~~~~~ b_1a_2x+b_1b_2y &amp;=&amp; b_1c_2, \quad (4)\\ (3) - (4):~~~~~~~~~~~~~~~ b_2a_1x-b_1a_2x &amp;=&amp; b_2c_1-b_1c_2. \end{aligned} \]
+The Matrix Matrices are a structure that allow us to more easily manipulate linear systems.</description>
+    </item>
+    
+    <item>
+      <title>Gaussian Elimination</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/</guid>
+      <description>Gaussian Elimination Consider the problem: Find $x, y,z$ such that
+\[ \begin{aligned} eq1: &amp; 2x &amp; + &amp; y &amp; -&amp; z &amp; = &amp; 3 \\ eq2: &amp; x &amp; &amp; &amp;+ &amp;5z &amp; = &amp; 6 \\ eq3: &amp; -x &amp;+&amp; 3y&amp; -&amp; 2z &amp; = &amp; 3 \end{aligned} \]
+Gaussian elimination -- step 1 reduce the above system of equations so that the unknown $x$ is removed from the last two equations:</description>
+    </item>
+    
+    <item>
+      <title>Matrix decompositions</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/</guid>
+      <description>Matrix factorisations play a key role in the solution of problems of the type $A x = b$. Often (e.g. ODE solvers), you have a fixed matrix $A$ that must be solved with many different $b$ vectors. A matrix factorisation is effectivly a pre-processing step that allows you to partition $A$ into multiple factors (e.g. $A = LU$ in the case of $LU$ decomposition), so that the actual solve is as quick as possible.</description>
+    </item>
+    
+    <item>
+      <title>LU decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/</guid>
+      <description>$LU$ decomposition The $LU$ decomposition is closely related to gaussian elimination. It takes the original equation to be solved $A x = b$ and splits it up into two separate equations involving a unit lower triangular matrix $L$, and the row echelon matrix $U$:
+\[ \begin{aligned} L y &amp;= b \\ U x &amp;= y \end{aligned} \]
+where $A = LU$. The $L$ matrix is a unit lower triangular matrix and thus has ones on the diagonal, whereas $U$ is in row echelon form with pivot values in the leading coefficients of each row.</description>
+    </item>
+    
+    <item>
+      <title>LDL decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</guid>
+      <description>$LDL$ decomposition It is often very benificial when solving linear systems to consider and take advantage of any special structure that the matrix $A$ might possesses. The $LDL$ decomposition is a varient on LU decomposition which is only applicable to a symmetric matrix $A$ (i.e. $A = A^T$). The advantage of using this decomposition is that it takes advantage of the redundent entries in the matrix to reduce the amount of computation to $n^3/3$, which is about a half that required for the $LU$ decomposition.</description>
+    </item>
+    
+    <item>
+      <title>Cholesky decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/</guid>
+      <description>Cholesky decomposition Symmetric positive definite matrices are a very special type of matrix that often arise in practice. From a computational point of view, this class of matrix is very attractive because it is possible to decompose a symmetic positive definite matrix $A$ very efficiently into a single lower triangular matrix $G$ so that $A = GG^T$.
+A matrix $A$ is positive definite if $x^T A x &amp;gt; 0$ for any nonzero $x \in \mathbb{R}$.</description>
+    </item>
+    
+    <item>
+      <title>QR decomposition</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/</guid>
+      <description>QR decomposition The least-squares problem One of the most important application of the $QR$ decomposition is the least squares solution of a set of overdetermined equations. That is a set of $m$ linear equations with $n$ unknowns, with $m \ge n$. The least squares problem to be solved is the mimimisation of $||A x - b ||_2$, where $|| x ||_2 = \sqrt{x_1^2 + x_2^2 + ... + x_m^2}$ is the standard 2-norm, and where $A \in \mathbb{R}^{m \times n}$ with $m \ge n$ and $b \in \mathbb{R}^m$.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.78.2" />
+    <meta name="description" content="An online course on Modelling and Scientific Computing in Python for the SABS:R3 Centre for Doctoral Training https://www.sabsr3.ox.ac.uk/">
+<meta name="author" content="Martin Robinson">
+
+    <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
+
+    <title>Conjugate Gradient Method   Modelling and Scientific Computing</title>
+
+    
+    <link href="/scientific-computing/css/nucleus.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608054345" rel="stylesheet">
+    
+    <link href="/scientific-computing/css/theme-dtc.css?1608054345" rel="stylesheet">
+    
+    
+
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608054345"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+        delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+        });
+    });
+</script>
+
+
+
+  </head>
+  <body class="" data-url="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://sabs-r3.github.io/scientific-computing/">
+    <img src="/scientific-computing/logos/SABSR3.svg" alt="SABSR3 logo">
+</a>
+  
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608054345"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608054345"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
+    
+</script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608054345"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_0_introduction/" title="Course introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_0_introduction/">
+          Course introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/01_course_overview/" title="Course Overview" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/01_course_overview/">
+        1. Course Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/02_course_activities/" title="Course Activities" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/02_course_activities/">
+        2. Course Activities
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/03_getting_matlab/" title="Getting MATLAB" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/03_getting_matlab/">
+        3. Getting MATLAB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_1_linear_algebra/">
+          <b>Day 1. </b>Direct Solvers and Matrix Decompositions
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/" title="Matrix form of equations" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+        Matrix form of equations
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/" title="Gaussian Elimination" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/">
+        Gaussian Elimination
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/">
+        Matrix decompositions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+        LU decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/">
+        LDL decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/">
+        Cholesky decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/" title="QR decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+        QR decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/scientific-computing/unit_2_linear_algebra/">
+          <b>Day 2. </b>Sparse Matrices and Iterative Solvers
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/" title="Sparse matrices" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/">
+        Sparse matrices
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/">
+        COOrdinate format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/">
+        Finite Difference Matrix
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+        Scipy.sparse
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/">
+        Iterative methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/" title="Jacobi and Relaxation Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/">
+        Jacobi and Relaxation Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/" title="Conjugate Gradient Method" class="dd-item active">
+        <a href="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+        Conjugate Gradient Method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
+        Scipy.sparse.linalg
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_3_ode/">
+          <b>Day 3. </b>Solving ODEs
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_4_optimisation/">
+          <b>Day 4. </b>Non-linear Optimisation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/">
+        Nonlinear Optimisation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/02-line-search-methods/" title="Line Search Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+        Line Search Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/">
+        Trust Region Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/" title="Derivative-free methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/">
+        Derivative-free methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/05-finite-difference-method/" title="Finite difference method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/05-finite-difference-method/">
+        Finite difference method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/06-nelder-mead/" title="Nelder-Mead method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/06-nelder-mead/">
+        Nelder-Mead method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/" title="Bayesian Inference" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_5_bayesian_inference/">
+          <b>Day 5. </b>Bayesian Inference
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_6_projects/">
+          <b>Day 6-8. </b>Projects
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/main/hugo_site/content/unit_2_linear_algebra/07-conjugate-gradient-method.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_2_linear_algebra/'>Sparse Matrices and Iterative Solvers</a> > Conjugate Gradient Method
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Conjugate Gradient Method
+            </h1>
+          
+
+        
+
+
+<p>One of the most important classes of iterative methods are the <em>Krylov subspace
+methods</em>, which include:</p>
+
+<ul>
+<li><em>Congugate Gradient (CG)</em>: for symmetrix positive definite matrices</li>
+<li><em>Biconjugate Gradient Stabilized (BiCGSTAB)</em>: for general square matrices</li>
+<li><em>Generalized Minimal Residual (GMRES)</em>: for general square matrices</li>
+</ul>
+
+<p>Below we will give a brief summary of the CG method, for more details you can consult
+the text by Golub and Van Loan (Chapter 10).</p>
+
+<p>The CG method is based on minimising the function</p>
+
+<p><span  class="math">\[
+\phi(x) = \frac{1}{2}x^T A x - x^T b
+\]</span></p>
+
+<p>If we set $x$ to the solution of $Ax =b$, that is $x = A^{-1} b$, then the value of
+$\phi(x)$ is at its minimum $\phi(A^{-1} b) = -b^T A^{-1} b / 2$, showing that solving
+$Ax = b$ and minimising $\phi$ are equivalent.</p>
+
+<p>At each iteration $k$ of CG we are concerned with the <em>residual</em>, defined as $r_k = b -
+A x_k$. If the residual is nonzero, then at each step we wish to find a positive
+$\alpha$ such that $\phi(x_k + \alpha p_k) &lt; \phi(x_k)$, where $p_k$ is the <em>search
+direction</em> at each $k$. For the classical stepest descent optimisation algorithm the
+search direction would be the residual $p_k = r_k$, however, steapest descent can suffer
+from convergence problems, so instead we aim to find a set of search directions $p_k$ so
+that $p_k^T r_{k-1} \ne 0$ (i.e. at each step we are guarenteed to reduce $\phi$), and
+that the search directions are linearly independent. The latter guarentees that the
+method will converge in at most $n$ steps, where $n$ is the size of the square matrix
+$A$.</p>
+
+<p>It can be shown that the best set of search directions can be achieved by setting</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+\beta_k &= \frac{-p^T_{k-1} A r_{k-1}}{p^T_{k-1} A p_{k-1}} \\
+p_k &= r_{k-1} + \beta_k p_{k-1} \\
+\alpha_k &= \frac{p^T_k r_{k-1}}{p^T_k A p_k}
+\end{aligned}
+\]</span></p>
+
+<p>Directly using the above equations in an iterative algorithm results in the standard CG
+algorithm. A more efficient algorithm can be derived from this by computing the
+residuals recursivly via $r_k = r_{k-1} - \alpha_k A p_k$, leading to the final
+algorithm given below (reproduced from
+<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">Wikipedia</a>):</p>
+
+<p><figure><img src="/scientific-computing/images/unit_02/cg_pseudocode.svg" alt="Conjugate Gradient algorithm"></figure></p>
+
+<h3 id="preconditioning">Preconditioning</h3>
+
+<p>The CG method works well (i.e. converges quickly) if the <em>condition number</em> of the
+matrix $A$ is low. The condition number of a matrix gives a measure of how much the
+solution $x$ changes in response to a small change in the input $b$, and is a property
+of the matrix $A$ itself, so can vary from problem to problem. In order to keep the
+number of iterations small for iterative solvers, it is therefore often neccessary to
+use a <em>preconditioner</em>, which is a method of transforming what might be a difficult
+problem with a poorly conditioned $A$, into a well conditioned problem that is easy to
+solve.</p>
+
+<p>Consider the case of precoditioning for the CG methods, we start from the standard
+problem $A x = b$, and we wish to solve an <em>equivilent</em> transformed problem given by</p>
+
+<p><span  class="math">\[
+\tilde{A} \tilde{x} = \tilde{b}
+\]</span></p>
+
+<p>where $\tilde{A} = C^{-1} A C^{-1}$, $\tilde{x} = Cx$, $\tilde{b} = C^{-1}$, and $C$ is
+a symmetric positive matrix.</p>
+
+<p>We then simply apply the standard CG method as given above to this transformed problem.
+This leads to an algorithm which is then simplified by instead computing the transformed
+quantities $\tilde{p}_k = C p_k$, $\tilde{x}_k = C x_k$, and $\tilde{r}_k = C^{-1} r_k$.
+Finally we define a matrix $M = C^2$, which is known as the <em>preconditioner</em>, leading to
+the final precoditioned CG algorithm given below (reproduced and edited from
+<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">Wikipedia</a>):</p>
+
+<p>$\mathbf{r}_0 := \mathbf{b} - \mathbf{A x}_0$<br>
+$\mathbf{z}_0 := \mathbf{M}^{-1} \mathbf{r}_0$<br>
+$\mathbf{p}_0 := \mathbf{z}_0$<br>
+$k := 0 \, $<br>
+<strong>repeat until $|| \mathbf{r}_k ||_2 &lt; \epsilon ||\mathbf{b}||_2$</strong><br>
+&nbsp;&nbsp; $\alpha_k := \frac{\mathbf{r}_k^T \mathbf{z}_k}{ \mathbf{p}_k^T
+\mathbf{A p}_k }$<br>
+&nbsp;&nbsp; $\mathbf{x}_{k+1} := \mathbf{x}_k + \alpha_k \mathbf{p}_k$ <br>
+&nbsp;&nbsp; $\mathbf{r}_{k+1} := \mathbf{r}_k - \alpha_k \mathbf{A p}_k$ <br>
+&nbsp;&nbsp; <strong>if</strong> $r_{k+1}$ is sufficiently small then exit loop <strong>end if</strong> <br>
+&nbsp;&nbsp; $\mathbf{z}_{k+1} := \mathbf{M}^{-1} \mathbf{r}_{k+1}$<br>
+&nbsp;&nbsp; $\beta_k := \frac{\mathbf{r}_{k+1}^T \mathbf{z}_{k+1}}{\mathbf{r}_k^T
+\mathbf{z}_k}$<br>
+&nbsp;&nbsp; $\mathbf{p}_{k+1} := \mathbf{z}_{k+1} + \beta_k \mathbf{p}_k$<br>
+&nbsp;&nbsp; $k := k + 1 \, $<br>
+<strong>end repeat</strong></p>
+
+<p>The key point to note here is that the preconditioner is used by inverting $M$, so this
+matrix must be &quot;easy&quot; to solve in some fashion, and also result in a transformed problem
+with better conditioning.</p>
+
+<p><strong>Termination</strong>: The CG algorithm is normally run untill convergence to a given
+tolerance which is based on the norm of the input vector $b$. In the algorithm above we
+iterate until the residual norm is less than some fraction (set by the user) of the norm
+of $b$.</p>
+
+<p>What preconditioner to choose for a given problem is often highly problem-specific, but
+some useful general purpose preconditioners exist, such as the <em>incomplete Cholesky
+preconditioner</em> for preconditioned CG (see Chapter 10.3.2 of the Golub &amp; Van Loan text
+given below). Chapter 3 of the <a href="https://www.netlib.org/templates/templates.pdf">Barrett et al.
+text</a>, also cited below, contains
+descriptions of a few more commonly used preconditioners.</p>
+
+<h3 id="other-reading">Other Reading</h3>
+
+<ul>
+<li>Golub, G. H. &amp; Van Loan, C. F. Matrix Computations, 3rd Ed. (Johns Hopkins University
+Press, 1996). Chapter 10</li>
+<li>Barrett, R., Berry, M., Chan, T. F., Demmel, J., Donato, J., Dongarra, J., ... &amp; Van
+der Vorst, H. (1994). Templates for the solution of linear systems: building blocks
+for iterative methods. Society for Industrial and Applied Mathematics.</li>
+</ul>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/scientific-computing/js/clipboard.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608054345"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608054345"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608054345"></script>
+    <script src="/scientific-computing/js/learn.js?1608054345"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608054345"></script>
+    
+    
+
+  </body>
+</html>
+

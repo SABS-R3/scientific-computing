@@ -1,0 +1,290 @@
+
+:root{
+    
+    --MAIN-TEXT-color:#323232; /* Color of text by default */
+    --MAIN-TITLES-TEXT-color: #5e5e5e; /* Color of titles h2-h3-h4-h5 */
+    --MAIN-LINK-color:#006FE6; /* Color of links */
+    --MAIN-LINK-HOVER-color:#02377c; /* Color of hovered links */
+    --MAIN-ANCHOR-color: #02377c; /* color of anchors on titles */
+
+    --MENU-HEADER-BG-color:#002147; /* Background color of menu header */
+    --MENU-HEADER-BORDER-color:#02377c; /*Color of menu header border */ 
+
+    --MENU-SEARCH-BG-color:#02377c; /* Search field background color (by default borders + icons) */
+    --MENU-SEARCH-BOX-color: #02377c; /* Override search field border color */
+    --MENU-SEARCH-BOX-ICONS-color: #006FE6; /* Override search field icons color */
+
+    --MENU-SECTIONS-ACTIVE-BG-color:#002147; /* Background color of the active section and its childs */
+    --MENU-SECTIONS-BG-color:#02377c; /* Background color of other sections */
+    --MENU-SECTIONS-LINK-color: #ccc; /* Color of links in menu */
+    --MENU-SECTIONS-LINK-HOVER-color: #e6e6e6;  /* Color of links in menu, when hovered */
+    --MENU-SECTION-ACTIVE-CATEGORY-color: #777; /* Color of active category text */
+    --MENU-SECTION-ACTIVE-CATEGORY-BG-color: #fff; /* Color of background for the active category (only) */
+
+    --MENU-VISITED-color: #006FE6; /* Color of 'page visited' icons in menu */
+    --MENU-SECTION-HR-color: #20272b; /* Color of <hr> separator in menu */
+    
+}
+
+body {
+    color: var(--MAIN-TEXT-color) !important;
+}
+
+textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, select[multiple=multiple]:focus {
+    border-color: none;
+    box-shadow: none;
+}
+
+h2, h3, h4, h5 {
+    color: var(--MAIN-TITLES-TEXT-color) !important;
+}
+
+a {
+    color: var(--MAIN-LINK-color);
+}
+
+.anchor {
+    color: var(--MAIN-ANCHOR-color);
+}
+
+a:hover {
+    color: var(--MAIN-LINK-HOVER-color);
+}
+
+#sidebar ul li.visited > a .read-icon {
+	color: var(--MENU-VISITED-color);
+}
+
+#body a.highlight:after {
+    display: block;
+    content: "";
+    height: 1px;
+    width: 0%;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -ms-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+    background-color: var(--MAIN-LINK-HOVER-color);
+}
+#sidebar {
+	background-color: var(--MENU-SECTIONS-BG-color);
+}
+#sidebar #header-wrapper {
+    background: var(--MENU-HEADER-BG-color);
+    color: var(--MENU-SEARCH-BOX-color);
+    border-color: var(--MENU-HEADER-BORDER-color);
+}
+#sidebar .searchbox {
+	border-color: var(--MENU-SEARCH-BOX-color);
+    background: var(--MENU-SEARCH-BG-color);
+}
+#sidebar ul.topics > li.parent, #sidebar ul.topics > li.active {
+    background: var(--MENU-SECTIONS-ACTIVE-BG-color);
+}
+#sidebar .searchbox * {
+    color: var(--MENU-SEARCH-BOX-ICONS-color);
+}
+
+#sidebar a {
+    color: var(--MENU-SECTIONS-LINK-color);
+}
+
+#sidebar a:hover {
+    color: var(--MENU-SECTIONS-LINK-HOVER-color);
+}
+
+#sidebar ul li.active > a {
+    background: var(--MENU-SECTION-ACTIVE-CATEGORY-BG-color);
+    color: var(--MENU-SECTION-ACTIVE-CATEGORY-color) !important;
+}
+
+#sidebar hr {
+    border-color: var(--MENU-SECTION-HR-color);
+}
+
+#body img.matlab-logo {
+    max-width: 10vw;
+}
+
+#body img.os-logos {
+    max-width: 5vh;
+    margin: 0vw;
+}
+
+#body img.matlab-screenshot {
+    max-width: 67%;
+}
+
+#body img.matlab-screenshot-50 {
+    max-width: 50%;
+}
+
+#body img.matlab-screenshot-40 {
+    max-width: 40%;
+}
+
+#body img.matlab-screenshot-30 {
+    max-width: 30%;
+}
+
+code.has-jax {
+    -webkit-font-smoothing: antialiased;
+    background: inherit !important;
+    border: none !important;
+    font-size: 100%;
+}
+
+/*************************************************************************/
+/* Changes to notices that will hopefully soon be merged into the theme. */
+/* See https://github.com/matcornic/hugo-theme-learn/pull/455            */
+/* When this happens this section, and the                               */
+/* local layouts/partials/shortcodes/notice.html can be deleted.         */
+/*************************************************************************/
+
+div.notices p {
+    padding: 0px 15px;
+    display: block;
+    font-size: 1rem;
+    margin: 1rem 0;
+    color: inherit;
+}
+div.notices p:first-child:before {
+    content: none;
+}
+div.notices p:first-child:after {
+    all: inherit
+}
+div.notices.info p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.info p:first-child:after {
+    content: none;
+}
+div.notices.warning p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.warning p:first-child:after {
+    content: none;
+}
+div.notices.note p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.note p:first-child:after {
+    content: none;
+}
+div.notices.tip p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.tip p:first-child:after {
+    content: none;
+}
+
+div.notices {
+    border-top-width: 2rem;
+    border-top-style: solid;
+    color: #666;
+    margin: 2rem 0;
+    padding-bottom: .1px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+div.notices > * {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+div.notices > div.label {
+    color: #fff;
+    margin-bottom: 1rem;
+    margin-top: -1.75rem;
+}
+div.notices > div.label:first-child:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-left: -.35rem;
+    margin-right: .35rem;
+}
+div.notices.info {
+    border-color: #6AB0DE;
+    background: #E7F2FA;
+}
+div.notices.info > div.label:first-child:before {
+    content: "\f05a";
+}
+div.notices.warning {
+    border-color: rgba(217, 83, 79, 0.8);
+    background: #FAE2E2;
+}
+div.notices.warning > div.label:first-child:before {
+    content: "\f071";
+}
+div.notices.note {
+    border-color: #F0B37E;
+    background: #FFF2DB;
+}
+div.notices.note > div.label:first-child:before {
+    content: "\f06a";
+}
+div.notices.tip {
+    border-color: rgba(92, 184, 92, 0.8);
+    background: #E6F9E6;
+}
+div.notices.tip > div.label:first-child:before {
+    content: "\f0eb";
+}
+
+/*************************************************************************/
+/*************************************************************************/
+/*************************************************************************/
+
+div.notices.question p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.question p:first-child:after {
+    content: none;
+}
+div.notices.question {
+    border-color: #93c47d;
+    background: #d9ead3;
+}
+div.notices.question > div.label:first-child:before {
+    content: "\f059";
+}
+
+div.notices.hint p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.hint p:first-child:after {
+    content: none;
+}
+div.notices.hint {
+    border-color: #6AB0DE;
+    background: #E7F2FA;
+}
+div.notices.hint > div.label:first-child:before {
+    content: "\f05a";
+}
+
+div.notices.solution p {
+    border-top: none;
+    background: inherit;
+}
+div.notices.solution p:first-child:after {
+    content: none;
+}
+div.notices.solution {
+    border-color: #8e7cc3;
+    background: #d9d2e9;
+}
+div.notices.solution > div.label:first-child:before {
+    content: "\f0ae";
+}
+
+summary {
+    padding: 0.5rem 0px;
+}
