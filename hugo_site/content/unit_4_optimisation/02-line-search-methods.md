@@ -4,7 +4,7 @@ weight: 2
 markup: "mmark"
 ---
 
-### Gradient descent and line search methods
+### Gradient descent
 
 One of the simplest local optimisation algoriths is *gradient descent*. It is 
 initialised at some point in parameter space $a_0$, and at each iteration the function 
@@ -26,6 +26,9 @@ with a lower function value. The problem at each iteration becomes a one-dimensi
 optimisation problem along $p_k$ to find the optimal value of $\alpha$. Each line search 
 algorithm is thus defined on how it chooses both the search direction $p_k$ and the 
 optimal $\alpha$.
+
+{{< figure src="/scientific-computing/images/unit_04/Gradient_descent.gif" 
+title="Illustration of Gradient Descent on a 2D test function. Taken from Wikimedia Commons">}}
 
 ### Plataus with low gradient 
 
@@ -81,7 +84,7 @@ lession. Finally, it should be noted that the *conjugate gradient* method can al
 used for non-linear optimisation, where the search direction is given by
 
 $$
-p_k = -\nabla f(a_k) + \beta_k p\_{k-1}
+p_k = -\nabla f(a_k) + \beta_k p_{k-1}
 $$
 
 ### Step length
@@ -122,6 +125,7 @@ points that are too far from stationary points of $\phi$
 $$
 f(a_k + \alpha_k p_k) \le f(a_k) + c_1 \alpha_k \nabla f(a_k)^T p_k.
 $$
+
 $$
 |\nabla f(a_k + \alpha_k p_k)^T p_k| \ge c_2 |\nabla f(a_k)^T p_k|,
 $$

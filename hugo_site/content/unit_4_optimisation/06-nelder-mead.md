@@ -6,7 +6,7 @@ markup: "mmark"
 
 The [Nelder-Mead method](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method) is 
 popular and implementations exist in many optimisation software libraries. It is based 
-on the idea of a simplex in parameter space of dimension $n$, which is formed from the  
+on the idea of a simplex in parameter space of dimension $n$, which is formed from the 
 convex hull of $n + 1$ points in $\mathcal{R}^n$. These points $x_i$ are ordered 
 according to their function value so that
 
@@ -25,7 +25,7 @@ The other four points are defined by considering the line joining $\bar{x}$ and 
 point with the highest $f$ value $x_{n+1}$
 
 $$
-\bar{x}(t) = \bar{x} + t(x_{n+1} - \bar{x}
+\bar{x}(t) = \bar{x} + t(x_{n+1} - \bar{x})
 $$
 
 The four points are the *reflection*, *expanding*, the *outside contraction* and *inside 
