@@ -12,21 +12,21 @@
     <title>Line Search Methods   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608054345" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608106807" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608106807" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608054345" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608106807" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608054345"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608106807"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608054345"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608054345"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608106807"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608106807"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608054345"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608106807"></script>
 
     
   </div>
@@ -898,7 +898,7 @@
         
 
 
-<h3 id="gradient-descent-and-line-search-methods">Gradient descent and line search methods</h3>
+<h3 id="gradient-descent">Gradient descent</h3>
 
 <p>One of the simplest local optimisation algoriths is <em>gradient descent</em>. It is
 initialised at some point in parameter space $a_0$, and at each iteration the function
@@ -920,6 +920,13 @@ a_{k+1} = a_k + \alpha p_k
 optimisation problem along $p_k$ to find the optimal value of $\alpha$. Each line search
 algorithm is thus defined on how it chooses both the search direction $p_k$ and the
 optimal $\alpha$.</p>
+
+<figure>
+    <img src="/scientific-computing/images/unit_04/Gradient_descent.gif"/> <figcaption>
+            <h4>Illustration of Gradient Descent on a 2D test function. Taken from Wikimedia Commons</h4>
+        </figcaption>
+</figure>
+
 
 <h3 id="plataus-with-low-gradient">Plataus with low gradient</h3>
 
@@ -975,7 +982,7 @@ lession. Finally, it should be noted that the <em>conjugate gradient</em> method
 used for non-linear optimisation, where the search direction is given by</p>
 
 <p><span  class="math">\[
-p_k = -\nabla f(a_k) + \beta_k p\_{k-1}
+p_k = -\nabla f(a_k) + \beta_k p_{k-1}
 \]</span></p>
 
 <h3 id="step-length">Step length</h3>
@@ -1013,12 +1020,13 @@ times the initial slope $\phi'(0)$</p>
 <em>strong Wolfe</em> conditions restrict the gradient $\phi'$ to be small, so as to exclude
 points that are too far from stationary points of $\phi$</p>
 
-<p><span  class="math">\(
+<p><span  class="math">\[
 f(a_k + \alpha_k p_k) \le f(a_k) + c_1 \alpha_k \nabla f(a_k)^T p_k.
-\)</span>
-<span  class="math">\(
+\]</span></p>
+
+<p><span  class="math">\[
 |\nabla f(a_k + \alpha_k p_k)^T p_k| \ge c_2 |\nabla f(a_k)^T p_k|,
-\)</span></p>
+\]</span></p>
 
 <p>The Goldstein conditions are similar in spirit to the Wolfe condtitions, and are formed
 from the two inequalities</p>
@@ -1617,6 +1625,13 @@ which uses the strong Wolfe conditions.</li>
 
 	 
 	 
+		
+			<a class="nav nav-prev" href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
     </div>
 
     </section>
@@ -1624,16 +1639,16 @@ which uses the strong Wolfe conditions.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608054345"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608054345"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608054345"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608054345"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608054345"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608054345"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608106807"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608106807"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608106807"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608106807"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608106807"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608106807"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608054345"></script>
-    <script src="/scientific-computing/js/learn.js?1608054345"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608054345"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608106807"></script>
+    <script src="/scientific-computing/js/learn.js?1608106807"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608106807"></script>
     
     
 
