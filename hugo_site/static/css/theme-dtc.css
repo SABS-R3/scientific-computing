@@ -102,6 +102,10 @@ a:hover {
     border-color: var(--MENU-SECTION-HR-color);
 }
 
+#logo {
+    max-width: 3vw;
+}
+
 #body img.matlab-logo {
     max-width: 10vw;
 }
