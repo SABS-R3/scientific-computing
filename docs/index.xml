@@ -142,15 +142,6 @@ The Finite Difference (FD) method is based on taking a Taylor series expansion o
     </item>
     
     <item>
-      <title>LDL decomposition</title>
-      <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</link>
-      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/</guid>
-      <description>$LDL$ decomposition It is often very benificial when solving linear systems to consider and take advantage of any special structure that the matrix $A$ might possesses. The $LDL$ decomposition is a varient on LU decomposition which is only applicable to a symmetric matrix $A$ (i.e. $A = A^T$). The advantage of using this decomposition is that it takes advantage of the redundent entries in the matrix to reduce the amount of computation to $n^3/3$, which is about a half that required for the $LU$ decomposition.</description>
-    </item>
-    
-    <item>
       <title>Iterative methods</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/05-iterative-methods/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

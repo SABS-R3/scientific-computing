@@ -12,21 +12,21 @@
     <title>LU decomposition   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608228319" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608228319" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608221516"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608228319"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608221516"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608221516"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608228319"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608228319"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608221516"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608228319"></script>
 
     
   </div>
@@ -289,27 +289,6 @@
       <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item active">
         <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
         LU decomposition
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" class="dd-item ">
-        <a href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/">
-        LDL decomposition
         
         </a>
     </li>
@@ -1093,7 +1072,7 @@ store the entire martix $P$ so the array $p_i$ is stored instead).</p>
 
 <ol>
 <li>Begin with the left-most column $i=0$, find an appropriate pivot (e.g. maximum entry
-in the colum) and designate this row as the pivot row. Interchange this row with row
+in the column) and designate this row as the pivot row. Interchange this row with row
 $i$, and store the pivot row index as $p_i$. Use row replacements to create zeros
 below the pivot. Create the corresponding column for $L$ by dividing by the pivot
 value.</li>
@@ -1109,37 +1088,137 @@ matrix $P$</li>
 <p>In practice, most library implementation store $L$ and $U$ in the same matrix since they
 are lower and upper triangular respectivly.</p>
 
+<h2 id="ldl-decomposition">$LDL$ decomposition</h2>
+
+<p>It is often very benificial when solving linear systems to consider and take advantage
+of any special structure that the matrix $A$ might possesses. The $LDL$ decomposition is
+a varient on LU decomposition which is only applicable to a symmetric matrix $A$ (i.e.
+$A = A^T$). The advantage of using this decomposition is that it takes advantage of the
+redundent entries in the matrix to reduce the amount of computation to $n^3/3$, which is
+about a half that required for the $LU$ decomposition.</p>
+
 <h2 id="other-reading">Other Reading</h2>
 
 <ul>
 <li>Linear algebra and its applications by David C. Lay. Chaper 2.5<br></li>
 <li>Golub, G. H. &amp; Van Loan, C. F. Matrix Computations, 3rd Ed. (Johns Hopkins University
-Press, 1996). Chapter 3.2</li>
+Press, 1996). Chapter 3.2 &amp; 4.1</li>
 <li><a href="https://en.wikipedia.org/wiki/LU_decomposition">https://en.wikipedia.org/wiki/LU_decomposition</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cholesky_decomposition#LDL_decomposition_2">https://en.wikipedia.org/wiki/Cholesky_decomposition#LDL_decomposition_2</a></li>
 </ul>
 
 <h2 id="software">Software</h2>
 
-<ul>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html"><code>scipy.linalg.lu_factor</code></a>.</li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html"><code>scipy.linalg.lu_solve</code></a>.</li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html"><code>scipy.linalg.lu</code></a>.</li>
-</ul>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html"><code>scipy.linalg.lu_factor</code></a>.</p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html"><code>scipy.linalg.lu_solve</code></a>.</p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html"><code>scipy.linalg.lu</code></a>.</p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.ldl.html#scipy.linalg.ldl"><code>scipy.linalg.ldl</code></a></p>
 
 <h2 id="problems">Problems</h2>
 
-<ol>
-<li>Take your gaussian elimination code that you wrote in the previous lesson and use it
-to write an LU decomposition function that takes in a martix $A$, and returns $L$,
-$U$ and the array $p_i$. You can check your answer using
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html"><code>scipy.linalg.lu_factor</code></a>,
-or by simply verifying that $PLU=A$</li>
-<li>Write a unit test or set of unit tests using the Python <code>unittest</code> framework that you
-can run to satisfy that your function is robust for a wide varietry of inputs $A$.</li>
-</ol>
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>Take your gaussian elimination code that you wrote in the previous lesson and use it to
+write an LU decomposition function that takes in a martix $A$, and returns $L$, $U$ and
+the array $p_i$. You can check your answer using
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html"><code>scipy.linalg.lu_factor</code></a>.
+Hint: the permutation matrix is tricky to construct, so you might want to use the test
+given in the documentation for <code>lu_factor</code>.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> scipy
+<span style="color:#f92672">import</span> scipy.linalg
+<span style="color:#f92672">import</span> sys
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lu_decomposition</span>(A):
+    m, n <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>shape
+
+    LU <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(A)
+    pivots <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(n, dtype<span style="color:#f92672">=</span>int)
+    <span style="color:#75715e"># initialise the pivot row and column</span>
+    h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> h <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">and</span> k <span style="color:#f92672">&lt;</span> n:
+        <span style="color:#75715e"># Find the k-th pivot:</span>
+        pivots[k] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(LU[h:, k]) <span style="color:#f92672">+</span> h
+        <span style="color:#66d9ef">if</span> LU[pivots[k], k] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#75715e"># No pivot in this column, pass to next column</span>
+            k <span style="color:#f92672">=</span> k<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#75715e"># swap rows</span>
+            LU[[h, pivots[k]], :] <span style="color:#f92672">=</span> LU[[pivots[k], h], :]
+            <span style="color:#75715e"># Do for all rows below pivot:</span>
+            <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(h<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, m):
+                f <span style="color:#f92672">=</span> LU[i, k] <span style="color:#f92672">/</span> LU[h, k]
+                <span style="color:#75715e"># Store f as the new L column values</span>
+                LU[i, k] <span style="color:#f92672">=</span> f
+                <span style="color:#75715e"># Do for all remaining elements in current row:</span>
+                <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, n):
+                    LU[i, j] <span style="color:#f92672">=</span> LU[i, j] <span style="color:#f92672">-</span> LU[h, j] <span style="color:#f92672">*</span> f
+            <span style="color:#75715e"># Increase pivot row and column</span>
+            h <span style="color:#f92672">=</span> h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+            k <span style="color:#f92672">=</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> LU, pivots
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_matrix</span>(n):
+    R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
+    A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((n, n))
+    triu <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>triu_indices(n)
+    A[triu] <span style="color:#f92672">=</span> R[triu]
+    <span style="color:#66d9ef">return</span> A
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_non_singular_matrix</span>(n):
+    A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
+    <span style="color:#66d9ef">while</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cond(A) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>sys<span style="color:#f92672">.</span>float_info<span style="color:#f92672">.</span>epsilon:
+        A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
+    <span style="color:#66d9ef">return</span> A
+
+As <span style="color:#f92672">=</span> [
+    np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]]),
+    random_non_singular_matrix(<span style="color:#ae81ff">3</span>),
+    random_non_singular_matrix(<span style="color:#ae81ff">4</span>),
+    random_non_singular_matrix(<span style="color:#ae81ff">5</span>),
+    random_non_singular_matrix(<span style="color:#ae81ff">6</span>),
+]
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pivots_to_row_indices</span>(pivots):
+    n <span style="color:#f92672">=</span> len(pivots)
+    indices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(range(<span style="color:#ae81ff">0</span>, n))
+    <span style="color:#66d9ef">for</span> i, p <span style="color:#f92672">in</span> enumerate(pivots):
+        indices[i], indices[p] <span style="color:#f92672">=</span> indices[p], indices[i]
+    <span style="color:#66d9ef">return</span> indices
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_L_mult_U</span>(LU):
+    L <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>tril(LU)
+    np<span style="color:#f92672">.</span>fill_diagonal(L, <span style="color:#ae81ff">1</span>)
+    U <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>triu(LU)
+    <span style="color:#66d9ef">return</span> L <span style="color:#960050;background-color:#1e0010">@</span> U
+
+<span style="color:#66d9ef">for</span> A <span style="color:#f92672">in</span> As:
+    LU_scipy, pivots_scipy <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lu_factor(A)
+    row_indices_scipy <span style="color:#f92672">=</span> pivots_to_row_indices(pivots_scipy)
+    LU_mine, pivots_mine <span style="color:#f92672">=</span> lu_decomposition(A)
+    row_indices_mine <span style="color:#f92672">=</span> pivots_to_row_indices(pivots_mine)
+
+    np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(calculate_L_mult_U(LU_scipy),  A[row_indices_scipy])
+    np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(calculate_L_mult_U(LU_mine),  A[row_indices_mine])</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1328,22 +1407,6 @@ can run to satisfy that your function is robust for a wide varietry of inputs $A
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1691,7 +1754,7 @@ can run to satisfy that your function is robust for a wide varietry of inputs $A
 			<a class="nav nav-prev" href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1701,16 +1764,16 @@ can run to satisfy that your function is robust for a wide varietry of inputs $A
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608221516"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608221516"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608228319"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608228319"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608221516"></script>
-    <script src="/scientific-computing/js/learn.js?1608221516"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608221516"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608228319"></script>
+    <script src="/scientific-computing/js/learn.js?1608228319"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608228319"></script>
     
     
 

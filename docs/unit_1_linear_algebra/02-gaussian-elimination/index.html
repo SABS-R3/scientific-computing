@@ -12,21 +12,21 @@
     <title>Gaussian Elimination   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608221516" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608228319" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608228319" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608228319" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608221516"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608228319"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608221516"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608221516"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608228319"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608228319"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608221516"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608228319"></script>
 
     
   </div>
@@ -289,27 +289,6 @@
       <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
         <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
         LU decomposition
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/" title="LDL decomposition" class="dd-item ">
-        <a href="/scientific-computing/unit_1_linear_algebra/05-ldl-decomposition/">
-        LDL decomposition
         
         </a>
     </li>
@@ -1044,15 +1023,112 @@ while h ≤ m and k ≤ n
          /* Increase pivot row and column */
          h := h + 1
          k := k + 1</code></pre>
-<h2 id="problems">Problems</h2>
 
-<ol>
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol>
 <li>Code a Python function that takes an 2D numpy array representing a matrix $A$, and a
 1D array representing a RHS $b$, and returns the solution of the linear equation $Ax
 = b$. If you wish you can assume that the matrix has an inverse. Try it out on a few
 test matrices and check your answer using
 <a href="https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.linalg.solve.html"><code>scipy.linalg.solve</code></a>.</li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> scipy
+<span style="color:#f92672">import</span> scipy.linalg
+<span style="color:#f92672">import</span> sys
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solve_triangular</span>(A, b):
+    n <span style="color:#f92672">=</span> len(b)
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty_like(b)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+        x[i] <span style="color:#f92672">=</span> b[i]
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, i, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+            x[i] <span style="color:#f92672">-=</span> A[i, j] <span style="color:#f92672">*</span> x[j]
+        x[i] <span style="color:#f92672">/=</span> A[i, i]
+    <span style="color:#66d9ef">return</span> x
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gaussian_elimination</span>(A):
+    m, n <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>shape
+
+    <span style="color:#75715e"># initialise the pivot row and column</span>
+    h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> h <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">and</span> k <span style="color:#f92672">&lt;</span> n:
+        <span style="color:#75715e"># Find the k-th pivot:</span>
+        i_max <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(A[h:, k]) <span style="color:#f92672">+</span> h
+        <span style="color:#66d9ef">if</span> A[i_max, k] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#75715e"># No pivot in this column, pass to next column</span>
+            k <span style="color:#f92672">=</span> k<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#75715e"># swap rows</span>
+            A[[h, i_max], :] <span style="color:#f92672">=</span> A[[i_max, h], :]
+            <span style="color:#75715e"># Do for all rows below pivot:</span>
+            <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(h<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, m):
+                f <span style="color:#f92672">=</span> A[i, k] <span style="color:#f92672">/</span> A[h, k]
+                <span style="color:#75715e"># Fill with zeros the lower part of pivot column:</span>
+                A[i, k] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+                <span style="color:#75715e"># Do for all remaining elements in current row:</span>
+                <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, n):
+                    A[i, j] <span style="color:#f92672">=</span> A[i, j] <span style="color:#f92672">-</span> A[h, j] <span style="color:#f92672">*</span> f
+            <span style="color:#75715e"># Increase pivot row and column</span>
+            h <span style="color:#f92672">=</span> h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+            k <span style="color:#f92672">=</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> A
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solve_gaussian_elimination</span>(A, b):
+    augmented_system <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate((A, b<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    gaussian_elimination(augmented_system)
+    <span style="color:#66d9ef">return</span> solve_triangular(augmented_system[:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], augmented_system[:, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_matrix</span>(n):
+    R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
+    A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((n, n))
+    triu <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>triu_indices(n)
+    A[triu] <span style="color:#f92672">=</span> R[triu]
+    <span style="color:#66d9ef">return</span> A
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_non_singular_matrix</span>(n):
+    A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
+    <span style="color:#66d9ef">while</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cond(A) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>sys<span style="color:#f92672">.</span>float_info<span style="color:#f92672">.</span>epsilon:
+        A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
+    <span style="color:#66d9ef">return</span> A
+
+As <span style="color:#f92672">=</span> [
+    np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]]),
+    random_non_singular_matrix(<span style="color:#ae81ff">3</span>),
+    random_non_singular_matrix(<span style="color:#ae81ff">4</span>),
+    random_non_singular_matrix(<span style="color:#ae81ff">5</span>),
+    random_non_singular_matrix(<span style="color:#ae81ff">6</span>),
+]
+
+bs <span style="color:#f92672">=</span> [
+    np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]),
+    np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">3</span>),
+    np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">4</span>),
+    np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">5</span>),
+    np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">6</span>),
+]
+
+<span style="color:#66d9ef">for</span> A, b <span style="color:#f92672">in</span> zip(As, bs):
+    x_scipy <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>solve(A, b)
+    x_mine <span style="color:#f92672">=</span> solve_gaussian_elimination(A, b)
+    np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(x_scipy, x_mine)</code></pre></div>
+</div>
+
+</details>
+
 
 <h2 id="condition-number">Condition Number</h2>
 
@@ -1068,9 +1144,10 @@ solution is to the input values of the matrix or rhs vector. An identity matrix 
 condition number of 1, while an exactly singular matrix has a condition number of
 infinity.</p>
 
-<h2 id="problems-1">Problems</h2>
 
-<p>Suppose an experiment leads to the following system of equations:</p>
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>Suppose an experiment leads to the following system of equations:</p>
 
 <p><span  class="math">\[
 \begin{aligned}
@@ -1079,9 +1156,9 @@ infinity.</p>
 \end{aligned}
 \]</span></p>
 
-<ol>
+<ol start="2">
 <li>Solve system (1), and then solve system (2), below, in which the data on the right
- have been rounded to two decimal places. In each case, find the exact solution.</li>
+have been rounded to two decimal places. In each case, find the exact solution.</li>
 </ol>
 
 <p><span  class="math">\[
@@ -1091,13 +1168,34 @@ infinity.</p>
 \end{aligned}
 \]</span></p>
 
-<ol>
+<ol start="3">
 <li><p>The entries in (2) differ from those in (1) by less than .05%. Find the percentage
- error when using the solution of (2) as an approximation for the solution of (2).</p></li>
+error when using the solution of (2) as an approximation for the solution of (1).</p></li>
 
-<li><p>Use <code>numpy.linalg.cond</code> to produce the condition number of the coefficient matrix
- in (1).</p></li>
+<li><p>Use <code>numpy.linalg.cond</code> to produce the condition number of the coefficient matrix in
+(1).</p></li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([
+    [<span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">3.1</span>],
+    [<span style="color:#ae81ff">1.6</span>, <span style="color:#ae81ff">1.1</span>],
+])
+x1 <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>solve(A, np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">19.249</span>, <span style="color:#ae81ff">6.843</span>]))
+x2 <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>solve(A, np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">19.25</span>, <span style="color:#ae81ff">6.84</span>]))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;percentage error is &#39;</span>, np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(x2 <span style="color:#f92672">-</span> x1) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(x1) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;condition number is &#39;</span>, np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cond(A))</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1254,22 +1352,6 @@ infinity.</p>
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1659,16 +1741,16 @@ infinity.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608221516"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608221516"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608221516"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608228319"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608228319"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608228319"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608221516"></script>
-    <script src="/scientific-computing/js/learn.js?1608221516"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608221516"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608228319"></script>
+    <script src="/scientific-computing/js/learn.js?1608228319"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608228319"></script>
     
     
 
