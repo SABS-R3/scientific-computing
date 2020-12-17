@@ -210,212 +210,6 @@ Traceback (most recent call last):
 numpy.linalg.LinAlgError: Singular matrix
 ```
 
-### Null space
-
-When a matrix is singular we can find non-trivial solutions to  $Ax=0$.
-
-These are vectors which form a null space for $A$.
-
-These vectors make no difference to the effect that $A$ is having:
-
-$$
-A(x+u) = Ax + Au = Ax+0 =Ax.
-$$
- 
-Note that any combination or scaling of vectors in the null space is also in the null 
-space. That is, if $Au=0$ and $Av=0$ then
-
-$$
-A(\alpha u+ \beta v)=0
-$$
-
-The number of linearly independent vectors in the null space is denoted $\text(null)(A)$ 
-and
-
-$$
-\text{null}(A)+\text{rank}(𝐴)=\text{order}(A).
-$$
-
-### Null space example
-
-Previous example of a singular system:
-
-$$
-A = \left(\begin{matrix}1&1&1\\ 2&4&2\\ 7&10&7\end{matrix}\right)
-$$
-
-
-```python
-A = np.array([[1, 1, 1], [2, 5, 2], [7, 10, 7]])
-np.linalg.matrix_rank(A)
-```
-
-Output:
-
-```
-2
-```
-
-
-```python
-import scipy.linalg
-scipy.linalg.null_space(A)
-```
-
-Output:
-
-```
-array([[ 0.70710678],
-       [ 0.        ],
-       [-0.70710678]])
-```
-
-
-remember, scaled vectors in the null space are also in the null space, for example, 
-$x=1,y=0,z=−1$ is in the null space.
-
-Try it:
-
-$$
-\left(\begin{matrix} 1& 1& 1\\ 2& 5& 2\\ 7& 11&7 \end{matrix}\right)
-  \left(\begin{matrix} -1000\\ 0 \\ 1000 \end{matrix}\right) = \quad ?
-$$
-
-```python
-np.matmul(A,np.array([-1000,0,1000]))
-```
-
-Output:
-
-```
-array([0, 0, 0])
-```
-
-## Column space 
-
-Consider the following matrix $A$
-
-$$
-A = \left(\begin{matrix} 1 & -2 \\ -1 & 2\end{matrix}\right)
-$$
-
-Multiplying this matrix by a 2d vector $x$ give another 2d vector $b$
-
-$$
-\left(\begin{matrix} 1 & -2 \\ -1 & 2\end{matrix}\right)
-\left(\begin{matrix} x_1 \\ x_2\end{matrix}\right)
-=
-\left(\begin{matrix} b_1 \\ b_2\end{matrix}\right)
-$$
-
-If the equation above is *consistent* (i.e. true), then we can say that the vector $b$ 
-lies in the *column space* of $A$. The column space of $A$ is all the vectors that can 
-be made by linear combinations of the columns of $A$. Here the columns of $A$ are $c_1 = 
-(1, -1)^T$ and $c_2=  (-2, 2)^T$, and you can see the $b$ is equal to the linear 
-combination of $x_1 c_1 + x_2 c_2$.
-
-The matrix $A$ given above is singular with rank 1. Above we gave two examples with 
-different $b$ vectors
-
-$$
-\left(\begin{matrix} 1 & -2 \\ -1 & 2\end{matrix}\right)
-\left(\begin{matrix} x_1 \\ x_2\end{matrix}\right)
-=
-\left(\begin{matrix} -1 \\ 3\end{matrix}\right)
-$$
-
-and 
-
-$$
-\left(\begin{matrix} 1 & -2 \\ -1 & 2\end{matrix}\right)
-\left(\begin{matrix} x_1 \\ x_2\end{matrix}\right)
-=
-\left(\begin{matrix} -1 \\ 1\end{matrix}\right)
-$$
-
-We showed graphically that $b = (-1, 3)^T$ had an infinite number of solutions $x$, 
-whereas $b=(-1, 1)$ had no solutions. Therefore, $b = (-1, 3)^T$ is *within* the column 
-space of $A$, whereas $b=(-1, 1)$ is not.
-
-Naturally, if the matrix $A$ is *not* singular, then all possible vectors $b$ lie in the 
-column space of $A$.
-
-## Eigenvectors: motivation
-
-The *eigenvalues* and *eigenvectors* give an indication of how much effect the matrix has and in what direction. 
-
-- $A=\left(\begin{matrix} cos(45)&-sin(45)\\ sin(45)&cos(45)\\\end{matrix}\right)$ has no scaling effect.
-
-
-- $B=\left(\begin{matrix} 2& 0 \\ 0&\frac{1}{2}\\\end{matrix}\right)$ doubles in the $x$-direction, but halves in the $y$-direction.
-
-
-Repeated applications of $\;A\;$ stay the same distance from the origin, but repeated applications of $\;B\;$ move towards $\;(\infty, 0).$
-
-Eigenvalues and eigenvectors are useful in the following applications:
-
-- Transitions with probability
-- Markov chains
-- Google Page ranks
-- Solution of systems of linear ODEs
-- Stability of systems of nonlinear ODEs
-
-
-Mathematically, let $A\;$ be a matrix, $\;\textbf{v}\;$ be a *non-zero* vector, and
-$\;\lambda\;$ be a scalar, 
-
-If,
-
-$$A \textbf{v} = \lambda \textbf{v}$$
-
-then $\;\textbf{v}\;$ is called an *eigenvector* and $\;\lambda\;$ is the corresponding *eigenvalue*.
-
-Note that if $\;\textbf{v}\;$ is a solution, then so is a scaling $\;a\textbf{v}$:
-
-$$A (a \textbf{v}) = \lambda (a \textbf{v}).$$
-
-## Calculating Eigenvalues/Eigenvectors
-
-You are probably already familiar with calculating eigenvalues and eigenvectors 
-analytically. If we write:
-
-$$
-\begin{eqnarray*}
-A \textbf{v} &=& \lambda \textbf{v},\\
-A \textbf{v} -  \lambda I \textbf{v}&=& \textbf{0},\\
-(A  -  \lambda I) \textbf{v}&=& \textbf{0}.
-\end{eqnarray*}
-$$
-
-Since $v$ is non-zero, $(A - \lambda I)$ must be singular, and so we find the 
-eigenvalues be solving 
-
-$$|A-\lambda I|=0.$$
-
-For example, 
-
-$$A=\left(\begin{matrix}-2&-2\\ 1&-5\\\end{matrix}\right)$$
-
-$$|A-\lambda I|=\left\vert\begin{matrix}-2-\lambda&-2\\ 1&-5-\lambda\end{matrix}\right\vert=(-2-\lambda)(-5-\lambda)-(-2)$$
-
-$$=10+5\lambda+\lambda^2+2\lambda+2=\lambda^2+7\lambda+12=(\lambda+3)(\lambda+4)=0$$
-
-Finding the same eigenvalues, and associated eigenvectors using Python can be done using 
-Numpy:
-
-```python
-A = np.array([[-2, -2], [1, -5]])
-np.linalg.eig(A)
-```
-
-Output:
-
-```
-(array([-3., -4.]), array([[0.89442719, 0.70710678],
-       [0.4472136 , 0.70710678]]))
-```
-
-
 ## Other Reading
 
 Linear algebra by Ward Cheney
@@ -435,19 +229,64 @@ Industrial and Applied Mathematics.
 
 ## Problems
 
-1. Describe the intersection of the three planes u+v+w+z = 6 and u+w+z = 4 and u+w = 2 
-   (all in four-dimensional space). Is it a line or a point or a fourth equation that 
+{{% notice question %}}
+
+1. Describe the intersection of the three planes $u+v+w+z = 6$, $u+w+z = 4$ and $u+w = 
+   2$ (all in four-dimensional space). Is it a line or a point or a fourth equation that 
    leaves us with no solution. an empty set? What is the intersection if the fourth 
-   plane u = −1 is included? Find a fourth equation that leaves us with no solution.
+   plane $u = −1$ is included? Find a fourth equation that leaves us with no solution.
 
-2. Sketch these three lines and decide if the equations are solvable: 3 by 2 system
-  x + 2y = 2 x − y = 2 y = 1.
-What happens if all right-hand sides are zero? Is there any nonzero choice of right- 
-hand sides that allows the three lines to intersect at the same point?
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
 
-3. Write a Python function that takes in a triangular matrix $A$ represented as an 
-   `ndarray`, and a rhs vector $b$, and solves the equation $A x = b$. i.e. the function 
-   will solve the following triangular system for $x = (x_1, x_2, x_3)$:
+The intersection of the 3 planes is the 1d line $u + w = 2$, $v=2$ and $z=2$. 
+Introducing a fourth equation that does not intersect this line (e.g. $u + w = 3$) 
+leaves us with no solutions.
+
+{{% /notice %}}
+{{% /expand %}}
+{{% /notice %}}
+
+{{% notice question %}}
+
+2. Sketch or plot in Python these three lines and decide if the equations are solvable: 
+   3 by 2 system $x + 2y = 2$, $x − y = 2$, and $y = 1$. What happens if all right-hand 
+   sides are zero? Is there any nonzero choice of right- hand sides that allows the 
+   three lines to intersect at the same point?
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+
+```python
+import numpy as np
+import matplotlib.pylab as plt
+
+x = np.linspace(-1, 4, 100)
+
+def plot_lines(b1, b2, b3):
+    y1 = (b1 - x) / 2
+    y2 = x - b2
+    y3 = b3 * np.ones_like(x)
+    plt.plot(x, y1)
+    plt.plot(x, y2)
+    plt.plot(x, y3)
+    plt.show()
+
+
+plot_lines(2, 2, 1)
+plot_lines(0, 0, 0)
+plot_lines(2, -1, 1)
+```
+
+{{% /notice %}}
+{{% /expand %}}
+{{% /notice %}}
+
+{{% notice question %}}
+3. Write a Python function that takes in a $3 \times 3$ upper triangular matrix $A$ 
+   represented as an `ndarray`, and a rhs vector $b$, and solves the equation $A x = b$. 
+   i.e. the function will solve the following triangular system for $x = (x_1, x_2, 
+   x_3)$:
 
 $$
 \begin{aligned}
@@ -456,3 +295,53 @@ A_{22} x_2 + A_{23} x_3 &= b_2, \\
 A_{33} x_3 &= b_3
 \end{aligned}
 $$
+
+  Generalise this function to a $n \times n$ triangular matrix input.
+
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+
+```python
+def solve_triangular(A, b):
+    n = len(b)
+    x = np.empty_like(b)
+    for i in range(n-1, -1, -1):
+        x[i] = b[i]
+        for j in range(n-1, i, -1):
+            x[i] -= A[i, j] * x[j]
+        x[i] /= A[i, i]
+    return x
+
+def random_upper_triangular(n):
+    R = np.random.rand(n, n)
+    A = np.zeros((n, n))
+    triu = np.triu_indices(n)
+    A[triu] = R[triu]
+    return A
+
+As = [
+    np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]),
+    random_upper_triangular(3),
+    random_upper_triangular(4),
+    random_upper_triangular(5),
+    random_upper_triangular(6),
+]
+
+bs = [
+    np.array([1, 2, 3]),
+    np.random.rand(3),
+    np.random.rand(4),
+    np.random.rand(5),
+    np.random.rand(6),
+]
+
+for A, b in zip(As, bs):
+    x_scipy = scipy.linalg.solve_triangular(A, b)
+    x_mine = solve_triangular(A, b)
+    np.testing.assert_almost_equal(x_scipy, x_mine)
+```
+
+{{% /notice %}}
+{{% /expand %}}
+{{% /notice %}}
