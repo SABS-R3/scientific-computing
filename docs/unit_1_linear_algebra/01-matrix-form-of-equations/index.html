@@ -12,21 +12,21 @@
     <title>Matrix form of equations   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608131015" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608131015" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608221516" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608221516" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608131015" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608221516" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608131015"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608221516"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608131015"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608131015"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608221516"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608221516"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608131015"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608221516"></script>
 
     
   </div>
@@ -898,9 +898,10 @@
         
 
 
-<h2 id="simultaneous-equations">Simultaneous equations</h2>
+<h2 id="systems-of-linear-equations">Systems of linear equations</h2>
 
-<p>Consider 2 simultaneous equations:</p>
+<p>Linear algebra is largely concerned with representing, manipulating and solving large
+systems of linear equations. Consider the following 2 linear equations:</p>
 
 <p><span  class="math">\[
 \begin{aligned}
@@ -909,7 +910,9 @@ a_2x+b_2y &= c_2, \quad (2)
 \end{aligned}
 \]</span></p>
 
-<p>where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2, \;c_1\;$ and $\;c_2\;$ are given constants.</p>
+<p>where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2,
+\;c_1\;$ and $\;c_2\;$ are given constants. We know that we can use linear combinations
+of these two equations to solve this sytem for $\;x\;$ and $\;y\;$, like so:</p>
 
 <p><span  class="math">\[
 \begin{aligned}
@@ -921,9 +924,12 @@ a_2x+b_2y &= c_2, \quad (2)
 
 <h2 id="the-matrix">The Matrix</h2>
 
-<p>Matrices are a structure that allow us to more easily manipulate linear systems.</p>
+<p>We can also write these linear equations using a matrix. Matrices are structures that
+allow us to more easily manipulate linear systems. While not particularly useful for
+just 2 equations, using a matrix representation allows us to generalise to, say $N$
+equations and $M$ unknowns, or to solve large systems of equations on a computer.</p>
 
-<p>Consider the original system</p>
+<p>Consider the original system:</p>
 
 <p><span  class="math">\[
 \begin{aligned}
@@ -941,28 +947,6 @@ a_2x+b_2y &= c_2.
 \]</span></p>
 
 <p>Think about how this form relates to the original linear system.</p>
-
-<h3 id="the-determinant">The determinant</h3>
-
-<p>If</p>
-
-<p><span  class="math">\[A = \left(\begin{matrix} p & q \\ r & s\end{matrix}\right)\]</span></p>
-
-<p>then the <strong>determinant</strong> of A is:</p>
-
-<p><span  class="math">\[|A| = ps-qr\]</span></p>
-
-<p>The inverse of $A$ can be found using the determinant:</p>
-
-<p><span  class="math">\[
-A^{-1} = \frac{1}{ps-qr} \left(\begin{matrix} s & -q \\ -r & p\end{matrix}\right)
-\]</span></p>
-
-<p>Calculating the inverse of a matrix using its determinant can be very costly for larger
-matrices, therefore other algorithms are used (e.g. Gaussian Elimination, which is
-introduced below)</p>
-
-<p>If $|A| = 0$, A is said to be <strong>singular</strong> (have no inverse).</p>
 
 <h2 id="geometry-of-linear-equations">Geometry of linear equations</h2>
 
@@ -1036,6 +1020,75 @@ matrix is one.</p>
 <li>The equation $\;A\textbf{u} = \textbf{0}\;$ has non-trivial solutions ($\textbf{u} \neq \textbf{0}$)</li>
 </ul>
 
+<p>&quot;## Null space\n&quot;,</p>
+<pre><code>&#34;When a matrix is singular we can find non-trivial solutions to $\\;A\\textbf{u} = \\textbf{0}$.\n&#34;,
+&#34;\n&#34;,
+&#34;These are vectors which form a *null space* for $\\;A$.\n&#34;,
+&#34;\n&#34;,
+&#34;These vectors  make no difference to the effect that $A$ is having:\n&#34;,
+&#34;\n&#34;,
+&#34;$$\n&#34;,
+&#34; A(\\textbf{x} + \\textbf{u}) =  A\\textbf{x} + A\\textbf{u} =\n&#34;,
+&#34; A\\textbf{x} + \\textbf{0} =   A\\textbf{x}.\n&#34;,
+&#34;$$ &#34;</code></pre>
+<h3 id="the-determinant">The determinant</h3>
+
+<p>One way of solving a system of equations represented by $A x = b$ is to calculate the
+<em>inverse</em> of A, giving the solution as $x = A^{-1} b$. This can be done by calculating
+what is known as the <em>determinant</em> of $A$.</p>
+
+<p>If</p>
+
+<p><span  class="math">\[A = \left(\begin{matrix} p & q \\ r & s\end{matrix}\right)\]</span></p>
+
+<p>then the <strong>determinant</strong> of A is:</p>
+
+<p><span  class="math">\[|A| = ps-qr\]</span></p>
+
+<p>The inverse of $A$ can be found using the determinant:</p>
+
+<p><span  class="math">\[
+A^{-1} = \frac{1}{ps-qr} \left(\begin{matrix} s & -q \\ -r & p\end{matrix}\right)
+\]</span></p>
+
+<p>Calculating the inverse of a matrix using its determinant can be very costly for larger
+matrices, therefore other algorithms are used (e.g. Gaussian Elimination, which is
+introduced in the next section)</p>
+
+<p>If $|A| = 0$, A is said to be <strong>singular</strong> (have no inverse). Graphically, this is
+represented by the parallel or non-intersecting lines in the figure above.</p>
+
+<h3 id="using-python-to-calculate-the-inverse">Using Python to calculate the inverse</h3>
+
+<p>To find $A^{-1}$  for</p>
+
+<p><span  class="math">\[
+A = \left(\begin{matrix}3&0&2\\ 3&0&-3\\ 0&1&-1\end{matrix}\right)
+\]</span></p>
+
+<p>you can using numpy like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>]])
+np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(A)</code></pre></div>
+<p>Output:</p>
+<pre><code>array([[ 0.2       ,  0.13333333,  0.        ],
+       [-0.2       ,  0.2       ,  1.        ],
+       [ 0.2       , -0.2       , -0.        ]])</code></pre>
+<p>It doesn't always work. Consider the following system</p>
+
+<p><span  class="math">\[
+A = \left(\begin{matrix}1&1&1\\ 2&4&2\\ 7&10&7\end{matrix}\right)
+\]</span></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">7</span>]])
+np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(A)</code></pre></div>
+<p>Output:</p>
+<pre><code>Traceback (most recent call last):
+  File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt;
+  File &#34;&lt;__array_function__ internals&gt;&#34;, line 6, in inv
+  File &#34;/home/mrobins/git/scientific-computing/env/lib/python3.6/site-packages/numpy/linalg/linalg.py&#34;, line 546, in inv
+    ainv = _umath_linalg.inv(a, signature=signature, extobj=extobj)
+  File &#34;/home/mrobins/git/scientific-computing/env/lib/python3.6/site-packages/numpy/linalg/linalg.py&#34;, line 88, in _raise_linalgerror_singular
+    raise LinAlgError(&#34;Singular matrix&#34;)
+numpy.linalg.LinAlgError: Singular matrix</code></pre>
 <h2 id="other-reading">Other Reading</h2>
 
 <p>Linear algebra by Ward Cheney
@@ -1056,19 +1109,76 @@ Industrial and Applied Mathematics.</li>
 
 <h2 id="problems">Problems</h2>
 
-<ol>
-<li><p>Describe the intersection of the three planes u+v+w+z = 6 and u+w+z = 4 and u+w = 2
-(all in four-dimensional space). Is it a line or a point or a fourth equation that
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol>
+<li>Describe the intersection of the three planes $u+v+w+z = 6$, $u+w+z = 4$ and $u+w =
+2$ (all in four-dimensional space). Is it a line or a point or a fourth equation that
 leaves us with no solution. an empty set? What is the intersection if the fourth
-plane u = −1 is included? Find a fourth equation that leaves us with no solution.</p></li>
+plane $u = −1$ is included? Find a fourth equation that leaves us with no solution.</li>
+</ol>
 
-<li><p>Sketch these three lines and decide if the equations are solvable: 3 by 2 system
-x + 2y = 2 x − y = 2 y = 1.
-What happens if all right-hand sides are zero? Is there any nonzero choice of right- hand sides that allows the three lines to intersect at the same point?</p></li>
+<p><details></p>
+<pre><code>&lt;summary&gt;Expand for solution&lt;/summary&gt;
+&lt;div class=&#34;notices solution&#34; &gt;</code></pre>
+<p><div class="label">Solution</div>
+  <p>The intersection of the 3 planes is the 1d line $u + w = 2$, $v=2$ and $z=2$.
+Introducing a fourth equation that does not intersect this line (e.g. $u + w = 3$)
+leaves us with no solutions.</p></p>
 
-<li><p>Write a Python function that takes in a triangular matrix $A$ represented as an
-<code>ndarray</code>, and a rhs vector $b$, and solves the equation $A x = b$. i.e. the function
-will solve the following triangular system for $x = (x_1, x_2, x_3)$:</p></li>
+<p></div></p>
+
+<p></details></p>
+
+</div>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol start="2">
+<li>Sketch or plot in Python these three lines and decide if the equations are solvable:
+3 by 2 system $x + 2y = 2$, $x − y = 2$, and $y = 1$. What happens if all right-hand
+sides are zero? Is there any nonzero choice of right- hand sides that allows the
+three lines to intersect at the same point?</li>
+</ol>
+
+<p><details></p>
+<pre><code>&lt;summary&gt;Expand for solution&lt;/summary&gt;
+&lt;div class=&#34;notices solution&#34; &gt;</code></pre>
+<p><div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt</p>
+
+<p>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">100</span>)</p>
+
+<p><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_lines</span>(b1, b2, b3):</p>
+<pre><code>y1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (b1 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+y2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b2
+y3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b3 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones_like(x)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x, y1)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x, y2)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x, y3)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()</code></pre>
+<p>plot_lines(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>)
+plot_lines(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+plot_lines(<span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)</code></pre></div>
+</div></p>
+
+<p></details></p>
+
+</div>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol start="3">
+<li>Write a Python function that takes in a $3 \times 3$ upper triangular matrix $A$
+represented as an <code>ndarray</code>, and a rhs vector $b$, and solves the equation $A x = b$.
+i.e. the function will solve the following triangular system for $x = (x_1, x_2,
+x_3)$:</li>
 </ol>
 
 <p><span  class="math">\[
@@ -1078,6 +1188,54 @@ A_{22} x_2 + A_{23} x_3 &= b_2, \\
 A_{33} x_3 &= b_3
 \end{aligned}
 \]</span></p>
+
+<p>Generalise this function to a $n \times n$ triangular matrix input.</p>
+
+<p><details></p>
+<pre><code>&lt;summary&gt;Expand for solution&lt;/summary&gt;
+&lt;div class=&#34;notices solution&#34; &gt;</code></pre>
+<p><div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solve_triangular</span>(A, b):</p>
+<pre><code>n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(b)
+x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty_like(b)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    x[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b[i]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, i, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        x[i] &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; A[i, j] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x[j]
+    x[i] &lt;span style=&#34;color:#f92672&#34;&gt;/=&lt;/span&gt; A[i, i]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x</code></pre>
+<p><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_upper_triangular</span>(n):</p>
+<pre><code>R &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rand(n, n)
+A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros((n, n))
+triu &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;triu_indices(n)
+A[triu] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; R[triu]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; A</code></pre>
+<p>As <span style="color:#f92672">=</span> [</p>
+<pre><code>np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]]),
+random_upper_triangular(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;),
+random_upper_triangular(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;),
+random_upper_triangular(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;),
+random_upper_triangular(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;),</code></pre>
+<p>]</p>
+
+<p>bs <span style="color:#f92672">=</span> [</p>
+<pre><code>np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]),
+np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rand(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;),
+np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rand(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;),
+np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rand(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;),
+np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rand(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;),</code></pre>
+<p>]</p>
+
+<p><span style="color:#66d9ef">for</span> A, b <span style="color:#f92672">in</span> zip(As, bs):</p>
+<pre><code>x_scipy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; scipy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;solve_triangular(A, b)
+x_mine &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; solve_triangular(A, b)
+np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;testing&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;assert_almost_equal(x_scipy, x_mine)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</code></pre>
+<p></div></p>
+
+<p></details></p>
+
+</div>
+
 
 
 <footer class="footline">
@@ -1636,16 +1794,16 @@ A_{33} x_3 &= b_3
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608131015"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608131015"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608131015"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608131015"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608131015"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608131015"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608221516"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608221516"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608221516"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608221516"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608221516"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608221516"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608131015"></script>
-    <script src="/scientific-computing/js/learn.js?1608131015"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608131015"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608221516"></script>
+    <script src="/scientific-computing/js/learn.js?1608221516"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608221516"></script>
     
     
 

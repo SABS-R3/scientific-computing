@@ -10,14 +10,12 @@
     <item>
       <title>Matrix form of equations</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</guid>
-      <description>Simultaneous equations Consider 2 simultaneous equations:
+      <description>Systems of linear equations Linear algebra is largely concerned with representing, manipulating and solving large systems of linear equations. Consider the following 2 linear equations:
 \[ \begin{aligned} a_1x+b_1y &amp;= c_1, \quad (1)\\ a_2x+b_2y &amp;= c_2, \quad (2) \end{aligned} \]
-where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2, \;c_1\;$ and $\;c_2\;$ are given constants.
-\[ \begin{aligned} (1) \times b_2:~~~~~~~~~~~~~~~ b_2a_1x+b_2b_1y &amp;=&amp; b_2c_1, \quad (3)\\ (2) \times b_1:~~~~~~~~~~~~~~~ b_1a_2x+b_1b_2y &amp;=&amp; b_1c_2, \quad (4)\\ (3) - (4):~~~~~~~~~~~~~~~ b_2a_1x-b_1a_2x &amp;=&amp; b_2c_1-b_1c_2. \end{aligned} \]
-The Matrix Matrices are a structure that allow us to more easily manipulate linear systems.</description>
+where the values $\;x\;$ and $\;y\;$ are to be found, and $\;a_1, \;b_1, \;a_2, \;b_2, \;c_1\;$ and $\;c_2\;$ are given constants. We know that we can use linear combinations of these two equations to solve this sytem for $\;x\;$ and $\;y\;$, like so:</description>
     </item>
     
     <item>
