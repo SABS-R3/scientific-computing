@@ -212,20 +212,14 @@ numpy.linalg.LinAlgError: Singular matrix
 
 ## Other Reading
 
-Linear algebra by Ward Cheney
-Linear algebra and its applications by David C. Lay.
-
-Strang, G. (2016). Introduction to linear algebra (Fifth ed.). Wellesley.
-
-Linear algebra and its applications by Gilbert Strang
-
-lots of supplimentary material for this last two via MIT course page here:
+- Linear algebra by Ward Cheney
+- Linear algebra and its applications by David C. Lay.
+- Strang, G. (2016). Introduction to linear algebra (Fifth ed.). Wellesley.
+- Linear algebra and its applications by Gilbert Strang
+  - lots of supplimentary material via MIT course page here:
 https://github.com/mitmath/1806/blob/master/summaries.md
-
-
-- LA from an ODE perspective
-Kapitula, T. (2015). Ordinary Differential Equations and Linear Algebra. Society for 
-Industrial and Applied Mathematics.
+- LA from an ODE perspective: Kapitula, T. (2015). Ordinary Differential Equations and 
+  Linear Algebra. Society for Industrial and Applied Mathematics.
 
 ## Problems
 
@@ -236,6 +230,8 @@ Industrial and Applied Mathematics.
    leaves us with no solution. an empty set? What is the intersection if the fourth 
    plane $u = −1$ is included? Find a fourth equation that leaves us with no solution.
 
+{{% /notice %}}
+
 {{% expand "Expand for solution" %}}
 {{% notice solution %}}
 
@@ -245,7 +241,6 @@ leaves us with no solutions.
 
 {{% /notice %}}
 {{% /expand %}}
-{{% /notice %}}
 
 {{% notice question %}}
 
@@ -253,6 +248,8 @@ leaves us with no solutions.
    3 by 2 system $x + 2y = 2$, $x − y = 2$, and $y = 1$. What happens if all right-hand 
    sides are zero? Is there any nonzero choice of right- hand sides that allows the 
    three lines to intersect at the same point?
+
+{{% /notice %}}
 
 {{% expand "Expand for solution" %}}
 {{% notice solution %}}
@@ -280,7 +277,6 @@ plot_lines(2, -1, 1)
 
 {{% /notice %}}
 {{% /expand %}}
-{{% /notice %}}
 
 {{% notice question %}}
 3. Write a Python function that takes in a $3 \times 3$ upper triangular matrix $A$ 
@@ -298,6 +294,7 @@ $$
 
   Generalise this function to a $n \times n$ triangular matrix input.
 
+{{% /notice %}}
 
 {{% expand "Expand for solution" %}}
 {{% notice solution %}}
@@ -344,4 +341,3 @@ for A, b in zip(As, bs):
 
 {{% /notice %}}
 {{% /expand %}}
-{{% /notice %}}

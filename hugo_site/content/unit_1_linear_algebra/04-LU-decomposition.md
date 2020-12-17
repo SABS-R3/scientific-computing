@@ -205,7 +205,7 @@ store the entire martix $P$ so the array $p_i$ is stored instead).
 Thus, the LU algorithm proceeds as follows:
 
 1. Begin with the left-most column $i=0$, find an appropriate pivot (e.g. maximum entry 
-   in the colum) and designate this row as the pivot row. Interchange this row with row 
+   in the column) and designate this row as the pivot row. Interchange this row with row 
    $i$, and store the pivot row index as $p_i$. Use row replacements to create zeros 
    below the pivot. Create the corresponding column for $L$ by dividing by the pivot 
    value.
@@ -220,31 +220,127 @@ Thus, the LU algorithm proceeds as follows:
 In practice, most library implementation store $L$ and $U$ in the same matrix since they 
 are lower and upper triangular respectivly.
 
+## $LDL$ decomposition
+
+It is often very benificial when solving linear systems to consider and take advantage 
+of any special structure that the matrix $A$ might possesses. The $LDL$ decomposition is 
+a varient on LU decomposition which is only applicable to a symmetric matrix $A$ (i.e. 
+$A = A^T$). The advantage of using this decomposition is that it takes advantage of the 
+redundent entries in the matrix to reduce the amount of computation to $n^3/3$, which is 
+about a half that required for the $LU$ decomposition.
+
 ## Other Reading
 
 - Linear algebra and its applications by David C. Lay. Chaper 2.5  
 - Golub, G. H. & Van Loan, C. F. Matrix Computations, 3rd Ed. (Johns Hopkins University 
-  Press, 1996). Chapter 3.2
+  Press, 1996). Chapter 3.2 & 4.1
 - https://en.wikipedia.org/wiki/LU_decomposition
+- https://en.wikipedia.org/wiki/Cholesky_decomposition#LDL_decomposition_2
 
 ## Software
 
-- 
-  [`scipy.linalg.lu_factor`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html).
-- 
-  [`scipy.linalg.lu_solve`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html).
-- 
-  [`scipy.linalg.lu`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html).
+[`scipy.linalg.lu_factor`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html).
 
+[`scipy.linalg.lu_solve`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html).
+
+[`scipy.linalg.lu`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html).
+
+[`scipy.linalg.ldl`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.ldl.html#scipy.linalg.ldl)
 
 ## Problems
 
-1. Take your gaussian elimination code that you wrote in the previous lesson and use it 
-   to write an LU decomposition function that takes in a martix $A$, and returns $L$, 
-   $U$ and the array $p_i$. You can check your answer using 
-   [`scipy.linalg.lu_factor`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html), 
-   or by simply verifying that $PLU=A$
-2. Write a unit test or set of unit tests using the Python `unittest` framework that you 
-   can run to satisfy that your function is robust for a wide varietry of inputs $A$. 
+{{% notice question %}}
 
+Take your gaussian elimination code that you wrote in the previous lesson and use it to 
+write an LU decomposition function that takes in a martix $A$, and returns $L$, $U$ and 
+the array $p_i$. You can check your answer using 
+[`scipy.linalg.lu_factor`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html). 
+Hint: the permutation matrix is tricky to construct, so you might want to use the test 
+given in the documentation for `lu_factor`.
 
+{{% /notice %}}
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+```python
+import numpy as np
+import matplotlib.pylab as plt
+import scipy
+import scipy.linalg
+import sys
+
+def lu_decomposition(A):
+    m, n = A.shape
+
+    LU = np.copy(A)
+    pivots = np.empty(n, dtype=int)
+    # initialise the pivot row and column
+    h = 0
+    k = 0
+    while h < m and k < n:
+        # Find the k-th pivot:
+        pivots[k] = np.argmax(LU[h:, k]) + h
+        if LU[pivots[k], k] == 0:
+            # No pivot in this column, pass to next column
+            k = k+1
+        else:
+            # swap rows
+            LU[[h, pivots[k]], :] = LU[[pivots[k], h], :]
+            # Do for all rows below pivot:
+            for i in range(h+1, m):
+                f = LU[i, k] / LU[h, k]
+                # Store f as the new L column values
+                LU[i, k] = f
+                # Do for all remaining elements in current row:
+                for j in range(k + 1, n):
+                    LU[i, j] = LU[i, j] - LU[h, j] * f
+            # Increase pivot row and column
+            h = h + 1
+            k = k + 1
+    return LU, pivots
+
+def random_matrix(n):
+    R = np.random.rand(n, n)
+    A = np.zeros((n, n))
+    triu = np.triu_indices(n)
+    A[triu] = R[triu]
+    return A
+
+def random_non_singular_matrix(n):
+    A = np.random.rand(n, n)
+    while np.linalg.cond(A) > 1/sys.float_info.epsilon:
+        A = np.random.rand(n, n)
+    return A
+
+As = [
+    np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]),
+    random_non_singular_matrix(3),
+    random_non_singular_matrix(4),
+    random_non_singular_matrix(5),
+    random_non_singular_matrix(6),
+]
+
+def pivots_to_row_indices(pivots):
+    n = len(pivots)
+    indices = np.array(range(0, n))
+    for i, p in enumerate(pivots):
+        indices[i], indices[p] = indices[p], indices[i]
+    return indices
+
+def calculate_L_mult_U(LU):
+    L = np.tril(LU)
+    np.fill_diagonal(L, 1)
+    U = np.triu(LU)
+    return L @ U
+
+for A in As:
+    LU_scipy, pivots_scipy = scipy.linalg.lu_factor(A)
+    row_indices_scipy = pivots_to_row_indices(pivots_scipy)
+    LU_mine, pivots_mine = lu_decomposition(A)
+    row_indices_mine = pivots_to_row_indices(pivots_mine)
+
+    np.testing.assert_almost_equal(calculate_L_mult_U(LU_scipy),  A[row_indices_scipy])
+    np.testing.assert_almost_equal(calculate_L_mult_U(LU_mine),  A[row_indices_mine])
+```
+{{% /notice %}}
+{{% /expand %}}
