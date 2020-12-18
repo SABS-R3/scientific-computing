@@ -124,18 +124,6 @@ When $\;\text{rank}(A) < n\;$ then
 - The determinant of $\;A\;$ is 0
 - The equation $\;A\textbf{u} = \textbf{0}\;$ has non-trivial solutions ($\textbf{u} \neq \textbf{0}$)
 
-"## Null space\n",
-    "When a matrix is singular we can find non-trivial solutions to $\\;A\\textbf{u} = \\textbf{0}$.\n",
-    "\n",
-    "These are vectors which form a *null space* for $\\;A$.\n",
-    "\n",
-    "These vectors  make no difference to the effect that $A$ is having:\n",
-    "\n",
-    "$$\n",
-    " A(\\textbf{x} + \\textbf{u}) =  A\\textbf{x} + A\\textbf{u} =\n",
-    " A\\textbf{x} + \\textbf{0} =   A\\textbf{x}.\n",
-    "$$ "
-
 ### The determinant
 
 One way of solving a system of equations represented by $A x = b$ is to calculate the 
