@@ -12,21 +12,21 @@
     <title>Cholesky decomposition   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608280277" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608280277" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608282413" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608280277" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608282413" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608280277"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608282413"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608280277"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608280277"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608282413"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608282413"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608280277"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608282413"></script>
 
     
   </div>
@@ -938,22 +938,22 @@ Press, 1996). Chapter 4.2</li>
 
 <h3 id="software">Software</h3>
 
-<ul>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky.html"><code>scipy.linalg.cholesky</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_factor.html"><code>scipy.linalg.cho_factor</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve.html"><code>scipy.linalg.cho_solve</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky_banded.html"><code>scipy.linalg.cholesky_banded</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve_banded.html"><code>scipy.linalg.cho_solve_banded</code></a></li>
-</ul>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky.html"><code>scipy.linalg.cholesky</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_factor.html"><code>scipy.linalg.cho_factor</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve.html"><code>scipy.linalg.cho_solve</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky_banded.html"><code>scipy.linalg.cholesky_banded</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve_banded.html"><code>scipy.linalg.cho_solve_banded</code></a></p>
 
 <h2 id="problems">Problems</h2>
 
-<p>Imagine that we wanted to sample an array of values $x_i$, for $i = 1...n$, where each
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>Imagine that we wanted to sample an array of values $x_i$, for $i = 1...n$, where each
 value is sampled from an independent Normal distribution with standard deviation
 $\sigma$</p>
 
@@ -983,17 +983,53 @@ $\sigma$</p>
 
 <p>where each element of the vector $\eta$ is $\eta_i \sim \mathcal{N}(0, 1)$.</p>
 
-<p>Write Python code to randomly sample an n-dimensional vector $x$ from</p>
+<p>Write Python code to randomly sample an n-dimensional vector $y$ from</p>
 
 <ol>
-<li><p>an independent Normal distribution with variance $\sigma^2$</p></li>
+<li><p>an independent Normal distribution with variance $\sigma_1^2$.</p></li>
 
-<li><p>a multivariate normal distribution using a covariance matrix $\Sigma_{ij} = \exp[(i-
-j)^2/ \sigma^2]$</p></li>
-
-<li><p>a multivariate normal distribution with $\Sigma = \sigma^2 I$. Show that this
-algorithm reduces to that used for (1).</p></li>
+<li><p>a multivariate normal distribution using a covariance matrix $\Sigma_{ij} =
+\sigma_1**2 * \exp$</p></li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> scipy
+<span style="color:#f92672">import</span> scipy.linalg
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sample_zero_mean_random_field</span>(covariance_matrix):
+    N <span style="color:#f92672">=</span> covariance_matrix<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+    L, _ <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cho_factor(covariance_matrix)
+    indep_random_sample <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(size<span style="color:#f92672">=</span>(N, <span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>triu(L) <span style="color:#960050;background-color:#1e0010">@</span> indep_random_sample
+
+n <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+sigma1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+sigma2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>
+xs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, n)
+K1 <span style="color:#f92672">=</span> sigma1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>eye(n)
+K2 <span style="color:#f92672">=</span> sigma1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(
+    <span style="color:#f92672">-</span>(xs[:, np<span style="color:#f92672">.</span>newaxis] <span style="color:#f92672">-</span> xs[:, np<span style="color:#f92672">.</span>newaxis]<span style="color:#f92672">.</span>T)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> sigma2<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+)
+K2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1e-5</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>eye(n)
+
+plt<span style="color:#f92672">.</span>plot(sample_zero_mean_random_field(K1))
+plt<span style="color:#f92672">.</span>plot(sample_zero_mean_random_field(K2))
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;x&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;y&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1539,16 +1575,16 @@ algorithm reduces to that used for (1).</p></li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608280277"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608280277"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608280277"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608280277"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608280277"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608280277"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608282413"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608282413"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608282413"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608282413"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608282413"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608282413"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608280277"></script>
-    <script src="/scientific-computing/js/learn.js?1608280277"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608280277"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608282413"></script>
+    <script src="/scientific-computing/js/learn.js?1608282413"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608282413"></script>
     
     
 
