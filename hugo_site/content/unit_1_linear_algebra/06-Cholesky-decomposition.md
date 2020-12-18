@@ -64,19 +64,19 @@ requiring taking the square root of the diagonal elements.
 
 ### Software
 
-- 
-  [`scipy.linalg.cholesky`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky.html)
-- 
+[`scipy.linalg.cholesky`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky.html)
+
 [`scipy.linalg.cho_factor`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_factor.html)
-- 
+
 [`scipy.linalg.cho_solve`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve.html)
-- 
+
 [`scipy.linalg.cholesky_banded`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky_banded.html)
-- 
+
 [`scipy.linalg.cho_solve_banded`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve_banded.html)
 
 ## Problems
 
+{{% notice question %}}
 Imagine that we wanted to sample an array of values $x_i$, for $i = 1...n$, where each 
 value is sampled from an independent Normal distribution with standard deviation 
 $\sigma$
@@ -107,12 +107,45 @@ $\sigma$
 
  where each element of the vector $\eta$ is $\eta_i \sim \mathcal{N}(0, 1)$.
 
- Write Python code to randomly sample an n-dimensional vector $x$ from 
+ Write Python code to randomly sample an n-dimensional vector $y$ from 
  
- 1. an independent Normal distribution with variance $\sigma^2$
+ 1. an independent Normal distribution with variance $\sigma_1^2$.
 
- 2. a multivariate normal distribution using a covariance matrix $\Sigma_{ij} = \exp[(i- 
-    j)^2/ \sigma^2]$
+ 2. a multivariate normal distribution using a covariance matrix $\Sigma_{ij} = 
+    \sigma_1**2 * \exp[-(i- j)^2/ \sigma_2^2]$
 
- 3. a multivariate normal distribution with $\Sigma = \sigma^2 I$. Show that this 
-    algorithm reduces to that used for (1).
+{{% /notice %}}
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+
+```python
+import numpy as np
+import matplotlib.pylab as plt
+import scipy
+import scipy.linalg
+
+def sample_zero_mean_random_field(covariance_matrix):
+    N = covariance_matrix.shape[0]
+    L, _ = scipy.linalg.cho_factor(covariance_matrix)
+    indep_random_sample = np.random.normal(size=(N, 1))
+    return np.triu(L) @ indep_random_sample
+
+n = 100
+sigma1 = 1.0
+sigma2 = 10.0
+xs = np.arange(0, n)
+K1 = sigma1**2 * np.eye(n)
+K2 = sigma1**2 * np.exp(
+    -(xs[:, np.newaxis] - xs[:, np.newaxis].T)**2 / sigma2**2
+)
+K2 += 1e-5 * np.eye(n)
+
+plt.plot(sample_zero_mean_random_field(K1))
+plt.plot(sample_zero_mean_random_field(K2))
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+```
+{{% /notice %}}
+{{% /expand %}}
