@@ -78,12 +78,12 @@ requiring taking the square root of the diagonal elements.
 
 {{% notice question %}}
 Imagine that we wanted to sample an array of values $x_i$, for $i = 1...n$, where each 
-value is sampled from an independent Normal distribution with standard deviation 
+value is sampled from an independent normal distribution with standard deviation 
 $\sigma$
 
  $$x_i \sim \mathcal{N}(0, \sigma)$$
 
- This could be achieved, for example, by sampling from a Normal distribution with unit 
+ This could be achieved, for example, by sampling from a normal distribution with unit 
  standard deviation, a function that typically exists in any computer language, then 
  multiplying by $\sigma$
 
@@ -91,8 +91,8 @@ $\sigma$
 
  where $\eta \sim \mathcal{N}(0, 1)$
 
- Now imagine that instead of an independent Normal distribution you wish to sample 
- $\mathbf{x} = [x_1, x_2, ..., x_n]$ from a multivariate Normal distribution with some 
+ Now imagine that instead of an independent normal distribution you wish to sample 
+ $\mathbf{x} = [x_1, x_2, ..., x_n]$ from a multivariate normal distribution with some 
  covariance matrix $\Sigma$
 
  $$\mathbf{x} \sim \mathcal{N}(\mathbf{0}, \Sigma)$$
@@ -107,12 +107,14 @@ $\sigma$
 
  where each element of the vector $\eta$ is $\eta_i \sim \mathcal{N}(0, 1)$.
 
- Write Python code to randomly sample an n-dimensional vector $y$ from 
+ Write Python code to randomly sample an n-dimensional vector $x$ from 
  
- 1. an independent Normal distribution with variance $\sigma_1^2$.
+ 1. an independent normal distribution with variance $\sigma_1^2$.
 
  2. a multivariate normal distribution using a covariance matrix $\Sigma_{ij} = 
-    \sigma_1**2 * \exp[-(i- j)^2/ \sigma_2^2]$
+    \sigma_1^2 \exp{(-(i- j)^2 / \sigma_2^2)}$. Try different values for the magnitute 
+    $\sigma_1$, and lenghtscale $\sigma_2$ parameters and their effect on the sampled 
+    $\mathbf{x}$
 
 {{% /notice %}}
 
@@ -149,3 +151,44 @@ plt.show()
 ```
 {{% /notice %}}
 {{% /expand %}}
+
+{{% notice question %}}
+Now imagine that we have a vector of measurements $\mathbf{x}$, and we assume that a 
+suitable model for these measurements is that they are generated from a zero-mean, 
+multivariate normal distribuion, i.e.
+
+$$\mathbf{x} \sim \mathcal{N}(\mathbf{0}, \Sigma)$$
+
+We assume that the covariance matrix is of the following form, with two parameters 
+$\mathbf{\theta} = (\sigma_1, \sigma_2)$. 
+
+$$\Sigma_{ij} = \sigma_1^2 \exp{(-(i- j)^2/ \sigma_2^2)}$$
+
+We can write down the *likelihood* of the covariance parameters $\mathbf{\theta}$, given 
+a given dataset $\mathbf{x}$, by using the probability distribution function (PDF) for a 
+zero-mean multivariate normal distribution 
+
+$$
+P(\mathbf{\theta} | \mathbf{x}) = (2 \pi)^{\frac{n}{2}} \text{ 
+det}(\Sigma)^{\frac{1}{2}} \exp{\left( \frac{1}{2}\mathbf{x}^T \Sigma^{-1} 
+\mathbf{x}\right)}
+$$
+
+Typically we work with the log of the likelihood for numerical reasons, which is
+
+$$
+\mathcal{L} = -\frac{1}{2} \log(|\Sigma|) + \mathbf{x}^T \Sigma^{-1} \mathbf{x} + 
+\frac{n}{2} \log(2\pi)
+$$
+
+3. Generate a simulated dataset $\mathbf{x}$ using your code for question (2) using 
+   "true" parameters $\mathbf{\theta} = (\sigma_1, \sigma_2)$. Then calculate the 
+   log-likelihood using the Cholesky decomposition to efficiently calculate the log 
+   determinant and the inverse of the covariance matrix. Vary $\mathbf{\theta}$ and 
+   satisfy yourself that the maximum of the likelihood occurs at your "true" parameters. 
+   In practice, when you don't know the true parameters, you could use an optimisation 
+   algorithm to automatically determine the *most likely* model parameters that give 
+   rise to your data.
+$\sigma$
+
+ 
