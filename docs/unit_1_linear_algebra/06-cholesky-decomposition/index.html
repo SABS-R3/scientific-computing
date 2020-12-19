@@ -12,21 +12,21 @@
     <title>Cholesky decomposition   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608282413" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608372219" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608372219" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608282413" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608372219" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608282413"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608372219"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608282413"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608282413"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608372219"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608372219"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608282413"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608372219"></script>
 
     
   </div>
@@ -954,12 +954,12 @@ Press, 1996). Chapter 4.2</li>
 <div class="notices question" >
   <div class="label">Question</div>
   <p>Imagine that we wanted to sample an array of values $x_i$, for $i = 1...n$, where each
-value is sampled from an independent Normal distribution with standard deviation
+value is sampled from an independent normal distribution with standard deviation
 $\sigma$</p>
 
 <p><span  class="math">\[x_i \sim \mathcal{N}(0, \sigma)\]</span></p>
 
-<p>This could be achieved, for example, by sampling from a Normal distribution with unit
+<p>This could be achieved, for example, by sampling from a normal distribution with unit
  standard deviation, a function that typically exists in any computer language, then
  multiplying by $\sigma$</p>
 
@@ -967,8 +967,8 @@ $\sigma$</p>
 
 <p>where $\eta \sim \mathcal{N}(0, 1)$</p>
 
-<p>Now imagine that instead of an independent Normal distribution you wish to sample
- $\mathbf{x} = [x_1, x_2, ..., x_n]$ from a multivariate Normal distribution with some
+<p>Now imagine that instead of an independent normal distribution you wish to sample
+ $\mathbf{x} = [x_1, x_2, ..., x_n]$ from a multivariate normal distribution with some
  covariance matrix $\Sigma$</p>
 
 <p><span  class="math">\[\mathbf{x} \sim \mathcal{N}(\mathbf{0}, \Sigma)\]</span></p>
@@ -983,13 +983,15 @@ $\sigma$</p>
 
 <p>where each element of the vector $\eta$ is $\eta_i \sim \mathcal{N}(0, 1)$.</p>
 
-<p>Write Python code to randomly sample an n-dimensional vector $y$ from</p>
+<p>Write Python code to randomly sample an n-dimensional vector $x$ from</p>
 
 <ol>
-<li><p>an independent Normal distribution with variance $\sigma_1^2$.</p></li>
+<li><p>an independent normal distribution with variance $\sigma_1^2$.</p></li>
 
 <li><p>a multivariate normal distribution using a covariance matrix $\Sigma_{ij} =
-\sigma_1**2 * \exp$</p></li>
+\sigma_1^2 \exp{(-(i- j)^2 / \sigma_2^2)}$. Try different values for the magnitute
+$\sigma_1$, and lenghtscale $\sigma_2$ parameters and their effect on the sampled
+$\mathbf{x}$</p></li>
 </ol>
 
 </div>
@@ -1029,6 +1031,52 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
 </div>
 
 </details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>Now imagine that we have a vector of measurements $\mathbf{x}$, and we assume that a
+suitable model for these measurements is that they are generated from a zero-mean,
+multivariate normal distribuion, i.e.</p>
+
+<p><span  class="math">\[\mathbf{x} \sim \mathcal{N}(\mathbf{0}, \Sigma)\]</span></p>
+
+<p>We assume that the covariance matrix is of the following form, with two parameters
+$\mathbf{\theta} = (\sigma_1, \sigma_2)$.</p>
+
+<p><span  class="math">\[\Sigma_{ij} = \sigma_1^2 \exp{(-(i- j)^2/ \sigma_2^2)}\]</span></p>
+
+<p>We can write down the <em>likelihood</em> of the covariance parameters $\mathbf{\theta}$, given
+a given dataset $\mathbf{x}$, by using the probability distribution function (PDF) for a
+zero-mean multivariate normal distribution</p>
+
+<p><span  class="math">\[
+P(\mathbf{\theta} | \mathbf{x}) = (2 \pi)^{\frac{n}{2}} \text{ 
+det}(\Sigma)^{\frac{1}{2}} \exp{\left( \frac{1}{2}\mathbf{x}^T \Sigma^{-1} 
+\mathbf{x}\right)}
+\]</span></p>
+
+<p>Typically we work with the log of the likelihood for numerical reasons, which is</p>
+
+<p><span  class="math">\[
+\mathcal{L} = -\frac{1}{2} \log(|\Sigma|) + \mathbf{x}^T \Sigma^{-1} \mathbf{x} + 
+\frac{n}{2} \log(2\pi)
+\]</span></p>
+
+<ol start="3">
+<li>Generate a simulated dataset $\mathbf{x}$ using your code for question (2) using
+&quot;true&quot; parameters $\mathbf{\theta} = (\sigma_1, \sigma_2)$. Then calculate the
+log-likelihood using the Cholesky decomposition to efficiently calculate the log
+determinant and the inverse of the covariance matrix. Vary $\mathbf{\theta}$ and
+satisfy yourself that the maximum of the likelihood occurs at your &quot;true&quot; parameters.
+In practice, when you don't know the true parameters, you could use an optimisation
+algorithm to automatically determine the <em>most likely</em> model parameters that give
+rise to your data.
+$\sigma$</li>
+</ol>
+
+</div>
 
 
 
@@ -1575,16 +1623,16 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608282413"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608282413"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608282413"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608282413"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608282413"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608282413"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608372219"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608372219"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608372219"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608372219"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608372219"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608372219"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608282413"></script>
-    <script src="/scientific-computing/js/learn.js?1608282413"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608282413"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608372219"></script>
+    <script src="/scientific-computing/js/learn.js?1608372219"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608372219"></script>
     
     
 
