@@ -182,13 +182,13 @@ $$
 $$
 
 3. Generate a simulated dataset $\mathbf{x}$ using your code for question (2) using 
-   "true" parameters $\mathbf{\theta} = (\sigma_1, \sigma_2)$. Then calculate the 
-   log-likelihood using the Cholesky decomposition to efficiently calculate the log 
-   determinant and the inverse of the covariance matrix. Vary $\mathbf{\theta}$ and 
-   satisfy yourself that the maximum of the likelihood occurs at your "true" parameters. 
-   In practice, when you don't know the true parameters, you could use an optimisation 
-   algorithm to automatically determine the *most likely* model parameters that give 
-   rise to your data.
+   "true" parameters $\mathbf{\theta}^t = (\sigma^t_1, \sigma^t_2)$. Then calculate 
+   the log-likelihood using the Cholesky decomposition to efficiently calculate the 
+   log determinant and the inverse of the covariance matrix. Vary $\mathbf{\theta}$ 
+   and satisfy yourself that the maximum of the likelihood occurs at your "true" 
+   parameters. In practice, when you don't know the true parameters, you could use an 
+   optimisation algorithm to automatically determine the *most likely* model 
+   parameters that give rise to your data.
 $\sigma$
 
  
