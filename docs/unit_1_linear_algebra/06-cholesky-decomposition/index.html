@@ -12,21 +12,21 @@
     <title>Cholesky decomposition   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608372327" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608372327" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1608465459" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608372327" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1608465459" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608372327"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608465459"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608372327"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608372327"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608465459"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608465459"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608372327"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1608465459"></script>
 
     
   </div>
@@ -991,7 +991,12 @@ $\sigma$</p>
 <li><p>a multivariate normal distribution using a covariance matrix $\Sigma_{ij} =
 \sigma_1^2 \exp{(-(i- j)^2 / \sigma_2^2)}$. Try different values for the magnitute
 $\sigma_1$, and lenghtscale $\sigma_2$ parameters and their effect on the sampled
-$\mathbf{x}$</p></li>
+$\mathbf{x}$. Hint: while the expression for $\Sigma$ is guarrenteed to be positive
+definte for all values of $\sigma_1$ and $\sigma_2$, numerical round-off can mean
+that the Cholesky decomposition can fail. To guarrentee a positive definite
+$\Sigma$, try addiing a small amount (e.g. 1e-5) to the diagonal of $\Sigma$. This
+is equivilent to adding a very small amount of independent normal noise to
+$\mathbf{x}$.</p></li>
 </ol>
 
 </div>
@@ -1007,26 +1012,28 @@ $\mathbf{x}$</p></li>
 <span style="color:#f92672">import</span> scipy
 <span style="color:#f92672">import</span> scipy.linalg
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sample_zero_mean_random_field</span>(covariance_matrix):
-    N <span style="color:#f92672">=</span> covariance_matrix<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
-    L, _ <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cho_factor(covariance_matrix)
-    indep_random_sample <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(size<span style="color:#f92672">=</span>(N, <span style="color:#ae81ff">1</span>))
-    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>triu(L) <span style="color:#960050;background-color:#1e0010">@</span> indep_random_sample
-
 n <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+xs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, n)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">construct_covariance</span>(sigma1, sigma2):
+    K <span style="color:#f92672">=</span> sigma1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(
+        <span style="color:#f92672">-</span>(xs[:, np<span style="color:#f92672">.</span>newaxis] <span style="color:#f92672">-</span> xs[:, np<span style="color:#f92672">.</span>newaxis]<span style="color:#f92672">.</span>T)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> sigma2<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    )
+    K <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1e-5</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>eye(n)
+    <span style="color:#66d9ef">return</span> K
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sample_zero_mean_random_field</span>(covariance_matrix):
+    L, _ <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cho_factor(covariance_matrix, lower<span style="color:#f92672">=</span>True)
+    indep_random_sample <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(size<span style="color:#f92672">=</span>n)
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>dot(np<span style="color:#f92672">.</span>tril(L), indep_random_sample)
+
 sigma1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
 sigma2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>
-xs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, n)
 K1 <span style="color:#f92672">=</span> sigma1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>eye(n)
-K2 <span style="color:#f92672">=</span> sigma1<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(
-    <span style="color:#f92672">-</span>(xs[:, np<span style="color:#f92672">.</span>newaxis] <span style="color:#f92672">-</span> xs[:, np<span style="color:#f92672">.</span>newaxis]<span style="color:#f92672">.</span>T)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> sigma2<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-)
-K2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1e-5</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>eye(n)
+K2 <span style="color:#f92672">=</span> construct_covariance(sigma1, sigma2)
 
 plt<span style="color:#f92672">.</span>plot(sample_zero_mean_random_field(K1))
 plt<span style="color:#f92672">.</span>plot(sample_zero_mean_random_field(K2))
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;x&#39;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;y&#39;</span>)
 plt<span style="color:#f92672">.</span>show()</code></pre></div>
 </div>
 
@@ -1072,11 +1079,49 @@ log determinant and the inverse of the covariance matrix. Vary $\mathbf{\theta}$
 and satisfy yourself that the maximum of the likelihood occurs at your &quot;true&quot;
 parameters. In practice, when you don't know the true parameters, you could use an
 optimisation algorithm to automatically determine the <em>most likely</em> model
-parameters that give rise to your data.
-$\sigma$</li>
+parameters that give rise to your data.</li>
 </ol>
 
 </div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log_likelihood</span>(sigma1, sigma2, x):
+    K <span style="color:#f92672">=</span> construct_covariance(sigma1, sigma2)
+    L, lower <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cho_factor(K, lower<span style="color:#f92672">=</span>True)
+
+    logdet <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sum(np<span style="color:#f92672">.</span>log(np<span style="color:#f92672">.</span>diag(L)))
+    xinvSx <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>dot(scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cho_solve((L, lower), x))
+
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> (logdet <span style="color:#f92672">+</span> xinvSx)
+
+sigma1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">100</span>)
+sigma2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">15.0</span>, <span style="color:#ae81ff">100</span>)
+Sigma1, Sigma2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(sigma1, sigma2)
+x <span style="color:#f92672">=</span> sample_zero_mean_random_field(K2)
+
+L <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>vectorize(log_likelihood, excluded<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;x&#39;</span>])(Sigma1, Sigma2, x<span style="color:#f92672">=</span>x)
+max_log_likelihood <span style="color:#f92672">=</span> log_likelihood(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, x)
+levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0.9</span> <span style="color:#f92672">*</span> max_log_likelihood, max_log_likelihood, <span style="color:#ae81ff">5</span>)
+
+plt<span style="color:#f92672">.</span>clf()
+contours <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>contour(Sigma1, Sigma2, L, levels<span style="color:#f92672">=</span>levels, colors<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
+plt<span style="color:#f92672">.</span>clabel(contours, inline<span style="color:#f92672">=</span>True, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>)
+
+plt<span style="color:#f92672">.</span>imshow(L, extent<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">15.0</span>], origin<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lower&#39;</span>,
+           cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RdGy&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, vmin<span style="color:#f92672">=</span>levels[<span style="color:#ae81ff">0</span>], aspect<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;auto&#39;</span>)
+c <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar();
+c<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$\mathcal{L}$&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$\sigma_1$&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$\sigma_2$&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
 
 
 
@@ -1623,16 +1668,16 @@ $\sigma$</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608372327"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608372327"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608372327"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608372327"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608372327"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608372327"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1608465459"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608465459"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608465459"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1608465459"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1608465459"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1608465459"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608372327"></script>
-    <script src="/scientific-computing/js/learn.js?1608372327"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608372327"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608465459"></script>
+    <script src="/scientific-computing/js/learn.js?1608465459"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1608465459"></script>
     
     
 
