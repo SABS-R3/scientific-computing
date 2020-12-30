@@ -175,20 +175,23 @@ Additional reading on the $QR$ decomposition can be found at:
 
 ### Software
 
-- 
   [`scipy.linalg.qr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html)
-- 
+
   [`scipy.linalg.qr_multiply`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_multiply.html)
-- 
+
   [`scipy.linalg.qr_update`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_update.html)
-- 
+
   [`scipy.linalg.qr_delete`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_delete.html)
-- 
+
   [`scipy.linalg.qr_insert`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_insert.html)
+
+  [`numpy.linalg.lstsq`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html)
+
 
 
 ## Problems
 
+{{% notice question %}}
 For this exercises we will be using some data on Oxford's weather which is hosted by 
 [Saad Jbabdi](https://users.fmrib.ox.ac.uk/~saad/) from the Wellcome Centre for 
 Integrative NeuroImaging (FMRIB), which can be obtained 
@@ -204,7 +207,47 @@ $$
 y_i = a x_i^2 + b x_i + c
 $$
 
-Use a $QR$ decomposition to find the least-squares solution to these equations, and 
-therefore fit the model to the data. Plot the model and the data side by side to 
-qualitativly evaluate the fit.
+Use a $QR$ decomposition to find the least-squares solution to these equations (you can 
+check it using `np.linalg.lstsq` if you like), and therefore fit the model to the data. 
+Plot the model and the data side by side to qualitatively evaluate the fit.
+{{% /notice %}}
 
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+```python
+import pandas as pd
+import matplotlib.pylab as plt
+import numpy as np
+import scipy.linalg
+
+names = ['year', 'month', 'maxTemp', 'minTemp', 'hoursFrost', 'rain', 'hoursSun']
+df    = pd.read_csv('OxfordWeather.txt',
+                     delim_whitespace=True, header=None, names=names)
+
+x = df.month.values.reshape(-1,1)
+y = df.hoursSun.values.reshape(-1,1)
+
+# we have to sort the data according to x if we want a nice plot
+i = np.argsort(x,axis=0).reshape(-1)
+x = x[i]
+y = y[i]
+
+# polynomial model $y = a x^2 + b x + c$,
+# or $M beta = y$ where $beta = (a, b, c)$
+M = np.concatenate([np.ones_like(x), x, x**2], axis=1)
+Q, R = scipy.linalg.qr(M, mode='economic')
+beta = np.linalg.solve(R, Q.T @ y)
+
+# check against lstsq
+np.testing.assert_almost_equal(
+    beta, np.linalg.lstsq(M, y, rcond=None)[0]
+)
+
+plt.plot(x, y, 'o')
+plt.plot(x, M @ beta, 'r')
+plt.xlabel('month')
+plt.ylabel('hoursSun')
+plt.show()
+```
+{{% /notice %}}
+{{% /expand %}}
