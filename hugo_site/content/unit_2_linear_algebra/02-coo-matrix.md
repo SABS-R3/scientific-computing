@@ -4,13 +4,13 @@ weight: 2
 markup: "mmark"
 ---
 
-As an example of a sparse matrix format, this section describes one of the sparse 
-formats implemented in Scipy, the The COOrdinate format (COO). This is also known as the 
-"ijv" or "triplet" format, and stores the non-zero elements in three arrays, `row`, 
-`col`, and `data`. The `data[i]` value is the non-zero entry in row `row[i]` and column 
+As an example of a sparse matrix format, this section describes one of the sparse
+formats implemented in Scipy, the The COOrdinate format (COO). This is also known as the
+"ijv" or "triplet" format, and stores the non-zero elements in three arrays, `row`,
+`col`, and `data`. The `data[i]` value is the non-zero entry in row `row[i]` and column
 `col[i]` of the matrix. The advantages of this format are:
 
-- fast format for contructing sparse matrices
+- fast format for constructing sparse matrices
 - fast conversions to/from the CSR and CSC formats
 - fast matrix-vector multiplication
 - fast elementwise operations (e.g. multiply each element by 2 is just `data * 2`)
@@ -97,5 +97,3 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: 'coo_matrix' object is not subscriptable
 ```
-
-

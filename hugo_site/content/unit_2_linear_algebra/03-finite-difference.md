@@ -21,10 +21,10 @@ $x_1$, $x_2$:
               +----+----+----------+----+> x
               0   x_1  x_2    ... x_N   1
 
-Using this set of point and the discretised eqution, this gives a set of $N$ equations 
+Using this set of point and the discretised equation, this gives a set of $N$ equations 
 at each interior point on the domain:
 
-$$\frac{v_{i+1} - 2v_i + v_{i-1}}{h^2} = 0 \text{ for } i = 1...N$$
+$$\frac{v_{i+1} - 2v_i + v_{i-1}}{h^2} = f(x_i) \text{ for } i = 1...N$$
 
 where $v_i \approx u(x_i)$.
 
@@ -33,11 +33,11 @@ the *boundary conditions*. For this example we will use $u(x) = g(x)$ at $x=0$ a
 (also known as a non-homogenous Dirichlet bc), so that $v_0 = g(0)$, and $v\_{N+1} = 
 g(1)$, and the equation at $x_1$ becomes:
 
-$$\frac{v_{i+1} - 2v_i + g(0)}{h^2} = 0$$
+$$\frac{v_{i+1} - 2v_i + g(0)}{h^2} = f(x_i)$$
 
 and the equation at $x_N$ becomes:
 
-$$\frac{g(1) - 2v_i + v_{i-1}}{h^2} = 0$$
+$$\frac{g(1) - 2v_i + v_{i-1}}{h^2} = f(x_i)$$
 
 We can therefore represent the final $N$ equations in matrix form like so:
 
@@ -54,15 +54,20 @@ v_2    \\
 v_{N-1}\\
 v_{N}  
 \end{bmatrix}
-= \begin{bmatrix} -g(0)    \\
+= \begin{bmatrix} f(x_1)    \\
+f(x_2)    \\
+\vdots \\
+f(x_{N-1})  \\
+f(x_N)
+\end{bmatrix} - \frac{1}{h^2} \begin{bmatrix} g(0)    \\
 0    \\
 \vdots \\
 0    \\
--g(1)
+g(1)
 \end{bmatrix}
 $$
 
-The relevent sparse matrix here is $A$, given by
+The relevant sparse matrix here is $A$, given by
 
 
 $$
@@ -74,7 +79,8 @@ A = \begin{bmatrix} -2      & 1      &         &   &     \\
 $$
 
 As you can see, the number of non-zero elements grows linearly with the size $N$, so a 
-sparse matrix format is much prefered over a dense matrix holding all $N^2$ elements!
+sparse matrix format is much preferred over a dense matrix holding all $N^2$ elements!
+
 
 ## Additional Reading
 

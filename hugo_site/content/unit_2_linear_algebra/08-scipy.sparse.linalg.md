@@ -1,13 +1,12 @@
 ---
-title: "Scipy.sparse.linalg"
+title: "Iterative solvers in Scipy"
 weight: 8 
 markup: "mmark"
 ---
 
 Once again the best resource for Python is the [`scipi.sparse.linalg` 
-documentation](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
-
-Iterative methods for linear equation systems in `scipy.sparse.linalg`:
+documentation](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html). The 
+available iterative solvers in Scipy are:
 
 - [BIConjugate Gradient iteration 
   (BiCG)](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicg.html#scipy.sparse.linalg.bicg)
