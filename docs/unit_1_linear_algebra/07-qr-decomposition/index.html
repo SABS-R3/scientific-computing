@@ -12,21 +12,21 @@
     <title>QR decomposition   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1608465459" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609313854" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1608465459" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609313854" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1608465459"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609313854"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1608465459"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1608465459"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609313854"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1608465459"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609313854"></script>
 
     
   </div>
@@ -1049,22 +1049,24 @@ Press, 1996). Chapter 5.2</li>
 
 <h3 id="software">Software</h3>
 
-<ul>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html"><code>scipy.linalg.qr</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_multiply.html"><code>scipy.linalg.qr_multiply</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_update.html"><code>scipy.linalg.qr_update</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_delete.html"><code>scipy.linalg.qr_delete</code></a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_insert.html"><code>scipy.linalg.qr_insert</code></a></li>
-</ul>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html"><code>scipy.linalg.qr</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_multiply.html"><code>scipy.linalg.qr_multiply</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_update.html"><code>scipy.linalg.qr_update</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_delete.html"><code>scipy.linalg.qr_delete</code></a></p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr_insert.html"><code>scipy.linalg.qr_insert</code></a></p>
+
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html"><code>numpy.linalg.lstsq</code></a></p>
 
 <h2 id="problems">Problems</h2>
 
-<p>For this exercises we will be using some data on Oxford's weather which is hosted by
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>For this exercises we will be using some data on Oxford's weather which is hosted by
 <a href="https://users.fmrib.ox.ac.uk/~saad/">Saad Jbabdi</a> from the Wellcome Centre for
 Integrative NeuroImaging (FMRIB), which can be obtained
 <a href="http://www.fmrib.ox.ac.uk/~saad/ONBI/OxfordWeather.txt">here</a>.</p>
@@ -1079,9 +1081,55 @@ each data point $(y_i, x_i)$ for $i=1..m$ we have:</p>
 y_i = a x_i^2 + b x_i + c
 \]</span></p>
 
-<p>Use a $QR$ decomposition to find the least-squares solution to these equations, and
-therefore fit the model to the data. Plot the model and the data side by side to
-qualitativly evaluate the fit.</p>
+<p>Use a $QR$ decomposition to find the least-squares solution to these equations (you can
+check it using <code>np.linalg.lstsq</code> if you like), and therefore fit the model to the data.
+Plot the model and the data side by side to qualitatively evaluate the fit.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> scipy.linalg
+
+names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;year&#39;</span>, <span style="color:#e6db74">&#39;month&#39;</span>, <span style="color:#e6db74">&#39;maxTemp&#39;</span>, <span style="color:#e6db74">&#39;minTemp&#39;</span>, <span style="color:#e6db74">&#39;hoursFrost&#39;</span>, <span style="color:#e6db74">&#39;rain&#39;</span>, <span style="color:#e6db74">&#39;hoursSun&#39;</span>]
+df    <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;OxfordWeather.txt&#39;</span>,
+                     delim_whitespace<span style="color:#f92672">=</span>True, header<span style="color:#f92672">=</span>None, names<span style="color:#f92672">=</span>names)
+
+x <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>month<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+y <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>hoursSun<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># we have to sort the data according to x if we want a nice plot</span>
+i <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argsort(x,axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+x <span style="color:#f92672">=</span> x[i]
+y <span style="color:#f92672">=</span> y[i]
+
+<span style="color:#75715e"># polynomial model $y = a x^2 + b x + c$,</span>
+<span style="color:#75715e"># or $M beta = y$ where $beta = (a, b, c)$</span>
+M <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate([np<span style="color:#f92672">.</span>ones_like(x), x, x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+Q, R <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>qr(M, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;economic&#39;</span>)
+beta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>solve(R, Q<span style="color:#f92672">.</span>T <span style="color:#960050;background-color:#1e0010">@</span> y)
+
+<span style="color:#75715e"># check against lstsq</span>
+np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(
+    beta, np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lstsq(M, y, rcond<span style="color:#f92672">=</span>None)[<span style="color:#ae81ff">0</span>]
+)
+
+plt<span style="color:#f92672">.</span>plot(x, y, <span style="color:#e6db74">&#39;o&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(x, M <span style="color:#960050;background-color:#1e0010">@</span> beta, <span style="color:#e6db74">&#39;r&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;month&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;hoursSun&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1627,16 +1675,16 @@ qualitativly evaluate the fit.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1608465459"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1608465459"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1608465459"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1608465459"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1608465459"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1608465459"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609313854"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609313854"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1608465459"></script>
-    <script src="/scientific-computing/js/learn.js?1608465459"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1608465459"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609313854"></script>
+    <script src="/scientific-computing/js/learn.js?1609313854"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609313854"></script>
     
     
 
