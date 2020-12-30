@@ -9,24 +9,24 @@
 
     <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
 
-    <title>Scipy.sparse.linalg   Modelling and Scientific Computing</title>
+    <title>Iterative solvers in Scipy   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609319950" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609319950" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609319950"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609313854"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609319950"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609319950"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609319950"></script>
 
     
   </div>
@@ -446,9 +446,9 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item ">
         <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
-        Scipy.sparse
+        Scipy.sparse and problems
         
         </a>
     </li>
@@ -530,9 +530,9 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item active">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Iterative solvers in Scipy" class="dd-item active">
         <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
-        Scipy.sparse.linalg
+        Iterative solvers in Scipy
         
         </a>
     </li>
@@ -841,7 +841,7 @@
             
           
           
-            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_2_linear_algebra/'>Sparse Matrices and Iterative Solvers</a> > Scipy.sparse.linalg
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_2_linear_algebra/'>Sparse Matrices and Iterative Solvers</a> > Iterative solvers in Scipy
           
         
           
@@ -870,7 +870,7 @@
           
             <h1>
               
-              Scipy.sparse.linalg
+              Iterative solvers in Scipy
             </h1>
           
 
@@ -878,9 +878,8 @@
 
 
 <p>Once again the best resource for Python is the <a href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html"><code>scipi.sparse.linalg</code>
-documentation</a>.</p>
-
-<p>Iterative methods for linear equation systems in <code>scipy.sparse.linalg</code>:</p>
+documentation</a>. The
+available iterative solvers in Scipy are:</p>
 
 <ul>
 <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicg.html#scipy.sparse.linalg.bicg">BIConjugate Gradient iteration
@@ -1473,16 +1472,16 @@ iterations and $N$. How long do the computations take?</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609313854"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609313854"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609319950"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609319950"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609313854"></script>
-    <script src="/scientific-computing/js/learn.js?1609313854"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609313854"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609319950"></script>
+    <script src="/scientific-computing/js/learn.js?1609319950"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609319950"></script>
     
     
 

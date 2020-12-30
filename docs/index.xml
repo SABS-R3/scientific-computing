@@ -56,7 +56,7 @@ Gaussian elimination -- step 1 reduce the above system of equations so that the 
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/02-coo-matrix/</guid>
       <description>As an example of a sparse matrix format, this section describes one of the sparse formats implemented in Scipy, the The COOrdinate format (COO). This is also known as the &amp;quot;ijv&amp;quot; or &amp;quot;triplet&amp;quot; format, and stores the non-zero elements in three arrays, row, col, and data. The data[i] value is the non-zero entry in row row[i] and column col[i] of the matrix. The advantages of this format are:
- fast format for contructing sparse matrices fast conversions to/from the CSR and CSC formats fast matrix-vector multiplication fast elementwise operations (e.</description>
+ fast format for constructing sparse matrices fast conversions to/from the CSR and CSC formats fast matrix-vector multiplication fast elementwise operations (e.</description>
     </item>
     
     <item>
@@ -132,7 +132,7 @@ The Finite Difference (FD) method is based on taking a Taylor series expansion o
     </item>
     
     <item>
-      <title>Scipy.sparse</title>
+      <title>Scipy.sparse and problems</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -205,13 +205,12 @@ The CG method is based on minimising the function</description>
     </item>
     
     <item>
-      <title>Scipy.sparse.linalg</title>
+      <title>Iterative solvers in Scipy</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/</guid>
-      <description>Once again the best resource for Python is the scipi.sparse.linalg documentation.
-Iterative methods for linear equation systems in scipy.sparse.linalg:
+      <description>Once again the best resource for Python is the scipi.sparse.linalg documentation. The available iterative solvers in Scipy are:
  BIConjugate Gradient iteration (BiCG) BIConjugate Gradient STABilized iteration (BiCGSTAB) Conjugate Gradient iteration (CG) Conjugate Gradient Squared iteration (CGS) Generalized Minimal RESidual iteration (GMRES)  LGMRES MINimum RESidual iteration (MINRES) Quasi-Minimal Residual iteration (QMR)  GCROT(m,k)  scipy.sparse.linalg also contains two iterative solvers for least-squares problems, lsqr and lsmr
 Problems Note: based on the Finite Difference matrix $A$ in a previous exercise:</description>
     </item>

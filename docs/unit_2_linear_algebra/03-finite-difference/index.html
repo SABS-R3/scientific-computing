@@ -12,21 +12,21 @@
     <title>Finite Difference Matrix   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609319950" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609319950" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609319950"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609313854"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609319950"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609319950"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609319950"></script>
 
     
   </div>
@@ -446,9 +446,9 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item ">
         <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
-        Scipy.sparse
+        Scipy.sparse and problems
         
         </a>
     </li>
@@ -530,9 +530,9 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Iterative solvers in Scipy" class="dd-item ">
         <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
-        Scipy.sparse.linalg
+        Iterative solvers in Scipy
         
         </a>
     </li>
@@ -892,10 +892,10 @@ discretistaion of the Poisson equation. In 1D, Poisson equation is</p>
 $x_1$, $x_2$:</p>
 <pre><code>          +----+----+----------+----+&gt; x
           0   x_1  x_2    ... x_N   1</code></pre>
-<p>Using this set of point and the discretised eqution, this gives a set of $N$ equations
+<p>Using this set of point and the discretised equation, this gives a set of $N$ equations
 at each interior point on the domain:</p>
 
-<p><span  class="math">\[\frac{v_{i+1} - 2v_i + v_{i-1}}{h^2} = 0 \text{ for } i = 1...N\]</span></p>
+<p><span  class="math">\[\frac{v_{i+1} - 2v_i + v_{i-1}}{h^2} = f(x_i) \text{ for } i = 1...N\]</span></p>
 
 <p>where $v_i \approx u(x_i)$.</p>
 
@@ -904,11 +904,11 @@ the <em>boundary conditions</em>. For this example we will use $u(x) = g(x)$ at 
 (also known as a non-homogenous Dirichlet bc), so that $v_0 = g(0)$, and $v_{N+1} =
 g(1)$, and the equation at $x_1$ becomes:</p>
 
-<p><span  class="math">\[\frac{v_{i+1} - 2v_i + g(0)}{h^2} = 0\]</span></p>
+<p><span  class="math">\[\frac{v_{i+1} - 2v_i + g(0)}{h^2} = f(x_i)\]</span></p>
 
 <p>and the equation at $x_N$ becomes:</p>
 
-<p><span  class="math">\[\frac{g(1) - 2v_i + v_{i-1}}{h^2} = 0\]</span></p>
+<p><span  class="math">\[\frac{g(1) - 2v_i + v_{i-1}}{h^2} = f(x_i)\]</span></p>
 
 <p>We can therefore represent the final $N$ equations in matrix form like so:</p>
 
@@ -925,15 +925,20 @@ v_2    \\
 v_{N-1}\\
 v_{N}  
 \end{bmatrix}
-= \begin{bmatrix} -g(0)    \\
+= \begin{bmatrix} f(x_1)    \\
+f(x_2)    \\
+\vdots \\
+f(x_{N-1})  \\
+f(x_N)
+\end{bmatrix} - \frac{1}{h^2} \begin{bmatrix} g(0)    \\
 0    \\
 \vdots \\
 0    \\
--g(1)
+g(1)
 \end{bmatrix}
 \]</span></p>
 
-<p>The relevent sparse matrix here is $A$, given by</p>
+<p>The relevant sparse matrix here is $A$, given by</p>
 
 <p><span  class="math">\[
 A = \begin{bmatrix} -2      & 1      &         &   &     \\
@@ -944,7 +949,7 @@ A = \begin{bmatrix} -2      & 1      &         &   &     \\
 \]</span></p>
 
 <p>As you can see, the number of non-zero elements grows linearly with the size $N$, so a
-sparse matrix format is much prefered over a dense matrix holding all $N^2$ elements!</p>
+sparse matrix format is much preferred over a dense matrix holding all $N^2$ elements!</p>
 
 <h2 id="additional-reading">Additional Reading</h2>
 
@@ -1487,7 +1492,7 @@ Introduction. Cambridge University Press, 2005.</p>
 			<a class="nav nav-prev" href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1497,16 +1502,16 @@ Introduction. Cambridge University Press, 2005.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609313854"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609313854"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609319950"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609319950"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609313854"></script>
-    <script src="/scientific-computing/js/learn.js?1609313854"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609313854"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609319950"></script>
+    <script src="/scientific-computing/js/learn.js?1609319950"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609319950"></script>
     
     
 

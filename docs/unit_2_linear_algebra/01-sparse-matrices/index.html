@@ -12,21 +12,21 @@
     <title>Sparse matrices   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609313854" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609319950" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609319950" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609313854" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609319950" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609313854"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609319950"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609313854"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609319950"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609319950"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609313854"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609319950"></script>
 
     
   </div>
@@ -446,9 +446,9 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item ">
         <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
-        Scipy.sparse
+        Scipy.sparse and problems
         
         </a>
     </li>
@@ -530,9 +530,9 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Scipy.sparse.linalg" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Iterative solvers in Scipy" class="dd-item ">
         <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
-        Scipy.sparse.linalg
+        Iterative solvers in Scipy
         
         </a>
     </li>
@@ -887,10 +887,10 @@ matrix containing many zero elements. Since zeros can be ignored in many computa
 for example multiplication or addition, a sparse matrix will specify a special data
 structure so that only the <em>non-zero</em> elements of the matrix are actually stored and
 used in computation. Note also that a sparse matrix can itself be symmetric or positive
-definite, and it is often neccessary to take all these properties into account when
+definite, and it is often necessary to take all these properties into account when
 designing your algorithm.</p>
 
-<p>The most obvious benifit of a sparse matrix is low memory usage. A dense matrix needs to
+<p>The most obvious benefit of a sparse matrix is low memory usage. A dense matrix needs to
 store all the elements of a matrix of size $n$, and thus the memory requirements scale
 as $\mathcal{O}(n^2)$. For example, the following show the memory requirements of a
 matrix of double precision numbers (taken from the excellent
@@ -909,234 +909,18 @@ method illustrated below</li>
 non-zero elements of the matrix represent edges between nodes</li>
 </ul>
 
-<p>Note that while a sparse matrix has obvious benifits in terms of matrix multiplication,
+<p>Note that while a sparse matrix has obvious benefits in terms of matrix multiplication,
 where the zero elements can simply be ignored, direct solver algorithms such as $LU$
-decodecomposition for the problem $Ax = b$, where $A$ is sparse, need considerably more
-thought as the zeros in $A$ can have propogating effects, and there is no guarentee that
+decomposition for the problem $Ax = b$, where $A$ is sparse, need considerably more
+thought as the zeros in $A$ can have propagating effects, and there is no guarantee that
 the decomposition of a $A$ or its inverse will be itself sparse, there can be a
-significant amount of what is known as <em>fill-in</em>. This fact motivates a separate class
-of <em>iterative</em> (as opposed to <em>direct</em>) solvers that only rely on the matrix
-multiplication of $A$ with a vector, ignoring the internal sparsity structure of $A$ and
-only taking advantage of the increased speed of the matrix multiplication itself. These
-iterative solvers will be covered in the following chapter, but in this chapter we will
-focus on the practical requirements of constructing and using sparse matrices using the
-<code>scipy.sparse</code> library.</p>
-
-<h2 id="an-example-sparse-format">An example sparse format</h2>
-
-<p>The COOrdinate format (COO) is also known as the &quot;ijv&quot; or &quot;triplet&quot; format, and stores
-the non-zero elements in three arrays, <code>row</code>, <code>col</code>, and <code>data</code>. The <code>data[i]</code> value is
-the non-zero entry in row <code>row[i]</code> and column <code>col[i]</code> of the matrix. The advantages of
-this format are:</p>
-
-<ul>
-<li>fast format for contructing sparse matrices</li>
-<li>fast conversions to/from the CSR and CSC formats</li>
-<li>fast matrix-vector multiplication</li>
-<li>fast elementwise operations (e.g. multiply each element by 2 is just <code>data * 2</code>)</li>
-</ul>
-
-<p>However, slicing using this format is difficult.</p>
-
-<p>Here are some examples of the COO matrix format using
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.coo_matrix.html"><code>scipy.sparse.coo_matrix</code></a>.
-Again, these have been taken from
-<a href="http://scipy-lectures.org/advanced/scipy_sparse/introduction.html#why-sparse-matrices">scipy-lectures</a>,
-which is an excellent resource and contains examples of the other sparse matrix formats
-implemented in Scipy.</p>
-
-<h3 id="create-empty-coo-matrix">create empty COO matrix:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mtx <span style="color:#f92672">=</span> sparse<span style="color:#f92672">.</span>coo_matrix((<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>), dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>int8)
-mtx<span style="color:#f92672">.</span>todense()</code></pre></div>
-<p>Output:</p>
-<pre><code>matrix([[0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]], dtype=int8)</code></pre>
-<h3 id="create-using-data-ij-tuple">create using (data, ij) tuple:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">row <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>])
-col <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>])
-data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>])
-mtx <span style="color:#f92672">=</span> sparse<span style="color:#f92672">.</span>coo_matrix((data, (row, col)), shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>))
-mtx
-mtx<span style="color:#f92672">.</span>todense()</code></pre></div>
-<p>Output:</p>
-<pre><code>&gt;&gt;&gt; mtx
-&lt;4x4 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
-        with 4 stored elements in COOrdinate format&gt;
-&gt;&gt;&gt; mtx.todense()
-matrix([[4, 0, 9, 0],
-        [0, 7, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 5]])</code></pre>
-<h3 id="duplicates-entries-are-summed-together">duplicates entries are summed together:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">row <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>])
-col <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>])
-data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>])
-mtx <span style="color:#f92672">=</span> sparse<span style="color:#f92672">.</span>coo_matrix((data, (row, col)), shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>))
-mtx<span style="color:#f92672">.</span>todense()</code></pre></div>
-<p>Output:</p>
-<pre><code>&gt;&gt;&gt; mtx.todense()
-matrix([[3, 0, 1, 0],
-        [0, 2, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 1]])</code></pre>
-<h3 id="no-slicing">no slicing…:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mtx[<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]</code></pre></div>
-<p>Output:</p>
-<pre><code>&gt;&gt;&gt; mtx[2, 3]
-Traceback (most recent call last):
-  File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt;
-TypeError: &#39;coo_matrix&#39; object is not subscriptable</code></pre>
-<h2 id="an-example-sparse-matrix-arising-from-a-finite-difference-discretistaion">An example sparse matrix arising from a finite difference discretistaion</h2>
-
-<p>Many matrices in scientific computing contain mostly zeros, particularly those arising
-from the discretistaion of partial differential equations (PDEs). Here we will construct
-a sparse matrix using <code>scipy.sparse</code> that is derived from the finite difference
-discretistaion of the Poisson equation. In 1D, Poisson equation is</p>
-
-<p><span  class="math">\[u_{xx} = f(x)\text{ for }0 \le x \le 1\]</span></p>
-
-<p>The central FD approximation of $u_{xx}$ is:</p>
-
-<p><span  class="math">\[u_{xx} \approx \frac{u(x + h) - 2u(x) + u(x-h)}{h^2}\]</span></p>
-
-<p>We will discretise $u_{xx} = 0$ at $N$ regular points along $x$ from 0 to 1, given by
-$x_1$, $x_2$:</p>
-<pre><code>          +----+----+----------+----+&gt; x
-          0   x_1  x_2    ... x_N   1</code></pre>
-<p>Using this set of point and the discretised eqution, this gives a set of $N$ equations
-at each interior point on the domain:</p>
-
-<p><span  class="math">\[\frac{v_{i+1} - 2v_i + v_{i-1}}{h^2} = 0 \text{ for } i = 1...N\]</span></p>
-
-<p>where $v_i \approx u(x_i)$.</p>
-
-<p>To solve these equations we will need additional equations at $x=0$ and $x=1$, known as
-the <em>boundary conditions</em>. For this example we will use $u(x) = g(x)$ at $x=0$ and $x=1$
-(also known as a non-homogenous Dirichlet bc), so that $v_0 = g(0)$, and $v_{N+1} =
-g(1)$, and the equation at $x_1$ becomes:</p>
-
-<p><span  class="math">\[\frac{v_{i+1} - 2v_i + g(0)}{h^2} = 0\]</span></p>
-
-<p>and the equation at $x_N$ becomes:</p>
-
-<p><span  class="math">\[\frac{g(1) - 2v_i + v_{i-1}}{h^2} = 0\]</span></p>
-
-<p>We can therefore represent the final $N$ equations in matrix form like so:</p>
-
-<p><span  class="math">\[
-\frac{1}{h^2}
-\begin{bmatrix} -2      & 1      &         &   &     \\
- 1      & -2     & 1       &       & \\
-&\ddots & \ddots  &  \ddots &\\
-&        & 1      &  -2     &  1     \\
-&        &        &   1     & -2     \end{bmatrix}
-\begin{bmatrix} v_1    \\
-v_2    \\
-\vdots \\
-v_{N-1}\\
-v_{N}  
-\end{bmatrix}
-= \begin{bmatrix} -g(0)    \\
-0    \\
-\vdots \\
-0    \\
--g(1)
-\end{bmatrix}
-\]</span></p>
-
-<p>The relevent sparse matrix here is $A$, given by</p>
-
-<p><span  class="math">\[
-A = \begin{bmatrix} -2      & 1      &         &   &     \\
- 1      & -2     & 1       &       & \\
-&\ddots & \ddots  &  \ddots &\\
-&        & 1      &  -2     &  1     \\
-&        &        &   1     & -2     \end{bmatrix}
-\]</span></p>
-
-<p>As you can see, the number of non-zero elements grows linearly with the size $N$, so a
-sparse matrix format is much prefered over a dense matrix holding all $N^2$ elements!</p>
-
-<h2 id="additional-reading">Additional Reading</h2>
-
-<p>For more on the Finite Difference Method for solving PDEs:</p>
-
-<p>K. W. Morton and D. F. Mayers. Numerical Solution of Partial Differential Equations: An
-Introduction. Cambridge University Press, 2005.</p>
-
-<h2 id="software">Software</h2>
-
-<p>There are seven available sparse matrix types in <code>scipy.sparse</code>:</p>
-
-<ul>
-<li><code>csc_matrix</code>: Compressed Sparse Column format</li>
-<li><code>csr_matrix</code>: Compressed Sparse Row format</li>
-<li><code>bsr_matrix</code>: Block Sparse Row format</li>
-<li><code>lil_matrix</code>: List of Lists format</li>
-<li><code>dok_matrix</code>: Dictionary of Keys format</li>
-<li><code>coo_matrix</code>: COOrdinate format (aka IJV, triplet format)</li>
-<li><code>dia_matrix</code>: DIAgonal format</li>
-</ul>
-
-<p>As indicated by the excellent
-<a href="https://docs.scipy.org/doc/scipy/reference/sparse.html">documentation</a>, the
-<code>dok_matrix</code> or <code>lil_matrix</code> formats are preferable to construct matrices as they
-support basic slicing and indexing similar to a standard NumPy array.</p>
-
-<p>You will notice that the FD matrix we have constructed for the Poisson problem is
-composed entirely of diagonal elements, as is often the case. If you were constructing a
-similar matrix in MATLAB, you would use the
-<a href="https://uk.mathworks.com/help/matlab/ref/spdiags.html"><code>spdiags</code></a> function, and
-<code>scipy.sparse</code> has its own
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.spdiags.html">equivalent</a>.
-However, all the <code>scipy.sparse</code> formats also have special methods
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.lil_matrix.setdiag.html"><code>setdiag</code></a>
-which provide a more object-orientated method of doing the same thing.</p>
-
-<p>Scipy has a few different direct solvers for sparse matrics, given below:</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve.html#scipy.sparse.linalg.spsolve"><code>spsolve</code></a>:
-This solves $Ax=b$ where $A$ is converted into CSC or CSR form</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve_triangular.html#scipy.sparse.linalg.spsolve_triangular"><code>spsolve_triangular</code></a>:
-Solves $Ax=b$, where $A$ is assumed to be triangular.</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.factorized.html#scipy.sparse.linalg.factorized"><code>factorized</code></a>:
-This computes the $LU$ decomposition of the input matrix $A$, returning a Python
-function that can be called to solve $Ax = b$</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu"><code>splu</code></a>:
-This computes the $LU$ decomposition of the input matrix $A$ using the popular SuperLU
-library. It returns a Python object of class
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU"><code>SuperLU</code></a>,
-that has a <code>solve</code> method you can use to solve $Ax = b$</p>
-
-<p>Note, <code>scipy.sparse.linalg</code> also has many iterative solvers, which we will investigate
-further in the next chapter.</p>
-
-<h3 id="problem-construction-in-scipysparse">Problem: construction in <code>scipy.sparse</code></h3>
-
-<p>Your goal for this problem is to construct the FD matrix $A$ given above, using
-<code>scipy.sparse</code>, and:</p>
-
-<ol>
-<li>Visualise the matrix $A$ using the Matplotlib
-<a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.spy.html"><code>spy</code></a> plot</li>
-<li>Solve the Poisson problem using $f(x) = 2 \cos(x) / e^x$ and $g(x) = \sin(x) / e^x$.
-Check your answer using the analytical solution $u_{a}(x) = \sin(x) / e^x$.</li>
-<li>Vary the number of discretisation points $N$ and calculate $AA$ using both sparse and
-dense matrices. For each $N$ calculate the time to calculate the matix
-multiplicatiion using Python's
-<a href="https://docs.python.org/3/library/time.html#time.perf_counter"><code>time.perf_counter</code></a>,
-and plot time verus $N$ for dense and sparse matrix multiplicatiion. Comment on how
-the time varies with $N$.</li>
-<li>Vary the number of discretisation points $N$ and solve the Poisson problem with
-varying $N$, and with using both the sparse and direct $LU$ solvers. For each $N$
-record the time taken for both the dense and sparse solvers, and record the numerical
-error $||\mathbf{v} - \mathbf{v}_a||_2$. Generate plots of both error and time versus
-$N$, and comment on how they vary with $N$</li>
-</ol>
+significant amount of what is known as <em>fill-in</em> (i.e. non-zero elements where there
+were zeros in the original matrix). This fact motivates a separate class of <em>iterative</em>
+(as opposed to <em>direct</em>) solvers that only rely on the matrix multiplication of $A$ with
+a vector, ignoring the internal sparsity structure of $A$ and only taking advantage of
+the increased speed of the matrix multiplication itself. These iterative solvers will be
+covered in the following chapter, but in this chapter we will focus on the practical
+requirements of constructing and using sparse matrices using the <code>scipy.sparse</code> library.</p>
 
 
 <footer class="footline">
@@ -1679,16 +1463,16 @@ $N$, and comment on how they vary with $N$</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609313854"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609313854"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609313854"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609319950"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609319950"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609319950"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609313854"></script>
-    <script src="/scientific-computing/js/learn.js?1609313854"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609313854"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609319950"></script>
+    <script src="/scientific-computing/js/learn.js?1609319950"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609319950"></script>
     
     
 
