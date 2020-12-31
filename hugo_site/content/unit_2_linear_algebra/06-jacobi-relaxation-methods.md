@@ -100,10 +100,10 @@ def buildA(N):
     e2 = np.copy(e1)
     e2[:N-1:] = 0
     e3 = np.copy(e1)
-    e3[N-1:N-1:] = 0
+    e3[N-2:N-1:] = 0
     A = sp.spdiags(
         (-e1, -e3, 4*e1, -e2, -e1),
-        (-N-1, -1, 0, 1, N-1), nvar, nvar
+        (-(N-1), -1, 0, 1, N-1), nvar, nvar
     )
     A = A / dx**2;
     return A
@@ -157,18 +157,17 @@ def jacobi(A, b, x0=None, tol=1e-5, max_iter=1000):
     x = np.copy(x0)
     b_norm = np.linalg.norm(b)
 
-    # jacobi method: M = D, N = L + U
-    M = A.diagonal()
+    # jacobi method: M = D
+    M = A.diagonal().reshape(-1, 1)
     invM = 1/M
-    N = sp.tril(A, k=-1) + sp.triu(A, k=1)
 
     # main relaxation iteration
     for i in range(max_iter):
-        Nx = N @ x
-        error = np.linalg.norm(M * x + Nx - b) / b_norm
+        r = b - A @ x
+        error = np.linalg.norm(r) / b_norm
         if error < tol:
             break
-        x = invM * (b - Nx)
+        x += invM * r
     return x, i
 
 num = 20
@@ -177,7 +176,6 @@ iterations[:] = np.nan
 Ns = np.logspace(0.5, 1.5, num=num, dtype=int)
 for j, buildf in enumerate((buildf1, buildf2)):
     for i, N in enumerate(Ns):
-        print('N = ',N)
         A = buildA(N)
         f = buildf(N)
         max_iter = 10*N
@@ -205,7 +203,7 @@ plt.show()
 {{% expand "Expand for solution" %}}
 {{% notice solution %}}
 ```python
-def SOR(A, b, omega, x0=None, tol=1e-5, max_iter=1000):
+def SOR(A, b, omega, x0=None, tol=1e-5, max_iter=300):
     if x0 is None:
         x0 = np.zeros_like(b)
     x = np.copy(x0)
@@ -214,30 +212,28 @@ def SOR(A, b, omega, x0=None, tol=1e-5, max_iter=1000):
     # SOR method
     D = sp.spdiags((A.diagonal()), (0), *A.shape)
     L = sp.tril(A, k=-1)
-    U = sp.triu(A, k=1)
-    M = 1 / omega * D + L
-    N = (1 - omega) / omega * D + U
+    M = (1/omega) * D + L
 
     # main relaxation iteration
     for i in range(max_iter):
-        Nx = N @ x
-        error = np.linalg.norm(M * x + Nx - b) / b_norm
+        r = b - A @ x
+        error = np.linalg.norm(r) / b_norm
         if error < tol:
             break
-        x = sp.linalg.spsolve_triangular(M, b - Nx, lower=True)
+        x += sp.linalg.spsolve_triangular(M, r)
     return x, i
+
 
 N = 64
 A = buildA(N)
 f = buildf2(N)
 
 def SOR_iterations(omega):
-    x, i = SOR(A, f, omega)
-    print('omega =', omega, 'iterations =', i)
-    return float(i)
+    x, i = SOR(A, f, omega, max_iter=10, tol=1e-32)
+    return np.linalg.norm(A @ x - f)
 
-res = scipy.optimize.minimize_scalar(SOR_iterations, bracket=[0.2, 0.5, 0.9], tol=1e-2)
-print('ideal omega is', res.x)
+res = scipy.optimize.minimize_scalar(SOR_iterations, bracket=[0.1, 1.0, 1.99], tol=1e-2)
+print('ideal omega is', res.x, 'versus analytic value of', 2 / (1 + np.sin(np.pi/N)))
 ```
 {{% /notice %}}
 {{% /expand %}}
