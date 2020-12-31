@@ -168,7 +168,7 @@ A matrix $A$ is positive definite if $x^T A x &amp;gt; 0$ for any nonzero $x \in
       <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/</guid>
       <description>Jacobi Method The Jacobi method is the simplest of the iterative methods, and relies on the fact that the matrix is diagonally dominant. Starting from the problem definition:
 \[ A\mathbf{x} = \mathbf{b} \]
-we decompose $A$ in to $A = L + D + U$, where $L$ is lower triagular, $D$ is diagonal, $U$ is upper triangular.
+we decompose $A$ in to $A = L + D + U$, where $L$ is lower triangular, $D$ is diagonal, $U$ is upper triangular.
 \[ A\mathbf{x} = L\mathbf{x} + D\mathbf{x} + U\mathbf{x} = \mathbf{b} \]
 We then assume that we have an initial guess at the solution $\mathbf{x}^0$, and try to find a new estimate $\mathbf{x}^1$.</description>
     </item>
