@@ -54,7 +54,7 @@ $$\mathbf{x}_{k+1} = M^{-1}N\mathbf{x}_k + M^{-1}\mathbf{b}$$
 
 For the Jacobi method $M = D$ and $N = -(L + U)$. Other relaxation methods include 
 Gauss-Seidel, where $M = (D + L)$ and $N = -U$, and successive over-relaxation (SOR), 
-where $M = \frac{1}{\omega} D + L$ and $N = -\frac{1 - \omega}{\omega} D - U$, where 
+where $M = \frac{1}{\omega} D + L$ and $N = \frac{1 - \omega}{\omega} D - U$, where 
 $\omega$ is the *relaxation* parameter.
 
 For any relaxation method to converge we need $\rho(M^{-1}N) < 1$, where $\rho()$ is the 

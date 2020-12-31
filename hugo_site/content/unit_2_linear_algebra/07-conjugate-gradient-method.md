@@ -6,7 +6,7 @@ markup: "mmark"
 
 One of the most important classes of iterative methods are the *Krylov subspace 
 methods*, which include:
-- *Congugate Gradient (CG)*: for symmetrix positive definite matrices
+- *Conjugate Gradient (CG)*: for symmetric positive definite matrices
 - *Biconjugate Gradient Stabilized (BiCGSTAB)*: for general square matrices
 - *Generalized Minimal Residual (GMRES)*: for general square matrices
 
@@ -46,7 +46,7 @@ $$
 
 Directly using the above equations in an iterative algorithm results in the standard CG 
 algorithm. A more efficient algorithm can be derived from this by computing the 
-residuals recursivly via $r_k = r\_{k-1} - \alpha_k A p_k$, leading to the final 
+residuals recursively via $r_k = r\_{k-1} - \alpha_k A p_k$, leading to the final 
 algorithm given below (reproduced from 
 [Wikipedia](https://en.wikipedia.org/wiki/Conjugate_gradient_method)):
 
@@ -58,13 +58,13 @@ The CG method works well (i.e. converges quickly) if the *condition number* of t
 matrix $A$ is low. The condition number of a matrix gives a measure of how much the 
 solution $x$ changes in response to a small change in the input $b$, and is a property 
 of the matrix $A$ itself, so can vary from problem to problem. In order to keep the 
-number of iterations small for iterative solvers, it is therefore often neccessary to 
+number of iterations small for iterative solvers, it is therefore often necessary to 
 use a *preconditioner*, which is a method of transforming what might be a difficult 
 problem with a poorly conditioned $A$, into a well conditioned problem that is easy to 
 solve.
 
 Consider the case of precoditioning for the CG methods, we start from the standard 
-problem $A x = b$, and we wish to solve an *equivilent* transformed problem given by
+problem $A x = b$, and we wish to solve an *equivalent* transformed problem given by
 
 $$
 \tilde{A} \tilde{x} = \tilde{b}
