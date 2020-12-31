@@ -14,7 +14,7 @@ $$
 A\mathbf{x} = \mathbf{b}
 $$
 
-we decompose $A$ in to $A = L + D + U$, where $L$ is lower triagular, $D$ is diagonal, 
+we decompose $A$ in to $A = L + D + U$, where $L$ is lower triangular, $D$ is diagonal, 
 $U$ is upper triangular. 
 
 $$
@@ -54,8 +54,8 @@ $$\mathbf{x}_{k+1} = M^{-1}N\mathbf{x}_k + M^{-1}\mathbf{b}$$
 
 For the Jacobi method $M = D$ and $N = -(L + U)$. Other relaxation methods include 
 Gauss-Seidel, where $M = (D + L)$ and $N = -U$, and successive over-relaxation (SOR), 
-where $M = D + \omega L$ and $N = (1 - \omega) D - \omega U$, where $\omega$ is the 
-*relaxation* parameter.
+where $M = \frac{1}{\omega} D + L$ and $N = -\frac{1 - \omega}{\omega} D - U$, where 
+$\omega$ is the *relaxation* parameter.
 
 For any relaxation method to converge we need $\rho(M^{-1}N) < 1$, where $\rho()$ is the 
 *spectral radius* of $M^{-1} N$, which is defined as the largest eigenvalue $\lambda$ of 
@@ -93,22 +93,19 @@ import numpy as np
 import scipy.sparse as sp
 
 def buildA(N):
-  dx = 1 / N
-  nvar = (N - 1)^2;
-  e1 = np.ones((nvar, 1));
-  e2 = e1
-  e2[1:N-1:nvar] = 0
-  e3 = e1
-  e3[N-1:N-1:nvar] = 0
-  A = sp.spdiags(
-        np.vstack((-e1, 4*e1, -e1)),
-        -(N-1):N-1:N-1, nvar, nvar
-      ) +
-      sp.spdiags(
-        np.vstack((-e3, -e2),
-        -1:2:1 , nvar, nvar
-      )
-  A= A / dx^2;
+    dx = 1 / N
+    nvar = (N - 1)**2;
+    e1 = np.ones((nvar), dtype=float);
+    e2 = np.copy(e1)
+    e2[:N-1:] = 0
+    e3 = np.copy(e1)
+    e3[N-1:N-1:] = 0
+    A = sp.spdiags(
+        (-e1, -e3, 4*e1, -e2, -e1),
+        (-N-1, -1, 0, 1, N-1), nvar, nvar
+    )
+    A = A / dx**2;
+    return A
 ```
 
 and let $\mathbf{f}_1$ and $\mathbf{f}_2$ be the vectors defined in
@@ -116,18 +113,18 @@ and let $\mathbf{f}_1$ and $\mathbf{f}_2$ be the vectors defined in
 
 ```python
 def buildf1(N):
-  x = 0:1/N:1
-  y = x
-  f = np.dot(np.sin(pi*x), np.sin(pi*y))
-  return f[2:N,2:N].reshape(-1,1)
+    x = np.arange(0, 1, 1/N).reshape(N, 1)
+    y = x.T
+    f = np.dot(np.sin(np.pi*x), np.sin(np.pi*y))
+    return f[1:,1:].reshape(-1,1)
 ```
 
 ```python
 def buildf2(N):
-  x = 0:1/N:1
-  y = x
-  f = np.dot(np.max(x,1-x), np.max(y,1-y))
-  return f[2:N,2:N].reshape(-1, 1)
+    x = np.arange(0, 1, 1/N).reshape(N, 1)
+    y = x.T
+    f = np.dot(np.maximum(x,1-x), np.maximum(y,1-y))
+    return f[1:,1:].reshape(-1, 1)
 ```
 
 We will consider manipulation of the matrix $A$ and solution of the linear
