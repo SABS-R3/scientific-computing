@@ -77,7 +77,7 @@ We then assume that we have an initial guess at the solution $\mathbf{x}^0$, and
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/</guid>
       <description>One of the most important classes of iterative methods are the Krylov subspace methods, which include:
- Congugate Gradient (CG): for symmetrix positive definite matrices Biconjugate Gradient Stabilized (BiCGSTAB): for general square matrices Generalized Minimal Residual (GMRES): for general square matrices  Below we will give a brief summary of the CG method, for more details you can consult the text by Golub and Van Loan (Chapter 10).
+ Conjugate Gradient (CG): for symmetric positive definite matrices Biconjugate Gradient Stabilized (BiCGSTAB): for general square matrices Generalized Minimal Residual (GMRES): for general square matrices  Below we will give a brief summary of the CG method, for more details you can consult the text by Golub and Van Loan (Chapter 10).
 The CG method is based on minimising the function</description>
     </item>
     
