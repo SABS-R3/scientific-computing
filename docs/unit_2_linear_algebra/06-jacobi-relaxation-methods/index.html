@@ -12,21 +12,21 @@
     <title>Jacobi and Relaxation Methods   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609437715" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609437715" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609437967" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609437967" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609437715" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609437967" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609437715"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609437967"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609437715"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609437715"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609437967"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609437967"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609437715"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609437967"></script>
 
     
   </div>
@@ -924,10 +924,15 @@ M - N$</p>
 <p><span  class="math">\(M\mathbf{x}_{k+1} = N\mathbf{x}_k + \mathbf{b}\)</span>
 <span  class="math">\(\mathbf{x}_{k+1} = M^{-1}N\mathbf{x}_k + M^{-1}\mathbf{b}\)</span></p>
 
+<p>This can be rearranged in terms of the <em>residual</em> $\mathbf{r}_k = \mathbf{b} - A
+\mathbf{x}_k$ to the update equation</p>
+
+<p><span  class="math">\[\mathbf{x}_{k+1} = \mathbf{x}_{k} + M^{-1}N\mathbf{r}_k\]</span></p>
+
 <p>For the Jacobi method $M = D$ and $N = -(L + U)$. Other relaxation methods include
 Gauss-Seidel, where $M = (D + L)$ and $N = -U$, and successive over-relaxation (SOR),
-where $M = \frac{1}{\omega} D + L$ and $N = \frac{1 - \omega}{\omega} D - U$, where
-$\omega$ is the <em>relaxation</em> parameter.</p>
+where $M = \frac{1}{\omega} D + L$ and $N = \frac{\omega - 1}{\omega} D + U$, where
+$\omega$ is the <em>relaxation</em> parameter that is within the range $0 \le \omega \le 2$.</p>
 
 <p>For any relaxation method to converge we need $\rho(M^{-1}N) &lt; 1$, where $\rho()$ is the
 <em>spectral radius</em> of $M^{-1} N$, which is defined as the largest eigenvalue $\lambda$ of
@@ -1661,16 +1666,16 @@ res <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</spa
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609437715"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609437715"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609437715"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609437715"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609437715"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609437715"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609437967"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609437967"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609437967"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609437967"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609437967"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609437967"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609437715"></script>
-    <script src="/scientific-computing/js/learn.js?1609437715"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609437715"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609437967"></script>
+    <script src="/scientific-computing/js/learn.js?1609437967"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609437967"></script>
     
     
 
