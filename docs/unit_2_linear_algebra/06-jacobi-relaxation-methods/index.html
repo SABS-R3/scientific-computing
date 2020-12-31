@@ -12,21 +12,21 @@
     <title>Jacobi and Relaxation Methods   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609408148" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609408148" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609408600" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609408600" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609408148" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609408600" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609408148"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609408600"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609408148"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609408148"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609408600"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609408600"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609408148"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609408600"></script>
 
     
   </div>
@@ -956,7 +956,10 @@ for iterative methods. Society for Industrial and Applied Mathematics.</li>
 
 <h3 id="problems">Problems</h3>
 
-<p>This exercise involves the manipulation and solution of the linear system resulting from
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>This exercise involves the manipulation and solution of the linear system resulting from
 the finite difference solution to Poisson's equation in <em>two</em> dimensions. Let $A$ be a
 sparse symmetric positive definite matrix of dimension $(N-1)^2 \times (N-1)^2$ created
 using <code>scipy.sparse</code> (for a given $N$) by the function
@@ -1002,11 +1005,121 @@ analysis.</p>
 <li>Write a function to solve a linear system using the Jacobi method. In
 terms of $N$, how many iterations does it take to converge? (Try
 $N=4,8,16,32,64$.)</li>
+</ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> scipy.sparse <span style="color:#f92672">as</span> sp
+<span style="color:#f92672">import</span> scipy.sparse.linalg
+<span style="color:#f92672">import</span> scipy.optimize
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">jacobi</span>(A, b, x0<span style="color:#f92672">=</span>None, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+    <span style="color:#66d9ef">if</span> x0 <span style="color:#f92672">is</span> None:
+        x0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(b)
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(x0)
+    b_norm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(b)
+
+    <span style="color:#75715e"># jacobi method: M = D, N = L + U</span>
+    M <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>diagonal()
+    invM <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>M
+    N <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>tril(A, k<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> sp<span style="color:#f92672">.</span>triu(A, k<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+    <span style="color:#75715e"># main relaxation iteration</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(max_iter):
+        Nx <span style="color:#f92672">=</span> N <span style="color:#960050;background-color:#1e0010">@</span> x
+        error <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(M <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> Nx <span style="color:#f92672">-</span> b) <span style="color:#f92672">/</span> b_norm
+        <span style="color:#66d9ef">if</span> error <span style="color:#f92672">&lt;</span> tol:
+            <span style="color:#66d9ef">break</span>
+        x <span style="color:#f92672">=</span> invM <span style="color:#f92672">*</span> (b <span style="color:#f92672">-</span> Nx)
+    <span style="color:#66d9ef">return</span> x, i
+
+num <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+iterations <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty((num, <span style="color:#ae81ff">2</span>), dtype<span style="color:#f92672">=</span>int)
+iterations[:] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+Ns <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>logspace(<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">1.5</span>, num<span style="color:#f92672">=</span>num, dtype<span style="color:#f92672">=</span>int)
+<span style="color:#66d9ef">for</span> j, buildf <span style="color:#f92672">in</span> enumerate((buildf1, buildf2)):
+    <span style="color:#66d9ef">for</span> i, N <span style="color:#f92672">in</span> enumerate(Ns):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;N = &#39;</span>,N)
+        A <span style="color:#f92672">=</span> buildA(N)
+        f <span style="color:#f92672">=</span> buildf(N)
+        max_iter <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>N
+        x, iters <span style="color:#f92672">=</span> jacobi(A, f, max_iter<span style="color:#f92672">=</span>max_iter)
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> max_iter:
+            iterations[i, j] <span style="color:#f92672">=</span> iters
+
+plt<span style="color:#f92672">.</span>plot(Ns, iterations)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;N&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;iterations&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol start="2">
 <li>Write a function to solve a linear system using the SOR method. For
 $N=64$ and right-hand-side $\mathbf{f}_2$ determine numerically the best
-choice of the relaxation parameter to 2 decimal places and compare this
-with theory.</li>
+choice of the relaxation parameter to 2 decimal places  and compare this
+with theory. Hint, use
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar"><code>scipy.optimize.minimize_scalar</code></a>.</li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">SOR</span>(A, b, omega, x0<span style="color:#f92672">=</span>None, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+    <span style="color:#66d9ef">if</span> x0 <span style="color:#f92672">is</span> None:
+        x0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(b)
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(x0)
+    b_norm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(b)
+
+    <span style="color:#75715e"># SOR method</span>
+    D <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>spdiags((A<span style="color:#f92672">.</span>diagonal()), (<span style="color:#ae81ff">0</span>), <span style="color:#f92672">*</span>A<span style="color:#f92672">.</span>shape)
+    L <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>tril(A, k<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+    U <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>triu(A, k<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    M <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> omega <span style="color:#f92672">*</span> D <span style="color:#f92672">+</span> L
+    N <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> omega) <span style="color:#f92672">/</span> omega <span style="color:#f92672">*</span> D <span style="color:#f92672">+</span> U
+
+    <span style="color:#75715e"># main relaxation iteration</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(max_iter):
+        Nx <span style="color:#f92672">=</span> N <span style="color:#960050;background-color:#1e0010">@</span> x
+        error <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(M <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> Nx <span style="color:#f92672">-</span> b) <span style="color:#f92672">/</span> b_norm
+        <span style="color:#66d9ef">if</span> error <span style="color:#f92672">&lt;</span> tol:
+            <span style="color:#66d9ef">break</span>
+        x <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>spsolve_triangular(M, b <span style="color:#f92672">-</span> Nx, lower<span style="color:#f92672">=</span>True)
+    <span style="color:#66d9ef">return</span> x, i
+
+N <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>
+A <span style="color:#f92672">=</span> buildA(N)
+f <span style="color:#f92672">=</span> buildf2(N)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">SOR_iterations</span>(omega):
+    x, i <span style="color:#f92672">=</span> SOR(A, f, omega)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;omega =&#39;</span>, omega, <span style="color:#e6db74">&#39;iterations =&#39;</span>, i)
+    <span style="color:#66d9ef">return</span> float(i)
+
+res <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>optimize<span style="color:#f92672">.</span>minimize_scalar(SOR_iterations, bracket<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.9</span>], tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-2</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;ideal omega is&#39;</span>, res<span style="color:#f92672">.</span>x)</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1552,16 +1665,16 @@ with theory.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609408148"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609408148"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609408148"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609408148"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609408148"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609408148"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609408600"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609408600"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609408600"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609408600"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609408600"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609408600"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609408148"></script>
-    <script src="/scientific-computing/js/learn.js?1609408148"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609408148"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609408600"></script>
+    <script src="/scientific-computing/js/learn.js?1609408600"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609408600"></script>
     
     
 
