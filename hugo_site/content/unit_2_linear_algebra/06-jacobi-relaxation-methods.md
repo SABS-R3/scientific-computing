@@ -50,12 +50,13 @@ into a dominant part $M$ (which is easy to solve), and the remainder $N$. That i
 M - N$
 
 $$M\mathbf{x}_{k+1} = N\mathbf{x}_k + \mathbf{b}$$
+
 $$\mathbf{x}_{k+1} = M^{-1}N\mathbf{x}_k + M^{-1}\mathbf{b}$$
 
 This can be rearranged in terms of the *residual* $\mathbf{r}_k = \mathbf{b} - A 
 \mathbf{x}_k$ to the update equation
 
-$$\mathbf{x}_{k+1} = \mathbf{x}_{k} + M^{-1}N\mathbf{r}_k$$
+$$\mathbf{x}_{k+1} = \mathbf{x}_{k} + M^{-1}\mathbf{r}_k$$
 
 For the Jacobi method $M = D$ and $N = -(L + U)$. Other relaxation methods include 
 Gauss-Seidel, where $M = (D + L)$ and $N = -U$, and successive over-relaxation (SOR), 
