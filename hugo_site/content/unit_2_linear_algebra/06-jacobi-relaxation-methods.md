@@ -83,6 +83,7 @@ optimal $\omega$.
 ### Problems
 
 
+{{% notice question %}}
 This exercise involves the manipulation and solution of the linear system resulting from 
 the finite difference solution to Poisson's equation in *two* dimensions. Let $A$ be a 
 sparse symmetric positive definite matrix of dimension $(N-1)^2 \times (N-1)^2$ created 
@@ -139,7 +140,104 @@ analysis.
 1. Write a function to solve a linear system using the Jacobi method. In
   terms of $N$, how many iterations does it take to converge? (Try
   $N=4,8,16,32,64$.)
+{{% /notice %}}
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+```python
+import numpy as np
+import scipy.sparse as sp
+import scipy.sparse.linalg
+import scipy.optimize
+import matplotlib.pylab as plt
+
+def jacobi(A, b, x0=None, tol=1e-5, max_iter=1000):
+    if x0 is None:
+        x0 = np.zeros_like(b)
+    x = np.copy(x0)
+    b_norm = np.linalg.norm(b)
+
+    # jacobi method: M = D, N = L + U
+    M = A.diagonal()
+    invM = 1/M
+    N = sp.tril(A, k=-1) + sp.triu(A, k=1)
+
+    # main relaxation iteration
+    for i in range(max_iter):
+        Nx = N @ x
+        error = np.linalg.norm(M * x + Nx - b) / b_norm
+        if error < tol:
+            break
+        x = invM * (b - Nx)
+    return x, i
+
+num = 20
+iterations = np.empty((num, 2), dtype=int)
+iterations[:] = np.nan
+Ns = np.logspace(0.5, 1.5, num=num, dtype=int)
+for j, buildf in enumerate((buildf1, buildf2)):
+    for i, N in enumerate(Ns):
+        print('N = ',N)
+        A = buildA(N)
+        f = buildf(N)
+        max_iter = 10*N
+        x, iters = jacobi(A, f, max_iter=max_iter)
+        if i < max_iter:
+            iterations[i, j] = iters
+
+plt.plot(Ns, iterations)
+plt.xlabel('N')
+plt.ylabel('iterations')
+plt.show()
+```
+{{% /notice %}}
+{{% /expand %}}
+
+{{% notice question %}}
 2. Write a function to solve a linear system using the SOR method. For
   $N=64$ and right-hand-side $\mathbf{f}_2$ determine numerically the best
-  choice of the relaxation parameter to 2 decimal places and compare this
-  with theory.
+  choice of the relaxation parameter to 2 decimal places  and compare this
+  with theory. Hint, use 
+  [`scipy.optimize.minimize_scalar`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar).
+
+{{% /notice %}}
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+```python
+def SOR(A, b, omega, x0=None, tol=1e-5, max_iter=1000):
+    if x0 is None:
+        x0 = np.zeros_like(b)
+    x = np.copy(x0)
+    b_norm = np.linalg.norm(b)
+
+    # SOR method
+    D = sp.spdiags((A.diagonal()), (0), *A.shape)
+    L = sp.tril(A, k=-1)
+    U = sp.triu(A, k=1)
+    M = 1 / omega * D + L
+    N = (1 - omega) / omega * D + U
+
+    # main relaxation iteration
+    for i in range(max_iter):
+        Nx = N @ x
+        error = np.linalg.norm(M * x + Nx - b) / b_norm
+        if error < tol:
+            break
+        x = sp.linalg.spsolve_triangular(M, b - Nx, lower=True)
+    return x, i
+
+N = 64
+A = buildA(N)
+f = buildf2(N)
+
+def SOR_iterations(omega):
+    x, i = SOR(A, f, omega)
+    print('omega =', omega, 'iterations =', i)
+    return float(i)
+
+res = scipy.optimize.minimize_scalar(SOR_iterations, bracket=[0.2, 0.5, 0.9], tol=1e-2)
+print('ideal omega is', res.x)
+```
+{{% /notice %}}
+{{% /expand %}}
