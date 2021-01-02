@@ -88,8 +88,7 @@ The CG method is based on minimising the function</description>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/</guid>
       <description>Once again the best resource for Python is the scipi.sparse.linalg documentation. The available iterative solvers in Scipy are:
- BIConjugate Gradient iteration (BiCG) BIConjugate Gradient STABilized iteration (BiCGSTAB) Conjugate Gradient iteration (CG) Conjugate Gradient Squared iteration (CGS) Generalized Minimal RESidual iteration (GMRES)  LGMRES MINimum RESidual iteration (MINRES) Quasi-Minimal Residual iteration (QMR)  GCROT(m,k)  scipy.sparse.linalg also contains two iterative solvers for least-squares problems, lsqr and lsmr
-Problems Note: based on the Finite Difference matrix $A$ in a previous exercise:</description>
+ BIConjugate Gradient iteration (BiCG)  Applicable to non-symmetric problems. Requires the matrix-vector product of $A$ and its transpose $A^T$.  Quasi-Minimal Residual iteration (QMR)  Applicable to non-symmetric $A$ Designed as an improvement of BiCG, avoids one of the two failure situations of BiCG Computational costs slightly higher than BiCG, still requires the transpose $A^T$.</description>
     </item>
     
   </channel>

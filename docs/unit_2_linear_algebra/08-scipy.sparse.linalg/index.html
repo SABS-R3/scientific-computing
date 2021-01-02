@@ -12,21 +12,21 @@
     <title>Iterative solvers in Scipy   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609438114" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609438114" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1609577890" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1609577890" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609438114" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1609577890" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609438114"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609577890"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609438114"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609438114"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609577890"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609577890"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609438114"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1609577890"></script>
 
     
   </div>
@@ -883,23 +883,80 @@ available iterative solvers in Scipy are:</p>
 
 <ul>
 <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicg.html#scipy.sparse.linalg.bicg">BIConjugate Gradient iteration
-(BiCG)</a></li>
-<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicgstab.html#scipy.sparse.linalg.bicgstab">BIConjugate Gradient STABilized iteration
-(BiCGSTAB)</a></li>
-<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg">Conjugate Gradient iteration
-(CG)</a></li>
-<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cgs.html#scipy.sparse.linalg.cgs">Conjugate Gradient Squared iteration
-(CGS)</a></li>
-<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gmres.html#scipy.sparse.linalg.gmres">Generalized Minimal RESidual iteration
-(GMRES)</a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lgmres.html#scipy.sparse.linalg.lgmres">LGMRES</a></li>
-<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.minres.html#scipy.sparse.linalg.minres">MINimum RESidual iteration
-(MINRES)</a></li>
+(BiCG)</a>
+
+<ul>
+<li>Applicable to non-symmetric problems. Requires the matrix-vector product of $A$
+and its transpose $A^T$.</li>
+</ul></li>
 <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.qmr.html#scipy.sparse.linalg.qmr">Quasi-Minimal Residual iteration
-(QMR)</a></li>
-<li>
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gcrotmk.html#scipy.sparse.linalg.gcrotmk">GCROT(m,k)</a></li>
+(QMR)</a>
+
+<ul>
+<li>Applicable to non-symmetric $A$</li>
+<li>Designed as an improvement of BiCG, avoids one of the two failure situations of
+BiCG</li>
+<li>Computational costs slightly higher than BiCG, still requires the transpose
+$A^T$.</li>
+</ul></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cgs.html#scipy.sparse.linalg.cgs">Conjugate Gradient Squared iteration
+(CGS)</a>
+
+<ul>
+<li>Applicable to non-symmetric $A$</li>
+<li>Often converges twice as fast as BiCG, but is often irregular and can diverge if
+starting guess is close to solution.</li>
+<li>Unlike BiCG, the two matrix-vector products cannot be parallelized.</li>
+</ul></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicgstab.html#scipy.sparse.linalg.bicgstab">BIConjugate Gradient STABilized iteration
+(BiCGSTAB)</a>
+
+<ul>
+<li>Applicable to non-symmetric $A$</li>
+<li>Computational cost similar to BiCG, but does not require the transpose of $A$.</li>
+<li>Simliar convergence speed as CGS, but avoids the irregular convergence properties
+of this method</li>
+</ul></li>
+
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg">Conjugate Gradient iteration
+(CG)</a></p>
+
+<ul>
+<li>Applicable only to symmetric positive definite $A$.</li>
+<li>Speed of convergences depends on condition number</li>
+</ul></li>
+
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gmres.html#scipy.sparse.linalg.gmres">Generalized Minimal RESidual iteration
+(GMRES)</a></p>
+
+<ul>
+<li>Applicable non-symmetric $A$</li>
+<li>Best convergence properties, but each additional iteration becomes increasingly
+expensive, with large storage costs.</li>
+<li>To limit the increasing cost with additional iterations, it is necessary to
+periodically <em>restart</em> the method. When to do this is highly dependence on the
+properties of $A$</li>
+<li>Requires only matrix-vector products with $A$</li>
+</ul></li>
+
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lgmres.html#scipy.sparse.linalg.lgmres">LGMRES</a></p>
+
+<ul>
+<li>Modification to GMRES that uses alternating residual vectors to improve
+convergence.</li>
+<li>It is possible to supply the algorithm with &quot;guess&quot; vectors used to augment the
+Krylov subspace, which is useful if you are solving several very similar
+matrices one after another.</li>
+</ul></li>
+
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.minres.html#scipy.sparse.linalg.minres">MINimum RESidual iteration
+(MINRES)</a></p>
+
+<ul>
+<li>Applicable to symmetric $A$</li>
+</ul></li>
+
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gcrotmk.html#scipy.sparse.linalg.gcrotmk">GCROT(m,k)</a></p></li>
 </ul>
 
 <p><code>scipy.sparse.linalg</code> also contains two iterative solvers for least-squares problems,
@@ -909,7 +966,15 @@ and
 
 <h3 id="problems">Problems</h3>
 
-<p>Note: based on the Finite Difference matrix $A$ in a previous exercise:</p>
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>For this problem we are going to compare many of the different types of solvers, both
+direct and iterative, that we've looked at thus far.</p>
+
+<p>Note: We will be using the Finite Difference matrix $A$ based on the two-dimensional
+finite difference approximation of the Poisson problem that we developed in the previous
+exercise.</p>
 
 <p>For $N=4,8,16,32,64,128$ try the following:</p>
 
@@ -927,6 +992,9 @@ For the right-hand-side $\mathbf{f}_2$ what is the relationship between the numb
 iterations and $N$. How long do the computations take?</li>
 <li>Repeat using the <code>scipy.sparse.linalg</code> BICGSTAB and GMRES solvers.</li>
 </ol>
+
+</div>
+
 
 
 <footer class="footline">
@@ -1472,16 +1540,16 @@ iterations and $N$. How long do the computations take?</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609438114"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609438114"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609438114"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609438114"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609438114"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609438114"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1609577890"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609577890"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609577890"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1609577890"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1609577890"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1609577890"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609438114"></script>
-    <script src="/scientific-computing/js/learn.js?1609438114"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609438114"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609577890"></script>
+    <script src="/scientific-computing/js/learn.js?1609577890"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1609577890"></script>
     
     
 
