@@ -1,17 +1,59 @@
 ---
-title: "Conjugate Gradient Method"
+title: "Krylov subspace methods and CG"
 weight: 7 
 markup: "mmark"
 ---
 
-One of the most important classes of iterative methods are the *Krylov subspace 
-methods*, which include:
-- *Conjugate Gradient (CG)*: for symmetric positive definite matrices
-- *Biconjugate Gradient Stabilized (BiCGSTAB)*: for general square matrices
-- *Generalized Minimal Residual (GMRES)*: for general square matrices
+## The Krylov subspace
 
-Below we will give a brief summary of the CG method, for more details you can consult 
-the text by Golub and Van Loan (Chapter 10).
+The set of basis vectors for the Krylov subspace $\mathcal{K}_k(A, b)$ are formed by 
+repeated application of a matrix $A$ on a vector $b$
+
+$$
+\mathcal{K}_k(A, b) = \text{span}\{ b, Ab, A^2b, ..., A^{k-1}b \}
+$$
+
+## Krylov subspace methods
+
+Krylov subspace methods are an important family of iterative algorithms for solving 
+$Ax=b$. Lets suppose that $A$ is an $n \times n$ invertible matrix, and our only 
+knowledge of $A$ is its matrix-vector product with an arbitrary vector $\mathbf{x}$. 
+Repeated application of $A$ $n+1$ times on an initial vector $b$ gives us a sequence of 
+vectors $\mathbf{b}, A \mathbf{b}, A^2 \mathbf{b}, ..., A^{k}$. Since we are in 
+$n$-dimensional space, we are guaranteed that these $n+1$ vectors are linearly 
+dependent, and therefore
+
+$$
+a_0 \mathbf{b} + a_1 A \mathbf{b} + ... + a_n A^n \mathbf{b} = 0
+$$
+
+for some set of coefficients $a_i$. Let now pick the smallest index $k$ such that $a_k 
+\ne 0$, and multiply the above equation by $\frac{1}{a_k} A^{-k-1}$, giving
+
+$$
+A^{-1} b = \frac{1}{a_k} ( a_{k+1} b + ... + a_n A^{n-k-1} b )
+$$
+
+This implies that $A^{-1} b$ can be found only via repeated application of $A$, and also 
+motivates the search for solutions from the Krylov subspace.
+
+For each iteration $k$ of a Krylov subspace method, we choose the "best" linear 
+combination of the Krylov basis vectors $\mathbf{b}, A\mathbf{b}, ... , A^{k−1} 
+\mathbf{b}$ to form an improved solution $\mathbf{x}_k$. Different methods give various 
+definitions of "best", for example:
+
+1. The residual $\mathbf{r}_k = \mathbf{b} − A\mathbf{x}_k$
+is orthogonal to $\mathcal{K}_k$ (Conjugate Gradients).
+2. The residual $\mathbf{r}_k$ has minimum norm for $\mathbf{x}_k$
+in $\mathcal{K}_k$ (GMRES and MINRES).
+3. $\mathbf{r}_k$ is orthogonal to a different space $\mathcal{K}_k(A^T)$ (BiConjugate 
+   Gradients).
+
+## Conjugate Gradient Method
+
+
+Here we will give a brief summary of the CG method, for more details you can consult the 
+text by Golub and Van Loan (Chapter 10).
 
 The CG method is based on minimising the function
 
@@ -29,10 +71,10 @@ $\alpha$ such that $\phi(x_k + \alpha p_k) < \phi(x_k)$, where $p_k$ is the *sea
 direction* at each $k$. For the classical stepest descent optimisation algorithm the 
 search direction would be the residual $p_k = r_k$, however, steapest descent can suffer 
 from convergence problems, so instead we aim to find a set of search directions $p_k$ so 
-that $p_k^T r\_{k-1} \ne 0$ (i.e. at each step we are guarenteed to reduce $\phi$), and 
-that the search directions are linearly independent. The latter guarentees that the 
-method will converge in at most $n$ steps, where $n$ is the size of the square matrix 
-$A$.
+that $p_k^T r\_{k-1} \ne 0$ (i.e. at each step we are guaranteed to reduce $\phi$), and 
+that the search directions are linearly independent. The latter condition guarantees 
+that the method will converge in at most $n$ steps, where $n$ is the size of the square 
+matrix $A$.
 
 It can be shown that the best set of search directions can be achieved by setting
 
@@ -43,6 +85,12 @@ p_k &= r_{k-1} + \beta_k p_{k-1} \\
 \alpha_k &= \frac{p^T_k r_{k-1}}{p^T_k A p_k}
 \end{aligned}
 $$
+
+This ensures that the search direction $\mathbf{p}_k$ is the closest vector to 
+$\mathbf{r}_{k-1}$ that is also *A-conjugate* to $\mathbf{p}_1, ..., \mathbf{p}_{k-1}$, 
+i.e. $p^T_i A p_j$ for all $i \ne j$, which gives this algorithm its name. It can also 
+be shown that after $k$ iterations the sequence of residuals $\mathbf{r}_i$ for $i=1..k$ 
+form a set of mutually orthogonal vectors that span the Krylov subspace $\mathcal{K}_k$.
 
 Directly using the above equations in an iterative algorithm results in the standard CG 
 algorithm. A more efficient algorithm can be derived from this by computing the 

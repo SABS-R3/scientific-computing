@@ -104,9 +104,9 @@ def buildA(N):
     nvar = (N - 1)**2;
     e1 = np.ones((nvar), dtype=float);
     e2 = np.copy(e1)
-    e2[:N-1:] = 0
+    e2[::N-1] = 0
     e3 = np.copy(e1)
-    e3[N-2:N-1:] = 0
+    e3[N-2::N-1] = 0
     A = sp.spdiags(
         (-e1, -e3, 4*e1, -e2, -e1),
         (-(N-1), -1, 0, 1, N-1), nvar, nvar
