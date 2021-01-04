@@ -71,14 +71,14 @@ We then assume that we have an initial guess at the solution $\mathbf{x}^0$, and
     </item>
     
     <item>
-      <title>Conjugate Gradient Method</title>
+      <title>Krylov subspace methods and CG</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/</guid>
-      <description>One of the most important classes of iterative methods are the Krylov subspace methods, which include:
- Conjugate Gradient (CG): for symmetric positive definite matrices Biconjugate Gradient Stabilized (BiCGSTAB): for general square matrices Generalized Minimal Residual (GMRES): for general square matrices  Below we will give a brief summary of the CG method, for more details you can consult the text by Golub and Van Loan (Chapter 10).
-The CG method is based on minimising the function</description>
+      <description>The Krylov subspace The set of basis vectors for the Krylov subspace $\mathcal{K}_k(A, b)$ are formed by repeated application of a matrix $A$ on a vector $b$
+\[ \mathcal{K}_k(A, b) = \text{span}\{ b, Ab, A^2b, ..., A^{k-1}b \} \]
+Krylov subspace methods Krylov subspace methods are an important family of iterative algorithms for solving $Ax=b$. Lets suppose that $A$ is an $n \times n$ invertible matrix, and our only knowledge of $A$ is its matrix-vector product with an arbitrary vector $\mathbf{x}$.</description>
     </item>
     
     <item>
