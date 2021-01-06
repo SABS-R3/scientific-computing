@@ -26,7 +26,7 @@ We might also have a set of constraints, for example a parameter might be requir
       <guid>https://sabs-r3.github.io/scientific-computing/unit_4_optimisation/02-line-search-methods/</guid>
       <description>Gradient descent One of the simplest local optimisation algoriths is gradient descent. It is initialised at some point in parameter space $a_0$, and at each iteration the function $f(x)$ is reduced by following the direction of steepest descent $-\nabla f(a)$
 \[ a_{n+1} = a_n - \gamma \nabla f(a_n) \]
-This is an example of an imporant class of algorithms called the line search methods. These algorithms choose a search direction $p_k$ at each iteration $k$, and search along the 1D line from the initial point $a_k$ to a new point</description>
+This is an example of an important class of algorithms called the line search methods. These algorithms choose a search direction $p_k$ at each iteration $k$, and search along the 1D line from the initial point $a_k$ to a new point</description>
     </item>
     
     <item>
