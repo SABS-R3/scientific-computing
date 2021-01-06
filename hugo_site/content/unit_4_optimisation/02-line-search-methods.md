@@ -14,7 +14,7 @@ $$
 a_{n+1} = a_n - \gamma \nabla f(a_n)
 $$
 
-This is an example of an imporant class of algorithms called the *line search* methods. 
+This is an example of an important class of algorithms called the *line search* methods. 
 These algorithms choose a *search direction*  $p_k$ at each iteration $k$, and search 
 along the 1D line from the initial point $a_k$ to a new point 
 
@@ -30,10 +30,10 @@ optimal $\alpha$.
 {{< figure src="/scientific-computing/images/unit_04/Gradient_descent.gif" 
 title="Illustration of Gradient Descent on a 2D test function. Taken from Wikimedia Commons">}}
 
-### Plataus with low gradient 
+### Plateaus with low gradient 
 
 An obvious downside to simple gradient descent can be seen for functions which have 
-regions of zero or small gradients, or plataus. Here a gradient descent algorithm with a 
+regions of zero or small gradients, or plateaus. Here a gradient descent algorithm with a 
 constant $\gamma$ will proceed very slowly, if at all. This motivates another important 
 line search algorithm, *Newtons method*.
 
@@ -54,7 +54,7 @@ $$
 
 Unlike the steepest descent, Newtons method has a natural step length $\alpha \approx 
 1$, which is suitable for a wide variety of problems and can quickly cross areas of low 
-gradient. Natually, since the algorithm is based on a *second-order* approximation of 
+gradient. Naturally, since the algorithm is based on a *second-order* approximation of 
 the function $f$, it works better if this approximation is reasonably accurate.
 
 Newtons method can be used as long as the inverse of the second derivative of the 
@@ -77,11 +77,10 @@ $$
 p_k = -B_k^{-1} \nabla f(a_k)
 $$
 
-For more details of other line search methods, and other concepts such as the *Wolfe 
-conditions* for calculating the step length $\alpha$, please see Chapter 3 of the 
-Nocedal and Wright textbook, or in the other textbooks listed at the end of this 
-lession. Finally, it should be noted that the *conjugate gradient* method can also be 
-used for non-linear optimisation, where the search direction is given by
+For more details of other line search methods, please see Chapter 3 of the Nocedal and 
+Wright textbook, or in the other textbooks listed at the end of this lesson. Finally, it 
+should be noted that the *conjugate gradient* method can also be used for non-linear 
+optimisation, where the search direction is given by
 
 $$
 p_k = -\nabla f(a_k) + \beta_k p_{k-1}
@@ -97,8 +96,8 @@ $$
 \phi(\alpha_k) = f(a_k + \alpha_k p_k),\text{ }\alpha_k > 0.
 $$
 
-In general this is too expensive to do this minimisation exactly, so approximate methods 
-are used so that multiple trial $\alpha_k$ values are trialed, stopping when a candidate 
+In general it is too expensive to do this minimisation exactly, so approximate methods 
+are used so that multiple trial $\alpha_k$ values are trialled, stopping when a candidate 
 is found that satisfies a set of *conditions*. There are two main conditions used, the 
 *Wolfe conditions* and the *Goldstein* conditions.
 
@@ -130,7 +129,7 @@ $$
 |\nabla f(a_k + \alpha_k p_k)^T p_k| \ge c_2 |\nabla f(a_k)^T p_k|,
 $$
 
-The Goldstein conditions are similar in spirit to the Wolfe condtitions, and are formed 
+The Goldstein conditions are similar in spirit to the Wolfe conditions, and are formed 
 from the two inequalities
 
 $$
@@ -162,7 +161,19 @@ $\alpha_k := \bar{\alpha}$ \\
 ### Software
 
 - Scipy has a wide variety of (mostly) line search and trust region algorithms in 
-  [`scipy.optimize`](https://docs.scipy.org/doc/scipy/reference/optimize.html)
+  [`scipy.optimize`](https://docs.scipy.org/doc/scipy/reference/optimize.html). There 
+  are 14 local minimisers, so we won't list them all here!
+- It is worth noting that Scipy includes the 
+  [`line_search`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.line_search.html#scipy.optimize.line_search) 
+  function, which allows you to use their line search satisfying the strong Wolfe 
+  conditions with your own custom search direction.
+- Scipy also includes a 
+  [`HessianUpdateStrategy`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.HessianUpdateStrategy.html#scipy.optimize.HessianUpdateStrategy), 
+  which provides an interface for specifying an approximate Hessian for use in 
+  quasi-Newton methods, along with two implementations 
+  [`BFGS`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.BFGS.html#scipy.optimize.BFGS) 
+  and 
+  [`SR1`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.SR1.html#scipy.optimize.SR1).
 
 
 ### Problems 

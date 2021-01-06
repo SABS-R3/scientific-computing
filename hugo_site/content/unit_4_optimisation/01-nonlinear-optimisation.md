@@ -37,7 +37,7 @@ $$
 interest $\theta$, and the constraints. The algorithms for performing the minimisation 
 fall under the field of optimisation. Sub-fields of this are concerned with the 
 minimisation of discrete function, often called *integer programming*. Confusingly, it 
-is common to see the terms "optimisation" and "programming" used interchangably, as thie 
+is common to see the terms "optimisation" and "programming" used interchangeably, as the 
 latter term was coined before the 1940s, and does not refer to computer software 
 programming at all.
 
@@ -50,7 +50,7 @@ then algorithms that deal with these fall under the topic of *constrained* optim
 An important distinction when looking at optimisation problems is the notion of *global* 
 versus *local* optimisation. The latter finds a point in parameter space $\theta_m$ that 
 has a function value $f(\theta_m)$ greater than the surrounding points, but might not 
-neccessarily by the global minimum. These algorithms are often initialised to a point 
+necessarily be the global minimum. These algorithms are often initialised to a point 
 that is near to the minima of interest. The more general problem of global optimisation 
 is significantly more difficult as it requires that the optimisation be robust to 
 finding and rejecting such local minima. For a function that is *convex*, then local and 
