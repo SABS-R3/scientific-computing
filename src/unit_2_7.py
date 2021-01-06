@@ -33,24 +33,8 @@ def buildf2(N):
     f = np.dot(np.maximum(x,1-x), np.maximum(y,1-y))
     return f[1:,1:].reshape(-1, 1)
 
-def cg(A, b, x0=None, tol=1e-5, max_iter=1000):
-    if x0 is None:
-        x0 = np.zeros_like(b)
-    x = np.copy(x0)
-    b_norm = np.linalg.norm(b)
 
-    # jacobi method: M = D
-    M = A.diagonal().reshape(-1, 1)
-    invM = 1/M
 
-    # main relaxation iteration
-    for i in range(max_iter):
-        r = b - A @ x
-        error = np.linalg.norm(r) / b_norm
-        if error < tol:
-            break
-        x += invM * r
-    return x, i
 
 num = 20
 times = np.empty((num, 2, 6), dtype=float)
@@ -128,10 +112,19 @@ plt.ylabel('time')
 plt.legend(['lu', 'cholesky', 'inv', 'cg', 'bicgstab', 'gmres'])
 plt.show()
 
-plt.loglog(Ns, iterations[:,0,:], ls='-')
+plt.plot(Ns, iterations[:,0,:], ls='-')
 plt.gca().set_prop_cycle(None)
-plt.loglog(Ns, iterations[:,1,:], ls='--')
+plt.plot(Ns, iterations[:,1,:], ls='--')
 plt.xlabel('N')
 plt.ylabel('iterations')
 plt.legend(['cg', 'bicgstab', 'gmres'])
 plt.show()
+
+print(iterations)
+
+# Krylov subspace solvers only take 1 iteration to solve with b = f1 because x is a
+# scalar multiple of f (i.e. f1 is an eigenvector for A, and
+A = buildA(10)
+f = buildf1(10)
+np.testing.assert_almost_equal(A@f, 19.57739348*f)
+

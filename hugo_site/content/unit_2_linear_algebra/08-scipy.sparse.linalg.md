@@ -81,9 +81,9 @@ For $N=4,8,16,32,64,128$ try the following:
 2. Solve the linear systems using the $\text{LU}$ and Cholesky decompositions. Plot the 
    time this takes on the same graph.
 3. Now solve the systems iteratively using a conjugate gradients solver (you can use the 
-   one in `scipy.linalg.sparse`, or you can code up your own). How many iterations are 
-   needed for each problem? Explain the results for the right-hand-side $\mathbf{f}_1$. 
-   For the right-hand-side $\mathbf{f}_2$ what is the relationship between the number of 
-   iterations and $N$. How long do the computations take?
+   one in `scipy.linalg.sparse`, or you can code up your own). How many iterations 
+   are needed for each problem? Explain the results for the right-hand-side 
+   $\mathbf{f}_1$. For the right-hand-side $\mathbf{f}_2$ what is the relationship 
+   between the number of iterations and $N$. How long do the computations take?
 4. Repeat using the `scipy.sparse.linalg` BICGSTAB and GMRES solvers.
 {{% /notice %}}

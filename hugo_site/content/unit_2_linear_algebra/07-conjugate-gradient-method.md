@@ -18,9 +18,9 @@ $$
 Krylov subspace methods are an important family of iterative algorithms for solving 
 $Ax=b$. Lets suppose that $A$ is an $n \times n$ invertible matrix, and our only 
 knowledge of $A$ is its matrix-vector product with an arbitrary vector $\mathbf{x}$. 
-Repeated application of $A$ $n+1$ times on an initial vector $b$ gives us a sequence of 
-vectors $\mathbf{b}, A \mathbf{b}, A^2 \mathbf{b}, ..., A^{k}$. Since we are in 
-$n$-dimensional space, we are guaranteed that these $n+1$ vectors are linearly 
+Repeated application of $A$, $n$ times on an initial vector $b$ gives us a sequence of 
+vectors $\mathbf{b}, A \mathbf{b}, A^2 \mathbf{b}, ..., A^{n} \mathbf{b}$. Since we are 
+in $n$-dimensional space, we are guaranteed that these $n+1$ vectors are linearly 
 dependent, and therefore
 
 $$
@@ -86,11 +86,11 @@ p_k &= r_{k-1} + \beta_k p_{k-1} \\
 \end{aligned}
 $$
 
-This ensures that the search direction $\mathbf{p}_k$ is the closest vector to 
-$\mathbf{r}_{k-1}$ that is also *A-conjugate* to $\mathbf{p}_1, ..., \mathbf{p}_{k-1}$, 
-i.e. $p^T_i A p_j$ for all $i \ne j$, which gives this algorithm its name. It can also 
-be shown that after $k$ iterations the sequence of residuals $\mathbf{r}_i$ for $i=1..k$ 
-form a set of mutually orthogonal vectors that span the Krylov subspace $\mathcal{K}_k$.
+This ensures that the search direction $\mathbf{p}\_k$ is the closest vector to 
+$\mathbf{r}_{k-1}$ that is also *A-conjugate* to $\mathbf{p}\_1, ..., 
+\mathbf{p}\_{k-1}$, i.e. $p^T_i A p_j$ for all $i \ne j$, which gives the algorithm its 
+name. After $k$ iterations the sequence of residuals $\mathbf{r}_i$ for $i=1..k$ form a 
+set of mutually orthogonal vectors that span the Krylov subspace $\mathcal{K}_k$.
 
 Directly using the above equations in an iterative algorithm results in the standard CG 
 algorithm. A more efficient algorithm can be derived from this by computing the 
@@ -106,26 +106,25 @@ The CG method works well (i.e. converges quickly) if the *condition number* of t
 matrix $A$ is low. The condition number of a matrix gives a measure of how much the 
 solution $x$ changes in response to a small change in the input $b$, and is a property 
 of the matrix $A$ itself, so can vary from problem to problem. In order to keep the 
-number of iterations small for iterative solvers, it is therefore often necessary to 
-use a *preconditioner*, which is a method of transforming what might be a difficult 
-problem with a poorly conditioned $A$, into a well conditioned problem that is easy to 
-solve.
+number of iterations small for iterative solvers, it is therefore often necessary to use 
+a *preconditioner*, which is a method of transforming what might be a difficult problem 
+with a poorly conditioned $A$, into a well conditioned problem that is easy to solve.
 
-Consider the case of precoditioning for the CG methods, we start from the standard 
+Consider the case of preconditioning for the CG methods, we start from the standard 
 problem $A x = b$, and we wish to solve an *equivalent* transformed problem given by
 
 $$
 \tilde{A} \tilde{x} = \tilde{b}
 $$
 
-where $\tilde{A} = C^{-1} A C^{-1}$, $\tilde{x} = Cx$, $\tilde{b} = C^{-1}$, and $C$ is 
-a symmetric positive matrix.
+where $\tilde{A} = C^{-1} A C^{-1}$, $\tilde{x} = Cx$, $\tilde{b} = C^{-1} b $, and $C$ 
+is a symmetric positive matrix.
 
 We then simply apply the standard CG method as given above to this transformed problem. 
 This leads to an algorithm which is then simplified by instead computing the transformed 
 quantities $\tilde{p}_k = C p_k$, $\tilde{x}_k = C x_k$, and $\tilde{r}_k = C^{-1} r_k$. 
 Finally we define a matrix $M = C^2$, which is known as the *preconditioner*, leading to 
-the final precoditioned CG algorithm given below (reproduced and edited from 
+the final preconditioned CG algorithm given below (reproduced and edited from 
 [Wikipedia](https://en.wikipedia.org/wiki/Conjugate_gradient_method)):
 
 $\mathbf{r}\_0 := \mathbf{b} - \mathbf{A x}\_0$\\
@@ -149,7 +148,7 @@ The key point to note here is that the preconditioner is used by inverting $M$, 
 matrix must be "easy" to solve in some fashion, and also result in a transformed problem 
 with better conditioning.
 
-**Termination**: The CG algorithm is normally run untill convergence to a given 
+**Termination**: The CG algorithm is normally run until convergence to a given 
 tolerance which is based on the norm of the input vector $b$. In the algorithm above we 
 iterate until the residual norm is less than some fraction (set by the user) of the norm 
 of $b$.
