@@ -220,9 +220,7 @@ Krylov subspace methods Krylov subspace methods are an important family of itera
       <pubDate>Thu, 26 Nov 2020 16:52:22 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/01_course_overview/</guid>
-      <description>Welcome to &amp;lsquo;Scientific Computing in MATLAB&amp;rsquo;. We are delighted you have chosen this course and hope it will meet your expectations.
-In this preliminary unit we shall be looking at:
- communications managing your learning activities.  If you are already familiar with online study, you will be able to skip through these sessions quickly and get onto the real stuff. If you are not, it may answer a few of your questions.</description>
+      <description></description>
     </item>
     
     <item>
@@ -231,18 +229,16 @@ In this preliminary unit we shall be looking at:
       <pubDate>Wed, 25 Nov 2020 16:52:22 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/02_course_activities/</guid>
-      <description>The main teaching mechanism on this course is through activities and exercises. Each unit is composed of a number of such activities which will not only introduce the material to you but also enable you to demonstrate your understanding (or to express your lack of understanding – something you should never be afraid to do).
-Regular activities and resources There are several kinds of activity that you will be asked to complete while on this course.</description>
+      <description></description>
     </item>
     
     <item>
-      <title>Getting MATLAB</title>
-      <link>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_matlab/</link>
+      <title>Getting Python</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_python/</link>
       <pubDate>Tue, 24 Nov 2020 16:52:22 +0000</pubDate>
       
-      <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_matlab/</guid>
-      <description>A pre-requisite for the course is to have the program MATLAB installed on your computer. You will only need the basic version of MATLAB for this course. As you will discover there are many toolboxes are available which extend the functionality of MATLAB but these are not needed for this course. In this section we will get MATLAB set up on your computer.
-Checking for MATLAB If you are using a departmental computer then MATLAB may already have been installed for you.</description>
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_python/</guid>
+      <description></description>
     </item>
     
   </channel>
