@@ -33,9 +33,6 @@ def buildf2(N):
     f = np.dot(np.maximum(x,1-x), np.maximum(y,1-y))
     return f[1:,1:].reshape(-1, 1)
 
-
-
-
 num = 20
 times = np.empty((num, 2, 6), dtype=float)
 iterations = np.empty((num, 2, 3), dtype=int)
@@ -112,18 +109,17 @@ plt.ylabel('time')
 plt.legend(['lu', 'cholesky', 'inv', 'cg', 'bicgstab', 'gmres'])
 plt.show()
 
-plt.plot(Ns, iterations[:,0,:], ls='-')
+plt.loglog(Ns, iterations[:,0,:], ls='-')
 plt.gca().set_prop_cycle(None)
-plt.plot(Ns, iterations[:,1,:], ls='--')
+plt.loglog(Ns, iterations[:,1,:], ls='--')
 plt.xlabel('N')
 plt.ylabel('iterations')
 plt.legend(['cg', 'bicgstab', 'gmres'])
 plt.show()
 
-print(iterations)
-
 # Krylov subspace solvers only take 1 iteration to solve with b = f1 because x is a
-# scalar multiple of f (i.e. f1 is an eigenvector for A, and
+# scalar multiple of f. i.e. x is in the k=1 Krylov subspace, and the initial search
+# direction will directly lead to x
 A = buildA(10)
 f = buildf1(10)
 np.testing.assert_almost_equal(A@f, 19.57739348*f)
