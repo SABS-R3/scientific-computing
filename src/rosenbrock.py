@@ -3,7 +3,7 @@ from sympy import symbols, simplify, pprint
 x = symbols('x')
 y = symbols('y')
 
-rosenbrock = (1 - x)**2 + (y - x**2)**2
+rosenbrock = (1 - x)**2 + 10*(y - x**2)**2
 print('rosenbrock:')
 pprint(rosenbrock)
 print('d_rosenbrock_dx:')
