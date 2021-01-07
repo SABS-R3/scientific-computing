@@ -12,21 +12,21 @@
     <title>Trust Region Methods   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1610006929" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1610040264" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1610040264" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1610040264"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1610006929"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1610006929"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1610040264"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1610040264"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1610006929"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1610040264"></script>
 
     
   </div>
@@ -1019,7 +1019,10 @@ p_k^U + (\tau - 1)(p_k^B - p_k^U), & 1 \le \tau \le 2.
 
 <h3 id="problems">Problems</h3>
 
-<ol>
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol>
 <li>Let $f(x) = 10 \left( x_2 − x^2_1 \right)^2 + (1 − x_1)^2$. At $x = (0,−1)$ draw the
 contour lines of the quadratic model
 <br></li>
@@ -1033,13 +1036,170 @@ contour lines of the quadratic model
    \in \mathcal{R}^n}m_k(p)$ so that $||p|| \le \Delta_k$  as the trust region radius
    varies from $\Delta_k = 0$ to $\Delta_k = 2$. Repeat this at $x = (0, 0.5)$.</p>
 
-<ol start="2">
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f</span>(x):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>(x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>x[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad_f</span>(x):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array([
+        <span style="color:#ae81ff">40</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> (x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>,
+        <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">20</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">1</span>]
+    ])
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hessian_f</span>(x):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array([
+        [<span style="color:#ae81ff">120</span> <span style="color:#f92672">*</span> x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">40</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">40</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>]],
+        [<span style="color:#f92672">-</span><span style="color:#ae81ff">40</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">20</span>],
+    ])
+
+<span style="color:#75715e"># plot contours</span>
+x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">100</span>)
+y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">100</span>)
+X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+Z <span style="color:#f92672">=</span> f([X, Y])
+plt<span style="color:#f92672">.</span>contour(X, Y, Z, levels<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+min_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">1.</span>])
+
+<span style="color:#66d9ef">for</span> x0 <span style="color:#f92672">in</span> [np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>]), np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>, <span style="color:#ae81ff">0.5</span>])]:
+    N <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty((N, <span style="color:#ae81ff">2</span>), dtype<span style="color:#f92672">=</span>float)
+    plt<span style="color:#f92672">.</span>plot(x0[<span style="color:#ae81ff">0</span>], x0[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;.&#39;</span>)
+    plt<span style="color:#f92672">.</span>plot(min_x[<span style="color:#ae81ff">0</span>], min_x[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;+&#39;</span>)
+    <span style="color:#66d9ef">for</span> i, delta <span style="color:#f92672">in</span> enumerate(np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">1e-3</span>, <span style="color:#ae81ff">2</span>, N)):
+        <span style="color:#75715e"># if minimum of f is within radius, this is the min point, otherwise it is</span>
+        <span style="color:#75715e"># somewhere on the border of the search radius</span>
+        <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>sum((min_x <span style="color:#f92672">-</span> x0)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;</span> delta<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>:
+            x[i, :] <span style="color:#f92672">=</span> min_x
+        <span style="color:#66d9ef">else</span>:
+            min_f <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e10</span>
+            <span style="color:#66d9ef">for</span> omega <span style="color:#f92672">in</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi, <span style="color:#ae81ff">200</span>):
+                test_x <span style="color:#f92672">=</span> x0 <span style="color:#f92672">+</span> delta <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>array([np<span style="color:#f92672">.</span>cos(omega), np<span style="color:#f92672">.</span>sin(omega)])
+                test_f <span style="color:#f92672">=</span> f(test_x)
+                <span style="color:#66d9ef">if</span> test_f <span style="color:#f92672">&lt;</span> min_f:
+                    x[i, :] <span style="color:#f92672">=</span> test_x
+                    min_f <span style="color:#f92672">=</span> test_f
+    plt<span style="color:#f92672">.</span>plot(x[:, <span style="color:#ae81ff">0</span>], x[:, <span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;-.&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol start="2">
 <li>Write a program that implements the dogleg method. Choose $B_k$ to be the exact
-Hessian. Apply it to solve <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock’s
-function</a>. Experiment with the
-update rule for the trust region by changing the constants in the trust region
-algorithm given above, or by designing your own rules.</li>
+Hessian. Apply it to minimise the function in (1) from the same two starting
+points. If you wish, experiment with the update rule for the trust region by
+changing the constants in the trust region algorithm given above, or by designing
+your own rules.</li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">line_sphere_intersect</span>(o, u, r2):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    algorithm from https://en.wikipedia.org/wiki/Line</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">2</span><span style="color:#e6db74">%80%</span><span style="color:#e6db74">93sphere_intersection
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    here we assume that the line intersects the sphere, and we are only interested in
+</span><span style="color:#e6db74">    the most positive solution
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    u_dot_o <span style="color:#f92672">=</span> u<span style="color:#f92672">.</span>dot(o)
+    det <span style="color:#f92672">=</span> u_dot_o<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> (np<span style="color:#f92672">.</span>dot(o, o) <span style="color:#f92672">-</span> r2)
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>u_dot_o <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>sqrt(det)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dogleg</span>(delta, g, B, x0):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    implements the dogleg method of minimising m(p)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    returns min p and a boolean that is True if min p lies on the trust region border
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    delta2 <span style="color:#f92672">=</span> delta<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    pB <span style="color:#f92672">=</span> <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>solve(B, g)
+
+    <span style="color:#75715e"># if pB is within trust region then use that</span>
+    <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>dot(pB, pB) <span style="color:#f92672">&lt;</span> delta2:
+        <span style="color:#66d9ef">return</span> pB, False
+
+    pU <span style="color:#f92672">=</span> <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>dot(g, g) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>dot(g, B <span style="color:#960050;background-color:#1e0010">@</span> g) <span style="color:#f92672">*</span> g
+
+    <span style="color:#75715e"># find intersection of segment x0 -&gt; pU -&gt; pB with trust region</span>
+    <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>dot(pU, pU) <span style="color:#f92672">&gt;</span> delta2:
+        u <span style="color:#f92672">=</span> (pU <span style="color:#f92672">-</span> x0) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(pU <span style="color:#f92672">-</span> x0)
+        intersect <span style="color:#f92672">=</span> line_sphere_intersect(x0, u, delta2)
+        <span style="color:#66d9ef">return</span> x0 <span style="color:#f92672">+</span> intersect <span style="color:#f92672">*</span> u, True
+    <span style="color:#66d9ef">else</span>:
+        u <span style="color:#f92672">=</span> (pB <span style="color:#f92672">-</span> pU) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(pB <span style="color:#f92672">-</span> pU)
+        intersect <span style="color:#f92672">=</span> line_sphere_intersect(pU, u, delta2)
+        <span style="color:#66d9ef">return</span> pU <span style="color:#f92672">+</span> intersect <span style="color:#f92672">*</span> u , True
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minimise</span>(f, grad_f, hessian_f, x0, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+    nu <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>
+    delta_hat <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+    delta <span style="color:#f92672">=</span> delta_hat
+    a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(x0)
+    a_store <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty((max_iter<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, len(x0)), dtype<span style="color:#f92672">=</span>float)
+    a_store[<span style="color:#ae81ff">0</span>, :] <span style="color:#f92672">=</span> a
+    j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(max_iter):
+        g <span style="color:#f92672">=</span> grad_f(a)
+        B <span style="color:#f92672">=</span> hessian_f(a)
+        f_a <span style="color:#f92672">=</span> f(a)
+        p, p_equal_delta <span style="color:#f92672">=</span> dogleg(delta, g, B, a)
+        rho <span style="color:#f92672">=</span> (f_a <span style="color:#f92672">-</span> f(a <span style="color:#f92672">+</span> p)) <span style="color:#f92672">/</span> (<span style="color:#f92672">-</span>g<span style="color:#f92672">.</span>dot(p) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span><span style="color:#f92672">*</span>p<span style="color:#f92672">.</span>dot(B <span style="color:#960050;background-color:#1e0010">@</span> p))
+        <span style="color:#66d9ef">if</span> rho <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.25</span>:
+            delta <span style="color:#f92672">*=</span> <span style="color:#ae81ff">0.25</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">if</span> rho <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.75</span> <span style="color:#f92672">and</span> p_equal_delta:
+                delta <span style="color:#f92672">=</span> min(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>delta, delta_hat)
+        <span style="color:#66d9ef">if</span> rho <span style="color:#f92672">&gt;</span> nu:
+            a <span style="color:#f92672">+=</span> p
+            a_store[j, :] <span style="color:#f92672">=</span> a
+            j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(p) <span style="color:#f92672">&lt;</span> tol:
+                <span style="color:#66d9ef">break</span>
+    <span style="color:#66d9ef">return</span> a_store[:j, :]
+
+<span style="color:#75715e"># plot contours</span>
+x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">100</span>)
+y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">100</span>)
+X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+Z <span style="color:#f92672">=</span> f([X, Y])
+plt<span style="color:#f92672">.</span>contour(X, Y, Z, levels<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+min_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">1.</span>])
+
+<span style="color:#75715e"># do the minimisation for both points and plot all iterations</span>
+<span style="color:#66d9ef">for</span> x0 <span style="color:#f92672">in</span> [np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span>]), np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>, <span style="color:#ae81ff">0.5</span>])]:
+    plt<span style="color:#f92672">.</span>plot(x0[<span style="color:#ae81ff">0</span>], x0[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;.&#39;</span>)
+    plt<span style="color:#f92672">.</span>plot(min_x[<span style="color:#ae81ff">0</span>], min_x[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;+&#39;</span>)
+    a_store <span style="color:#f92672">=</span> minimise(f, grad_f, hessian_f, x0)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;done in&#39;</span>, a_store<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#39;iterations&#39;</span>)
+    plt<span style="color:#f92672">.</span>plot(a_store[:, <span style="color:#ae81ff">0</span>], a_store[:, <span style="color:#ae81ff">1</span>])
+
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1585,16 +1745,16 @@ algorithm given above, or by designing your own rules.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1610006929"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1610006929"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1610006929"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1610006929"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1610006929"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1610006929"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1610040264"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1610040264"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1610040264"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1610040264"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1610040264"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1610040264"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1610006929"></script>
-    <script src="/scientific-computing/js/learn.js?1610006929"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1610006929"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1610040264"></script>
+    <script src="/scientific-computing/js/learn.js?1610040264"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1610040264"></script>
     
     
 
