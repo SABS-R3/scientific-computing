@@ -23,11 +23,11 @@ Newtons methods tend to be
 [trapped](https://arxiv.org/abs/1405.4604) in saddle points, due to the presence of 
 negative eigenvalues in the hessian matrix. This can be avoided by approximating the 
 hessian with a positive definite matrix $B_k \approx \nabla^2 f$, like some quasi-Newton 
-methods (i.e. BFGS). Alternativly, the class of *trust region methods* restate the 
+methods (i.e. BFGS). Alternatively, the class of *trust region methods* restate the 
 optimisation problem as an sequence of optimisations of a second order approximation to 
 $f$ in a local *trust-region* surrounding the current point $a_k$. The exact solution to 
 each of these subproblems can be shown to be $(\nabla^2 f(a_k) + \lambda I)^{-1} \nabla 
-f(a_k)$, where $\lambda$ is chosen to be large enought to make $(\nabla^2 f(a_k) + 
+f(a_k)$, where $\lambda$ is chosen to be large enough to make $(\nabla^2 f(a_k) + 
 \lambda I)$ positive definite. Therefore, by design the trust-region methods aim avoid 
 this problem of negative eigenvalues. 
 
@@ -54,8 +54,8 @@ $$
 \rho_k = \frac{f(a_k) - f(a_k + p_k)}{m_k(0) - m_k(p_k)}.
 $$
 
-Since $m_k(0) - m_k(p_k)$ is always positive, if $\rho_k$ is negative then the the 
-actual function value is increasing, the step is rejected and the trust region radius 
+Since $m_k(0) - m_k(p_k)$ is always positive, if $\rho_k$ is negative then the actual 
+function value is increasing, the step is rejected and the trust region radius 
 $\Delta_k$ is decreased in order to improve the approximate model $m_k$. If $\rho_k$ is 
 positive but much smaller than one then we do not alter $\Delta_k$. If $\rho_k$ is close 
 to or greater than 1 we can be confident in our model and thus increase $\Delta_k$. The 
@@ -65,7 +65,7 @@ Wright cited below) is:
 Given $a_0$, $\hat{\Delta} > 0$, $\Delta_0 \in (0, \hat{\Delta})$, and $\nu \in [0, 
 \frac{1}{4})$: \\
 **for** $k = 0, 1, 2, ...$ \\
-&nbsp;&nbsp; Obtain $p_k$ by (approximatly) minimising $m_k(p)$ where $||p|| < \Delta_k$ 
+&nbsp;&nbsp; Obtain $p_k$ by (approximately) minimising $m_k(p)$ where $||p|| < \Delta_k$ 
 \\
 &nbsp;&nbsp; $\rho_k := \frac{f(a_k) - f(a_k + p_k)}{m_k(0) - m_k(p_k)}$ \\
 &nbsp;&nbsp; **if** $\rho_k < \frac{1}{4}$ \\
