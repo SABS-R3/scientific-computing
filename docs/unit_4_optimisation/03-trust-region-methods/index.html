@@ -12,21 +12,21 @@
     <title>Trust Region Methods   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609966333" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1610006929" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609966333" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1610006929" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609966333"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1610006929"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609966333"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609966333"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1610006929"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1610006929"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609966333"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1610006929"></script>
 
     
   </div>
@@ -896,11 +896,11 @@ Newtons methods tend to be
 <a href="https://arxiv.org/abs/1405.4604">trapped</a> in saddle points, due to the presence of
 negative eigenvalues in the hessian matrix. This can be avoided by approximating the
 hessian with a positive definite matrix $B_k \approx \nabla^2 f$, like some quasi-Newton
-methods (i.e. BFGS). Alternativly, the class of <em>trust region methods</em> restate the
+methods (i.e. BFGS). Alternatively, the class of <em>trust region methods</em> restate the
 optimisation problem as an sequence of optimisations of a second order approximation to
 $f$ in a local <em>trust-region</em> surrounding the current point $a_k$. The exact solution to
 each of these subproblems can be shown to be $(\nabla^2 f(a_k) + \lambda I)^{-1} \nabla
-f(a_k)$, where $\lambda$ is chosen to be large enought to make $(\nabla^2 f(a_k) +
+f(a_k)$, where $\lambda$ is chosen to be large enough to make $(\nabla^2 f(a_k) +
 \lambda I)$ positive definite. Therefore, by design the trust-region methods aim avoid
 this problem of negative eigenvalues.</p>
 
@@ -927,8 +927,8 @@ the actual to the predicted reduction in the function value</p>
 \rho_k = \frac{f(a_k) - f(a_k + p_k)}{m_k(0) - m_k(p_k)}.
 \]</span></p>
 
-<p>Since $m_k(0) - m_k(p_k)$ is always positive, if $\rho_k$ is negative then the the
-actual function value is increasing, the step is rejected and the trust region radius
+<p>Since $m_k(0) - m_k(p_k)$ is always positive, if $\rho_k$ is negative then the actual
+function value is increasing, the step is rejected and the trust region radius
 $\Delta_k$ is decreased in order to improve the approximate model $m_k$. If $\rho_k$ is
 positive but much smaller than one then we do not alter $\Delta_k$. If $\rho_k$ is close
 to or greater than 1 we can be confident in our model and thus increase $\Delta_k$. The
@@ -938,7 +938,7 @@ Wright cited below) is:</p>
 <p>Given $a_0$, $\hat{\Delta} &gt; 0$, $\Delta_0 \in (0, \hat{\Delta})$, and $\nu \in [0,
 \frac{1}{4})$: <br>
 <strong>for</strong> $k = 0, 1, 2, ...$ <br>
-&nbsp;&nbsp; Obtain $p_k$ by (approximatly) minimising $m_k(p)$ where $||p|| &lt; \Delta_k$
+&nbsp;&nbsp; Obtain $p_k$ by (approximately) minimising $m_k(p)$ where $||p|| &lt; \Delta_k$
 <br>
 &nbsp;&nbsp; $\rho_k := \frac{f(a_k) - f(a_k + p_k)}{m_k(0) - m_k(p_k)}$ <br>
 &nbsp;&nbsp; <strong>if</strong> $\rho_k &lt; \frac{1}{4}$ <br>
@@ -1585,16 +1585,16 @@ algorithm given above, or by designing your own rules.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609966333"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609966333"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1610006929"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1610006929"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609966333"></script>
-    <script src="/scientific-computing/js/learn.js?1609966333"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609966333"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1610006929"></script>
+    <script src="/scientific-computing/js/learn.js?1610006929"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1610006929"></script>
     
     
 

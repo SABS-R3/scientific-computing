@@ -12,21 +12,21 @@
     <title>Line Search Methods   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1609966333" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1609966333" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1610006929" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1610006929" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1609966333" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1610006929" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1609966333"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1610006929"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1609966333"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1609966333"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1610006929"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1610006929"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1609966333"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1610006929"></script>
 
     
   </div>
@@ -1055,19 +1055,147 @@ and
 
 <h3 id="problems">Problems</h3>
 
-<ol>
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol>
 <li>Program the steepest descent and Newton algorithms using the backtracking line
-search, Algorithm 3.1. Use them to minimize the <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
+search. Use them to minimize the <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
 function</a>. Set the initial step
 length $\alpha_0 = 1$ and print the step length used by each method at each
 iteration. First try the initial point $x_0 = (1.2, 1.2)^T$ and then the more
 difficult starting point $x_0 = (−1.2, 1)^T$.</li>
 <li>Plot the function surface using <code>matplotlib</code> and overlay the line search segments so
-you can visualise the progress of your algorithm.</li>
-<li>Repeat (1) and (2) above using the line seach implemented in Scipy
+you can visualise the progress of your algorithm. Observe the difference between
+the algorithms when the gradient of the rosenbrock function is low (i.e. at the
+bottom of the curved valley)</li>
+<li>Repeat (1) and (2) above using the line search implemented in Scipy
 <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.line_search.html"><code>scipy.optimize.line_search</code></a>,
 which uses the strong Wolfe conditions.</li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> cm
+<span style="color:#f92672">import</span> scipy.optimize
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">steepest_descent</span>(x, f, grad_f, hessian_f):
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>grad_f(x)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">newton</span>(x, f, grad_f, hessian_f):
+    A <span style="color:#f92672">=</span> hessian_f(x)
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>solve(A, grad_f(x))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">backtracking</span>(f, grad_f, x, p):
+    alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+    c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-4</span>
+    rho <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+    f_x <span style="color:#f92672">=</span> f(x)
+    c_grad_f_x_p <span style="color:#f92672">=</span> c<span style="color:#f92672">*</span>grad_f(x)<span style="color:#f92672">.</span>dot(p)
+    <span style="color:#66d9ef">while</span> f(x <span style="color:#f92672">+</span> alpha<span style="color:#f92672">*</span>p) <span style="color:#f92672">&gt;</span> f_x <span style="color:#f92672">+</span> alpha <span style="color:#f92672">*</span> c_grad_f_x_p:
+        alpha <span style="color:#f92672">=</span> rho <span style="color:#f92672">*</span> alpha
+    <span style="color:#66d9ef">return</span> alpha
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">scipy_line_search</span>(f, grad_f, x, p):
+    <span style="color:#66d9ef">return</span> scipy<span style="color:#f92672">.</span>optimize<span style="color:#f92672">.</span>line_search(f, grad_f, x, p)[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minimise</span>(f, grad_f, hessian_f, x0, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, search_direction<span style="color:#f92672">=</span>steepest_descent, line_search<span style="color:#f92672">=</span>backtracking):
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(x0)
+    alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+    p <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(x)
+    p[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.</span>
+    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    array_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty((max_iter<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, len(x)), dtype<span style="color:#f92672">=</span>float)
+    array_alpha <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(max_iter, dtype<span style="color:#f92672">=</span>float)
+    array_x[<span style="color:#ae81ff">0</span>, :] <span style="color:#f92672">=</span> x
+    <span style="color:#66d9ef">while</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(alpha <span style="color:#f92672">*</span> p) <span style="color:#f92672">&gt;</span> tol <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> max_iter:
+        p <span style="color:#f92672">=</span> search_direction(x, f, grad_f, hessian_f)
+        alpha <span style="color:#f92672">=</span> line_search(f, grad_f, x, p)
+        x <span style="color:#f92672">+=</span> alpha <span style="color:#f92672">*</span> p
+        array_x[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, :] <span style="color:#f92672">=</span> x
+        array_alpha[i] <span style="color:#f92672">=</span> alpha
+        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> array_x[:i,:], array_alpha[:i]
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rosenbrock</span>(x, y):
+    <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> x)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (y <span style="color:#f92672">-</span> x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rosenbrock_2d</span>(x):
+    <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad_rosenbrock_2d</span>(x):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array([
+        <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> (x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>,
+        <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">1</span>]
+    ])
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hessian_rosenbrock_2d</span>(x):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array([
+        [<span style="color:#ae81ff">12</span> <span style="color:#f92672">*</span> x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>]],
+        [<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">2</span>],
+    ])
+
+<span style="color:#75715e"># verify grad and hessian using finite differences</span>
+h <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-5</span>
+x0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>, <span style="color:#ae81ff">0.</span>])
+x0_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([h, <span style="color:#ae81ff">0.</span>])
+x0_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>, h])
+fd_grad_rosenbrock <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([
+    (rosenbrock_2d(x0_x) <span style="color:#f92672">-</span> rosenbrock_2d(x0)) <span style="color:#f92672">/</span> h,
+    (rosenbrock_2d(x0_y) <span style="color:#f92672">-</span> rosenbrock_2d(x0)) <span style="color:#f92672">/</span> h,
+])
+np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(fd_grad_rosenbrock, grad_rosenbrock_2d(x0), decimal<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+fd_hessian_rosenbrock <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>vstack((
+    (grad_rosenbrock_2d(x0_x) <span style="color:#f92672">-</span> grad_rosenbrock_2d(x0)) <span style="color:#f92672">/</span> h,
+    (grad_rosenbrock_2d(x0_y) <span style="color:#f92672">-</span> grad_rosenbrock_2d(x0)) <span style="color:#f92672">/</span> h,
+))
+np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(fd_hessian_rosenbrock, hessian_rosenbrock_2d(x0),
+                               decimal<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+
+<span style="color:#75715e"># plot rosenbrock surface</span>
+x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">100</span>)
+y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">100</span>)
+X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+Z <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>vectorize(rosenbrock)(X, Y)
+
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>gca(projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+fig2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax2 <span style="color:#f92672">=</span> fig2<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+
+surf <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>plot_surface(X, Y, Z, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, cmap<span style="color:#f92672">=</span>cm<span style="color:#f92672">.</span>coolwarm)
+
+<span style="color:#75715e"># pick two initial starting points</span>
+x01 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">1.2</span>])
+x02 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#f92672">-</span><span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">1</span>])
+
+<span style="color:#75715e"># run all methods and plot results</span>
+<span style="color:#66d9ef">for</span> x0 <span style="color:#f92672">in</span> [x01, x02]:
+    <span style="color:#66d9ef">for</span> p_method <span style="color:#f92672">in</span> [steepest_descent, newton]:
+        <span style="color:#66d9ef">for</span> ls_method <span style="color:#f92672">in</span> [backtracking, scipy_line_search]:
+            label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{}-{}&#39;</span><span style="color:#f92672">.</span>format(p_method<span style="color:#f92672">.</span>__name__, ls_method<span style="color:#f92672">.</span>__name__)
+            pos, alpha <span style="color:#f92672">=</span> \
+                minimise(rosenbrock_2d, grad_rosenbrock_2d, hessian_rosenbrock_2d, x0,
+                         search_direction<span style="color:#f92672">=</span>p_method, line_search<span style="color:#f92672">=</span>ls_method)
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;method&#39;</span>, label, <span style="color:#e6db74">&#39;finished in&#39;</span>, len(alpha), <span style="color:#e6db74">&#39;iterations&#39;</span>)
+            xs <span style="color:#f92672">=</span> pos[:, <span style="color:#ae81ff">0</span>]
+            ys <span style="color:#f92672">=</span> pos[:, <span style="color:#ae81ff">1</span>]
+            ax<span style="color:#f92672">.</span>plot(xs, ys, rosenbrock(xs, ys), label<span style="color:#f92672">=</span>label, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+            ax2<span style="color:#f92672">.</span>plot(alpha, label<span style="color:#f92672">=</span>label)
+ax2<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1613,16 +1741,16 @@ which uses the strong Wolfe conditions.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1609966333"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1609966333"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1609966333"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1610006929"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1610006929"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1610006929"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1609966333"></script>
-    <script src="/scientific-computing/js/learn.js?1609966333"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1609966333"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1610006929"></script>
+    <script src="/scientific-computing/js/learn.js?1610006929"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1610006929"></script>
     
     
 
