@@ -71,6 +71,7 @@ automatic differentiation via the [`autograd`](https://github.com/HIPS/autograd)
 
 {{% expand "Expand for solution" %}}
 {{% notice solution %}}
+```python
 import autograd.numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize, shgo
@@ -175,7 +176,7 @@ if __name__ == '__main__':
                 if m == 'shgo' and a == True:
                     continue
                 optimize(f, m, a)
-
+```
 {{% /notice %}}
 {{% /expand %}}
 

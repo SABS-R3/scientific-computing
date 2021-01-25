@@ -67,6 +67,7 @@ functions](https://en.wikipedia.org/wiki/Test_functions_for_optimization)
 
 {{% expand "Expand for solution" %}}
 {{% notice solution %}}
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize, shgo
@@ -203,6 +204,6 @@ if __name__ == '__main__':
             init_func=init, blit=True
         )
         plt.show()
-
+```
 {{% /notice %}}
 {{% /expand %}}
