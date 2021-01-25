@@ -12,21 +12,21 @@
     <title>Finite difference method   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611598028" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611598028" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1610040264"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598028"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1610040264"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1610040264"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598028"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598028"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1610040264"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611598028"></script>
 
     
   </div>
@@ -921,15 +921,13 @@ user-supplied functions.</p>
 
 <h3 id="problems">Problems</h3>
 
-<ol>
-<li><p>Implement a simple 2D quadratic function $f(x, y) = x^2 + y^2$, the 2D <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
-function</a>, and the 2D <a href="https://en.wikipedia.org/wiki/Rastrigin_function">Rastrigin
-function</a>, and visualise these
-functions over the domain $-5 &lt; x &lt; 5$ and $-5 &lt; y &lt; 5$</p></li>
 
-<li><p>Use <a href="https://docs.scipy.org/doc/scipy/reference/optimize.html"><code>scipy.optimize</code></a> to
-minimise each of these functions, starting at $x = y = 2.5$, using the following
-methods:</p>
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>Use the following methods from
+<a href="https://docs.scipy.org/doc/scipy/reference/optimize.html"><code>scipy.optimize</code></a> to minimize
+the 2D <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
+function</a>:</p>
 
 <ul>
 <li>Nelder-Mead Simplex</li>
@@ -937,18 +935,126 @@ methods:</p>
 <li>BFGS Quasi-Newton</li>
 <li>Newton-CG</li>
 <li>SHG Global Optimisation</li>
-</ul></li>
-</ol>
+</ul>
+
+<p>Either use $x_0 = (−1.2, 1)^T$ as the starting point, or experiment with your own.</p>
 
 <p>In each case perform the optimisation with and without a user-supplied jacobian and
-   evaluate the effect on the number of evaluations of the function $f$ required to
-   converge to the opimium.</p>
+evaluate the effect on the number of evaluations of the function $f$ required to
+converge to the optimum. Optional: You can take the derivatives by hand, or use
+automatic differentiation via the <a href="https://github.com/HIPS/autograd"><code>autograd</code></a> or
+<a href="https://github.com/google/jax"><code>JAX</code></a> packages</p>
 
-<ol start="3">
-<li>Try using <a href="https://numdifftools.readthedocs.io/en/latest/index.html"><code>numdifftools</code></a>
-to calculate the jacobian. See if you can improve on the number of function
-evaluations required to converge to an minimum.</li>
-</ol>
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <p>import autograd.numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import minimize, shgo
+from autograd import grad</p>
+
+<p>def convex_function(x):</p>
+<pre><code>return np.sum(np.array(x)**2, axis=0)</code></pre>
+<p>def rosenbrock(x):</p>
+<pre><code>a = 1.0
+b = 100.0
+return (a-x[0])**2 + b*(x[1]-x[0]**2)**2</code></pre>
+<p>def rastrigin(x):</p>
+<pre><code>A = 10.0
+n = len(x)
+ret = A*n
+for i in range(n):
+    ret += x[i]**2 - A * np.cos(2*np.pi*x[i])
+return ret</code></pre>
+<p>def visualise_functions():</p>
+<pre><code>nx, ny = (100, 100)
+x = np.linspace(-5, 5, nx)
+y = np.linspace(-5, 5, ny)
+xv, yv = np.meshgrid(x, y)
+eval_convex = convex([xv, yv])
+eval_rastrigin = rastrigin([xv, yv])
+eval_rosenbrock = rosenbrock([xv, yv])
+
+plt.contourf(x, y, eval_convex)
+plt.colorbar()
+plt.show()
+plt.clf()
+plt.contourf(x, y, eval_rosenbrock)
+plt.colorbar()
+plt.show()
+plt.clf()
+plt.contourf(x, y, eval_rastrigin)
+plt.colorbar()
+plt.show()</code></pre>
+<p>def optimize(function, method, autodiff):</p>
+<pre><code>eval_points_x = []
+eval_points_y = []
+def fill_eval_points(xk):
+    eval_points_x.append(xk[0])
+    eval_points_y.append(xk[1])
+
+x0 = np.array([2.5, 2.5])
+if autodiff:
+    jac = grad(function)
+else:
+    jac = None
+
+if method == &#39;shgo&#39;:
+    bounds = [(-10, 10), (-10.0, 10.0)]
+    res = shgo(function, bounds, callback=fill_eval_points,
+                options={&#39;disp&#39;: True})
+else:
+    res = minimize(function, x0, method=method, callback=fill_eval_points,
+                    jac = jac,
+                options={&#39;disp&#39;: True})
+
+nx, ny = (100, 100)
+x = np.linspace(-5, 5, nx)
+y = np.linspace(-5, 5, ny)
+xv, yv = np.meshgrid(x, y)
+eval_function = np.empty_like(xv)
+eval_function = function([xv, yv])
+
+print(function.__name__)
+plt.clf()
+plt.contourf(x, y, eval_function)
+plt.plot(eval_points_x, eval_points_y, &#39;x-k&#39;)
+plt.colorbar()
+neval = res.nfev
+try:
+    neval += res.njev
+except:
+    print(&#39;no njev&#39;)
+try:
+    neval += res.nhev
+except:
+    print(&#39;no nhev&#39;)
+plt.title(&#39;iterations: {} evaluations: {}&#39;.format(res.nit, neval))
+
+if autodiff:
+    ext = &#39;-auto.pdf&#39;
+else:
+    ext = &#39;.pdf&#39;
+
+plt.savefig(function.__name__ + &#39;-&#39; + method + ext)</code></pre>
+<p>if <strong>name</strong> == '<strong>main</strong>':</p>
+<pre><code>for f in [convex_function, rosenbrock, rastrigin]:
+    for m in [&#39;shgo&#39;,&#39;nelder-mead&#39;, &#39;cg&#39;, &#39;bfgs&#39;, &#39;newton-cg&#39;]:
+        for a in [False, True]:
+            if m == &#39;newton-cg&#39; and a == False:
+                continue
+            if m == &#39;shgo&#39; and a == True:
+                continue
+            optimize(f, m, a)</code></pre>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1494,16 +1600,16 @@ evaluations required to converge to an minimum.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1610040264"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1610040264"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611598028"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611598028"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1610040264"></script>
-    <script src="/scientific-computing/js/learn.js?1610040264"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1610040264"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598028"></script>
+    <script src="/scientific-computing/js/learn.js?1611598028"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611598028"></script>
     
     
 

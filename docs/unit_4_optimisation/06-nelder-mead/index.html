@@ -12,21 +12,21 @@
     <title>Nelder-Mead method   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1610040264" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611598028" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1610040264" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611598028" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1610040264"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598028"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1610040264"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1610040264"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598028"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598028"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1610040264"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611598028"></script>
 
     
   </div>
@@ -891,7 +891,7 @@ f(x_1) \le f(x_2) \le \cdots \le f(x_{n+1})
 first of which is the centroid of the $n$ points with the lowest $f$ values</p>
 
 <p><span  class="math">\[
-\bar{x} = \sum_{i=1}^n x_i
+\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
 \]</span></p>
 
 <p>The other four points are defined by considering the line joining $\bar{x}$ and the
@@ -901,9 +901,9 @@ point with the highest $f$ value $x_{n+1}$</p>
 \bar{x}(t) = \bar{x} + t(x_{n+1} - \bar{x})
 \]</span></p>
 
-<p>The four points are the <em>reflection</em>, <em>expanding</em>, the <em>outside contraction</em> and <em>inside
-constraction</em> points, given by $\bar{x}(-1)$, $\bar{x}(-2)$, $\bar{x}(1/2)$, and
-$\bar{x}(-1/2)$ respectivly.</p>
+<p>The four points are the <em>reflection</em>, <em>expanding</em>, the <em>inside contraction</em> and <em>outside
+contraction</em> points, given by $\bar{x}(-1)$, $\bar{x}(-2)$, $\bar{x}(1/2)$, and
+$\bar{x}(-1/2)$ respectively.</p>
 
 <p>The Nelder-Mead algorithm tries to replace $x_{n+1}$ by reflecting, expanding, or
 contracting the simplex to one of these points. If it cannot find a better point, then
@@ -922,19 +922,160 @@ Write textbook given below</p>
 <ul>
 <li>Nelder, John A.; R. Mead (1965). &quot;A simplex method for function minimization&quot;.
 Computer Journal. 7 (4): 308–313. doi:10.1093/comjnl/7.4.308.</li>
+<li><a href="http://www.webpages.uidaho.edu/~fuchang/res/ANMS.pdf">Gao, L. Han, &quot;Implementing the Nelder-Mead simplex algorithm with adaptive
+parameters&quot;, Comput. Optim. Appl., DOI
+10.1007/s10589-010-9329-3</a></li>
 <li>Numerical optimization by Nocedal, Jorge; Wright, Stephen J., 1960-, Chapter 9</li>
 </ul>
 
 <h3 id="problems">Problems</h3>
 
-<ul>
-<li>Code up the Nelder-Mead algorithm and compare its performance against the steepest
-descent, Newton and dogleg algorithms you did in the last lesson. You can evaluate
-them on the 2D quadratic function $f(x, y) = x^2 + y^2$, the 2D <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>Code up the Nelder-Mead algorithm and compare its performance against the steepest
+descent, Newton and dogleg algorithms you did in the last lesson. You can evaluate them
+on the 2D quadratic function $f(x, y) = x^2 + y^2$, the 2D <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
 function</a> or on one of many different
 <a href="https://en.wikipedia.org/wiki/Test_functions_for_optimization">optimisation test
-functions</a></li>
-</ul>
+functions</a></p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <p>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import minimize, shgo
+import matplotlib.animation as animation</p>
+
+<p>def convex_function(x):</p>
+<pre><code>return np.sum(np.array(x)**2, axis=0)</code></pre>
+<p>def order_vertices(f, vertices):</p>
+<pre><code>N = vertices.shape[0]
+f_evals = np.array([f(vertices[i]) for i in range(N)])
+ind = np.argsort(f_evals)
+return vertices[ind], f_evals[ind]</code></pre>
+<p>def nm_line(t, centroid, worst):</p>
+<pre><code>return centroid + t * (worst - centroid)</code></pre>
+<p>def centroid(vertices):</p>
+<pre><code>x = vertices[0]
+for i in range(1, vertices.shape[0]-1):
+    x += vertices[i]
+return x/(vertices.shape[0]-1)</code></pre>
+<p>def nelder_mead(f, x0, tol=1e-5, max_iter=1000):</p>
+<pre><code>n = len(x0)
+
+# MATLAB fminsearch initialisation routine
+vertices = np.empty([n+1, n], dtype=x0.dtype)
+vertices[0, :] = x0
+for i in range(1, n+1):
+    vertices[i, :] = x0
+    if x0[i-1] == 0:
+        vertices[i, i-1] += 0.00025
+    else:
+        vertices[i, i-1] += 0.05
+
+saved_vertices = np.empty([n+1, n, max_iter], dtype=x0.dtype)
+# Nelder–Mead algorithm from:
+#    Numerical optimization
+#    by Nocedal, Jorge; Wright, Stephen J., 1960-,
+#    Chapter 9
+for step in range(max_iter):
+    vertices, f_evals = order_vertices(f, vertices)
+    saved_vertices[:, :, step] = vertices
+    if np.std(f_evals) &lt; tol:
+        break
+    cent = centroid(vertices)
+    reflect = nm_line(-1, cent, vertices[-1])
+    f_reflect = f(reflect)
+    if f_evals[0] &lt;= f_reflect and f_reflect &lt; f_evals[-2]:
+        vertices[-1] = reflect
+    elif f_reflect &lt; f_evals[0]:
+        expansion = nm_line(-2, cent, vertices[-1])
+        f_expansion = f(expansion)
+        if f_expansion &lt; f_reflect:
+            vertices[-1] = expansion
+        else:
+            vertices[-1] = reflect
+    elif f_reflect &gt;= f_evals[-2]:
+        contraction_successful = False
+        if f_evals[-2] &lt;= f_reflect and f_reflect &lt; f_evals[-1]:
+            out_contract = nm_line(-0.5, cent, vertices[-1])
+            f_out_contract = f(out_contract)
+            if f_out_contract &lt;= f_reflect:
+                vertices[-1] = out_contract
+                contraction_successful = True
+        else:
+            in_contract = nm_line(0.5, cent, vertices[-1])
+            f_in_contract = f(in_contract)
+            if f_in_contract &lt;= f_reflect:
+                vertices[-1] = in_contract
+                contraction_successful = True
+        if not contraction_successful:
+            for i in range(1, n+1):
+                vertices[i] = 0.5*(vertices[0] + vertices[i])
+return saved_vertices[:, :, 0:step+1]</code></pre>
+<p>if <strong>name</strong> == '<strong>main</strong>':</p>
+<pre><code>for f in [convex_function]:
+    x0 = np.array([1.0, 1.0])
+    x_min = np.array([-1.0, -1.0])
+    x_max = np.array([1.0, 1.0])
+
+    saved_vertices = nelder_mead(f, x0)
+    print(&#39;Complete after&#39;, saved_vertices.shape[2], &#39;iterations&#39;)
+
+    nx, ny = (100, 100)
+    x = np.linspace(x_min[0], x_max[0], nx)
+    y = np.linspace(x_min[1], x_max[1], ny)
+    xv, yv = np.meshgrid(x, y)
+    eval_f = f([xv, yv])
+    fig, ax = plt.subplots()
+    c = plt.contourf(x, y, eval_f)
+
+    ln, = plt.plot(
+        np.append(
+            saved_vertices[:, 0, 0],
+            saved_vertices[0, 0, 0]
+        ),
+        np.append(
+            saved_vertices[:, 1, 0],
+            saved_vertices[0, 1, 0]
+        )
+    )
+
+    def init():
+        ax.set_xlim(x_min[0], x_max[0])
+        ax.set_ylim(x_min[1], x_max[1])
+        return ln,
+
+    def update(i):
+        ln.set_data(
+            np.append(
+                saved_vertices[:, 0, i],
+                saved_vertices[0, 0, i]
+            ),
+            np.append(
+                saved_vertices[:, 1, i],
+                saved_vertices[0, 1, i]
+            )
+        )
+        return ln,
+
+    ani = animation.FuncAnimation(
+        fig, update,
+        range(1, saved_vertices.shape[2]),
+        init_func=init, blit=True
+    )
+    plt.show()</code></pre>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1480,16 +1621,16 @@ functions</a></li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1610040264"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1610040264"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1610040264"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611598028"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611598028"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1610040264"></script>
-    <script src="/scientific-computing/js/learn.js?1610040264"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1610040264"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598028"></script>
+    <script src="/scientific-computing/js/learn.js?1611598028"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611598028"></script>
     
     
 
