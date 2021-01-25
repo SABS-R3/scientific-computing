@@ -12,21 +12,21 @@
     <title>Finite difference method   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611598308" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611598308" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598308"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598028"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598028"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598308"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598308"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1611598028"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611598308"></script>
 
     
   </div>
@@ -953,104 +953,110 @@ automatic differentiation via the <a href="https://github.com/HIPS/autograd"><co
     <summary>Expand for solution</summary>
     <div class="notices solution" >
   <div class="label">Solution</div>
-  <p>import autograd.numpy as np
-import matplotlib.pyplot as plt
-from scipy.optimize import minimize, shgo
-from autograd import grad</p>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> autograd.numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> scipy.optimize <span style="color:#f92672">import</span> minimize, shgo
+<span style="color:#f92672">from</span> autograd <span style="color:#f92672">import</span> grad
 
-<p>def convex_function(x):</p>
-<pre><code>return np.sum(np.array(x)**2, axis=0)</code></pre>
-<p>def rosenbrock(x):</p>
-<pre><code>a = 1.0
-b = 100.0
-return (a-x[0])**2 + b*(x[1]-x[0]**2)**2</code></pre>
-<p>def rastrigin(x):</p>
-<pre><code>A = 10.0
-n = len(x)
-ret = A*n
-for i in range(n):
-    ret += x[i]**2 - A * np.cos(2*np.pi*x[i])
-return ret</code></pre>
-<p>def visualise_functions():</p>
-<pre><code>nx, ny = (100, 100)
-x = np.linspace(-5, 5, nx)
-y = np.linspace(-5, 5, ny)
-xv, yv = np.meshgrid(x, y)
-eval_convex = convex([xv, yv])
-eval_rastrigin = rastrigin([xv, yv])
-eval_rosenbrock = rosenbrock([xv, yv])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convex_function</span>(x):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sum(np<span style="color:#f92672">.</span>array(x)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
 
-plt.contourf(x, y, eval_convex)
-plt.colorbar()
-plt.show()
-plt.clf()
-plt.contourf(x, y, eval_rosenbrock)
-plt.colorbar()
-plt.show()
-plt.clf()
-plt.contourf(x, y, eval_rastrigin)
-plt.colorbar()
-plt.show()</code></pre>
-<p>def optimize(function, method, autodiff):</p>
-<pre><code>eval_points_x = []
-eval_points_y = []
-def fill_eval_points(xk):
-    eval_points_x.append(xk[0])
-    eval_points_y.append(xk[1])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rosenbrock</span>(x):
+    a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+    b <span style="color:#f92672">=</span> <span style="color:#ae81ff">100.0</span>
+    <span style="color:#66d9ef">return</span> (a<span style="color:#f92672">-</span>x[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>(x[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span>x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
 
-x0 = np.array([2.5, 2.5])
-if autodiff:
-    jac = grad(function)
-else:
-    jac = None
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rastrigin</span>(x):
+    A <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>
+    n <span style="color:#f92672">=</span> len(x)
+    ret <span style="color:#f92672">=</span> A<span style="color:#f92672">*</span>n
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n):
+        ret <span style="color:#f92672">+=</span> x[i]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> A <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>x[i])
+    <span style="color:#66d9ef">return</span> ret
 
-if method == &#39;shgo&#39;:
-    bounds = [(-10, 10), (-10.0, 10.0)]
-    res = shgo(function, bounds, callback=fill_eval_points,
-                options={&#39;disp&#39;: True})
-else:
-    res = minimize(function, x0, method=method, callback=fill_eval_points,
-                    jac = jac,
-                options={&#39;disp&#39;: True})
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visualise_functions</span>():
+    nx, ny <span style="color:#f92672">=</span> (<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">100</span>)
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, nx)
+    y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, ny)
+    xv, yv <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+    eval_convex <span style="color:#f92672">=</span> convex([xv, yv])
+    eval_rastrigin <span style="color:#f92672">=</span> rastrigin([xv, yv])
+    eval_rosenbrock <span style="color:#f92672">=</span> rosenbrock([xv, yv])
 
-nx, ny = (100, 100)
-x = np.linspace(-5, 5, nx)
-y = np.linspace(-5, 5, ny)
-xv, yv = np.meshgrid(x, y)
-eval_function = np.empty_like(xv)
-eval_function = function([xv, yv])
+    plt<span style="color:#f92672">.</span>contourf(x, y, eval_convex)
+    plt<span style="color:#f92672">.</span>colorbar()
+    plt<span style="color:#f92672">.</span>show()
+    plt<span style="color:#f92672">.</span>clf()
+    plt<span style="color:#f92672">.</span>contourf(x, y, eval_rosenbrock)
+    plt<span style="color:#f92672">.</span>colorbar()
+    plt<span style="color:#f92672">.</span>show()
+    plt<span style="color:#f92672">.</span>clf()
+    plt<span style="color:#f92672">.</span>contourf(x, y, eval_rastrigin)
+    plt<span style="color:#f92672">.</span>colorbar()
+    plt<span style="color:#f92672">.</span>show()
 
-print(function.__name__)
-plt.clf()
-plt.contourf(x, y, eval_function)
-plt.plot(eval_points_x, eval_points_y, &#39;x-k&#39;)
-plt.colorbar()
-neval = res.nfev
-try:
-    neval += res.njev
-except:
-    print(&#39;no njev&#39;)
-try:
-    neval += res.nhev
-except:
-    print(&#39;no nhev&#39;)
-plt.title(&#39;iterations: {} evaluations: {}&#39;.format(res.nit, neval))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">optimize</span>(function, method, autodiff):
+    eval_points_x <span style="color:#f92672">=</span> []
+    eval_points_y <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fill_eval_points</span>(xk):
+        eval_points_x<span style="color:#f92672">.</span>append(xk[<span style="color:#ae81ff">0</span>])
+        eval_points_y<span style="color:#f92672">.</span>append(xk[<span style="color:#ae81ff">1</span>])
 
-if autodiff:
-    ext = &#39;-auto.pdf&#39;
-else:
-    ext = &#39;.pdf&#39;
+    x0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">2.5</span>])
+    <span style="color:#66d9ef">if</span> autodiff:
+        jac <span style="color:#f92672">=</span> grad(function)
+    <span style="color:#66d9ef">else</span>:
+        jac <span style="color:#f92672">=</span> None
 
-plt.savefig(function.__name__ + &#39;-&#39; + method + ext)</code></pre>
-<p>if <strong>name</strong> == '<strong>main</strong>':</p>
-<pre><code>for f in [convex_function, rosenbrock, rastrigin]:
-    for m in [&#39;shgo&#39;,&#39;nelder-mead&#39;, &#39;cg&#39;, &#39;bfgs&#39;, &#39;newton-cg&#39;]:
-        for a in [False, True]:
-            if m == &#39;newton-cg&#39; and a == False:
-                continue
-            if m == &#39;shgo&#39; and a == True:
-                continue
-            optimize(f, m, a)</code></pre>
+    <span style="color:#66d9ef">if</span> method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;shgo&#39;</span>:
+        bounds <span style="color:#f92672">=</span> [(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>), (<span style="color:#f92672">-</span><span style="color:#ae81ff">10.0</span>, <span style="color:#ae81ff">10.0</span>)]
+        res <span style="color:#f92672">=</span> shgo(function, bounds, callback<span style="color:#f92672">=</span>fill_eval_points,
+                    options<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;disp&#39;</span>: True})
+    <span style="color:#66d9ef">else</span>:
+        res <span style="color:#f92672">=</span> minimize(function, x0, method<span style="color:#f92672">=</span>method, callback<span style="color:#f92672">=</span>fill_eval_points,
+                        jac <span style="color:#f92672">=</span> jac,
+                    options<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;disp&#39;</span>: True})
+
+    nx, ny <span style="color:#f92672">=</span> (<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">100</span>)
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, nx)
+    y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, ny)
+    xv, yv <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+    eval_function <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty_like(xv)
+    eval_function <span style="color:#f92672">=</span> function([xv, yv])
+
+    <span style="color:#66d9ef">print</span>(function<span style="color:#f92672">.</span>__name__)
+    plt<span style="color:#f92672">.</span>clf()
+    plt<span style="color:#f92672">.</span>contourf(x, y, eval_function)
+    plt<span style="color:#f92672">.</span>plot(eval_points_x, eval_points_y, <span style="color:#e6db74">&#39;x-k&#39;</span>)
+    plt<span style="color:#f92672">.</span>colorbar()
+    neval <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span>nfev
+    <span style="color:#66d9ef">try</span>:
+        neval <span style="color:#f92672">+=</span> res<span style="color:#f92672">.</span>njev
+    <span style="color:#66d9ef">except</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;no njev&#39;</span>)
+    <span style="color:#66d9ef">try</span>:
+        neval <span style="color:#f92672">+=</span> res<span style="color:#f92672">.</span>nhev
+    <span style="color:#66d9ef">except</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;no nhev&#39;</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;iterations: {} evaluations: {}&#39;</span><span style="color:#f92672">.</span>format(res<span style="color:#f92672">.</span>nit, neval))
+
+    <span style="color:#66d9ef">if</span> autodiff:
+        ext <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-auto.pdf&#39;</span>
+    <span style="color:#66d9ef">else</span>:
+        ext <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.pdf&#39;</span>
+
+    plt<span style="color:#f92672">.</span>savefig(function<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">+</span> method <span style="color:#f92672">+</span> ext)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> [convex_function, rosenbrock, rastrigin]:
+        <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;shgo&#39;</span>,<span style="color:#e6db74">&#39;nelder-mead&#39;</span>, <span style="color:#e6db74">&#39;cg&#39;</span>, <span style="color:#e6db74">&#39;bfgs&#39;</span>, <span style="color:#e6db74">&#39;newton-cg&#39;</span>]:
+            <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> [False, True]:
+                <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;newton-cg&#39;</span> <span style="color:#f92672">and</span> a <span style="color:#f92672">==</span> False:
+                    <span style="color:#66d9ef">continue</span>
+                <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;shgo&#39;</span> <span style="color:#f92672">and</span> a <span style="color:#f92672">==</span> True:
+                    <span style="color:#66d9ef">continue</span>
+                optimize(f, m, a)</code></pre></div>
 </div>
 
 </details>
@@ -1600,16 +1606,16 @@ plt.savefig(function.__name__ + &#39;-&#39; + method + ext)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1611598028"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1611598028"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611598308"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611598308"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598028"></script>
-    <script src="/scientific-computing/js/learn.js?1611598028"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1611598028"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598308"></script>
+    <script src="/scientific-computing/js/learn.js?1611598308"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611598308"></script>
     
     
 

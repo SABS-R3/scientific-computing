@@ -12,21 +12,21 @@
     <title>Nelder-Mead method   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1611598028" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611598308" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1611598028" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611598308" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598028"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598308"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598028"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598028"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598308"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598308"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1611598028"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611598308"></script>
 
     
   </div>
@@ -948,130 +948,142 @@ functions</a></p>
     <summary>Expand for solution</summary>
     <div class="notices solution" >
   <div class="label">Solution</div>
-  <p>import numpy as np
-import matplotlib.pyplot as plt
-from scipy.optimize import minimize, shgo
-import matplotlib.animation as animation</p>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> scipy.optimize <span style="color:#f92672">import</span> minimize, shgo
+<span style="color:#f92672">import</span> matplotlib.animation <span style="color:#f92672">as</span> animation
 
-<p>def convex_function(x):</p>
-<pre><code>return np.sum(np.array(x)**2, axis=0)</code></pre>
-<p>def order_vertices(f, vertices):</p>
-<pre><code>N = vertices.shape[0]
-f_evals = np.array([f(vertices[i]) for i in range(N)])
-ind = np.argsort(f_evals)
-return vertices[ind], f_evals[ind]</code></pre>
-<p>def nm_line(t, centroid, worst):</p>
-<pre><code>return centroid + t * (worst - centroid)</code></pre>
-<p>def centroid(vertices):</p>
-<pre><code>x = vertices[0]
-for i in range(1, vertices.shape[0]-1):
-    x += vertices[i]
-return x/(vertices.shape[0]-1)</code></pre>
-<p>def nelder_mead(f, x0, tol=1e-5, max_iter=1000):</p>
-<pre><code>n = len(x0)
 
-# MATLAB fminsearch initialisation routine
-vertices = np.empty([n+1, n], dtype=x0.dtype)
-vertices[0, :] = x0
-for i in range(1, n+1):
-    vertices[i, :] = x0
-    if x0[i-1] == 0:
-        vertices[i, i-1] += 0.00025
-    else:
-        vertices[i, i-1] += 0.05
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convex_function</span>(x):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sum(np<span style="color:#f92672">.</span>array(x)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
 
-saved_vertices = np.empty([n+1, n, max_iter], dtype=x0.dtype)
-# Nelder–Mead algorithm from:
-#    Numerical optimization
-#    by Nocedal, Jorge; Wright, Stephen J., 1960-,
-#    Chapter 9
-for step in range(max_iter):
-    vertices, f_evals = order_vertices(f, vertices)
-    saved_vertices[:, :, step] = vertices
-    if np.std(f_evals) &lt; tol:
-        break
-    cent = centroid(vertices)
-    reflect = nm_line(-1, cent, vertices[-1])
-    f_reflect = f(reflect)
-    if f_evals[0] &lt;= f_reflect and f_reflect &lt; f_evals[-2]:
-        vertices[-1] = reflect
-    elif f_reflect &lt; f_evals[0]:
-        expansion = nm_line(-2, cent, vertices[-1])
-        f_expansion = f(expansion)
-        if f_expansion &lt; f_reflect:
-            vertices[-1] = expansion
-        else:
-            vertices[-1] = reflect
-    elif f_reflect &gt;= f_evals[-2]:
-        contraction_successful = False
-        if f_evals[-2] &lt;= f_reflect and f_reflect &lt; f_evals[-1]:
-            out_contract = nm_line(-0.5, cent, vertices[-1])
-            f_out_contract = f(out_contract)
-            if f_out_contract &lt;= f_reflect:
-                vertices[-1] = out_contract
-                contraction_successful = True
-        else:
-            in_contract = nm_line(0.5, cent, vertices[-1])
-            f_in_contract = f(in_contract)
-            if f_in_contract &lt;= f_reflect:
-                vertices[-1] = in_contract
-                contraction_successful = True
-        if not contraction_successful:
-            for i in range(1, n+1):
-                vertices[i] = 0.5*(vertices[0] + vertices[i])
-return saved_vertices[:, :, 0:step+1]</code></pre>
-<p>if <strong>name</strong> == '<strong>main</strong>':</p>
-<pre><code>for f in [convex_function]:
-    x0 = np.array([1.0, 1.0])
-    x_min = np.array([-1.0, -1.0])
-    x_max = np.array([1.0, 1.0])
 
-    saved_vertices = nelder_mead(f, x0)
-    print(&#39;Complete after&#39;, saved_vertices.shape[2], &#39;iterations&#39;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">order_vertices</span>(f, vertices):
+    N <span style="color:#f92672">=</span> vertices<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+    f_evals <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([f(vertices[i]) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N)])
+    ind <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argsort(f_evals)
+    <span style="color:#66d9ef">return</span> vertices[ind], f_evals[ind]
 
-    nx, ny = (100, 100)
-    x = np.linspace(x_min[0], x_max[0], nx)
-    y = np.linspace(x_min[1], x_max[1], ny)
-    xv, yv = np.meshgrid(x, y)
-    eval_f = f([xv, yv])
-    fig, ax = plt.subplots()
-    c = plt.contourf(x, y, eval_f)
 
-    ln, = plt.plot(
-        np.append(
-            saved_vertices[:, 0, 0],
-            saved_vertices[0, 0, 0]
-        ),
-        np.append(
-            saved_vertices[:, 1, 0],
-            saved_vertices[0, 1, 0]
-        )
-    )
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nm_line</span>(t, centroid, worst):
+    <span style="color:#66d9ef">return</span> centroid <span style="color:#f92672">+</span> t <span style="color:#f92672">*</span> (worst <span style="color:#f92672">-</span> centroid)
 
-    def init():
-        ax.set_xlim(x_min[0], x_max[0])
-        ax.set_ylim(x_min[1], x_max[1])
-        return ln,
 
-    def update(i):
-        ln.set_data(
-            np.append(
-                saved_vertices[:, 0, i],
-                saved_vertices[0, 0, i]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">centroid</span>(vertices):
+    x <span style="color:#f92672">=</span> vertices[<span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, vertices<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+        x <span style="color:#f92672">+=</span> vertices[i]
+    <span style="color:#66d9ef">return</span> x<span style="color:#f92672">/</span>(vertices<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nelder_mead</span>(f, x0, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+    n <span style="color:#f92672">=</span> len(x0)
+
+    <span style="color:#75715e"># MATLAB fminsearch initialisation routine</span>
+    vertices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty([n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n], dtype<span style="color:#f92672">=</span>x0<span style="color:#f92672">.</span>dtype)
+    vertices[<span style="color:#ae81ff">0</span>, :] <span style="color:#f92672">=</span> x0
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+        vertices[i, :] <span style="color:#f92672">=</span> x0
+        <span style="color:#66d9ef">if</span> x0[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            vertices[i, i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.00025</span>
+        <span style="color:#66d9ef">else</span>:
+            vertices[i, i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.05</span>
+
+    saved_vertices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty([n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n, max_iter], dtype<span style="color:#f92672">=</span>x0<span style="color:#f92672">.</span>dtype)
+    <span style="color:#75715e"># Nelder–Mead algorithm from:</span>
+    <span style="color:#75715e">#    Numerical optimization</span>
+    <span style="color:#75715e">#    by Nocedal, Jorge; Wright, Stephen J., 1960-,</span>
+    <span style="color:#75715e">#    Chapter 9</span>
+    <span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(max_iter):
+        vertices, f_evals <span style="color:#f92672">=</span> order_vertices(f, vertices)
+        saved_vertices[:, :, step] <span style="color:#f92672">=</span> vertices
+        <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>std(f_evals) <span style="color:#f92672">&lt;</span> tol:
+            <span style="color:#66d9ef">break</span>
+        cent <span style="color:#f92672">=</span> centroid(vertices)
+        reflect <span style="color:#f92672">=</span> nm_line(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, cent, vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+        f_reflect <span style="color:#f92672">=</span> f(reflect)
+        <span style="color:#66d9ef">if</span> f_evals[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> f_reflect <span style="color:#f92672">and</span> f_reflect <span style="color:#f92672">&lt;</span> f_evals[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]:
+            vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> reflect
+        <span style="color:#66d9ef">elif</span> f_reflect <span style="color:#f92672">&lt;</span> f_evals[<span style="color:#ae81ff">0</span>]:
+            expansion <span style="color:#f92672">=</span> nm_line(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, cent, vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+            f_expansion <span style="color:#f92672">=</span> f(expansion)
+            <span style="color:#66d9ef">if</span> f_expansion <span style="color:#f92672">&lt;</span> f_reflect:
+                vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> expansion
+            <span style="color:#66d9ef">else</span>:
+                vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> reflect
+        <span style="color:#66d9ef">elif</span> f_reflect <span style="color:#f92672">&gt;=</span> f_evals[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]:
+            contraction_successful <span style="color:#f92672">=</span> False
+            <span style="color:#66d9ef">if</span> f_evals[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;=</span> f_reflect <span style="color:#f92672">and</span> f_reflect <span style="color:#f92672">&lt;</span> f_evals[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
+                out_contract <span style="color:#f92672">=</span> nm_line(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, cent, vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+                f_out_contract <span style="color:#f92672">=</span> f(out_contract)
+                <span style="color:#66d9ef">if</span> f_out_contract <span style="color:#f92672">&lt;=</span> f_reflect:
+                    vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> out_contract
+                    contraction_successful <span style="color:#f92672">=</span> True
+            <span style="color:#66d9ef">else</span>:
+                in_contract <span style="color:#f92672">=</span> nm_line(<span style="color:#ae81ff">0.5</span>, cent, vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+                f_in_contract <span style="color:#f92672">=</span> f(in_contract)
+                <span style="color:#66d9ef">if</span> f_in_contract <span style="color:#f92672">&lt;=</span> f_reflect:
+                    vertices[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> in_contract
+                    contraction_successful <span style="color:#f92672">=</span> True
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> contraction_successful:
+                <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+                    vertices[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span><span style="color:#f92672">*</span>(vertices[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> vertices[i])
+    <span style="color:#66d9ef">return</span> saved_vertices[:, :, <span style="color:#ae81ff">0</span>:step<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> [convex_function]:
+        x0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>])
+        x_min <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>])
+        x_max <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>])
+
+        saved_vertices <span style="color:#f92672">=</span> nelder_mead(f, x0)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Complete after&#39;</span>, saved_vertices<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;iterations&#39;</span>)
+
+        nx, ny <span style="color:#f92672">=</span> (<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">100</span>)
+        x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(x_min[<span style="color:#ae81ff">0</span>], x_max[<span style="color:#ae81ff">0</span>], nx)
+        y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(x_min[<span style="color:#ae81ff">1</span>], x_max[<span style="color:#ae81ff">1</span>], ny)
+        xv, yv <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+        eval_f <span style="color:#f92672">=</span> f([xv, yv])
+        fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+        c <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>contourf(x, y, eval_f)
+
+        ln, <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>plot(
+            np<span style="color:#f92672">.</span>append(
+                saved_vertices[:, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],
+                saved_vertices[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]
             ),
-            np.append(
-                saved_vertices[:, 1, i],
-                saved_vertices[0, 1, i]
+            np<span style="color:#f92672">.</span>append(
+                saved_vertices[:, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>],
+                saved_vertices[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]
             )
         )
-        return ln,
 
-    ani = animation.FuncAnimation(
-        fig, update,
-        range(1, saved_vertices.shape[2]),
-        init_func=init, blit=True
-    )
-    plt.show()</code></pre>
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init</span>():
+            ax<span style="color:#f92672">.</span>set_xlim(x_min[<span style="color:#ae81ff">0</span>], x_max[<span style="color:#ae81ff">0</span>])
+            ax<span style="color:#f92672">.</span>set_ylim(x_min[<span style="color:#ae81ff">1</span>], x_max[<span style="color:#ae81ff">1</span>])
+            <span style="color:#66d9ef">return</span> ln,
+
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(i):
+            ln<span style="color:#f92672">.</span>set_data(
+                np<span style="color:#f92672">.</span>append(
+                    saved_vertices[:, <span style="color:#ae81ff">0</span>, i],
+                    saved_vertices[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, i]
+                ),
+                np<span style="color:#f92672">.</span>append(
+                    saved_vertices[:, <span style="color:#ae81ff">1</span>, i],
+                    saved_vertices[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, i]
+                )
+            )
+            <span style="color:#66d9ef">return</span> ln,
+
+        ani <span style="color:#f92672">=</span> animation<span style="color:#f92672">.</span>FuncAnimation(
+            fig, update,
+            range(<span style="color:#ae81ff">1</span>, saved_vertices<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>]),
+            init_func<span style="color:#f92672">=</span>init, blit<span style="color:#f92672">=</span>True
+        )
+        plt<span style="color:#f92672">.</span>show()</code></pre></div>
 </div>
 
 </details>
@@ -1621,16 +1633,16 @@ return saved_vertices[:, :, 0:step+1]</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1611598028"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1611598028"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1611598028"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611598308"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611598308"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598028"></script>
-    <script src="/scientific-computing/js/learn.js?1611598028"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1611598028"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598308"></script>
+    <script src="/scientific-computing/js/learn.js?1611598308"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611598308"></script>
     
     
 
