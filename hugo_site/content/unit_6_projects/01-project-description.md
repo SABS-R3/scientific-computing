@@ -23,7 +23,7 @@ In the last three days of this course, you will pick one (or more than one) scie
 computing algorithm of your choice and publish both an implementation of the algorithm 
 as well as an explanation of its theoretical and/or practical properties (i.e. how it 
 works). Which algorithm you choose, your implementation and how you publish it is 
-entirely up to you. 
+entirely up to you.
 
 For example, you might choose to:
 - implement the algorithm as a Jupyter notebook, interleaving markdown text and code to 
@@ -45,7 +45,7 @@ like D3.
 
 You can pick any scientific computing algorithm you wish, you do not have to be confined 
 to the topics discussed during this course (e.g. perhaps you want to focus on a
-technique you might use for your DPhil). Below are a few suggestions:
+technique you might use for your DPhil). Below are a few suggestions to get you started.
 
 ### Linear algebra
 
