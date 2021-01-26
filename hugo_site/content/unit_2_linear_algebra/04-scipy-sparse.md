@@ -171,9 +171,57 @@ plt.show()
 {{% /notice %}}
 {{% /expand %}}
 
+{{% notice question %}}
 4. Vary the number of discretisation points $N$ and solve the Poisson problem with 
    varying $N$, and with using both the sparse and direct $LU$ solvers. For each $N$ 
    record the time taken for both the dense and sparse solvers, and record the numerical 
    error $||\mathbf{v} - \mathbf{v}_a||_2$. Generate plots of both error and time versus 
    $N$, and comment on how they vary with $N$
 
+{{% /notice %}}
+
+{{% expand "Expand for solution" %}}
+{{% notice solution %}}
+```python
+times = np.empty(num, dtype=float)
+times_dense = np.empty(num, dtype=float)
+times_dense[:] = np.nan
+
+for i, N in enumerate(Ns):
+    e = np.ones(N, dtype=float)
+    A = sp.spdiags([e, -2*e, e], [-1, 0, 1], N, N, format='csc')
+
+    x = np.linspace(0, L, N+2)
+    h = x[1] - x[0]
+    fcos = 2 * np.cos(x) / np.exp(x)
+    analytical_cos = -np.sin(x) / np.exp(x)
+
+    A /= h**2
+
+    b = fcos[1:-1]
+    b[0] -= analytical_cos[0] / h**2
+    b[-1] -= analytical_cos[-1] / h**2
+
+    t0 = time.perf_counter()
+    splu = sp.linalg.splu(A)
+    v = splu.solve(b)
+    t1 = time.perf_counter()
+    times[i] = t1 - t0
+    if N < 2000:
+        Adense = A.toarray()
+        t0 = time.perf_counter()
+        lu = scipy.linalg.lu_factor(Adense)
+        v = scipy.linalg.lu_solve(lu, b)
+        t1 = time.perf_counter()
+        times_dense[i] = t1 - t0
+
+plt.clf()
+plt.loglog(Ns, times, label='sparse LU')
+plt.loglog(Ns, times_dense, label='dense LU')
+plt.xlabel('N')
+plt.ylabel('time taken')
+plt.legend()
+plt.show()
+```
+{{% /notice %}}
+{{% /expand %}}
