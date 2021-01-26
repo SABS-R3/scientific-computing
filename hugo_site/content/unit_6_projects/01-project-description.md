@@ -45,7 +45,9 @@ like D3.
 
 You can pick any scientific computing algorithm you wish, you do not have to be confined 
 to the topics discussed during this course (e.g. perhaps you want to focus on a
-technique you might use for your DPhil). Below are a few suggestions to get you started.
+technique you might use for your DPhil). Below are a few suggestions to get you started. 
+Note that you can also choose one of the algorithms already presented during this course 
+like QR decomposition, and explain it better than I did!
 
 ### Linear algebra
 
