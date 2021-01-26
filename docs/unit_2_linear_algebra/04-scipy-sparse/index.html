@@ -12,21 +12,21 @@
     <title>Scipy.sparse and problems   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1611649973" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611660418" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611660418" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611660418" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611649973"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611660418"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611649973"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611649973"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611660418"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611660418"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1611649973"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611660418"></script>
 
     
   </div>
@@ -1071,13 +1071,68 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
 </details>
 
 
-<ol start="4">
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <ol start="4">
 <li>Vary the number of discretisation points $N$ and solve the Poisson problem with
 varying $N$, and with using both the sparse and direct $LU$ solvers. For each $N$
 record the time taken for both the dense and sparse solvers, and record the numerical
 error $||\mathbf{v} - \mathbf{v}_a||_2$. Generate plots of both error and time versus
 $N$, and comment on how they vary with $N$</li>
 </ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">times <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(num, dtype<span style="color:#f92672">=</span>float)
+times_dense <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(num, dtype<span style="color:#f92672">=</span>float)
+times_dense[:] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+
+<span style="color:#66d9ef">for</span> i, N <span style="color:#f92672">in</span> enumerate(Ns):
+    e <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones(N, dtype<span style="color:#f92672">=</span>float)
+    A <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>spdiags([e, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>e, e], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], N, N, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;csc&#39;</span>)
+
+    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, L, N<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>)
+    h <span style="color:#f92672">=</span> x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">0</span>]
+    fcos <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
+    analytical_cos <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sin(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
+
+    A <span style="color:#f92672">/=</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+
+    b <span style="color:#f92672">=</span> fcos[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+    b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-=</span> analytical_cos[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    b[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> analytical_cos[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+
+    t0 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
+    splu <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>splu(A)
+    v <span style="color:#f92672">=</span> splu<span style="color:#f92672">.</span>solve(b)
+    t1 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
+    times[i] <span style="color:#f92672">=</span> t1 <span style="color:#f92672">-</span> t0
+    <span style="color:#66d9ef">if</span> N <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2000</span>:
+        Adense <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>toarray()
+        t0 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
+        lu <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lu_factor(Adense)
+        v <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lu_solve(lu, b)
+        t1 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
+        times_dense[i] <span style="color:#f92672">=</span> t1 <span style="color:#f92672">-</span> t0
+
+plt<span style="color:#f92672">.</span>clf()
+plt<span style="color:#f92672">.</span>loglog(Ns, times, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse LU&#39;</span>)
+plt<span style="color:#f92672">.</span>loglog(Ns, times_dense, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dense LU&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;N&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;time taken&#39;</span>)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
 
 
 <footer class="footline">
@@ -1623,16 +1678,16 @@ $N$, and comment on how they vary with $N$</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1611649973"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611649973"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611649973"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1611649973"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1611649973"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1611649973"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611660418"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611660418"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611660418"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611660418"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611660418"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611660418"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611649973"></script>
-    <script src="/scientific-computing/js/learn.js?1611649973"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1611649973"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611660418"></script>
+    <script src="/scientific-computing/js/learn.js?1611660418"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611660418"></script>
     
     
 
