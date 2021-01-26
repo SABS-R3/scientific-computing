@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
 
-    <title>Scipy.sparse and problems   Modelling and Scientific Computing</title>
+    <title>Project description   Modelling and Scientific Computing</title>
 
     
     <link href="/scientific-computing/css/nucleus.css?1611675973" rel="stylesheet">
@@ -53,7 +53,7 @@
 
 
   </head>
-  <body class="" data-url="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+  <body class="" data-url="/scientific-computing/unit_6_projects/01-project-description/">
     <nav id="sidebar" class="">
 
 
@@ -357,7 +357,7 @@
   
     
     <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
-        parent
+        
         
         
         ">
@@ -446,7 +446,7 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item active">
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item ">
         <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
         Scipy.sparse and problems
         
@@ -767,7 +767,7 @@
   
     
     <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
-        
+        parent
         
         
         ">
@@ -793,7 +793,7 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_6_projects/01-project-description/" title="Project description" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_6_projects/01-project-description/" title="Project description" class="dd-item active">
         <a href="/scientific-computing/unit_6_projects/01-project-description/">
         Project description
         
@@ -841,7 +841,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/main/hugo_site/content/unit_2_linear_algebra/04-scipy-sparse.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/main/hugo_site/content/unit_6_projects/01-project-description.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -872,7 +872,7 @@
             
           
           
-            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_2_linear_algebra/'>Sparse Matrices and Iterative Solvers</a> > Scipy.sparse and problems
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_6_projects/'>Projects</a> > Project description
           
         
           
@@ -901,268 +901,126 @@
           
             <h1>
               
-              Scipy.sparse and problems
+              Project description
             </h1>
           
 
         
 
 
-<p>There are seven available sparse matrix types in <code>scipy.sparse</code>:</p>
+<p>The development of efficient and accurate general purpose algorithms for scientific
+computing is one of the primary motivators for researchers specialising in this field.
+However, an often overlooked aspect of scientific computing research is the proper
+<em>implementation</em> and <em>publication</em> of these algorithms in order for other researchers to
+make use of an algorithm. This is even more important for those working in more applied
+fields, whether in biomedicine or engineering, who might not have sufficient specialised
+technical knowledge to even read, for example, the latest literature in advanced MCMC
+sampling methods.</p>
+
+<p>Taking an even broader view to research in general. While it is important to pursue a
+rigorous research agenda in any specialist subject and generate important research
+outcomes, of equal importance is the proper <em>publication</em> of this work. How is it
+properly communicated to both those working inside and outside your field, and/or to the
+general public.</p>
+
+<p>In the last three days of this course, you will pick one (or more than one) scientific
+computing algorithm of your choice and publish both an implementation of the algorithm
+as well as an explanation of its theoretical and/or practical properties (i.e. how it
+works). Which algorithm you choose, your implementation and how you publish it is
+entirely up to you.</p>
+
+<p>For example, you might choose to:</p>
 
 <ul>
-<li><code>csc_matrix</code>: Compressed Sparse Column format</li>
-<li><code>csr_matrix</code>: Compressed Sparse Row format</li>
-<li><code>bsr_matrix</code>: Block Sparse Row format</li>
-<li><code>lil_matrix</code>: List of Lists format</li>
-<li><code>dok_matrix</code>: Dictionary of Keys format</li>
-<li><code>coo_matrix</code>: COOrdinate format (aka IJV, triplet format)</li>
-<li><code>dia_matrix</code>: DIAgonal format</li>
+<li>implement the algorithm as a Jupyter notebook, interleaving markdown text and code to
+explain the algorithm.</li>
+<li>implement the algorithm as a Python library on Github, with a README.md, Sphinx
+documentation and/or separate pdf document describing both how to use the library and
+a mathematical description of the algorithm.</li>
+<li>implement the algorithm in a fork of an existing package like Scipy, or
+<a href="https://github.com/pints-team/pints">Pints</a></li>
+<li>Produce an explanatory video or animation describing the algorithm, or which is used
+within a written explanation. Note that Matplotlib is able to generate animations, or
+you can <a href="https://observablehq.com/@d3/learn-d3-animation">use</a> a more purpose built
+like <a href="https://d3js.org/">D3</a>.</li>
 </ul>
 
-<p>As indicated by the excellent
-<a href="https://docs.scipy.org/doc/scipy/reference/sparse.html">documentation</a>, the
-<code>dok_matrix</code> or <code>lil_matrix</code> formats are preferable to construct matrices as they
-support basic slicing and indexing similar to a standard NumPy array.</p>
+<p>For inspiration, here is a link to the online journal
+<a href="https://distill.pub/about/">Distill</a>, a machine learning journal that specialises in
+articles publishing clear explanations of existing techniques using web technologies
+like D3.</p>
 
-<p>You will notice that the FD matrix we have constructed for the Poisson problem is
-composed entirely of diagonal elements, as is often the case. If you were constructing a
-similar matrix in MATLAB, you would use the
-<a href="https://uk.mathworks.com/help/matlab/ref/spdiags.html"><code>spdiags</code></a> function, and
-<code>scipy.sparse</code> has its own
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.spdiags.html">equivalent</a>.
-However, all the <code>scipy.sparse</code> formats also have special methods
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.lil_matrix.setdiag.html"><code>setdiag</code></a>
-which provide a more object-orientated method of doing the same thing.</p>
+<p>You can pick any scientific computing algorithm you wish, you do not have to be confined
+to the topics discussed during this course (e.g. perhaps you want to focus on a
+technique you might use for your DPhil). Below are a few suggestions:</p>
 
-<p>Scipy has a few different direct solvers for sparse matrics, given below:</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve.html#scipy.sparse.linalg.spsolve"><code>spsolve</code></a>:
-This solves $Ax=b$ where $A$ is converted into CSC or CSR form</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve_triangular.html#scipy.sparse.linalg.spsolve_triangular"><code>spsolve_triangular</code></a>:
-Solves $Ax=b$, where $A$ is assumed to be triangular.</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.factorized.html#scipy.sparse.linalg.factorized"><code>factorized</code></a>:
-This computes the $LU$ decomposition of the input matrix $A$, returning a Python
-function that can be called to solve $Ax = b$</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.splu.html#scipy.sparse.linalg.splu"><code>splu</code></a>:
-This computes the $LU$ decomposition of the input matrix $A$ using the popular SuperLU
-library. It returns a Python object of class
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.SuperLU.html#scipy.sparse.linalg.SuperLU"><code>SuperLU</code></a>,
-that has a <code>solve</code> method you can use to solve $Ax = b$</p>
-
-<p>Note, <code>scipy.sparse.linalg</code> also has many iterative solvers, which we will investigate
-further in the next chapter.</p>
-
-<h3 id="problems">Problems</h3>
-
-<p>Your goal for this problem is to construct the FD matrix $A$ given above, using
-<code>scipy.sparse</code>, and:</p>
-
-
-<div class="notices question" >
-  <div class="label">Question</div>
-  <ol>
-<li>Visualise the matrix $A$ using the Matplotlib
-<a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.spy.html"><code>spy</code></a> plot</li>
-</ol>
-
-</div>
-
-
-
-<details>
-    <summary>Expand for solution</summary>
-    <div class="notices solution" >
-  <div class="label">Solution</div>
-  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scipy.sparse.linalg
-<span style="color:#f92672">import</span> scipy.sparse <span style="color:#f92672">as</span> sp
-<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-
-N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
-e <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones(N, dtype<span style="color:#f92672">=</span>float)
-A <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>spdiags([e, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>e, e], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], N, N, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;csc&#39;</span>)
-
-plt<span style="color:#f92672">.</span>spy(A)
-plt<span style="color:#f92672">.</span>show()</code></pre></div>
-</div>
-
-</details>
-
-
-
-<div class="notices question" >
-  <div class="label">Question</div>
-  <ol start="2">
-<li>Solve the Poisson problem using:
+<h3 id="linear-algebra">Linear algebra</h3>
 
 <ul>
-<li>$f(x) = 2 \cos(x) / e^x$, with boundary conditions $g(0) = 0$ and $g(2 \pi)=0$. The
-analytical solution is  $u_{a}(x) = -\sin(x) / e^x$.</li>
-<li>$f(x) = 2 \sin(x) / e^x$, with boundary conditions $g(0) = 1$ and $g(2 \pi)=1 / e^{2
-\pi}$. The analytical solution is  $u_{a}(x) = \cos(x) / e^x$</li>
+<li>Eigenvalue solvers like Power iteration method. See list of iterative algorithms on
+<a href="https://en.wikipedia.org/wiki/Eigenvalue_algorithm#Iterative_algorithms">wikipedia</a></li>
+<li>Singular Value Decomposition</li>
+<li>Matrix-matrix multiplication (and numerous methods to speed it up)</li>
+<li>Rank-revealing QR decomposition</li>
+</ul>
+
+<h3 id="ode-solvers">ODE solvers</h3>
+
+<ul>
+<li><p>Explicit</p>
+
+<ul>
+<li>Single step methods such as Runge-Kutta</li>
+<li>Multistep methods like Adams-Bashforth</li>
 </ul></li>
-</ol>
 
-</div>
+<li><p>Implicit</p>
 
+<ul>
+<li>Single step like implicit runge-kutta</li>
+<li>Multistep like Backwards Difference Formula or Adams–Moulton</li>
+</ul></li>
+</ul>
 
+<h3 id="nonlinear-optimisation">Non-linear Optimisation</h3>
 
-<details>
-    <summary>Expand for solution</summary>
-    <div class="notices solution" >
-  <div class="label">Solution</div>
-  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">L <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi
-x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, L, N<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>)
-h <span style="color:#f92672">=</span> x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">0</span>]
-fcos <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
-analytical_cos <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sin(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
-fsin <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
-analytical_sin <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
+<ul>
+<li>Lots! <a href="https://en.wikipedia.org/wiki/List_of_algorithms#Optimization_algorithms">https://en.wikipedia.org/wiki/List_of_algorithms#Optimization_algorithms</a></li>
+</ul>
 
-<span style="color:#75715e"># Use sparse lu decomposition, matrix is tridiagonal so no fill-in</span>
-splu <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>splu(A <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
-fig, axs <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
-axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>spy(splu<span style="color:#f92672">.</span>L)
-axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;L&#39;</span>)
-axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>spy(splu<span style="color:#f92672">.</span>U)
-axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;U&#39;</span>)
-plt<span style="color:#f92672">.</span>show()
+<p>Some examples:</p>
 
-<span style="color:#75715e"># Use decomposition to solve both problems</span>
-<span style="color:#66d9ef">for</span> f, a <span style="color:#f92672">in</span> zip([fcos, fsin], [analytical_cos, analytical_sin]):
-    b <span style="color:#f92672">=</span> f[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
-    b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-=</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    b[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> a[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    v <span style="color:#f92672">=</span> splu<span style="color:#f92672">.</span>solve(b)
-    plt<span style="color:#f92672">.</span>plot(x[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], v, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;solution&#39;</span>)
-    plt<span style="color:#f92672">.</span>plot(x, a, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;analytical&#39;</span>)
-    plt<span style="color:#f92672">.</span>legend()
-    plt<span style="color:#f92672">.</span>show()</code></pre></div>
-</div>
+<ul>
+<li>Nonlinear optimisation methods like Gauss–Newton, or BFGS</li>
+<li>Stochastic gradient descent popular in ML (extensions AdaGrad, RMSProp or Adams)</li>
+<li>Monte Carlo methods like simulated annealing</li>
+</ul>
 
-</details>
+<h3 id="mcmc-samplers">MCMC samplers</h3>
 
+<ul>
+<li><a href="https://pints.readthedocs.io/en/stable/mcmc_samplers/index.html">Here</a> is the list of
+samplers available in the Pints library, for example:
+
+<ul>
+<li>Adaptive Covariance MCMC</li>
+<li>Hamiltonian Monte Carlo (HMC)</li>
+<li>Population MCMC</li>
+</ul></li>
+</ul>
 
 
 <div class="notices question" >
   <div class="label">Question</div>
-  <ol start="3">
-<li>Vary the number of discretisation points $N$ and calculate $AA$ using both sparse and
-dense matrices. For each $N$ calculate the time to calculate the matix
-multiplicatiion using Python's
-<a href="https://docs.python.org/3/library/time.html#time.perf_counter"><code>time.perf_counter</code></a>,
-and plot execution time versus $N$ for dense and sparse matrix multiplication.
-Comment on how the time varies with $N$.</li>
-</ol>
+  <p>Pick a scientific computing algorithm and provide both an re-usable implementation of
+the algorithm, as well as some form of publication that provides a clear explanation of
+how it works, and/or any other theoretical or practical properties it has (e.g. its
+execution time/memory complexity, error bounds etc.).</p>
+
+<p>Please hand in your project, in whatever format is most suitable, by 17:30 on Friday
+12th Feb 2021.</p>
 
 </div>
-
-
-
-<details>
-    <summary>Expand for solution</summary>
-    <div class="notices solution" >
-  <div class="label">Solution</div>
-  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
-
-num <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
-times <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(num, dtype<span style="color:#f92672">=</span>float)
-times_dense <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(num, dtype<span style="color:#f92672">=</span>float)
-times_dense[:] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
-Ns <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>logspace(<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">6</span>, num<span style="color:#f92672">=</span>num, dtype<span style="color:#f92672">=</span>int)
-<span style="color:#66d9ef">for</span> i, N <span style="color:#f92672">in</span> enumerate(Ns):
-    e <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones(N, dtype<span style="color:#f92672">=</span>float)
-    A <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>spdiags([e, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>e, e], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], N, N, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;csc&#39;</span>)
-
-    t0 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-    AA <span style="color:#f92672">=</span> A <span style="color:#960050;background-color:#1e0010">@</span> A
-    t1 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-    times[i] <span style="color:#f92672">=</span> t1 <span style="color:#f92672">-</span> t0
-
-    <span style="color:#66d9ef">if</span> N <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2000</span>:
-        Adense <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>toarray()
-        t0 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-        AA <span style="color:#f92672">=</span> Adense <span style="color:#960050;background-color:#1e0010">@</span> Adense
-        t1 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-        times_dense[i] <span style="color:#f92672">=</span> t1 <span style="color:#f92672">-</span> t0
-
-plt<span style="color:#f92672">.</span>clf()
-plt<span style="color:#f92672">.</span>loglog(Ns, times, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse&#39;</span>)
-plt<span style="color:#f92672">.</span>loglog(Ns, times_dense, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dense&#39;</span>)
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;N&#39;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;time taken&#39;</span>)
-plt<span style="color:#f92672">.</span>legend()
-plt<span style="color:#f92672">.</span>show()</code></pre></div>
-</div>
-
-</details>
-
-
-
-<div class="notices question" >
-  <div class="label">Question</div>
-  <ol start="4">
-<li>Vary the number of discretisation points $N$ and solve the Poisson problem with
-varying $N$, and with using both the sparse and direct $LU$ solvers. For each $N$
-record the time taken for both the dense and sparse solvers, and record the numerical
-error $||\mathbf{v} - \mathbf{v}_a||_2$. Generate plots of both error and time versus
-$N$, and comment on how they vary with $N$</li>
-</ol>
-
-</div>
-
-
-
-<details>
-    <summary>Expand for solution</summary>
-    <div class="notices solution" >
-  <div class="label">Solution</div>
-  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">times <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(num, dtype<span style="color:#f92672">=</span>float)
-times_dense <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(num, dtype<span style="color:#f92672">=</span>float)
-times_dense[:] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
-
-<span style="color:#66d9ef">for</span> i, N <span style="color:#f92672">in</span> enumerate(Ns):
-    e <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones(N, dtype<span style="color:#f92672">=</span>float)
-    A <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>spdiags([e, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>e, e], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], N, N, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;csc&#39;</span>)
-
-    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, L, N<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>)
-    h <span style="color:#f92672">=</span> x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> x[<span style="color:#ae81ff">0</span>]
-    fcos <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
-    analytical_cos <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sin(x) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>exp(x)
-
-    A <span style="color:#f92672">/=</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-
-    b <span style="color:#f92672">=</span> fcos[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
-    b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-=</span> analytical_cos[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    b[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> analytical_cos[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-
-    t0 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-    splu <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>splu(A)
-    v <span style="color:#f92672">=</span> splu<span style="color:#f92672">.</span>solve(b)
-    t1 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-    times[i] <span style="color:#f92672">=</span> t1 <span style="color:#f92672">-</span> t0
-    <span style="color:#66d9ef">if</span> N <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2000</span>:
-        Adense <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>toarray()
-        t0 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-        lu <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lu_factor(Adense)
-        v <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lu_solve(lu, b)
-        t1 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-        times_dense[i] <span style="color:#f92672">=</span> t1 <span style="color:#f92672">-</span> t0
-
-plt<span style="color:#f92672">.</span>clf()
-plt<span style="color:#f92672">.</span>loglog(Ns, times, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse LU&#39;</span>)
-plt<span style="color:#f92672">.</span>loglog(Ns, times_dense, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dense LU&#39;</span>)
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;N&#39;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;time taken&#39;</span>)
-plt<span style="color:#f92672">.</span>legend()
-plt<span style="color:#f92672">.</span>show()</code></pre></div>
-</div>
-
-</details>
 
 
 
@@ -1380,7 +1238,6 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
             
                 
                     
-                    
                 
                 
 
@@ -1388,25 +1245,6 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1439,122 +1277,6 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
                         
             
@@ -1688,6 +1410,136 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -1712,10 +1564,10 @@ plt<span style="color:#f92672">.</span>show()</code></pre></div>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/scientific-computing/unit_6_projects/" title="Projects"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/scientific-computing/unit_0_introduction/" title="Course introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

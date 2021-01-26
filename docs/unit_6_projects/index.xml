@@ -7,5 +7,14 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Fri, 27 Nov 2020 16:10:31 +0000</lastBuildDate><atom:link href="https://sabs-r3.github.io/scientific-computing/unit_6_projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project description</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_6_projects/01-project-description/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_6_projects/01-project-description/</guid>
+      <description>The development of efficient and accurate general purpose algorithms for scientific computing is one of the primary motivators for researchers specialising in this field. However, an often overlooked aspect of scientific computing research is the proper implementation and publication of these algorithms in order for other researchers to make use of an algorithm. This is even more important for those working in more applied fields, whether in biomedicine or engineering, who might not have sufficient specialised technical knowledge to even read, for example, the latest literature in advanced MCMC sampling methods.</description>
+    </item>
+    
   </channel>
 </rss>
