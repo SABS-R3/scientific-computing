@@ -39,18 +39,42 @@ all the vertices on the simplex are shrunk towards the best vertex $x_1$.
 ![Nelder–Mead simplex search over the Rosenbrock banana 
 function](/scientific-computing/images/unit_04/Nelder-Mead_Rosenbrock.gif) 
 
+## Algorithm
+
 [Scholarpedia](http://www.scholarpedia.org/article/Nelder-Mead_algorithm) and 
 [Wikipedia](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method) provide diagrams 
 and pseudocode of the Nelder-Mead algorithm, as does Chapter 9.5 of the Nocedal and 
 Write textbook given below
 
+## Initialisation and termination
+
+It is not obvious how Nelder-Mead should be initialised, given a single starting point 
+$x_0$ by the user. The (Gau 2012) paper provides an initialisation routine that was also 
+used in MATLAB's fminsearch function. The $x_0$ point is used as one of the vertices, 
+with the remaining $n$ vertices set to $x_0 + \tau_i e_i$, where $e_i$ is a unit vector 
+in the $i^{th}$ coordinate and 
+
+$$
+\tau_i = \begin{cases}
+0.05 \text{ if }(x_0)_i \ne 0,\\
+0.00025 \text{ if }(x_0)_i = 0,\\
+\end{cases}
+$$
+
+For termination, Nelder and Mead recommended stopping the iteration when the standard 
+deviation of the function evaluations reduces below a certain tolerance. MATLAB's 
+fminsearch terminates when 
+$\max\_{2 \le i \le n+1} |f\_i - f\_1| \le \text{TolFun}$ and $\max\_{2 \le i \le n+1} 
+|| x\_i - x\_1 ||_\infty \le \text{TolX}$, or if the maximum number of iterations of 
+function evaluations is reached.
+
 ## Other Reading
 
 - Nelder, John A.; R. Mead (1965). "A simplex method for function minimization". 
   Computer Journal. 7 (4): 308–313. doi:10.1093/comjnl/7.4.308.
-- [Gao, L. Han, "Implementing the Nelder-Mead simplex algorithm with adaptive 
-  parameters", Comput. Optim. Appl., DOI 
-  10.1007/s10589-010-9329-3](http://www.webpages.uidaho.edu/~fuchang/res/ANMS.pdf)
+- [Gao, F., & Han, L. (2012). Implementing the Nelder-Mead simplex algorithm with 
+  adaptive parameters. Computational Optimization and Applications, 51(1), 
+  259-277.](http://www.webpages.uidaho.edu/~fuchang/res/ANMS.pdf)
 - Numerical optimization by Nocedal, Jorge; Wright, Stephen J., 1960-, Chapter 9
 
 ### Problems
