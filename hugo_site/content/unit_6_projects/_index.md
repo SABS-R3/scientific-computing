@@ -8,7 +8,3 @@ pre = "<b>Day 6-8. </b>"
 
 # Individual Projects
 
-
-{{% notice warning %}}
-Chapter under construction.
-{{% /notice %}}
