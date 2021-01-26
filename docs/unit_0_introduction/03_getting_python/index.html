@@ -12,21 +12,21 @@
     <title>Getting Python   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1611645899" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611649973" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611649973" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611649973" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611645899"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611649973"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611645899"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611645899"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611649973"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611649973"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1611645899"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611649973"></script>
 
     
   </div>
@@ -854,7 +854,14 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows">Windows</a></li>
+    <li><a href="#mac-os-x">Mac OS X</a></li>
+    <li><a href="#debian-and-ubuntu-2004-linux">Debian and Ubuntu 20.04 Linux</a></li>
+    <li><a href="#virtual-environments">Virtual environments</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -878,6 +885,41 @@
 
 
 
+<div class="notices warning" >
+  <div class="label">Warning</div>
+  <p>This course and all of the sample solutions use Python 3.</p>
+
+</div>
+
+<h2 id="windows">Windows</h2>
+<p>You can download and install Python 3 using the releases provided by the CPython team
+<a href="https://www.python.org/downloads/windows/">here</a>. Installation using the windows
+installer packages should be straightforward, but if required you can find further
+documentation on the installation process
+<a href="https://docs.python.org/3/using/windows.html">here</a>.</p>
+<h2 id="mac-os-x">Mac OS X</h2>
+<p>You can download and install Python 3 on a Mac using the Python <a href="https://www.python.org/downloads/mac-osx/">download
+page</a>, and there are further instructions in
+the <a href="https://docs.python.org/3/using/mac.html">official documentation</a>.</p>
+<p>As an alternative, Homebrew is a package manager for Mac OSX that is very useful for
+installing scientific software and dependencies. You can see the official Homebrew
+<a href="https://brew.sh/">page</a> for installation instructions. Once Homebrew is installed you
+can install Python using</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install python
+</code></pre></div><h2 id="debian-and-ubuntu-2004-linux">Debian and Ubuntu 20.04 Linux</h2>
+<p>Debian Linux, and Ubuntu 20.04 both ship with Python 3 pre-installed.</p>
+<h2 id="virtual-environments">Virtual environments</h2>
+<p>As with everything you do in Python, it is recommended that you work in a virtual
+environment during this course. You can create a virtual environment in Python 3 using
+the <code>venv</code> module</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 -m venv env
+</code></pre></div><p>This creates a directory <code>env</code> containing the virtual environment. You can then activate
+this environment using</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">source env/bin/activate
+</code></pre></div><p>Once your environment is activated, you can install the dependencies for this course
+using <code>pip</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install numpy scipy matplotlib
+</code></pre></div>
 
 <footer class="footline">
 	
@@ -1419,16 +1461,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1611645899"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611645899"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611645899"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1611645899"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1611645899"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1611645899"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611649973"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611649973"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611649973"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611649973"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611649973"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611649973"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611645899"></script>
-    <script src="/scientific-computing/js/learn.js?1611645899"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1611645899"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611649973"></script>
+    <script src="/scientific-computing/js/learn.js?1611649973"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611649973"></script>
     
     
 

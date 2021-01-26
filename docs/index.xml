@@ -220,7 +220,7 @@ Krylov subspace methods Krylov subspace methods are an important family of itera
       <pubDate>Thu, 26 Nov 2020 16:52:22 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/01_course_overview/</guid>
-      <description></description>
+      <description>Scientific computing is a broad term, and encompasses everything from a small script to plot a dataset for publication, to a high performance numerical PDE solver that is running on a supercomputer. Underlying and supporting all these implementations are two important elements, without which the field of scientific computing could not exist. The first is the development and publishing of general purpose algorithms for solving common problems, such as algorithms for the solution of ordinary differential equations (e.</description>
     </item>
     
     <item>
@@ -229,7 +229,7 @@ Krylov subspace methods Krylov subspace methods are an important family of itera
       <pubDate>Wed, 25 Nov 2020 16:52:22 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/02_course_activities/</guid>
-      <description></description>
+      <description>The course material is broken up into days, each focusing on an individual topic. Each days topic is supported by at least one pre-recorded lecture to introduce the topic, accompanied by the written material in the website that covers the mathematical background of details of each algorithm covered. At certain points in the material, practical exercises are given to consolidate your understanding and to further develop practical skills in algorithm implementation using Python.</description>
     </item>
     
     <item>
@@ -238,7 +238,9 @@ Krylov subspace methods Krylov subspace methods are an important family of itera
       <pubDate>Tue, 24 Nov 2020 16:52:22 +0000</pubDate>
       
       <guid>https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_python/</guid>
-      <description></description>
+      <description>Warning This course and all of the sample solutions use Python 3.
+ Windows You can download and install Python 3 using the releases provided by the CPython team here. Installation using the windows installer packages should be straightforward, but if required you can find further documentation on the installation process here.
+Mac OS X You can download and install Python 3 on a Mac using the Python download page, and there are further instructions in the official documentation.</description>
     </item>
     
   </channel>

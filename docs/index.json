@@ -4,7 +4,7 @@
 	"title": "Course introduction",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 0 Course introduction "
+	"content": "Course introduction "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/",
@@ -32,7 +32,7 @@
 	"title": "Direct Solvers and Matrix Decompositions",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 1 Direct Solvers and Matrix Decompositions Warning Chapter under construction. Original course available here.\n "
+	"content": "Direct Solvers and Matrix Decompositions "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/",
@@ -60,7 +60,7 @@
 	"title": "Sparse Matrices and Iterative Solvers",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 1 Sparse Matrices and Iterative Solvers Warning Chapter under construction. Original course available here.\n "
+	"content": "Sparse Matrices and Iterative Solvers "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/",
@@ -88,7 +88,7 @@
 	"title": "Solving ODEs",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 1 Solving Ordinary Differential Equations (ODEs) Warning Chapter under construction.\n "
+	"content": "Solving Ordinary Differential Equations (ODEs) Warning Chapter under construction.\n "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/",
@@ -123,7 +123,7 @@
 	"title": "Non-linear Optimisation",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 1 Non-linear Optimisation Warning Chapter under construction.\n "
+	"content": "Non-linear Optimisation Warning Chapter under construction.\n "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/05-iterative-methods/",
@@ -137,14 +137,14 @@
 	"title": "Bayesian Inference",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 1 Bayesian Inference and MCMC Warning Chapter under construction.\n "
+	"content": "Bayesian Inference and MCMC Warning Chapter under construction.\n "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_6_projects/",
 	"title": "Projects",
 	"tags": [],
 	"description": "",
-	"content": "Chapter 1 Personal Projects Warning Chapter under construction.\n "
+	"content": "Individual Projects Warning Chapter under construction.\n "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/",
@@ -200,21 +200,21 @@
 	"title": "Course Overview",
 	"tags": [],
 	"description": "",
-	"content": ""
+	"content": "Scientific computing is a broad term, and encompasses everything from a small script to plot a dataset for publication, to a high performance numerical PDE solver that is running on a supercomputer. Underlying and supporting all these implementations are two important elements, without which the field of scientific computing could not exist. The first is the development and publishing of general purpose algorithms for solving common problems, such as algorithms for the solution of ordinary differential equations (e.g. Euler or Runge-Kutta methods), or to minimise a non-linear function (e.g. Newtons method or Nelder–Mead). The second is the development of software frameworks for ease of implementation of these algorithms, on both desktop and high performance computers. The most important category of software frameworks is the ubiquitous Linear Algebra libraries for representing and operating on matrices and vectors. The BLAS APIs that were developed in the 1970s were hugely important in developing a common set of functions for linear algebra that could be backed by processor-specific implementations for high execution speed. After these came higher level libraries such as ATLAS and LAPACK, leading eventually to mass market linear algebra applications like MATLAB.\nThis course attempts to give an introduction to a useful set of algorithms for scientific computing, along with practical skills in implementation of these algorithms using linear algebra and other scientific libraries. On the algorithm side, we will focus on:\n Linear algebra direct solvers and matrix decompositions Sparse matrices and iterative solvers Solution of Ordinary Differential Equations Non-linear Optimisation Bayesian Inference and MCMC sampling  For a two week course it is impractical to give a proper treatment of all of these topics. Therefor we will attempt to touch on some of the more important algorithms within each topic and provide links to further reading to broaden your knowledge.\nOn the software side, we will focus exclusively on implementation in Python, using the Numpy library for multidimensional arrays, and the Scipy library for both sparse matrices and many, many other general purpose scientific computing algorithms.\n"
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_0_introduction/02_course_activities/",
 	"title": "Course Activities",
 	"tags": [],
 	"description": "",
-	"content": ""
+	"content": "The course material is broken up into days, each focusing on an individual topic. Each days topic is supported by at least one pre-recorded lecture to introduce the topic, accompanied by the written material in the website that covers the mathematical background of details of each algorithm covered. At certain points in the material, practical exercises are given to consolidate your understanding and to further develop practical skills in algorithm implementation using Python.\nQuestion Print the value of $\\pi$ to the console.\nThis is an example problem. Each problem is followed by a hidden solution for your reference, see below. Of course, only consult the solution to compare against your own solution, or if you are stuck and cannot proceed.\n  Expand for solution Solution import numpy as np print(np.pi)    "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_0_introduction/03_getting_python/",
 	"title": "Getting Python",
 	"tags": [],
 	"description": "",
-	"content": ""
+	"content": " Warning This course and all of the sample solutions use Python 3.\n Windows You can download and install Python 3 using the releases provided by the CPython team here. Installation using the windows installer packages should be straightforward, but if required you can find further documentation on the installation process here.\nMac OS X You can download and install Python 3 on a Mac using the Python download page, and there are further instructions in the official documentation.\nAs an alternative, Homebrew is a package manager for Mac OSX that is very useful for installing scientific software and dependencies. You can see the official Homebrew page for installation instructions. Once Homebrew is installed you can install Python using\nbrew install python Debian and Ubuntu 20.04 Linux Debian Linux, and Ubuntu 20.04 both ship with Python 3 pre-installed.\nVirtual environments As with everything you do in Python, it is recommended that you work in a virtual environment during this course. You can create a virtual environment in Python 3 using the venv module\npython3 -m venv env This creates a directory env containing the virtual environment. You can then activate this environment using\nsource env/bin/activate Once your environment is activated, you can install the dependencies for this course using pip\npip install numpy scipy matplotlib "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/categories/",
