@@ -6,8 +6,6 @@ chapter = true
 pre = "<b>Day 5. </b>"
 +++
 
-### Chapter 1
-
 # Bayesian Inference and MCMC
 
 

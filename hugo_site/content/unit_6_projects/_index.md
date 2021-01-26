@@ -6,9 +6,7 @@ chapter = true
 pre = "<b>Day 6-8. </b>"
 +++
 
-### Chapter 1
-
-# Personal Projects
+# Individual Projects
 
 
 {{% notice warning %}}

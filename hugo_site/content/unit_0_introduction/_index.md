@@ -6,6 +6,4 @@ chapter = true
 pre = ""
 +++
 
-### Chapter 0
-
 # Course introduction

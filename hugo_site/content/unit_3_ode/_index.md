@@ -6,8 +6,6 @@ chapter = true
 pre = "<b>Day 3. </b>"
 +++
 
-### Chapter 1
-
 # Solving Ordinary Differential Equations (ODEs)
 
 

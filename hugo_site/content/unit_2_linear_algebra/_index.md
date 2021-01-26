@@ -6,11 +6,4 @@ chapter = true
 pre = "<b>Day 2. </b>"
 +++
 
-### Chapter 1
-
 # Sparse Matrices and Iterative Solvers
-
-
-{{% notice warning %}}
-Chapter under construction. Original course [available here](http://www.dtc.ox.ac.uk/online-learning/matlab/).
-{{% /notice %}}

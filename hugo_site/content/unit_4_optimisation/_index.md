@@ -6,8 +6,6 @@ chapter = true
 pre = "<b>Day 4. </b>"
 +++
 
-### Chapter 1
-
 # Non-linear Optimisation
 
 
