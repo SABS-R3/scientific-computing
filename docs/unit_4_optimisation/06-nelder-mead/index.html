@@ -12,21 +12,21 @@
     <title>Nelder-Mead method   Modelling and Scientific Computing</title>
 
     
-    <link href="/scientific-computing/css/nucleus.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/fontawesome-all.min.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/hybrid.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/featherlight.min.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/auto-complete.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/theme.css?1611598308" rel="stylesheet">
-    <link href="/scientific-computing/css/hugo-theme.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/nucleus.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1611645899" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1611645899" rel="stylesheet">
     
-    <link href="/scientific-computing/css/theme-dtc.css?1611598308" rel="stylesheet">
+    <link href="/scientific-computing/css/theme-dtc.css?1611645899" rel="stylesheet">
     
     
 
-    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611598308"></script>
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1611645899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611598308"></script>
-<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611598308"></script>
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1611645899"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1611645899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
     
 </script>
-<script type="text/javascript" src="/scientific-computing/js/search.js?1611598308"></script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1611645899"></script>
 
     
   </div>
@@ -912,19 +912,43 @@ all the vertices on the simplex are shrunk towards the best vertex $x_1$.</p>
 <p><figure><img src="/scientific-computing/images/unit_04/Nelder-Mead_Rosenbrock.gif" alt="Nelder–Mead simplex search over the Rosenbrock banana 
 function"></figure></p>
 
+<h2 id="algorithm">Algorithm</h2>
+
 <p><a href="http://www.scholarpedia.org/article/Nelder-Mead_algorithm">Scholarpedia</a> and
 <a href="https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method">Wikipedia</a> provide diagrams
 and pseudocode of the Nelder-Mead algorithm, as does Chapter 9.5 of the Nocedal and
 Write textbook given below</p>
+
+<h2 id="initialisation-and-termination">Initialisation and termination</h2>
+
+<p>It is not obvious how Nelder-Mead should be initialised, given a single starting point
+$x_0$ by the user. The (Gau 2012) paper provides an initialisation routine that was also
+used in MATLAB's fminsearch function. The $x_0$ point is used as one of the vertices,
+with the remaining $n$ vertices set to $x_0 + \tau_i e_i$, where $e_i$ is a unit vector
+in the $i^{th}$ coordinate and</p>
+
+<p><span  class="math">\[
+\tau_i = \begin{cases}
+0.05 \text{ if }(x_0)_i \ne 0,\\
+0.00025 \text{ if }(x_0)_i = 0,\\
+\end{cases}
+\]</span></p>
+
+<p>For termination, Nelder and Mead recommended stopping the iteration when the standard
+deviation of the function evaluations reduces below a certain tolerance. MATLAB's
+fminsearch terminates when
+$\max_{2 \le i \le n+1} |f_i - f_1| \le \text{TolFun}$ and $\max_{2 \le i \le n+1}
+|| x_i - x_1 ||_\infty \le \text{TolX}$, or if the maximum number of iterations of
+function evaluations is reached.</p>
 
 <h2 id="other-reading">Other Reading</h2>
 
 <ul>
 <li>Nelder, John A.; R. Mead (1965). &quot;A simplex method for function minimization&quot;.
 Computer Journal. 7 (4): 308–313. doi:10.1093/comjnl/7.4.308.</li>
-<li><a href="http://www.webpages.uidaho.edu/~fuchang/res/ANMS.pdf">Gao, L. Han, &quot;Implementing the Nelder-Mead simplex algorithm with adaptive
-parameters&quot;, Comput. Optim. Appl., DOI
-10.1007/s10589-010-9329-3</a></li>
+<li><a href="http://www.webpages.uidaho.edu/~fuchang/res/ANMS.pdf">Gao, F., &amp; Han, L. (2012). Implementing the Nelder-Mead simplex algorithm with
+adaptive parameters. Computational Optimization and Applications, 51(1),
+259-277.</a></li>
 <li>Numerical optimization by Nocedal, Jorge; Wright, Stephen J., 1960-, Chapter 9</li>
 </ul>
 
@@ -1633,16 +1657,16 @@ functions</a></p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/scientific-computing/js/clipboard.min.js?1611598308"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611598308"></script>
-    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611598308"></script>
-    <script src="/scientific-computing/js/jquery.sticky.js?1611598308"></script>
-    <script src="/scientific-computing/js/featherlight.min.js?1611598308"></script>
-    <script src="/scientific-computing/js/highlight.pack.js?1611598308"></script>
+    <script src="/scientific-computing/js/clipboard.min.js?1611645899"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1611645899"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1611645899"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1611645899"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1611645899"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1611645899"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611598308"></script>
-    <script src="/scientific-computing/js/learn.js?1611598308"></script>
-    <script src="/scientific-computing/js/hugo-learn.js?1611598308"></script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1611645899"></script>
+    <script src="/scientific-computing/js/learn.js?1611645899"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1611645899"></script>
     
     
 
