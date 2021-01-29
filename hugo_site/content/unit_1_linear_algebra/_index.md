@@ -8,3 +8,5 @@ pre = "<b>Day 1. </b>"
 
 # Direct Solvers and Matrix Decompositions
 
+
+{{< youtube 5ivZGDN74yg >}}

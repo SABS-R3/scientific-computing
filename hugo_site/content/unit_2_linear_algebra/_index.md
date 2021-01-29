@@ -7,3 +7,6 @@ pre = "<b>Day 2. </b>"
 +++
 
 # Sparse Matrices and Iterative Solvers
+
+
+{{< youtube nFBUW23N_9E >}}

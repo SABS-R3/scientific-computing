@@ -9,6 +9,7 @@ pre = "<b>Day 4. </b>"
 # Non-linear Optimisation
 
 
-{{% notice warning %}}
-Chapter under construction.
-{{% /notice %}}
+{{< youtube UmKqXMUGcPw >}}
+
+
+
