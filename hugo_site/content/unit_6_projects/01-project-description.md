@@ -37,6 +37,10 @@ For example, you might choose to:
   within a written explanation. Note that Matplotlib is able to generate animations, or 
   you can [use](https://observablehq.com/@d3/learn-d3-animation) a more purpose built 
   like [D3](https://d3js.org/).
+- Add your algorithm to the
+  [Algorithm Zoo](https://share.streamlit.io/fcooper8472/algorithms/algorithms.py),
+  including a description, several interactive examples of it in action, and at least 
+  one software implementation.
 
 For inspiration, here is a link to the online journal 
 [Distill](https://distill.pub/about/), a machine learning journal that specialises in 
