@@ -39,7 +39,7 @@
 	"title": "Direct Solvers and Matrix Decompositions",
 	"tags": [],
 	"description": "",
-	"content": "Direct Solvers and Matrix Decompositions "
+	"content": "Direct Solvers and Matrix Decompositions   "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/",
@@ -67,7 +67,7 @@
 	"title": "Sparse Matrices and Iterative Solvers",
 	"tags": [],
 	"description": "",
-	"content": "Sparse Matrices and Iterative Solvers "
+	"content": "Sparse Matrices and Iterative Solvers   "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/",
@@ -130,7 +130,7 @@
 	"title": "Non-linear Optimisation",
 	"tags": [],
 	"description": "",
-	"content": "Non-linear Optimisation Warning Chapter under construction.\n "
+	"content": "Non-linear Optimisation   "
 },
 {
 	"uri": "https://sabs-r3.github.io/scientific-computing/unit_2_linear_algebra/05-iterative-methods/",
