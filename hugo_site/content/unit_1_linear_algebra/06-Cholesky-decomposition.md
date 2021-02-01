@@ -117,7 +117,7 @@ $\sigma$
     $\mathbf{x}$. Hint: while the expression for $\Sigma$ is guarrenteed to be positive 
     definte for all values of $\sigma_1$ and $\sigma_2$, numerical round-off can mean 
     that the Cholesky decomposition can fail. To guarrentee a positive definite 
-    $\Sigma$, try addiing a small amount (e.g. 1e-5) to the diagonal of $\Sigma$. This 
+    $\Sigma$, try adding a small amount (e.g. 1e-5) to the diagonal of $\Sigma$. This 
     is equivilent to adding a very small amount of independent normal noise to 
     $\mathbf{x}$.
 
