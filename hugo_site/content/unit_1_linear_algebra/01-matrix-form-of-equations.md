@@ -73,7 +73,8 @@ Plotting these two linear equations on a graph shows graphically the solution to
 equation given by
 
 $$\left(\begin{matrix} x \\ y \end{matrix}\right) = A^{-1} \left(\begin{matrix} -1 \\ 3 
-\end{matrix}\right) = \left(\begin{matrix} -1 \\ 3 \end{matrix}\right)$$
+\end{matrix}\right) = \left(\begin{matrix} 3 \\ 2 
+\end{matrix}\right)$$
 
 ![single solution](/scientific-computing/images/unit_01/01-sim1.svg)
 
