@@ -88,7 +88,7 @@ $$
 
 This ensures that the search direction $\mathbf{p}\_k$ is the closest vector to 
 $\mathbf{r}_{k-1}$ that is also *A-conjugate* to $\mathbf{p}\_1, ..., 
-\mathbf{p}\_{k-1}$, i.e. $p^T_i A p_j$ for all $i \ne j$, which gives the algorithm its 
+\mathbf{p}\_{k-1}$, i.e. $p^T_i A p_j=0$ for all $i \ne j$, which gives the algorithm its 
 name. After $k$ iterations the sequence of residuals $\mathbf{r}_i$ for $i=1..k$ form a 
 set of mutually orthogonal vectors that span the Krylov subspace $\mathcal{K}_k$.
 
