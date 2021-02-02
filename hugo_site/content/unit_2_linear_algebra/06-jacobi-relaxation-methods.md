@@ -186,7 +186,7 @@ for j, buildf in enumerate((buildf1, buildf2)):
         f = buildf(N)
         max_iter = 10*N
         x, iters = jacobi(A, f, max_iter=max_iter)
-        if i < max_iter:
+        if iters < max_iter:
             iterations[i, j] = iters
 
 plt.plot(Ns, iterations)
