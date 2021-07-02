@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
 
-    <title>LU decomposition   Modelling and Scientific Computing</title>
+    <title>ODE Solvers - AM exercise   Modelling and Scientific Computing</title>
 
     
     <link href="/scientific-computing/css/nucleus.css?1625223403" rel="stylesheet">
@@ -53,7 +53,7 @@
 
 
   </head>
-  <body class="" data-url="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+  <body class="" data-url="/scientific-computing/unit_3_ode/01-am/">
     <nav id="sidebar" class="">
 
 
@@ -197,7 +197,7 @@
   
     
     <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
-        parent
+        
         
         
         ">
@@ -286,7 +286,7 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item active">
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
         <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
         LU decomposition
         
@@ -559,7 +559,7 @@
   
     
     <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
-        
+        parent
         
         
         ">
@@ -585,7 +585,7 @@
  
   
     
-      <li data-nav-id="/scientific-computing/unit_3_ode/01-am/" title="ODE Solvers - AM exercise" class="dd-item ">
+      <li data-nav-id="/scientific-computing/unit_3_ode/01-am/" title="ODE Solvers - AM exercise" class="dd-item active">
         <a href="/scientific-computing/unit_3_ode/01-am/">
         ODE Solvers - AM exercise
         
@@ -872,7 +872,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/master/hugo_site/content/unit_1_linear_algebra/04-LU-decomposition.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/master/hugo_site/content/unit_3_ode/01-AM.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -903,7 +903,7 @@
             
           
           
-            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_1_linear_algebra/'>Direct Solvers and Matrix Decompositions</a> > LU decomposition
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_3_ode/'>Solving ODEs</a> > ODE Solvers - AM exercise
           
         
           
@@ -932,264 +932,53 @@
           
             <h1>
               
-              LU decomposition
+              ODE Solvers - AM exercise
             </h1>
           
 
         
 
 
-<h2 id="lu-decomposition">$LU$ decomposition</h2>
-
-<p>The $LU$ decomposition is closely related to gaussian elimination. It takes the original
-equation to be solved $A x = b$ and splits it up into two separate equations involving a
-unit lower triangular matrix $L$, and the row echelon matrix $U$:</p>
-
-<p><span  class="math">\[
-\begin{aligned}
-L y &= b \\
-U x &= y
-\end{aligned}
-\]</span></p>
-
-<p>where $A = LU$. The $L$ matrix is a <em>unit</em> lower triangular matrix and thus has ones on
-the diagonal, whereas $U$ is in row echelon form with pivot values in the leading
-coefficients of each row.</p>
-
-<p><span  class="math">\[
-A = \left( \begin{matrix}
-1 & 0 & 0 & 0 \\ 
-\ast & 1 & 0 & 0 \\
-\ast & \ast & 1 & 0 \\
-\ast & \ast & \ast & 1 \end{matrix}\right)
-\left(\begin{matrix}
-p_1 & \ast & \ast & \ast \\
-0 & p_2 & \ast & \ast \\
-0 & 0 & p_3 & \ast \\
-0 & 0 & 0 & p_4
-\end{matrix}\right)
-\]</span></p>
-
-<p>Thus, we have converted our original problem of solving $A x = b$ into two separate
-solves, first solving the equation $L y = b$, and then using the result $y$ to solve $U
-x = y$.</p>
-
-<p><span  class="math">\[
-\begin{aligned}
-\left(\begin{matrix}
-1 & 0 & 0 & 0 \\ \ast & 1 & 0 & 0 \\
-\ast & \ast & 1 & 0 \\
-\ast & \ast & \ast & 1 
-\end{matrix}\right)
-\left(\begin{matrix}
-y_1 \\ 
-y_2 \\
-y_3 \\
-y_4 
-\end{matrix}\right)
-&= \left(\begin{matrix}
-b_1 \\ 
-b_2 \\
-b_3 \\
-b_4 
-\end{matrix}\right)
-\\
-\left(\begin{matrix}
-p_1 & \ast & \ast & \ast \\ 
-0 & p_2 & \ast & \ast \\
-0 & 0 & p_3 & \ast \\
-0 & 0 & 0 & p_4 
-\end{matrix}\right)
-\left(\begin{matrix}
-x_1 \\ 
-x_2 \\
-x_3 \\
-x_4 
-\end{matrix}\right)
-&= \left(\begin{matrix}
-y_1 \\ 
-y_2 \\
-y_3 \\
-y_4 
-\end{matrix}\right)
-\end{aligned}
-\]</span></p>
-
-<p>However, each of those solves is very cheap to compute, in this case for the 4x4 matrix
-shown above the solution of $L y = b$ only needs 6 multiplication and 6 additions,
-whereas $U x = y$ requires 4 divisions, 6 multiplications and 6 additions, leading to a
-total of 28 arithmetic operations, much fewer in comparison with the 62 operations
-required to solve the original equation $A x = b$. In general, $LU$ decomposition for an
-$n \times n$ matrix takes about $2 n^3 / 3$ flops, or floating point operations, to
-compute.</p>
-
-<h2 id="lu-factorisation-without-pivoting">$LU$ factorisation without pivoting</h2>
-
-<p>A relativly simple $LU$ algorithm can be described if we assume that no pivoting is
-required during a gaussian elimination. In this case, the gaussian elimination process
-is a sequence of $p$ linear operations $E_1, E_2, ..., E_p$, with each operation $E_i$
-being a row replacement that adds a multiple of one row to another below it (i.e. $E_i$
-is lower triangular). The final matrix after applying the sequence of row reductions is
-$U$ in row echelon form, that is:</p>
-
-<p><span  class="math">\[
-E_p \cdots E_2 E_1 A = U
-\]</span></p>
-
-<p>Since we have $A = LU$, we can show that the sequence of operations $E_1, E_2, ..., E_p$
-is also the sequence that reduces the matrix $L$ to an identity matrix:</p>
-
-<p><span  class="math">\[
-A = (E_p \cdots E_2 E_1)^{-1} U = LU,
-\]</span></p>
-
-<p>therefore,</p>
-
-<p><span  class="math">\[
-L = (E_p \cdots E_2 E_1)^{-1},
-\]</span></p>
-
-<p>and,</p>
-
-<p><span  class="math">\[
-(E_p \cdots E_2 E_1) L = (E_p \cdots E_2 E_1) (E_p \cdots E_2 E_1)^{-1} = I
-\]</span></p>
-
-<p>This implies how we can build up the matrix $L$. We choose values for $L$ such that the
-series of row operations $E_1, E_2, ..., E_p$ convert the matrix $L$ to the identity
-matrix. Since each $E_i$ is lower triangular, we know that both $(E_p \cdots E_2 E_1)$
-and $(E_p \cdots E_2 E_1)^{-1}$ are also lower triangular.</p>
-
-<p>For example, consider the following matrix</p>
-
-<p><span  class="math">\[
-A = \left(\begin{matrix}
-3 & 2 & 1 & -3 \\ 
--6 & -2 & 1 & 5 \\
-3 & -4 & -7 & 2 \\
--9 & -6 & -1 & 15 
-\end{matrix}\right)
-\]</span></p>
-
-<p>After three row reductions, $R_2 \mathrel{{+}{=}} 2 R_1$, $R_3 \mathrel{{+}{=}} -1 R_1$,
-and $R_3 \mathrel{{+}{=}} 3 R_1$, we have the following result:</p>
-
-<p><span  class="math">\[
-E_1 E_2 E_3 A = \left(\begin{matrix}
-3 & 2 & 1 & -3 \\ 
-0 & 2 & * & * \\
-0 & -6 & * & * \\
-0 & 0 & * & * 
-\end{matrix}\right)
-\]</span></p>
-
-<p>To build the 1st column of $L$, we simply divide the 1st column of $A$ by the pivot
-value 3, giving</p>
-
-<p><span  class="math">\[
-L = \left(\begin{matrix}
-1  & 0 & 0 & 0 \\ 
--2 & 1 & 0 & 0 \\
-1  & * & 1 & 0 \\
--3 & * & * & 1 
-\end{matrix}\right)
-\]</span></p>
-
-<p>For the next column we do the same, using the new pivot value $A_{2,2} = 2$ in row 2 to
-reduce $A_{3,2}$ and $A_{4,2}$ to zero, and then dividing the column vector under the
-pivot $(-6, 0)^T$ by the pivot value 2 to obtain the next column of $L$.</p>
-
-<p>Repeating this process for all the columns in $A$, we obtain the final factorisation.
-You can verify for yourself that repeating the same row operations we did to form $U$ to
-the matrix $L$ reduces it to the identity matrix.</p>
-
-<p><span  class="math">\[
-L = \left(\begin{matrix}
-1 & 0 & 0 & 0 \\ 
--2 & 1 & 0 & 0 \\
-1 & -3 & 1 & 0 \\
--3 & 0 & 2 & 1 
-\end{matrix}\right)
-\]</span></p>
-
-<p><span  class="math">\[
-E_1 E_2 ... E_p A = U = \left(\begin{matrix}
-3 & 2 & 1 & -3 \\ 
-0 & 2 & 3 & -1 \\
-0 & 0 & 1 & 2 \\
-0 & 0 & 0 & 2 
-\end{matrix}\right)
-\]</span></p>
-
-<h2 id="pivoting">Pivoting</h2>
-
-<p>Of course, for any practial $LU$ factorisation we need to consider pivoting. Any matrix
-$A$ can be factorised into $PLU$, where $P$ is a permutation matrix, and $L$ and $U$ are
-defined as before. During the gaussian elimination steps we store an array of row
-indices $p_i$ indicating that row $i$ is interchanged with row $p_i$, and the resultant
-array of $p_i$ can be used to build the permutation matrix $P$ (It would be wasteful to
-store the entire martix $P$ so the array $p_i$ is stored instead).</p>
-
-<p>Thus, the LU algorithm proceeds as follows:</p>
-
-<ol>
-<li>Begin with the left-most column $i=0$, find an appropriate pivot (e.g. maximum entry
-in the column) and designate this row as the pivot row. Interchange this row with row
-$i$, and store the pivot row index as $p_i$. Use row replacements to create zeros
-below the pivot. Create the corresponding column for $L$ by dividing by the pivot
-value.</li>
-<li>Continue along to the next column $i$, again choosing a pivot row $p_i$,
-interchanging it with row $i$ and creating zeros below the pivot, creating the new
-column in $L$, and making sure to record which pivot row has been chosen for each
-column. Repeat this step for all the columns of the matrix.</li>
-<li>Once the last column has been done, $U$ should be in row echlon form and $L$ should
-be a unit lower triangular matrix. The array $p_i$ implicitly defines the permutation
-matrix $P$</li>
-</ol>
-
-<p>In practice, most library implementation store $L$ and $U$ in the same matrix since they
-are lower and upper triangular respectivly.</p>
-
-<h2 id="ldl-decomposition">$LDL$ decomposition</h2>
-
-<p>It is often very benificial when solving linear systems to consider and take advantage
-of any special structure that the matrix $A$ might possesses. The $LDL$ decomposition is
-a varient on LU decomposition which is only applicable to a symmetric matrix $A$ (i.e.
-$A = A^T$). The advantage of using this decomposition is that it takes advantage of the
-redundent entries in the matrix to reduce the amount of computation to $n^3/3$, which is
-about a half that required for the $LU$ decomposition.</p>
-
-<h2 id="other-reading">Other Reading</h2>
+<p>The intentions behind this exercise are:</p>
 
 <ul>
-<li>Linear algebra and its applications by David C. Lay. Chaper 2.5<br></li>
-<li>Golub, G. H. &amp; Van Loan, C. F. Matrix Computations, 3rd Ed. (Johns Hopkins University
-Press, 1996). Chapter 3.2 &amp; 4.1</li>
-<li><a href="https://en.wikipedia.org/wiki/LU_decomposition">https://en.wikipedia.org/wiki/LU_decomposition</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Cholesky_decomposition#LDL_decomposition_2">https://en.wikipedia.org/wiki/Cholesky_decomposition#LDL_decomposition_2</a></li>
+<li>To give you a clear goal to meet</li>
+<li>To give you a chance to revise or learn a few things. Specifically:
+
+<ul>
+<li>The abstract base class pattern;</li>
+<li>Unit testing with <code>unittest</code>;</li>
+<li>Ordinary differential equation solver implementations.</li>
+</ul></li>
 </ul>
 
-<h2 id="software">Software</h2>
+<p>A nice feature of this assignment is that you are provided with a testing infrastructure
+which gives an
+implicit specification of the code you are required to write. This means that when
+you've written code
+such that all the tests pass then you will know that you have completed the exercise.</p>
 
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html"><code>scipy.linalg.lu_factor</code></a>.</p>
+<h3 id="getting-the-code-for-these-exercises">Getting the code for these exercises</h3>
 
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html"><code>scipy.linalg.lu_solve</code></a>.</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html"><code>scipy.linalg.lu</code></a>.</p>
-
-<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.ldl.html#scipy.linalg.ldl"><code>scipy.linalg.ldl</code></a></p>
-
-<h2 id="problems">Problems</h2>
+<p>Download the file <a href="/scientific-computing/ODEsAM.zip">ODEsAM.zip</a>. You have been
+provided with one source class (<code>AbstractOdeSolver</code>) and with two test files.
+You will not need to edit any of these 3 source files. If you do make edits to
+them during the course of the exercise then make sure that your final version
+works with the original versions of these files.</p>
 
 
 <div class="notices question" >
   <div class="label">Question</div>
-  <p>Take your gaussian elimination code that you wrote in the previous lesson and use it to
-write an LU decomposition function that takes in a martix $A$, and returns $L$, $U$ and
-the array $p_i$. You can check your answer using
-<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html"><code>scipy.linalg.lu_factor</code></a>.
-Hint: the permutation matrix is tricky to construct, so you might want to use the test
-given in the documentation for <code>lu_factor</code>.</p>
+  <p><strong>Running first test</strong>:</p>
+
+<p>Check to see what running the simplest test-suite  <code>TestOdeSolvers.py</code> does at
+this stage. It should stop with <code>ModuleNotFoundError: No module named 
+'ForwardEulerOdeSolver'</code>. In order for the test to run, you need to create the
+<code>ForwardEulerOdeSolver</code> class in <code>ForwardEulerOdeSolver.py</code>. This class should
+inherit from <code>AbstractOdeSolver</code>, and should provide the one method:
+<code>Solve()</code>. (This method's implementation does not yet have to contain any code
+other than <code>pass</code>.) Now check that the <code>TestOdeSolvers.py</code> test-suite runs. It
+is expected to throw exceptions at this stage.</p>
 
 </div>
 
@@ -1199,87 +988,255 @@ given in the documentation for <code>lu_factor</code>.</p>
     <summary>Expand for solution</summary>
     <div class="notices solution" >
   <div class="label">Solution</div>
-  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> scipy
-<span style="color:#f92672">import</span> scipy.linalg
-<span style="color:#f92672">import</span> sys
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> AbstractOdeSolver <span style="color:#f92672">import</span> AbstractOdeSolver <span style="color:#75715e"># Abstract base class</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ForwardEulerOdeSolver</span>(AbstractOdeSolver):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Solve</span>(self): <span style="color:#66d9ef">pass</span></code></pre></div>
+<p>This answer is just for completeness.  There's nothing to this part
+apart from a warm-up.</p>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lu_decomposition</span>(A):
-    m, n <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>shape
-
-    LU <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(A)
-    pivots <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(n, dtype<span style="color:#f92672">=</span>int)
-    <span style="color:#75715e"># initialise the pivot row and column</span>
-    h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">while</span> h <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">and</span> k <span style="color:#f92672">&lt;</span> n:
-        <span style="color:#75715e"># Find the k-th pivot:</span>
-        pivots[k] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(LU[h:, k]) <span style="color:#f92672">+</span> h
-        <span style="color:#66d9ef">if</span> LU[pivots[k], k] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-            <span style="color:#75715e"># No pivot in this column, pass to next column</span>
-            k <span style="color:#f92672">=</span> k<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">else</span>:
-            <span style="color:#75715e"># swap rows</span>
-            LU[[h, pivots[k]], :] <span style="color:#f92672">=</span> LU[[pivots[k], h], :]
-            <span style="color:#75715e"># Do for all rows below pivot:</span>
-            <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(h<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, m):
-                f <span style="color:#f92672">=</span> LU[i, k] <span style="color:#f92672">/</span> LU[h, k]
-                <span style="color:#75715e"># Store f as the new L column values</span>
-                LU[i, k] <span style="color:#f92672">=</span> f
-                <span style="color:#75715e"># Do for all remaining elements in current row:</span>
-                <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, n):
-                    LU[i, j] <span style="color:#f92672">=</span> LU[i, j] <span style="color:#f92672">-</span> LU[h, j] <span style="color:#f92672">*</span> f
-            <span style="color:#75715e"># Increase pivot row and column</span>
-            h <span style="color:#f92672">=</span> h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-            k <span style="color:#f92672">=</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">return</span> LU, pivots
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_matrix</span>(n):
-    R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
-    A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((n, n))
-    triu <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>triu_indices(n)
-    A[triu] <span style="color:#f92672">=</span> R[triu]
-    <span style="color:#66d9ef">return</span> A
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_non_singular_matrix</span>(n):
-    A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
-    <span style="color:#66d9ef">while</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>cond(A) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>sys<span style="color:#f92672">.</span>float_info<span style="color:#f92672">.</span>epsilon:
-        A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(n, n)
-    <span style="color:#66d9ef">return</span> A
-
-As <span style="color:#f92672">=</span> [
-    np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]]),
-    random_non_singular_matrix(<span style="color:#ae81ff">3</span>),
-    random_non_singular_matrix(<span style="color:#ae81ff">4</span>),
-    random_non_singular_matrix(<span style="color:#ae81ff">5</span>),
-    random_non_singular_matrix(<span style="color:#ae81ff">6</span>),
-]
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pivots_to_row_indices</span>(pivots):
-    n <span style="color:#f92672">=</span> len(pivots)
-    indices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(range(<span style="color:#ae81ff">0</span>, n))
-    <span style="color:#66d9ef">for</span> i, p <span style="color:#f92672">in</span> enumerate(pivots):
-        indices[i], indices[p] <span style="color:#f92672">=</span> indices[p], indices[i]
-    <span style="color:#66d9ef">return</span> indices
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_L_mult_U</span>(LU):
-    L <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>tril(LU)
-    np<span style="color:#f92672">.</span>fill_diagonal(L, <span style="color:#ae81ff">1</span>)
-    U <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>triu(LU)
-    <span style="color:#66d9ef">return</span> L <span style="color:#960050;background-color:#1e0010">@</span> U
-
-<span style="color:#66d9ef">for</span> A <span style="color:#f92672">in</span> As:
-    LU_scipy, pivots_scipy <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>lu_factor(A)
-    row_indices_scipy <span style="color:#f92672">=</span> pivots_to_row_indices(pivots_scipy)
-    LU_mine, pivots_mine <span style="color:#f92672">=</span> lu_decomposition(A)
-    row_indices_mine <span style="color:#f92672">=</span> pivots_to_row_indices(pivots_mine)
-
-    np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(calculate_L_mult_U(LU_scipy),  A[row_indices_scipy])
-    np<span style="color:#f92672">.</span>testing<span style="color:#f92672">.</span>assert_almost_equal(calculate_L_mult_U(LU_mine),  A[row_indices_mine])</code></pre></div>
 </div>
 
 </details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><strong>Writing a forward Euler solver</strong>:</p>
+
+<p>The good news is that 1 out of 3 of the tests in the <code>TestOdeSolvers</code> test-suite
+pass immediately.  The first test <code>test_abstract_class_methods</code> verifies that
+all the functionality I have written in the abstract base class works and
+consequently the test passes. The other two tests which check
+<code>ForwardEulerOdeSolver.Solve()</code> works correctly are the tests which are failing.
+If you need a revision tutorial about the Forward Euler method then please ask
+now.</p>
+
+<p>Your task is to implement the <code>Solve()</code>  method so that it solves from the
+initial values over a time-interval with a fixed time step using forward Euler.
+On exit from the method you should have populated <code>solutionTrace</code> with a list of
+$(x,y)$ values (as pairs/tuples) and <code>timeTrace</code> with the list of corresponding
+times.  The test-suite uses two simple model ordinary differential 2-d systems
+of equations. These are plugged into the solver as right-hand side functions.
+They are defined at the top of the test-suite file and both have straightforward<br>
+analytic solutions.</p>
+
+<p>As you develop your <code>Solve()</code> method you should reduce the number of failing
+lines. One or two of the test lines are harder to satisfy than others. Attempt
+to have no failures but the fewer the better. Please make sure that you have
+comments in your code.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <p>Here's a version which first builds the lists to the correct length and then
+writes in using indexing.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Solve</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34; The forward Euler solve method &#34;&#34;&#34;</span>
+        <span style="color:#75715e"># Fulfil the &#34;throw if not setup&#34; test</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>numberOfTimeSteps <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> :
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Timestepper not set up&#34;</span>)
+
+        <span style="color:#75715e"># There&#39;s a test which runs the Solve method twice</span>
+        <span style="color:#75715e"># and checks that the data from the first run is erased</span>
+        self<span style="color:#f92672">.</span>solutionTrace<span style="color:#f92672">=</span>[None]<span style="color:#f92672">*</span>(self<span style="color:#f92672">.</span>numberOfTimeSteps<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+        self<span style="color:#f92672">.</span>timeTrace<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>(self<span style="color:#f92672">.</span>numberOfTimeSteps<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+
+        <span style="color:#75715e"># Initial state is recorded</span>
+        self<span style="color:#f92672">.</span>solutionTrace[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>initialValues
+        self<span style="color:#f92672">.</span>timeTrace[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime
+
+        <span style="color:#75715e"># Set up loop variables</span>
+        time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime
+        values <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>initialValues
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, self<span style="color:#f92672">.</span>numberOfTimeSteps):
+            <span style="color:#75715e"># Euler step</span>
+            dvdt <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rhsFunction(values, time)
+            x <span style="color:#f92672">=</span> values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">*</span>dvdt[<span style="color:#ae81ff">0</span>]
+            y <span style="color:#f92672">=</span> values[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">*</span>dvdt[<span style="color:#ae81ff">1</span>]
+
+            <span style="color:#75715e"># Update solution and time to new values</span>
+            values <span style="color:#f92672">=</span> (x,y)
+            time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime <span style="color:#f92672">+</span> (i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>self<span style="color:#f92672">.</span>timeStepSize;
+            self<span style="color:#f92672">.</span>solutionTrace[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> values
+            self<span style="color:#f92672">.</span>timeTrace[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> time</code></pre></div>
+<p>Here's an outline of a version with appends to the back of the lists.
+This code also illustrates where testing may fail if the time-stepper uses
+repeated addition.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">        <span style="color:#75715e"># Initial state is recorded</span>
+        self<span style="color:#f92672">.</span>solutionTrace<span style="color:#f92672">.</span>append(self<span style="color:#f92672">.</span>initialValues)
+        self<span style="color:#f92672">.</span>timeTrace<span style="color:#f92672">.</span>append(self<span style="color:#f92672">.</span>startTime)
+        <span style="color:#75715e"># Set up loop variables</span>
+        time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime
+        accumulated_time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime  <span style="color:#75715e"># Wrong way to do this</span>
+        values <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>initialValues
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, self<span style="color:#f92672">.</span>numberOfTimeSteps):
+            <span style="color:#f92672">...</span>
+            <span style="color:#75715e"># Update solution and time to new values</span>
+            values <span style="color:#f92672">=</span> (x,y)
+            time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime <span style="color:#f92672">+</span> (i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>self<span style="color:#f92672">.</span>timeStepSize;
+            accumulated_time <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>timeStepSize; <span style="color:#75715e"># Wrong way to do this</span>
+            self<span style="color:#f92672">.</span>solutionTrace<span style="color:#f92672">.</span>append(values);
+            self<span style="color:#f92672">.</span>timeTrace<span style="color:#f92672">.</span>append(accumulated_time)
+            <span style="color:#f92672">...</span></code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><strong>Writing a better solver</strong>:</p>
+
+<p>Now run <code>TestHigherOrderOdeSolverRunner</code>.  This new test-suite
+requires you make another class <code>HigherOrderOdeSolver.py</code> which should
+again provide  only a <code>Solve()</code> method. It tests the convergence behaviour of
+your two solvers and checks that the higher-order one is better. My model answer
+(which passes the test) uses a standard second order Runge-Kutta method. Again
+work on your solution until there are few lines (ideally no lines) of failing
+tests.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HigherOrderOdeSolver</span>(AbstractOdeSolver):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Solve</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;This is a Runge-Kutta (RK2) solve method&#34;&#34;&#34;</span>
+        <span style="color:#75715e"># Fulfil the &#34;throw if not setup&#34; test</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>numberOfTimeSteps <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> :
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Timestepper not set up&#34;</span>)
+
+        <span style="color:#75715e"># There&#39;s a test which runs the Solve method twice</span>
+        <span style="color:#75715e"># and checks that the data from the first run is erased</span>
+        self<span style="color:#f92672">.</span>solutionTrace<span style="color:#f92672">=</span>[None]<span style="color:#f92672">*</span>(self<span style="color:#f92672">.</span>numberOfTimeSteps<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+        self<span style="color:#f92672">.</span>timeTrace<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>(self<span style="color:#f92672">.</span>numberOfTimeSteps<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+
+        <span style="color:#75715e"># Initial state is recorded</span>
+        self<span style="color:#f92672">.</span>solutionTrace[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>initialValues
+        self<span style="color:#f92672">.</span>timeTrace[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime
+
+        <span style="color:#75715e"># Set up loop variables</span>
+        time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime
+        values <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>initialValues
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, self<span style="color:#f92672">.</span>numberOfTimeSteps):
+            <span style="color:#75715e">#  Use gradient to get halfway point</span>
+            dvdt <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rhsFunction(values, time)
+            halfwayx <span style="color:#f92672">=</span> values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">*</span>dvdt[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>
+            halfwayy <span style="color:#f92672">=</span> values[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">*</span>dvdt[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>
+
+            <span style="color:#75715e"># Recompute gradient at halfway point</span>
+            dvdt <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rhsFunction((halfwayx, halfwayy),
+                                    time<span style="color:#f92672">+</span>(self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>))
+
+            <span style="color:#75715e"># Use this new gradient to update from the original value</span>
+            x <span style="color:#f92672">=</span> values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">*</span>dvdt[<span style="color:#ae81ff">0</span>]
+            y <span style="color:#f92672">=</span> values[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>timeStepSize<span style="color:#f92672">*</span>dvdt[<span style="color:#ae81ff">1</span>]
+
+            <span style="color:#75715e"># Update solution and time to new values</span>
+            values <span style="color:#f92672">=</span> (x,y)
+            time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime <span style="color:#f92672">+</span> (i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>self<span style="color:#f92672">.</span>timeStepSize
+            self<span style="color:#f92672">.</span>solutionTrace[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> values
+            self<span style="color:#f92672">.</span>timeTrace[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> time</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><strong>Using a library function</strong>:</p>
+
+<p>Write a solver implementation which uses <code>scipy.integrate.odeint</code> at its core.<br>
+You should be able to do this with very few lines of code, including just a
+single call to <code>odeint</code>.  Test it in a similar way to the
+<code>HigherOrderOdeSolver</code>, using progressively smaller time-steps.</p>
+
+<ul>
+<li>What do you notice about the reported error?<br></li>
+<li>What control do you have over the error?</li>
+</ul>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OdeIntOdeSolver</span>(AbstractOdeSolver):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Solve</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34; The solve method using scipy.integrate.odeint&#34;&#34;&#34;</span>
+        <span style="color:#75715e"># Fulfil the &#34;throw if not setup&#34; test</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>numberOfTimeSteps <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> :
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Timestepper not set up&#34;</span>)
+        stopT <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>startTime<span style="color:#f92672">+</span>self<span style="color:#f92672">.</span>numberOfTimeSteps<span style="color:#f92672">*</span>self<span style="color:#f92672">.</span>timeStepSize
+        times <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(self<span style="color:#f92672">.</span>startTime,stopT,self<span style="color:#f92672">.</span>numberOfTimeSteps<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+        self<span style="color:#f92672">.</span>timeTrace <span style="color:#f92672">=</span> list(times)
+        self<span style="color:#f92672">.</span>solutionTrace <span style="color:#f92672">=</span>\
+            odeint(self<span style="color:#f92672">.</span>rhsFunction, self<span style="color:#f92672">.</span>initialValues, times)</code></pre></div>
+<p>With the default setting and the same test as before I get something
+similar to:</p>
+<pre><code>#step_size         euler_error         hi_error       oi_error
+6.283185307179586  4.442882938158366  14.647777676841754 1.0706378471935034e-07
+3.141592653589793  7.088890675779233  14.73085508342019  1.1477237333346198e-07
+1.5707963267948966 6.5841823894717395 2.953368442233411  1.1211067003602387e-07
+0.7853981633974483 3.103938595129146  0.4282090775868214 1.1392372439136046e-07</code></pre>
+<p>This is because <code>odeint</code> has absolute and relative error tolerances
+set and it uses adaptive time-steps <em>between</em> the time-steps
+which we care about.  That means that the first $2\pi$ step around the
+circle is about as accurate as the finer tests which follow it.</p>
+
+<p>We can control the error by setting the error tolerances, with</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> self<span style="color:#f92672">.</span>solutionTrace <span style="color:#f92672">=</span>\
+     odeint(self<span style="color:#f92672">.</span>rhsFunction, self<span style="color:#f92672">.</span>initialValues, times, rtol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-12</span>, atol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-12</span>)</code></pre></div>
+<p>we get:</p>
+<pre><code>#step_size         euler_error         hi_error       oi_error
+6.283185307179586  4.442882938158366  14.647777676841754 2.4189691882833333e-12
+3.141592653589793  7.088890675779233  14.73085508342019  2.2407390802495764e-12
+1.5707963267948966 6.5841823894717395 2.953368442233411  1.990068084042871e-12
+0.7853981633974483 3.103938595129146  0.428209077586821  1.6920994988211508e-12</code></pre>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><strong>[Extension]</strong> Use the test output in <code>TestHigherOrderOdeSolver</code> as the
+model for plotting convergence behaviour for these two solvers and at
+least one other solver that you should write. Use <code>matplotlib</code> or some other
+plotting program to make a log-log plot with time-step on the x-axis and error
+on the y-axis.</p>
+
+</div>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><strong>[Extension]</strong>  If you love <code>C++</code> then you are welcome to investigate coding
+ODE solvers in <code>C++</code> by investigating the <code>C++</code> assignment which formed the
+basis of this exercise:
+<a href="www.cs.ox.ac.uk/people/joe.pitt-francis/C++ScientificComputing/oxfordonly/FridayAssignment.pdf">http://www.cs.ox.ac.uk/people/joe.pitt-francis/C++ScientificComputing/oxfordonly/FridayAssignment.pdf</a></p>
+
+</div>
 
 
 
@@ -1385,7 +1342,6 @@ As <span style="color:#f92672">=</span> [
             
                 
                     
-                    
                 
                 
 
@@ -1398,9 +1354,6 @@ As <span style="color:#f92672">=</span> [
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1450,7 +1403,6 @@ As <span style="color:#f92672">=</span> [
             
                 
                     
-                    
                 
                 
 
@@ -1466,9 +1418,6 @@ As <span style="color:#f92672">=</span> [
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1649,6 +1598,7 @@ As <span style="color:#f92672">=</span> [
             
                 
                     
+                    
                 
                 
 
@@ -1661,6 +1611,7 @@ As <span style="color:#f92672">=</span> [
             
             
                 
+                    
                     
                 
                 
@@ -1680,6 +1631,9 @@ As <span style="color:#f92672">=</span> [
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1845,10 +1799,10 @@ As <span style="color:#f92672">=</span> [
 	 
 	 
 		
-			<a class="nav nav-prev" href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/scientific-computing/unit_3_ode/" title="Solving ODEs"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
