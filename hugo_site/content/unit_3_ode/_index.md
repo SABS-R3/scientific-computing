@@ -8,7 +8,11 @@ pre = "<b>Day 3. </b>"
 
 # Solving Ordinary Differential Equations (ODEs)
 
+**You can download the slides for this lecture 
+[here](/scientific-computing/LectureSolvingODEs.pdf)**
 
-{{% notice warning %}}
-Chapter under construction.
-{{% /notice %}}
+{{< youtube 7wayjcLbvD8 >}}
+
+
+
+## Lecture Slides
