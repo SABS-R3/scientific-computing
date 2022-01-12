@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.78.2" />
+    <meta name="description" content="An online course on Modelling and Scientific Computing in Python for the SABS:R3 Centre for Doctoral Training https://www.sabsr3.ox.ac.uk/">
+<meta name="author" content="Martin Robinson">
+
+    <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
+
+    <title>ODE Solvers - PM exercise   Modelling and Scientific Computing</title>
+
+    
+    <link href="/scientific-computing/css/nucleus.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1641985009" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1641985009" rel="stylesheet">
+    
+    <link href="/scientific-computing/css/theme-dtc.css?1641985009" rel="stylesheet">
+    
+    
+
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1641985009"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+        delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+        });
+    });
+</script>
+
+
+
+  </head>
+  <body class="" data-url="/scientific-computing/unit_3_ode/02-pm/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://sabs-r3.github.io/scientific-computing/">
+    <img src="/scientific-computing/logos/SABSR3.svg" alt="SABSR3 logo">
+</a>
+  
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1641985009"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1641985009"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
+    
+</script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1641985009"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_0_introduction/" title="Course introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_0_introduction/">
+          Course introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/01_course_overview/" title="Course Overview" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/01_course_overview/">
+        1. Course Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/02_course_activities/" title="Course Activities" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/02_course_activities/">
+        2. Course Activities
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/03_getting_python/" title="Getting Python" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/03_getting_python/">
+        3. Getting Python
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_1_linear_algebra/">
+          <b>Day 1. </b>Direct Solvers and Matrix Decompositions
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/" title="Matrix form of equations" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+        Matrix form of equations
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/" title="Gaussian Elimination" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/">
+        Gaussian Elimination
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/">
+        Matrix decompositions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+        LU decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/">
+        Cholesky decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/" title="QR decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+        QR decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_2_linear_algebra/">
+          <b>Day 2. </b>Sparse Matrices and Iterative Solvers
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/" title="Sparse matrices" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/">
+        Sparse matrices
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/">
+        COOrdinate format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/">
+        Finite Difference Matrix
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+        Scipy.sparse and problems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/">
+        Iterative methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/" title="Jacobi and Relaxation Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/">
+        Jacobi and Relaxation Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/" title="Krylov subspace methods and CG" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+        Krylov subspace methods and CG
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Iterative solvers in Scipy" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
+        Iterative solvers in Scipy
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/scientific-computing/unit_3_ode/">
+          <b>Day 3. </b>Solving ODEs
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_3_ode/01-am/" title="ODE Solvers - AM exercise" class="dd-item ">
+        <a href="/scientific-computing/unit_3_ode/01-am/">
+        ODE Solvers - AM exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_3_ode/02-pm/" title="ODE Solvers - PM exercise" class="dd-item active">
+        <a href="/scientific-computing/unit_3_ode/02-pm/">
+        ODE Solvers - PM exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_4_optimisation/">
+          <b>Day 4. </b>Non-linear Optimisation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/">
+        Nonlinear Optimisation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/02-line-search-methods/" title="Line Search Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+        Line Search Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/">
+        Trust Region Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/" title="Derivative-free methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/">
+        Derivative-free methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/05-finite-difference-method/" title="Finite difference method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/05-finite-difference-method/">
+        Finite difference method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/06-nelder-mead/" title="Nelder-Mead method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/06-nelder-mead/">
+        Nelder-Mead method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/" title="Bayesian Inference" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_5_bayesian_inference/">
+          <b>Day 5. </b>Bayesian Inference
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_6_projects/">
+          <b>Day 6-8. </b>Projects
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_6_projects/01-project-description/" title="Project description" class="dd-item ">
+        <a href="/scientific-computing/unit_6_projects/01-project-description/">
+        Project description
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/master/hugo_site/content/unit_3_ode/02-PM.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_3_ode/'>Solving ODEs</a> > ODE Solvers - PM exercise
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              ODE Solvers - PM exercise
+            </h1>
+          
+
+        
+
+
+<p>In these exercises we will use  Python to solve a variety of Ordinary Differential
+Equations (ODEs), including initial and boundary value problems. Prior to attempting the
+exercises you should be familiar with how to solve first order ODEs using separable
+solutions and integrating factors. You should also know how solve a second order ODE
+with constant coefficients and how to reduce a general second order ODE to a system of
+coupled first order equations. If you are not familiar with this material  then speak to
+a module leader or demonstrator who will give you a tutorial. Advanced exercises are
+marked with a star ($\star$); you should attempt these only if you have time and have
+completed the other exercises.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Ordinary differential equations are used very frequently in modelling biological
+and physiological processes. Most commonly they are used to model the way in
+which quantities of interest (such as concentrations of drugs, viral load, or
+population densities) change as a function of time. The earlier exercises below
+are revision of the kinds of ODEs you may have encountered at A level or as an
+undergraduate. The later exercises are taken from real models of chemical and
+biological systems.</p>
+
+<p>The intentions behind this exercise are:</p>
+
+<ul>
+<li>To give you a clear goal to meet</li>
+<li>To give you a chance to revise or learn a few things. Specifically:
+
+<ul>
+<li>The abstract base class pattern;</li>
+<li>Unit testing with <code>unittest</code>;</li>
+<li>Ordinary differential equation solver implementations.</li>
+</ul></li>
+</ul>
+
+<p>A nice feature of this assignment is that you are provided with a testing
+infrastructure which gives an
+implicit specification of the code you are required to write. This means that
+when you've written code
+such that all the tests pass then you will know that you have completed the
+exercise.</p>
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><em>Initial value problems.</em></p>
+
+<p>Solve the following initial value problems by hand: \</p>
+
+<ol>
+<li>$\dfrac{\textrm{d} y}{\textrm{d} x} = x^{2}$, $\;$ subject to $y(0)=1$.</li>
+<li>$\dfrac{\textrm{d} x}{\textrm{d} y} = \dfrac{t^{2}}{x}$, $\;$  subject to $x(0)=1$.</li>
+<li>$\dfrac{\textrm{d} y}{\textrm{d} x} + \dfrac{y}{x}=1$, $\;$  subject to $y(1)=0$.</li>
+<li>$\dfrac{\textrm{d} y_{1}}{\textrm{d} x} = -y_{2}$ and $\dfrac{\textrm{d}
+ y_{2}}{\textrm{d} x} = y_{1}$, $\;$  subject to
+ $y_{1}(0)=1$ and $y_{2}(0)=0$.</li>
+<li>$\dfrac{\textrm{d}^{2} y}{\textrm{d} x^{2}} +3\dfrac{\textrm{d} y}{\textrm{d} x}
+ -4y=0$, $\;$ subject to $y(0)=1$ and $y'(0)=0$.</li>
+</ol>
+
+<p>Solve each of the above initial value problems numerically using
+your best Python ODE solver and compare with the analytic
+solutions. Note that in order to solve the last problem numerically
+you will need to reformulate the equation as a system of first order
+ODEs.  See if, for some of your answers, you can make a figure similar to those below,
+made using model solutions.</p>
+
+<p><figure><img src="/scientific-computing/images/unit_03/Figure_1a.png" alt="Solution for question 2."></figure><br>
+<figure><img src="/scientific-computing/images/unit_03/Figure_1b.png" alt="Solution for question 4."></figure></p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <p>The analytical solutions to the initial value problems are given as follows:</p>
+
+<ol>
+<li>$\dfrac{\textrm{d} y}{\textrm{d} x} = x^{2}$, $y(0)=1$ $\;$ $\Rightarrow$ $\;$
+ $y(x)=\frac{x^{3}}{3}+1.$}</li>
+<li>$\dfrac{\textrm{d} x}{\textrm{d} t} = \dfrac{t^{2}}{x}$,  $x(0)=1$  $\;$
+ $\Rightarrow$ \ $x(t)=\sqrt{\frac{2t^{3}}{3}+1}.$</li>
+<li>$\dfrac{\textrm{d} y}{\textrm{d} x} + \dfrac{y}{x}=1$,  $y(1)=0$  $\;$
+ $\Rightarrow$ $\;$ $y(x)=\frac{x}{2}-\frac{1}{2x}.$</li>
+<li>$\dfrac{\textrm{d} y_{1}}{\textrm{d} x} = -y_{2}$, $\dfrac{\textrm{d}
+ y_{2}}{\textrm{d} x} = y_{1}$, $y_{1}(0)=1$, $y_{2}(0)=0$  $\;$ $\Rightarrow$ $\;$
+ $y_{1}(x)=\cos{x}, \; y_{1}(x)=\sin{x}.$</li>
+<li>$\dfrac{\textrm{d}^{2} y}{\textrm{d} x^{2}} +3\dfrac{\textrm{d} y}{\textrm{d} x}
+ -4y=0$, $y(0)=1$, $y'(0)=0$ $\;$ $\Rightarrow$ $\;$ $y(x)=\frac{4}{5}e^{x}+
+ \frac{1}{5}e^{-4x} .$
+<br></li>
+</ol>
+
+<p>The following example Python codes can be modified to solve all the above
+initial value problems:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74">&#34;&#34;&#34; Code for question (ii) &#34;&#34;&#34;</span>
+<span style="color:#75715e"># Function to solve dxdt=tˆ2/x.</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dxdtfor2dsolver</span>(u, t):
+  <span style="color:#75715e"># dxdt=t*t/x (dydt is unused)</span>
+  <span style="color:#66d9ef">return</span> (t<span style="color:#f92672">*</span>t<span style="color:#f92672">/</span>u[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">0</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dxdt</span>(x, t):
+  <span style="color:#75715e"># dxdt=t*t/x </span>
+  <span style="color:#66d9ef">return</span> t<span style="color:#f92672">*</span>t<span style="color:#f92672">/</span>x
+
+<span style="color:#75715e"># My best solver</span>
+solver <span style="color:#f92672">=</span> HigherOrderOdeSolver()
+solver<span style="color:#f92672">.</span>SetInitialValues(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">42</span>)
+solver<span style="color:#f92672">.</span>SetInitialTimeNumberOfStepsAndFinalTime(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">100.0</span>)
+solver<span style="color:#f92672">.</span>SetRhsFunction(dxdtfor2dsolver)
+solver<span style="color:#f92672">.</span>Solve()
+
+<span style="color:#75715e"># odeint based on the time-steps in my solver</span>
+oi <span style="color:#f92672">=</span> odeint(dxdt, <span style="color:#ae81ff">1.0</span>, solver<span style="color:#f92672">.</span>GetTimeTrace())
+
+<span style="color:#75715e"># the analytic version based on the time-steps in my solver</span>
+t <span style="color:#f92672">=</span> solver<span style="color:#f92672">.</span>GetTimeTrace()
+analytic <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sqrt((np<span style="color:#f92672">.</span>power(t, <span style="color:#ae81ff">3</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>)
+
+plt<span style="color:#f92672">.</span>plot(solver<span style="color:#f92672">.</span>GetTimeTrace(),solver<span style="color:#f92672">.</span>GetXTrace(),<span style="color:#e6db74">&#39;b+&#39;</span>, 
+         label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;My best solver&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(solver<span style="color:#f92672">.</span>GetTimeTrace(), oi, <span style="color:#e6db74">&#39;gx&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;odeint&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(solver<span style="color:#f92672">.</span>GetTimeTrace(), analytic, <span style="color:#e6db74">&#39;r&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Analytic&#39;</span>)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Exercise 1 (ii)&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;t&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;x&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74">&#34;&#34;&#34; Code for question (iv) &#34;&#34;&#34;</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dydx</span>(y, x):
+    <span style="color:#75715e"># This one ought to look familiar (rhs_circle)</span>
+    <span style="color:#66d9ef">return</span> (<span style="color:#f92672">-</span>y[<span style="color:#ae81ff">1</span>], y[<span style="color:#ae81ff">0</span>])
+
+<span style="color:#75715e"># My best solver</span>
+solver <span style="color:#f92672">=</span> HigherOrderOdeSolver()
+solver<span style="color:#f92672">.</span>SetInitialValues(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+solver<span style="color:#f92672">.</span>SetInitialTimeNumberOfStepsAndFinalTime(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">1.5</span><span style="color:#f92672">*</span>math<span style="color:#f92672">.</span>pi)
+solver<span style="color:#f92672">.</span>SetRhsFunction(dydx)
+solver<span style="color:#f92672">.</span>Solve()
+
+<span style="color:#75715e"># odeint based on the time-steps in my solver</span>
+oi <span style="color:#f92672">=</span> odeint(dydx, (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), solver<span style="color:#f92672">.</span>GetTimeTrace())
+
+<span style="color:#75715e"># the analytic version based on the time-steps in my solver</span>
+t <span style="color:#f92672">=</span> solver<span style="color:#f92672">.</span>GetTimeTrace()
+x <span style="color:#f92672">=</span> solver<span style="color:#f92672">.</span>GetXTrace()
+y <span style="color:#f92672">=</span> solver<span style="color:#f92672">.</span>GetYTrace()
+analyticx <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(t)
+analyticy <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sin(t)
+
+plt<span style="color:#f92672">.</span>plot(solver<span style="color:#f92672">.</span>GetXTrace(), solver<span style="color:#f92672">.</span>GetYTrace(), <span style="color:#e6db74">&#39;b+&#39;</span>, 
+         label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;My best solver&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(oi[:,<span style="color:#ae81ff">0</span>], oi[:,<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;gx&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;odeint&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(analyticx,  analyticy, <span style="color:#e6db74">&#39;r&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Analytic&#39;</span>)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Exercise 1 (iv)&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;y1&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;y2&#39;</span>)
+plt<span style="color:#f92672">.</span>axes()<span style="color:#f92672">.</span>set_aspect(<span style="color:#e6db74">&#39;equal&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><em>Boundary value problems.</em></p>
+
+<p>Use <code>scipy.integrate.solve_bvp</code> to solve the boundary value problem</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+\dfrac{\textrm{d}^{2} y}{\textrm{d} x^{2}} + 3 \dfrac{\textrm{d} y}{\textrm{d} x} -4y=0,
+\end{aligned}
+\]</span></p>
+
+<p>subject to the boundary conditions $y(0)=1$ and  $y(1)=1$.</p>
+
+<p>Solve the same boundary value problem, but now with the boundary conditions  $y'(0) = 0$
+and $y(1)=1$.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Solving y&#39;&#39; + 3y&#39;- -4y</span>
+<span style="color:#75715e"># y[0] is y, y[1] is y&#39;</span>
+<span style="color:#75715e"># dy[0]/dx = y[1] and dy[1]/dx = -3y[1]+4y[0]</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dydx</span>(x, y):
+     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>vstack((y[<span style="color:#ae81ff">1</span>], <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>y[<span style="color:#ae81ff">0</span>]))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bcs_a</span>(yat0, yat1):
+    <span style="color:#75715e"># Dirichlet: y at both ends = 1, i.e. y(x=1)-1 = 0</span>
+    <span style="color:#66d9ef">return</span> (yat0[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, yat1[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bcs_b</span>(yat0, yat1):
+    <span style="color:#75715e"># Dirichlet/Neumann y&#39;(x=0)= 1, y(x=1)-1 = 0</span>
+    <span style="color:#66d9ef">return</span> (yat0[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, yat1[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+
+x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">50</span>)
+init_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones((<span style="color:#ae81ff">2</span>, x<span style="color:#f92672">.</span>size))
+sol_a <span style="color:#f92672">=</span> solve_bvp(dydx, bcs_a, x, init_y)
+sol_b <span style="color:#f92672">=</span> solve_bvp(dydx, bcs_b, x, init_y)
+plt<span style="color:#f92672">.</span>plot(sol_a<span style="color:#f92672">.</span>x, sol_a<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#39;b-+&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;(a)&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(sol_b<span style="color:#f92672">.</span>x, sol_b<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#39;r-*&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;(b)&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Exercise (a)&#39;</span>); plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;x&#39;</span>); plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;y&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p><em>Chemical reaction systems.</em></p>
+
+<p>Mathematical models of simple chemical or biochemical reaction mechanisms often take the
+form of non-linear systems of ordinary differential equations (derived using the
+standard chemical laws of mass action). Often the various reactions making up the system
+happen on very different time scales leading to a <em>stiff</em> system. An example is
+Robertson's chemical reaction model, in which the concentrations of three reacting
+chemical species evolve according to the system of equations</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  \dfrac{\textrm{d} y_{1}}{\textrm{d} x} &= -0.04y_1 + 10000 y_2 y_3, \\
+  \dfrac{\textrm{d} y_{2}}{\textrm{d} x} &=0.04y_1 - 10000 y_2 y_3 - 30000000y_2^2,\\
+  \dfrac{\textrm{d} y_{3}}{\textrm{d} x} &=   30000000y_2^2,
+\end{aligned}
+\]</span></p>
+
+<p>with initial conditions</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  y_1(0) = 1, \;  y_2(0) = 0, \;  y_3 (0) = 0.
+\end{aligned}
+\]</span></p>
+
+<p><strong>Note: your mileage may vary with this question,</strong> because with more modern versions
+  of <code>scipy</code> it becomes increasingly hard to stop the integration
+  scheme being &quot;clever&quot; and using a sophisticated scheme earlier.</p>
+
+<ol>
+<li>Read the documentation for <code>scipy.integrate.ode</code>.  Solve this
+system using the Dormand &amp; Prince <code>dopri</code> solver, which is a
+high-order Runge-Kutta solver, until $t=100$ in steps of $\Delta t=1$.  (Note that the interface is a bit
+more difficult to set up than <code>odeint</code> but an example is given with
+the documentation.) What warning do you get from the solver?  Can you change any of the
+<code>dopri</code> parameters to get rid of warnings?  How long does the
+integrator take to solve the system?</li>
+<li>If you are still getting warnings for the <code>dopri</code> then you will
+have a hint to help you select a better <code>scipy.integrate.ode</code>
+method.  Switch to such a method.  Again work to remove all warnings.</li>
+<li>($\star$) Explain what is happening mathematically and chemically.</li>
+<li>Repeat parts (a)--(b) for the system</li>
+</ol>
+
+<p><span  class="math">\[
+\begin{aligned}
+  \dfrac{\textrm{d} y_{1}}{\textrm{d} x} &= -0.04y_1 +  y_2 y_3, \\
+  \dfrac{\textrm{d} y_{2}}{\textrm{d} x} &=0.04y_1 -  y_2 y_3 - 30y_2^2,\\
+  \dfrac{\textrm{d} y_{3}}{\textrm{d} x} &=   30y_2^2,
+\end{aligned}
+\]</span></p>
+
+<p>with the same initial conditions. Which solver is faster now?  Which
+solver gives you warnings now?</p>
+
+<ol start="5">
+<li>Which solver should you use in which situation?</li>
+<li>($\star$) If you are feeling brave then assess how one of the fixed time-step solvers
+you have written yourself measures up to the
+solver you used in part (b).   There are 3 species so you may want
+to extend the functionality to cope with $y_3$.  Use the solution
+from part (b) as a reference to measure your error.  How small do
+you need to make your time-step to get within a particular error?</li>
+</ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <p>Code for all parts of this question is given below.</p>
+
+<p>To answer part (c) there is a large discrepancy between numerical
+values (or concentrations) so effects are occurring on different
+scales.  The proper term for this is <em>multiscale</em> but in ODEs
+we often call these systems &quot;stiff&quot;.  Problems arise a little after the
+initial time when there is a small amount of $y_2$ which leads to
+massive gradients.</p>
+
+<p>Therefore, to answer part (e), for problems occurring on single
+scales it is okay to use Runge-Kutta type solvers but for problems
+defined on multiple scales you should use adaptive stiff solvers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> scipy.integrate <span style="color:#f92672">import</span> ode
+
+<span style="color:#75715e">#def Robertson(Y,t):</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Robertson</span>(t, Y):
+    dYdt <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">0.04</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">10000</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">2</span>],
+         <span style="color:#ae81ff">0.04</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">10000</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">30000000</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>,
+         <span style="color:#ae81ff">30000000</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>]
+    <span style="color:#66d9ef">return</span> dYdt
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">SimpleODE</span>(t, Y):
+    dYdt <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">0.04</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">2</span>],
+         <span style="color:#ae81ff">0.04</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>,
+         <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span>Y[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>]
+    <span style="color:#66d9ef">return</span> dYdt
+
+
+t<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; y<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>]
+times<span style="color:#f92672">=</span>[t]; y1<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>]; y2<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>]; y3<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#75715e"># Experiments for part (a)</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>)
+<span style="color:#75715e"># UserWarning: dopri5: larger nmax is needed</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>, max_step<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>)
+<span style="color:#75715e"># dopri5: larger nmax is needed      0.7 sec WRONG</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+<span style="color:#75715e"># dopri5: larger nmax is needed       0.2 sec</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+<span style="color:#75715e"># dopri5: larger nmax is needed       1.5 sec</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">10000</span>)
+<span style="color:#75715e"># dopri5: problem is probably stiff   1.5 sec</span>
+
+
+<span style="color:#75715e"># Experiments for part (b) (FIND A STIFF SOLVER)</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)
+<span style="color:#75715e"># Fails with  &#34;vode: Excess work done on this call.&#34; and other messages</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;vode&#39;</span>, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bdf&#39;</span>)
+<span style="color:#75715e"># vode: Excess work done on this call</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;vode&#39;</span>, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bdf&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+<span style="color:#75715e"># vode: Excess work done on this call</span>
+solver <span style="color:#f92672">=</span> ode(Robertson)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;vode&#39;</span>, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bdf&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span>)
+<span style="color:#75715e"># No warnings!            2.2 sec</span>
+
+
+<span style="color:#75715e"># Experiments for part (d)</span>
+solver <span style="color:#f92672">=</span> ode(SimpleODE)
+<span style="color:#75715e"># ~6 ms</span>
+solver <span style="color:#f92672">=</span> ode(SimpleODE)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>)
+<span style="color:#75715e"># ~3 ms</span>
+solver <span style="color:#f92672">=</span> ode(SimpleODE)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;dopri&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+<span style="color:#75715e"># ~3 ms</span>
+solver <span style="color:#f92672">=</span> ode(SimpleODE)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;vode&#39;</span>, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bdf&#39;</span>)
+<span style="color:#75715e"># ~2 ms</span>
+solver <span style="color:#f92672">=</span> ode(SimpleODE)<span style="color:#f92672">.</span>set_integrator(<span style="color:#e6db74">&#39;vode&#39;</span>, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bdf&#39;</span>, nsteps<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span>)
+<span style="color:#75715e"># ~2 ms</span>
+<span style="color:#75715e"># (They all succeed and take a similar amount of time)</span>
+
+solver<span style="color:#f92672">.</span>set_initial_value(y,t)
+
+start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+<span style="color:#66d9ef">while</span> t<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">100</span>:
+    t<span style="color:#f92672">=</span>t<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    y<span style="color:#f92672">=</span>solver<span style="color:#f92672">.</span>integrate(t)
+    y1<span style="color:#f92672">.</span>append(y[<span style="color:#ae81ff">0</span>])
+    y2<span style="color:#f92672">.</span>append(y[<span style="color:#ae81ff">1</span>])
+    y3<span style="color:#f92672">.</span>append(y[<span style="color:#ae81ff">2</span>])
+    times<span style="color:#f92672">.</span>append(t)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Time taken =&#39;</span>,time<span style="color:#f92672">.</span>time()<span style="color:#f92672">-</span>start_time)
+plt<span style="color:#f92672">.</span>plot(times, y1, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y1&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(times, y2, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y2&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(times, y3, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y3&#39;</span>)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;t&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>($\star$) <em>When zombies attack!</em> Inspired by a famous SIR model for epidemics there is a
+SZR model for
+zombie invasion. The paper describing this model is
+available to download from
+<a href="https://mysite.science.uottawa.ca/rsmith43/Zombies.pdf">https://mysite.science.uottawa.ca/rsmith43/Zombies.pdf</a>
+which includes modelling code in <code>Matlab</code>.</p>
+
+<p>A more advanced model included in the paper, which includes latent infection and
+quarantine, is known as the SIZRQ model. This model is defined by</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  \dfrac{\textrm{d} S}{\textrm{d} t} &= \Pi - \beta SZ - \delta S, \\
+  \dfrac{\textrm{d} I}{\textrm{d} t} &= \beta S Z -\rho I - \delta I - \kappa I, 
+  \\
+  \dfrac{\textrm{d} Z}{\textrm{d} t} &= \rho I + \zeta R - \alpha S Z -\sigma Z, 
+  \\
+  \dfrac{\textrm{d} R}{\textrm{d} t} &= \delta S + \delta I + \alpha SZ -\zeta R + 
+  \gamma Q, \\
+  \dfrac{\textrm{d} Q}{\textrm{d} t} &= \kappa I +\sigma Z - \gamma Q,
+\end{aligned}
+\]</span></p>
+
+<p>with initial conditions</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  S(0) = 500, \; I(0) = 0, \; Z(0) = 0, \; R(0) = 0, \; Q(0) = 0
+\end{aligned}
+\]</span></p>
+
+<p>and parameter values</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  \Pi = 0, \; 
+  \alpha = 0.005, \; 
+  & \beta = 0.0095, \;  
+  \zeta = 0.1, \; 
+  \delta = 0.0001, \\
+  \rho = 0.5, \; 
+  & \kappa = 0.1, \; 
+  \sigma = 0.01, \; 
+  \gamma = 0.01.
+\end{aligned}
+\]</span></p>
+
+<ol>
+<li>Solve this system of equations numerically.</li>
+<li>How realistic is this type of model? Can you think of any improvements to the
+model?</li>
+</ol>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Function to solve the SIZRQ Zombie ODE system.</span>
+alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.005</span>;  zeta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>; rho <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>;
+sigma <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>;   pi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;     beta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0095</span>;
+delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0001</span>; kappa <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>;gamma <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>;
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Zombie</span>(Y, t):
+    S <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">0</span>]; I <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">1</span>]; Z <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">2</span>]; R <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">3</span>]; Q <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">4</span>]
+    dSdt <span style="color:#f92672">=</span> pi <span style="color:#f92672">-</span> beta<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> delta<span style="color:#f92672">*</span>S  <span style="color:#75715e">#Susceptible</span>
+    dIdt <span style="color:#f92672">=</span> beta<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> rho<span style="color:#f92672">*</span>I <span style="color:#f92672">-</span> delta<span style="color:#f92672">*</span>I <span style="color:#f92672">-</span> kappa<span style="color:#f92672">*</span>I; <span style="color:#75715e"># Infected</span>
+    dZdt <span style="color:#f92672">=</span> rho<span style="color:#f92672">*</span>I <span style="color:#f92672">+</span> zeta<span style="color:#f92672">*</span>R <span style="color:#f92672">-</span> alpha<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> sigma<span style="color:#f92672">*</span>Z; <span style="color:#75715e">#Zombie</span>
+    dRdt <span style="color:#f92672">=</span> delta<span style="color:#f92672">*</span>S <span style="color:#f92672">+</span> delta<span style="color:#f92672">*</span>I <span style="color:#f92672">+</span> alpha<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> zeta<span style="color:#f92672">*</span>R <span style="color:#f92672">+</span> gamma<span style="color:#f92672">*</span>Q; <span style="color:#75715e">#Removed</span>
+    dQdt <span style="color:#f92672">=</span> kappa<span style="color:#f92672">*</span>I <span style="color:#f92672">+</span> sigma<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> gamma<span style="color:#f92672">*</span>Q; <span style="color:#75715e">#Quarantined</span>
+    <span style="color:#66d9ef">return</span> [dSdt, dIdt, dZdt, dRdt, dQdt]
+
+S0<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>; I0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; Z0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; R0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; Q0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+StartTime<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; EndTime <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(StartTime, EndTime, <span style="color:#ae81ff">100</span>)
+Y<span style="color:#f92672">=</span>odeint(Zombie, [S0,I0,Z0,R0,Q0], t)
+
+plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">0</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Susceptible&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">1</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Infected&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">2</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Zombie&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">3</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Removed&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">4</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Quarantined&#39;</span>)
+
+plt<span style="color:#f92672">.</span>legend();plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;When zombies attack&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;time&#39;</span>);plt<span style="color:#f92672">.</span>show()</code></pre></div>
+<p>Possible improvements include the incorporation of delays, spatial
+heterogeneity, and more realistic nonlinear interaction terms.</p>
+
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>($\star$) <em>Simple events.</em></p>
+
+<p>ODE-based models of biological systems often include specific events,
+which may occur either at predetermined times or when a given
+condition on the values of the state variables or their derivatives is
+met. The following model describes a zombie outbreak in which there is
+periodic culling\footnote{Spoiler alert.  It looks like we all die
+  whatever we do.
+  If you think that's depressing then you might have to read this
+  <a href="http://dx.doi.org/10.1080/23737867.2014.11414478">followup paper</a>.}
+of the zombie population:</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+\dfrac{\textrm{d} S}{\textrm{d} t} &= \Pi - \beta SZ - \delta S, & \; t &\ne t_{n} ,\\
+\dfrac{\textrm{d} Z}{\textrm{d} t} &= \beta SZ + \zeta R - \alpha S Z, & t &\ne t_{n}, 
+\\
+\dfrac{\textrm{d} R}{\textrm{d} t} &= \delta S + \alpha SZ -\zeta R, & t &\ne t_{n}, \\
+\triangle Z &= -kZ, & t &= t_{n}.
+\end{aligned}
+\]</span></p>
+
+<p>Here $k\in(0,1]$ is the kill ratio, and the last equation represents periodic culling of the zombie population.</p>
+
+<p>Solve this model subject to initial conditions</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  S(0) = 500, \;  Z(0) = 0, \; \text{and} \; R(0) = 0,
+\end{aligned}
+\]</span></p>
+
+<p>and with parameter values</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+  \Pi = 0, \; \alpha = 0.005, \; \beta = 0.0095, \;   \zeta = 0.1, \; \delta = 0.0001,  
+  \; k = 0.25,
+\end{aligned}
+\]</span></p>
+
+<p>and culling every 10 units of time (i.e. $t_1=10$, $t_2=20$, etc.). Hint: you will need to loop over time intervals to solve this model.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Function to solve the SZR Zombie ODE system with culling.</span>
+alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.005</span>; zeta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>; pi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+beta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0095</span>; delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0001</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">SZR</span>(Y,t):
+    S <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">0</span>]; Z <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">1</span>]; R <span style="color:#f92672">=</span> Y[<span style="color:#ae81ff">2</span>]
+    <span style="color:#75715e">#Susceptible / Zombie / Removed</span>
+    dSdt <span style="color:#f92672">=</span> pi <span style="color:#f92672">-</span> beta<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> delta<span style="color:#f92672">*</span>S
+    dZdt <span style="color:#f92672">=</span> beta<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">+</span> zeta<span style="color:#f92672">*</span>R <span style="color:#f92672">-</span> alpha<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z
+    dRdt <span style="color:#f92672">=</span> delta<span style="color:#f92672">*</span>S <span style="color:#f92672">+</span> alpha<span style="color:#f92672">*</span>S<span style="color:#f92672">*</span>Z <span style="color:#f92672">-</span> zeta<span style="color:#f92672">*</span>R
+    <span style="color:#66d9ef">return</span> [dSdt, dZdt, dRdt]
+
+
+S0<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>; Z0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; R0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+EndTime <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+CullEffect <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.30</span>
+CullInterval <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>
+NumCull <span style="color:#f92672">=</span> round(EndTime<span style="color:#f92672">/</span>CullInterval)
+
+Y0 <span style="color:#f92672">=</span> [S0, Z0, R0]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range (<span style="color:#ae81ff">0</span>, NumCull):
+   t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(CullInterval<span style="color:#f92672">*</span>i, CullInterval<span style="color:#f92672">*</span>(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), <span style="color:#ae81ff">100</span>)
+   Y <span style="color:#f92672">=</span> odeint(SZR, Y0, t)
+   <span style="color:#75715e"># Get state at end </span>
+   Y0 <span style="color:#f92672">=</span> Y[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,:]
+   CullSize <span style="color:#f92672">=</span> CullEffect<span style="color:#f92672">*</span>Y0[<span style="color:#ae81ff">1</span>]
+   Y0[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> CullSize
+   Y0[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+=</span> CullSize
+   plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#39;r&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Susceptible&#39;</span>)
+   plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;g&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Zombie&#39;</span>)
+   plt<span style="color:#f92672">.</span>plot(t,Y[:,<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;b&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Removed&#39;</span>)
+plt<span style="color:#f92672">.</span>legend();plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Zombie culling at &#39;</span><span style="color:#f92672">+</span>str(CullEffect<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;%&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;time&#39;</span>);plt<span style="color:#f92672">.</span>show()
+<span style="color:#75715e"># Turn that graph on its side and you have a Christmas tree!</span></code></pre></div>
+</div>
+
+</details>
+
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/scientific-computing/unit_3_ode/01-am/" title="ODE Solvers - AM exercise"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/scientific-computing/js/clipboard.min.js?1641985009"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1641985009"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1641985009"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1641985009"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1641985009"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1641985009"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1641985009"></script>
+    <script src="/scientific-computing/js/learn.js?1641985009"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1641985009"></script>
+    
+    
+
+  </body>
+</html>
+

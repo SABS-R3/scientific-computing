@@ -90,6 +90,15 @@ This is an example of an important class of algorithms called the line search me
     </item>
     
     <item>
+      <title>ODE Solvers - PM exercise</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_3_ode/02-pm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_3_ode/02-pm/</guid>
+      <description>In these exercises we will use Python to solve a variety of Ordinary Differential Equations (ODEs), including initial and boundary value problems. Prior to attempting the exercises you should be familiar with how to solve first order ODEs using separable solutions and integrating factors. You should also know how solve a second order ODE with constant coefficients and how to reduce a general second order ODE to a system of coupled first order equations.</description>
+    </item>
+    
+    <item>
       <title>Matrix decompositions</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/</link>
       <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
