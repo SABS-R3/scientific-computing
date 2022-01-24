@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.78.2" />
+    <meta name="description" content="An online course on Modelling and Scientific Computing in Python for the SABS:R3 Centre for Doctoral Training https://www.sabsr3.ox.ac.uk/">
+<meta name="author" content="Martin Robinson">
+
+    <link rel="shortcut icon" href="/ScientificComputingInMatlab/logos/dtc_hex.svg" type="image/x-icon" />
+
+    <title>Applied Bayesian Inference - AM exercise   Modelling and Scientific Computing</title>
+
+    
+    <link href="/scientific-computing/css/nucleus.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/fontawesome-all.min.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/hybrid.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/featherlight.min.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/perfect-scrollbar.min.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/auto-complete.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/atom-one-dark-reasonable.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/theme.css?1643020901" rel="stylesheet">
+    <link href="/scientific-computing/css/hugo-theme.css?1643020901" rel="stylesheet">
+    
+    <link href="/scientific-computing/css/theme-dtc.css?1643020901" rel="stylesheet">
+    
+    
+
+    <script src="/scientific-computing/js/jquery-3.3.1.min.js?1643020901"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+        delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+        });
+    });
+</script>
+
+
+
+  </head>
+  <body class="" data-url="/scientific-computing/unit_5_bayesian_inference/01-am/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://sabs-r3.github.io/scientific-computing/">
+    <img src="/scientific-computing/logos/SABSR3.svg" alt="SABSR3 logo">
+</a>
+  
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/scientific-computing/js/lunr.min.js?1643020901"></script>
+<script type="text/javascript" src="/scientific-computing/js/auto-complete.js?1643020901"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/sabs-r3.github.io\/scientific-computing\/";
+    
+</script>
+<script type="text/javascript" src="/scientific-computing/js/search.js?1643020901"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_0_introduction/" title="Course introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_0_introduction/">
+          Course introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/01_course_overview/" title="Course Overview" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/01_course_overview/">
+        1. Course Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/02_course_activities/" title="Course Activities" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/02_course_activities/">
+        2. Course Activities
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_0_introduction/03_getting_python/" title="Getting Python" class="dd-item ">
+        <a href="/scientific-computing/unit_0_introduction/03_getting_python/">
+        3. Getting Python
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_1_linear_algebra/" title="Direct Solvers and Matrix Decompositions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_1_linear_algebra/">
+          <b>Day 1. </b>Direct Solvers and Matrix Decompositions
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/" title="Matrix form of equations" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/">
+        Matrix form of equations
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/" title="Gaussian Elimination" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/02-gaussian-elimination/">
+        Gaussian Elimination
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/" title="Matrix decompositions" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/03-matrix-decompositions/">
+        Matrix decompositions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/" title="LU decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/04-lu-decomposition/">
+        LU decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/" title="Cholesky decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/06-cholesky-decomposition/">
+        Cholesky decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/" title="QR decomposition" class="dd-item ">
+        <a href="/scientific-computing/unit_1_linear_algebra/07-qr-decomposition/">
+        QR decomposition
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_2_linear_algebra/" title="Sparse Matrices and Iterative Solvers" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_2_linear_algebra/">
+          <b>Day 2. </b>Sparse Matrices and Iterative Solvers
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/" title="Sparse matrices" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/01-sparse-matrices/">
+        Sparse matrices
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/" title="COOrdinate format" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/02-coo-matrix/">
+        COOrdinate format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/03-finite-difference/" title="Finite Difference Matrix" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/03-finite-difference/">
+        Finite Difference Matrix
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/" title="Scipy.sparse and problems" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/04-scipy-sparse/">
+        Scipy.sparse and problems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/" title="Iterative methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/05-iterative-methods/">
+        Iterative methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/" title="Jacobi and Relaxation Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/06-jacobi-relaxation-methods/">
+        Jacobi and Relaxation Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/" title="Krylov subspace methods and CG" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/07-conjugate-gradient-method/">
+        Krylov subspace methods and CG
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/" title="Iterative solvers in Scipy" class="dd-item ">
+        <a href="/scientific-computing/unit_2_linear_algebra/08-scipy.sparse.linalg/">
+        Iterative solvers in Scipy
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_3_ode/" title="Solving ODEs" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_3_ode/">
+          <b>Day 3. </b>Solving ODEs
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_3_ode/01-am/" title="ODE Solvers - AM exercise" class="dd-item ">
+        <a href="/scientific-computing/unit_3_ode/01-am/">
+        ODE Solvers - AM exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_3_ode/02-pm/" title="ODE Solvers - PM exercise" class="dd-item ">
+        <a href="/scientific-computing/unit_3_ode/02-pm/">
+        ODE Solvers - PM exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_4_optimisation/" title="Non-linear Optimisation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_4_optimisation/">
+          <b>Day 4. </b>Non-linear Optimisation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/" title="Nonlinear Optimisation" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/01-nonlinear-optimisation/">
+        Nonlinear Optimisation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/02-line-search-methods/" title="Line Search Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/02-line-search-methods/">
+        Line Search Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/03-trust-region-methods/" title="Trust Region Methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/03-trust-region-methods/">
+        Trust Region Methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/" title="Derivative-free methods" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/04-derivatite-free-methods/">
+        Derivative-free methods
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/05-finite-difference-method/" title="Finite difference method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/05-finite-difference-method/">
+        Finite difference method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_4_optimisation/06-nelder-mead/" title="Nelder-Mead method" class="dd-item ">
+        <a href="/scientific-computing/unit_4_optimisation/06-nelder-mead/">
+        Nelder-Mead method
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/" title="Applied Bayesian Inference" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/scientific-computing/unit_5_bayesian_inference/">
+          <b>Day 5. </b>Applied Bayesian Inference
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/01-am/" title="Applied Bayesian Inference - AM exercise" class="dd-item active">
+        <a href="/scientific-computing/unit_5_bayesian_inference/01-am/">
+        Applied Bayesian Inference - AM exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_5_bayesian_inference/02-pm/" title="Applied Bayesian Inference - PM exercise" class="dd-item ">
+        <a href="/scientific-computing/unit_5_bayesian_inference/02-pm/">
+        Applied Bayesian Inference - PM exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/scientific-computing/unit_6_projects/" title="Projects" class="dd-item
+        
+        
+        
+        ">
+      <a href="/scientific-computing/unit_6_projects/">
+          <b>Day 6-8. </b>Projects
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/scientific-computing/unit_6_projects/01-project-description/" title="Project description" class="dd-item ">
+        <a href="/scientific-computing/unit_6_projects/01-project-description/">
+        Project description
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/SABS-R3/scientific-computing/blob/master/hugo_site/content/unit_5_bayesian_inference/01-AM.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/scientific-computing/'></a> > <a href='/scientific-computing/unit_5_bayesian_inference/'>Applied Bayesian Inference</a> > Applied Bayesian Inference - AM exercise
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Applied Bayesian Inference - AM exercise
+            </h1>
+          
+
+        
+
+
+<h1 id="logistic-growth">Logistic growth</h1>
+
+<p>In this example, we are going to perform inference for the logistic growth model commonly used in population biology to describe resource-limited growth. The population density of a given bacteria is supposed to follow:</p>
+
+<p><span  class="math">\[
+\frac{d y}{d t} = r y (1 - \frac{y}{k})
+\]</span></p>
+
+<p>where we assume $y(0)&gt;0$; $r &gt; 0$ is the initial (exponential) growth rate when resources are abundant; $\kappa &gt; 0$ is the carrying capacity denoting the steady-state population density.</p>
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-1">1.</h2>
+
+<p>Using Scipy's integrator, write a function which numerically solves the logistic equation. Plot the solution for $y(0)=5, r=0.2, \kappa=20$ from $t=0$ to $t=40$.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> scipy.integrate <span style="color:#f92672">import</span> odeint
+<span style="color:#f92672">from</span> plotnine <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logistic_rhs</span>(y, t, r, k):
+    <span style="color:#66d9ef">return</span> r <span style="color:#f92672">*</span> y <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> y <span style="color:#f92672">/</span> k)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logistic_solve</span>(times, r, k, y0):
+    sol <span style="color:#f92672">=</span> odeint(logistic_rhs, [y0], times, args<span style="color:#f92672">=</span>(r, k))
+    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;t&#39;</span>: times, <span style="color:#e6db74">&#39;y&#39;</span>: sol[:, <span style="color:#ae81ff">0</span>]})
+    <span style="color:#66d9ef">return</span> df
+
+df <span style="color:#f92672">=</span> logistic_solve(np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">100</span>), <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>)
+(ggplot(df, aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;t&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line())</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-2">2.</h2>
+
+<p>Assume that the observed data differs from the logistic model solution according to the measurement equation:</p>
+
+<p><span  class="math">\[
+\tilde y(t) \sim \mathcal{N}(y(t), \sigma),
+\]</span></p>
+
+<p>where $\sigma &gt;0$ controls the measurement variability. Generate 'observed' data at $t= 0, 5, 10, 15, 20, 25, 30, 35, 40$ assuming $y(0)=5, r=0.2, \kappa=20, \sigma=2$. Plot these data overlaid on top of the true solution.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">times <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">5</span>)
+df_short <span style="color:#f92672">=</span> logistic_solve(times, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logistic_observations</span>(y, sigma):
+    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(y, sigma, len(y))
+
+df_short[<span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">=</span> logistic_observations(df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">2</span>)
+df_short[<span style="color:#e6db74">&#39;type&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;actual&#39;</span>
+df[<span style="color:#e6db74">&#39;type&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;simulated&#39;</span>
+df_both <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df, df_short])
+
+
+(ggplot(df_both[df_both[<span style="color:#e6db74">&#39;type&#39;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;simulated&#39;</span>], aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;t&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, colour<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;type&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line() <span style="color:#f92672">+</span>
+ geom_point(df_both[df_both[<span style="color:#e6db74">&#39;type&#39;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;actual&#39;</span>]))</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-3">3.</h2>
+
+<p>The likelihood for this model is given by:</p>
+
+<p><span  class="math">\[
+L = \prod_{i=1}^{N} \frac{1}{\sqrt{2\pi\sigma^2}} \exp(-\frac{(\tilde y(t_i) - y(t_i))^2}{2\sigma^2})
+\]</span></p>
+
+<p>where $N$ is the number of observations and $y(t) = y(t|r,\kappa, y(0))$ is the ODE solution at time $t$. Write a function which calculates the log-likelihood for given $(r, \kappa, y(0), \sigma)$.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scipy.stats
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logistic_log_likelihood</span>(times, y_tilde, r, k, y0, sigma):
+    df <span style="color:#f92672">=</span> logistic_solve(times, r, k, y0)
+    log_p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(times)):
+        log_p <span style="color:#f92672">+=</span> scipy<span style="color:#f92672">.</span>stats<span style="color:#f92672">.</span>norm<span style="color:#f92672">.</span>logpdf(y_tilde[i], df[<span style="color:#e6db74">&#39;y&#39;</span>][i], sigma)
+    <span style="color:#66d9ef">return</span> log_p</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-4">4.</h2>
+
+<p>Using the simulated data you previously generated, plot the log-likelihood as a function of $r$ holding all other parameters at their true values.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>)
+log_like <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(len(r))
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(r)):
+    log_like[i] <span style="color:#f92672">=</span> logistic_log_likelihood(times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], r[i], <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>)
+
+df_log_like <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;r&#39;</span>: r, <span style="color:#e6db74">&#39;log_like&#39;</span>: log_like})
+(ggplot(df_log_like, aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;log_like&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line())</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-5">5.</h2>
+
+<p>Plot the likelihood (not the log-likelihood as this is harder to distinguish) contour surface for $(r,k)$ holding all other parameters at their true values.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">50</span>)
+k <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">50</span>)
+X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(r, k)
+Z <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((len(r), len(k)))
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(r)):
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(k)):
+        Z[i, j] <span style="color:#f92672">=</span> logistic_log_likelihood(times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], r[i], k[j], <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>)
+
+fig,ax<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+cp <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(X, Y, np<span style="color:#f92672">.</span>exp(Z))
+fig<span style="color:#f92672">.</span>colorbar(cp)
+ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;r&#39;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;k&#39;</span>)
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <p>## 6.</p>
+
+<p>Assume we have priors on parameters: $r\sim \mathcal{N}(0.2, 0.02), \kappa\sim
+\mathcal{N}(20, 4)$, and we fix $y(0)=5$. Generate 100 prior predictive simulations of
+the ODE solution $y$ and plot these. Remember, a single prior predictive simulation is
+obtained by sampling each parameter from its prior and (in this case) solving the ODE
+for this parameter set.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n):
+    r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.02</span>, <span style="color:#ae81ff">1</span>)
+    k <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>)
+    temp <span style="color:#f92672">=</span> logistic_solve(np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">100</span>), r, k, <span style="color:#ae81ff">5</span>)
+    temp[<span style="color:#e6db74">&#39;simulation&#39;</span>] <span style="color:#f92672">=</span> str(i)
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        df_big <span style="color:#f92672">=</span> temp
+    <span style="color:#66d9ef">else</span>:
+        df_big <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df_big, temp])
+
+(ggplot(df_big, aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;t&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, group<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;simulation&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>))</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-7">7.</h2>
+
+<p>Now also allow $y(0)\sim \mathcal{N}(5, 1)$. How does the prior predictive distribution change?</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n):
+    r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.02</span>, <span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>]
+    k <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>]
+    y0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>]
+    temp <span style="color:#f92672">=</span> logistic_solve(np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">100</span>), r, k, y0)
+    temp[<span style="color:#e6db74">&#39;simulation&#39;</span>] <span style="color:#f92672">=</span> str(i)
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        df_big <span style="color:#f92672">=</span> temp
+    <span style="color:#66d9ef">else</span>:
+        df_big <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df_big, temp])
+
+(ggplot(df_big, aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;t&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, group<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;simulation&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>))</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-8">8.</h2>
+
+<p>We are now going to write a random walk Metropolis sampler. The first step is to write a method which takes as input $(r,\kappa, \sigma)$ and proposes new values using univariate normal distributions centered at the current values. So, for example,</p>
+
+<p><span  class="math">\[
+r'\sim\mathcal{N}(r,\tau_r)
+\]</span></p>
+
+<p>where $\tau_r$ is a hyperparameter of the method. Write such a function.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">propose</span>(r, k, sigma, tau_r, tau_k, tau_sigma):
+    r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(r, tau_r)
+    k <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(k, tau_k)
+    sigma <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(sigma, tau_sigma)
+    <span style="color:#66d9ef">return</span> r, k, sigma</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-9">9.</h2>
+
+<p>Assume priors: $r\sim \mathcal{N}(0.2, 0.02), \kappa\sim \mathcal{N}(20, 4), \sigma \sim \mathcal{N}(2, 0.2)$ and fix $y(0)=5$. Write a function that accepts as input $(r,\kappa, \sigma)$ and outputs the log-prior density $\log{\text -}p(r,\kappa, \sigma)$.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">prior</span>(r, k, sigma):
+    lp <span style="color:#f92672">=</span> (scipy<span style="color:#f92672">.</span>stats<span style="color:#f92672">.</span>norm<span style="color:#f92672">.</span>logpdf(r, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.02</span>) <span style="color:#f92672">+</span>
+          scipy<span style="color:#f92672">.</span>stats<span style="color:#f92672">.</span>norm<span style="color:#f92672">.</span>logpdf(k, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">4</span>) <span style="color:#f92672">+</span>
+          scipy<span style="color:#f92672">.</span>stats<span style="color:#f92672">.</span>norm<span style="color:#f92672">.</span>logpdf(sigma, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.2</span>))
+    <span style="color:#66d9ef">return</span> lp</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-10">10.</h2>
+
+<p>Write a function which calculates the unnormalised log-posterior (i.e. the sum of the log-prior and log-likelihood), $\text{log-}p(r,\kappa,\sigma|\text{data})$, for a given parameter set.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">posterior</span>(r, k, sigma, y0, times, y_tilde):
+    ll <span style="color:#f92672">=</span> logistic_log_likelihood(times, y_tilde, r, k, y0, sigma)
+    lp <span style="color:#f92672">=</span> prior(r, k, sigma)
+    <span style="color:#66d9ef">return</span> ll <span style="color:#f92672">+</span> lp</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">posterior(<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>])</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-11">11.</h2>
+
+<p>The next step is to write a function called 'step_accept' which takes as input $(r,\kappa, \sigma)$, proposes new values $(r',\kappa', \sigma')$. Then calculates the ratio:</p>
+
+<p><span  class="math">\[
+t = \exp(\text{log-}p(r',\kappa', \sigma'|\text{data}) - \text{log-}p(r,\kappa, \sigma|\text{data}))
+\]</span></p>
+
+<p>Then generates $u\sim U(0,1)$ and does the following: if $t \geq u$, return $(r',\kappa',\sigma')$; else return $(r,\kappa,\sigma)$.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">step_accept</span>(r, k, sigma, y0, times, y_tilde, tau_r, tau_k, tau_sigma):
+    r_prime, k_prime, sigma_prime <span style="color:#f92672">=</span> propose(r, k, sigma, tau_r, tau_k, tau_sigma)
+    logp_current <span style="color:#f92672">=</span> posterior(r, k, sigma, y0, times, y_tilde)
+    logp_proposed <span style="color:#f92672">=</span> posterior(r_prime, k_prime, sigma_prime, y0, times, y_tilde)
+    t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>exp(logp_proposed <span style="color:#f92672">-</span> logp_current)
+    u <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform()
+    <span style="color:#66d9ef">if</span> t <span style="color:#f92672">&gt;=</span> u:
+        <span style="color:#66d9ef">return</span> r_prime, k_prime, sigma_prime
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> r, k, sigma</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">step_accept(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-12">12.</h2>
+
+<p>Write a function which iterates 'step_accept' generating a chain of MCMC samples of $(r,\kappa,\sigma)$. Initialise $(r,\kappa,\sigma)$ using samples from the prior.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">MCMC</span>(numsamples, r, k, sigma, y0, times, y_tilde, tau_r, tau_k, tau_sigma):
+    r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.02</span>)
+    k <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">4</span>)
+    sigma <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.2</span>)
+    m_samples <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((numsamples, <span style="color:#ae81ff">3</span>))
+    m_samples[<span style="color:#ae81ff">0</span>, :] <span style="color:#f92672">=</span> [r, k, sigma]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, numsamples):
+        r, k, sigma <span style="color:#f92672">=</span> step_accept(r, k, sigma, y0, times, y_tilde, tau_r, tau_k, tau_sigma)
+        m_samples[i, :] <span style="color:#f92672">=</span> [r, k, sigma]
+    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;r&#39;</span>: m_samples[:, <span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#39;k&#39;</span>: m_samples[:, <span style="color:#ae81ff">1</span>],
+                       <span style="color:#e6db74">&#39;sigma&#39;</span>: m_samples[:, <span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;iter&#39;</span>: np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, numsamples)})
+    <span style="color:#66d9ef">return</span> df</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-13">13.</h2>
+
+<p>Assuming step sizes of $(\tau_r=0.01, \tau_k=1, \tau_{\sigma} = 0.1) $, generate an
+MCMC sample of 1000 draws. Visualise the sampled values of $r$ over time.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> MCMC(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>plot(df[<span style="color:#e6db74">&#39;r&#39;</span>])
+plt<span style="color:#f92672">.</span>show()</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-14">14.</h2>
+
+<p>Plot the pairwise distribution of $(r,\kappa)$. How do the sampled values compare to the true parameters?</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(ggplot(df, aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_point(colour<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;blue&#39;</span>) <span style="color:#f92672">+</span>
+ geom_vline(xintercept<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>) <span style="color:#f92672">+</span>
+ geom_hline(yintercept<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>))</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-15">15.</h2>
+
+<p>Modify your MCMC routine to use the following half-normal distributions to sample initial points for your chains. Run four independent chains for 1000 iterations each and plot the $\kappa$ samples over time. How long does it appear your chains be run until they reach a stationary distribution?</p>
+
+<p>$r \sim \text{half-N}(0.2, 0.1)$
+$\kappa \sim \text{half-N}(0, 20, 10)$
+$\sigma \sim \text{half-N}(2, 1)$</p>
+
+<p>Note, to do so, you can use the following function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">truncated_normal</span>(mu, sd):
+    myclip_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    myclip_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000</span>
+    my_mean <span style="color:#f92672">=</span> mu
+    my_std <span style="color:#f92672">=</span> sd
+
+    a, b <span style="color:#f92672">=</span> (myclip_a <span style="color:#f92672">-</span> my_mean) <span style="color:#f92672">/</span> my_std, (myclip_b <span style="color:#f92672">-</span> my_mean) <span style="color:#f92672">/</span> my_std
+    r <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>stats<span style="color:#f92672">.</span>truncnorm<span style="color:#f92672">.</span>rvs(a, b, loc<span style="color:#f92672">=</span>my_mean, scale<span style="color:#f92672">=</span>my_std, size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">return</span> r[<span style="color:#ae81ff">0</span>]</code></pre></div>
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">truncated_normal</span>(mu, sd):
+    myclip_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    myclip_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000</span>
+    my_mean <span style="color:#f92672">=</span> mu
+    my_std <span style="color:#f92672">=</span> sd
+
+    a, b <span style="color:#f92672">=</span> (myclip_a <span style="color:#f92672">-</span> my_mean) <span style="color:#f92672">/</span> my_std, (myclip_b <span style="color:#f92672">-</span> my_mean) <span style="color:#f92672">/</span> my_std
+    r <span style="color:#f92672">=</span> scipy<span style="color:#f92672">.</span>stats<span style="color:#f92672">.</span>truncnorm<span style="color:#f92672">.</span>rvs(a, b, loc<span style="color:#f92672">=</span>my_mean, scale<span style="color:#f92672">=</span>my_std, size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">return</span> r[<span style="color:#ae81ff">0</span>]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">MCMC</span>(numsamples, r, k, sigma, y0, times, y_tilde, tau_r, tau_k, tau_sigma):
+    r <span style="color:#f92672">=</span> truncated_normal(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.1</span>)
+    k <span style="color:#f92672">=</span> truncated_normal(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>)
+    sigma <span style="color:#f92672">=</span> truncated_normal(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>)
+    m_samples <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((numsamples, <span style="color:#ae81ff">3</span>))
+    m_samples[<span style="color:#ae81ff">0</span>, :] <span style="color:#f92672">=</span> [r, k, sigma]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, numsamples):
+        r, k, sigma <span style="color:#f92672">=</span> step_accept(r, k, sigma, y0, times, y_tilde, tau_r, tau_k, tau_sigma)
+        m_samples[i, :] <span style="color:#f92672">=</span> [r, k, sigma]
+    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;r&#39;</span>: m_samples[:, <span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#39;k&#39;</span>: m_samples[:, <span style="color:#ae81ff">1</span>],
+                       <span style="color:#e6db74">&#39;sigma&#39;</span>: m_samples[:, <span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;iter&#39;</span>: np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, numsamples)})
+    <span style="color:#66d9ef">return</span> df
+
+df <span style="color:#f92672">=</span> MCMC(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)
+df[<span style="color:#e6db74">&#39;chain&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1&#39;</span>
+df1 <span style="color:#f92672">=</span> MCMC(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)
+df1[<span style="color:#e6db74">&#39;chain&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2&#39;</span>
+df2 <span style="color:#f92672">=</span> MCMC(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)
+df2[<span style="color:#e6db74">&#39;chain&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;3&#39;</span>
+df3 <span style="color:#f92672">=</span> MCMC(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">5</span>, times, df_short[<span style="color:#e6db74">&#39;y&#39;</span>], <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)
+df3[<span style="color:#e6db74">&#39;chain&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;4&#39;</span>
+
+df_all <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df, df1, df2, df3])</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(ggplot(df_all, aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;iter&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, colour<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;chain&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line())</code></pre></div>
+</div>
+
+</details>
+
+
+
+<div class="notices question" >
+  <div class="label">Question</div>
+  <h2 id="section-16">16.</h2>
+
+<p>Using a random subset of 100 samples from all four chains taken from after they appear to have reached the stationary distribution, draw from the posterior predictive distribution of the logistic equation solution and overlay the observations.</p>
+
+</div>
+
+
+
+<details>
+    <summary>Expand for solution</summary>
+    <div class="notices solution" >
+  <div class="label">Solution</div>
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_all_after <span style="color:#f92672">=</span> df_all<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;iter &gt; 250&#39;</span>)
+nsamples <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+idx <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(len(df_all_after), size<span style="color:#f92672">=</span>nsamples)
+df_all_after <span style="color:#f92672">=</span> df_all_after<span style="color:#f92672">.</span>sample(n<span style="color:#f92672">=</span>nsamples)
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(nsamples):
+    r <span style="color:#f92672">=</span> df_all_after[<span style="color:#e6db74">&#39;r&#39;</span>]<span style="color:#f92672">.</span>iloc[i]
+    k <span style="color:#f92672">=</span> df_all_after[<span style="color:#e6db74">&#39;k&#39;</span>]<span style="color:#f92672">.</span>iloc[i]
+    temp <span style="color:#f92672">=</span> logistic_solve(np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">100</span>), r, k, <span style="color:#ae81ff">5</span>)
+    temp[<span style="color:#e6db74">&#39;simulation&#39;</span>] <span style="color:#f92672">=</span> str(i)
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        df_big <span style="color:#f92672">=</span> temp
+    <span style="color:#66d9ef">else</span>:
+        df_big <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df_big, temp])
+
+        
+df_big[<span style="color:#e6db74">&#39;type&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;simulation&#39;</span>
+df_short
+df_todo <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df_big, df_short])
+(ggplot(df_todo<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;type == &#34;simulation&#34;&#39;</span>), aes(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;t&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, group<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;simulation&#39;</span>)) <span style="color:#f92672">+</span>
+ geom_line(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">+</span>
+ geom_point(df_todo<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;type != &#34;simulation&#34;&#39;</span>), colour<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;orange&#34;</span>))</code></pre></div>
+</div>
+
+</details>
+
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/scientific-computing/unit_5_bayesian_inference/" title="Applied Bayesian Inference"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/scientific-computing/unit_5_bayesian_inference/02-pm/" title="Applied Bayesian Inference - PM exercise" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/scientific-computing/js/clipboard.min.js?1643020901"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.min.js?1643020901"></script>
+    <script src="/scientific-computing/js/perfect-scrollbar.jquery.min.js?1643020901"></script>
+    <script src="/scientific-computing/js/jquery.sticky.js?1643020901"></script>
+    <script src="/scientific-computing/js/featherlight.min.js?1643020901"></script>
+    <script src="/scientific-computing/js/highlight.pack.js?1643020901"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/scientific-computing/js/modernizr.custom-3.6.0.js?1643020901"></script>
+    <script src="/scientific-computing/js/learn.js?1643020901"></script>
+    <script src="/scientific-computing/js/hugo-learn.js?1643020901"></script>
+    
+    
+
+  </body>
+</html>
+

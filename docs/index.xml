@@ -8,6 +8,17 @@
     <language>en-gb</language>
     <lastBuildDate>Fri, 27 Nov 2020 16:10:31 +0000</lastBuildDate><atom:link href="https://sabs-r3.github.io/scientific-computing/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Applied Bayesian Inference - AM exercise</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_5_bayesian_inference/01-am/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_5_bayesian_inference/01-am/</guid>
+      <description>Logistic growth In this example, we are going to perform inference for the logistic growth model commonly used in population biology to describe resource-limited growth. The population density of a given bacteria is supposed to follow:
+\[ \frac{d y}{d t} = r y (1 - \frac{y}{k}) \]
+where we assume $y(0)&amp;gt;0$; $r &amp;gt; 0$ is the initial (exponential) growth rate when resources are abundant; $\kappa &amp;gt; 0$ is the carrying capacity denoting the steady-state population density.</description>
+    </item>
+    
+    <item>
       <title>Matrix form of equations</title>
       <link>https://sabs-r3.github.io/scientific-computing/unit_1_linear_algebra/01-matrix-form-of-equations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -66,6 +77,17 @@ We might also have a set of constraints, for example a parameter might be requir
       <description>Gaussian Elimination Consider the problem: Find $x, y,z$ such that
 \[ \begin{aligned} eq1: &amp; 2x &amp; + &amp; y &amp; -&amp; z &amp; = &amp; 3 \\ eq2: &amp; x &amp; &amp; &amp;+ &amp;5z &amp; = &amp; 6 \\ eq3: &amp; -x &amp;+&amp; 3y&amp; -&amp; 2z &amp; = &amp; 3 \end{aligned} \]
 Gaussian elimination -- step 1 reduce the above system of equations so that the unknown $x$ is removed from the last two equations:</description>
+    </item>
+    
+    <item>
+      <title>Applied Bayesian Inference - PM exercise</title>
+      <link>https://sabs-r3.github.io/scientific-computing/unit_5_bayesian_inference/02-pm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabs-r3.github.io/scientific-computing/unit_5_bayesian_inference/02-pm/</guid>
+      <description>Lotka-Volterra In this practical, we are going to perform inference for the Lotka-Volterra model of population dynamics. The model describes the dynamics of population sizes of prey ($u(t)$) and predators ($v(t)$), where, here, $t$ denotes a given time in years. These equations are given by:
+\[ \begin{aligned} \frac{d u}{dt} &amp;= \alpha u - \beta u v\\ \frac{d v}{dt} &amp;= -\gamma v + \delta u v \end{aligned} \]
+where at time $t=0$, $u(0) = u_0$ and $v(0)=v_0$.</description>
     </item>
     
     <item>
