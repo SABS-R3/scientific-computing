@@ -68,8 +68,8 @@ $Ax = b$ and minimising $\phi$ are equivalent.
 At each iteration $k$ of CG we are concerned with the *residual*, defined as $r_k = b - 
 A x_k$. If the residual is nonzero, then at each step we wish to find a positive 
 $\alpha$ such that $\phi(x_k + \alpha p_k) < \phi(x_k)$, where $p_k$ is the *search 
-direction* at each $k$. For the classical stepest descent optimisation algorithm the 
-search direction would be the residual $p_k = r_k$, however, steapest descent can suffer 
+direction* at each $k$. For the classical steepest descent optimisation algorithm the 
+search direction would be the residual $p_k = r_k$, however, steepest descent can suffer 
 from convergence problems, so instead we aim to find a set of search directions $p_k$ so 
 that $p_k^T r\_{k-1} \ne 0$ (i.e. at each step we are guaranteed to reduce $\phi$), and 
 that the search directions are linearly independent. The latter condition guarantees 
