@@ -126,7 +126,7 @@ f(a_k + \alpha_k p_k) \le f(a_k) + c_1 \alpha_k \nabla f(a_k)^T p_k.
 $$
 
 $$
-|\nabla f(a_k + \alpha_k p_k)^T p_k| \ge c_2 |\nabla f(a_k)^T p_k|,
+|\nabla f(a_k + \alpha_k p_k)^T p_k| \le c_2 |\nabla f(a_k)^T p_k|,
 $$
 
 The Goldstein conditions are similar in spirit to the Wolfe conditions, and are formed 
