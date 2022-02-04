@@ -41,7 +41,7 @@ The Newtons direction $p^N_k$ can be derived by considering the second-order Tay
 expansion of the function $f(x)$
 
 $$
-f(a_k + p) \approx f(a_k) + p^T \nabla f(a_k) + \frac{1}{2} p^T \nabla^2 f(a_k) = 
+f(a_k + p) \approx f(a_k) + p^T \nabla f(a_k) + \frac{1}{2} p^T \nabla^2 f(a_k) p = 
 m_k(p).
 $$
 
