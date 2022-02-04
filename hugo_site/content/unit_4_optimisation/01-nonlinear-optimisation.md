@@ -19,8 +19,8 @@ a set of equality $\mathcal{E}$ and inequality $\mathcal{I}$ constraints
 
 $$
 \min_{\theta \in \mathcal{R}^n} f(\theta) \text{ subject to } \begin{cases}
-c_i(x) = 0, & i \in \mathcal{E} \\
-c_i(x) \ge 0, & i \in \mathcal{I} \end{cases}
+c_i(\theta) = 0, & i \in \mathcal{E} \\
+c_i(\theta) \ge 0, & i \in \mathcal{I} \end{cases}
 $$
 
 Or these might simply be defined as *bounds* in parameter space that restrict the 
