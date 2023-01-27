@@ -11,7 +11,6 @@ pre = "<b>Day 3. </b>"
 **You can download the slides for this lecture 
 [here](/scientific-computing/LectureSolvingODEs.pdf)**
 
-{{< youtube 7wayjcLbvD8 >}}
 
 
 
